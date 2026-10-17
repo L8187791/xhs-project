@@ -1,0 +1,122 @@
+name: CI-CD
+
+# 触发：push/PR 到任意分支 + 手动。部署（Pages）仅在 push main 时执行。
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHONIOENCODING: utf-8
+
+jobs:
+  # ---------- ① 测试：语法体检 + 四道既有自检闸门 ----------
+  test:
+    name: 测试（闸门自检）
+    runs-on: windows-latest
+    steps:
+      - name: 启用 git 长路径支持（中文长文件名）
+        run: git config --global core.longpaths true
+
+      - uses: actions/checkout@v4
+
+      # 本地大量脚本硬编码了两个旧路径（均为本地 Junction，见 00_总说明 §三）。
+      # 在 runner 上用目录联接还原，脚本一行不改即可运行。
+      - name: 还原本地 Junction 路径
+        shell: pwsh
+        run: |
+          New-Item -ItemType Junction -Path 'D:\小红书项目' -Target '${{ github.workspace }}' -Force | Out-Null
+          New-Item -ItemType Junction -Path 'D:\Documents\deepseek-harness\default-workspace' -Target (Join-Path '${{ github.workspace }}' 'default-workspace') -Force | Out-Null
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      - name: 运行总闸门（语法 + 合规 + 卡号 + 驾驶舱时效）
+        run: python ci/run_checks.py
+
+      - name: 上传合规闸门报告（失败时定位用）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gate-report
+          path: default-workspace/_extract/gate_v3_report.json
+          if-no-files-found: ignore
+          retention-days: 14
+
+  # ---------- ② 构建：打包交付物 ----------
+  build:
+    name: 构建（交付物打包）
+    needs: test
+    runs-on: windows-latest
+    steps:
+      - name: 启用 git 长路径支持
+        run: git config --global core.longpaths true
+
+      - uses: actions/checkout@v4
+
+      - name: 打包交付物目录 → dist/
+        shell: pwsh
+        run: |
+          $dirs = @(
+            'default-workspace\19.9产品包-上架用',
+            'default-workspace\49.9产品包-上架用',
+            'default-workspace\交付_99元全流程资料包',
+            'default-workspace\干货批次01_第1至4篇',
+            'default-workspace\干货批次02_03_第5至10篇'
+          ) | Where-Object { Test-Path $_ }
+          New-Item -ItemType Directory -Path dist -Force | Out-Null
+          $out = "dist\交付包-$($env:GITHUB_SHA.Substring(0,7)).zip"
+          Compress-Archive -Path $dirs -DestinationPath $out -Force
+          Get-Item $out | Select-Object Name, @{n='MB';e={"{0:N1}" -f ($_.Length/1MB)}} | Format-Table
+
+      - name: 上传构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: deliverables
+          path: dist/*.zip
+          retention-days: 30
+
+  # ---------- ③ 部署：HTML 看板发布到 GitHub Pages ----------
+  deploy:
+    name: 部署（GitHub Pages）
+    needs: [test, build]
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 启用 git 长路径支持
+        run: git config --global core.longpaths true
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 组装 Pages 站点（看板 + 索引页）
+        run: python ci/make_pages_index.py
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10/12 虚拟店铺升级 · 当天可勾选执行清单 · 账号 1163622308</title>
+<style>
+:root{
+  --paper:#FAF7F2; --card:#fff; --ink:#262220; --ink-2:#4C4640; --muted:#8A827A;
+  --line:#E3DCCE; --red:#C82929; --red-deep:#A01D1D; --red-soft:#F9E7E7;
+  --green:#2C7A57; --green-soft:#E5F0EA; --gold:#B07A1D; --gold-soft:#F7EEDC;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;background:var(--paper);color:var(--ink);line-height:1.68;font-size:15.5px;-webkit-print-color-adjust:exact}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+header{padding:42px 0 22px;border-bottom:1px solid var(--line)}
+.kicker{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.kicker .dot{width:9px;height:9px;background:var(--red);border-radius:2px}
+.kicker span{font-size:12.5px;color:var(--muted);letter-spacing:.14em}
+h1{font-family:"Noto Serif SC",Georgia,serif;font-weight:900;font-size:clamp(24px,3.6vw,34px);line-height:1.25;margin-bottom:10px}
+h1 em{font-style:normal;color:var(--red-deep)}
+.sub{color:var(--ink-2);font-size:15px;max-width:800px}
+.bar{position:sticky;top:0;z-index:9;background:rgba(250,247,242,.96);border-bottom:1px solid var(--line);padding:10px 0;margin:16px 0 0}
+.bar .wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.pgw{flex:1;min-width:200px;height:10px;background:#EDE7DC;border-radius:6px;overflow:hidden}
+.pgb{height:100%;width:0;background:var(--green);transition:width .2s}
+.pgt{font-size:13px;color:var(--ink-2);font-weight:700;white-space:nowrap}
+button{font:inherit;font-size:13px;padding:6px 13px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--ink-2);cursor:pointer}
+button:hover{border-color:var(--red);color:var(--red-deep)}
+section{padding:26px 0;border-bottom:1px solid var(--line)}
+.sec-head{display:flex;align-items:baseline;gap:11px;margin-bottom:6px}
+.sec-head .no{font-family:"Noto Serif SC",serif;font-weight:900;font-size:13.5px;color:var(--red);letter-spacing:.05em}
+.sec-head h2{font-family:"Noto Serif SC",serif;font-weight:900;font-size:20px}
+.hint{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.gate{background:var(--gold-soft);border:1px solid #E6D2A8;border-radius:11px;padding:14px 18px;margin-bottom:12px}
+.q{display:grid;grid-template-columns:26px 1fr;gap:8px;align-items:start;margin-bottom:10px;font-size:14.5px}
+.q b{font-family:"Noto Serif SC",serif;color:var(--red-deep)}
+.fill{display:inline-block;min-width:150px;border-bottom:1.5px dashed var(--red);height:1.15em;vertical-align:-2px}
+.route{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.rt{background:#fff;border:1px solid var(--line);border-radius:11px;padding:12px 15px;font-size:14px}
+.rt.a{border-left:4px solid var(--green)}
+.rt.b{border-left:4px solid var(--red)}
+.rt h4{font-family:"Noto Serif SC",serif;font-size:14.5px;margin-bottom:5px}
+.rt.a h4{color:var(--green)} .rt.b h4{color:var(--red-deep)}
+.item{display:grid;grid-template-columns:26px 1fr;gap:9px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:9px 13px;margin-bottom:6px;font-size:14.3px}
+.item:hover{border-color:#D6CCB8}
+.item input{margin-top:5px;width:16px;height:16px;accent-color:#2C7A57;cursor:pointer}
+.item .txt{color:var(--ink)}
+.item.done .txt{color:var(--muted);text-decoration:line-through}
+.item .why{display:block;font-size:12.8px;color:var(--muted);margin-top:3px;text-decoration:none}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:5px;padding:1px 6px;margin-right:6px;vertical-align:1px;white-space:nowrap}
+.t-all{background:#EFEAE0;color:#645C52}
+.t-a{background:var(--green-soft);color:#1F5C42}
+.t-b{background:var(--red-soft);color:var(--red-deep)}
+.t-hard{background:#FCE8C9;color:#8A5A0B}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:13.6px;margin:10px 0}
+th,td{padding:8px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--ink);color:#fff;font-weight:500;font-size:12.8px}
+tr:last-child td{border-bottom:none}
+td:first-child{font-weight:600}
+.melt{background:#FFF7F5;border:1px solid #EFC9C1;border-radius:11px;padding:12px 16px;font-size:14.2px;margin-bottom:8px}
+.melt b{color:var(--red-deep)}
+footer{padding:24px 0 40px;font-size:12.5px;color:var(--muted)}
+@media(max-width:720px){.route{grid-template-columns:1fr}}
+@media print{
+  .bar{display:none}
+  body{background:#fff;font-size:12pt}
+  section{break-inside:avoid}
+  .item{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <div class="kicker"><span class="dot"></span><span>求职时间表研究所 · 账号 1163622308 · 2026-10-12</span></div>
+  <h1>虚拟店铺升级 · <em>当天可勾选执行清单</em></h1>
+  <p class="sub">先做 STEP 0 的三问判定（5 分钟），再按 A / B 分支往下勾。通用项两条路都要做；标记 <span class="tag t-a">A</span> 的只在「报白通过、主体不变」时做，<span class="tag t-b">B</span> 的只在「换主体 / 仍是替代类目」时做。<b>所有核对项都要截图存档</b>（命名：<code>1012-项名-截图.png</code>）。</p>
+</div></header>
+
+<div class="bar"><div class="wrap">
+  <span class="pgt" id="pgt">进度 0 / 0</span>
+  <span class="pgw"><span class="pgb" id="pgb"></span></span>
+  <button onclick="allDone()">全部勾选</button>
+  <button onclick="allClear()">全部清空</button>
+  <button onclick="window.print()">打印 / 存 PDF</button>
+</div></div>
+
+<main class="wrap">
+
+<!-- ============ STEP 0 ============ -->
+<section>
+  <div class="sec-head"><span class="no">STEP 0</span><h2>三问判定：走 A 还是 B</h2></div>
+  <p class="hint">在 10/12 一上班（或 10/11 晚）先做完这三问，答案决定下面的分支。若任一项拿不准，<b>一律按更保守的 B 处理</b>（多做几项不会亏，漏做会直接断转化）。</p>
+  <div class="gate">
+    <div class="q"><b>Q1</b><div>账户注册时长是否 ≥ 180 天？<span class="fill"></span> 天（在 App「设置 → 关于小红书」或创作中心账号信息里看；拿不准就记 <b>不满 180 天</b>）</div></div>
+    <div class="q"><b>Q2</b><div>10/12 的升级入口是哪种？<br/>①「类目报白 / 资质审核通过」＝<b>主体不变</b>　②「更换 / 新增店铺主体」＝<b>主体变更</b>　③ 不确定 → 按 ② 处理</div></div>
+    <div class="q"><b>Q3</b><div>商品编辑页的类目路径是否＝<b>正式「电子资源」类目</b>（不是临时/替代类目）？截图留档。<span class="fill"></span></div></div>
+  </div>
+  <div class="route">
+    <div class="rt a"><h4>→ A 分支：报白通过、主体不变</h4>
+      Q2 = ① 且 Q3 = 是。<b>老店销量与评价保留</b>，商品 ID 大概率不变。风险集中在「类目/费率/投流权限」的信息确认上。</div>
+    <div class="rt b"><h4>→ B 分支：换主体 / 仍替代类目</h4>
+      Q2 = ②③ 或 Q3 = 否（含 Q1 不满 180 天走个体户/企业店）。<b>销量与评价会重置</b>，商品 ID 变化 → 全部挂链必须重挂。这是本轮最容易翻车的一条路。</div>
+  </div>
+</section>
+
+<!-- ============ STEP 1 ============ -->
+<section>
+  <div class="sec-head"><span class="no">STEP 1</span><h2>10/11 晚（升级前 12 小时）· 全部通用</h2></div>
+  <p class="hint">这一组做完，10/12 才不会被「找不回来 / 接不上」拖住。</p>
+  <div id="g1"></div>
+</section>
+
+<!-- ============ STEP 2 ============ -->
+<section>
+  <div class="sec-head"><span class="no">STEP 2</span><h2>10/12 上午 · 只核对、不改动</h2></div>
+  <p class="hint">六项逐条确认并截图。任何一项与预期不符，<b>先停下问清楚，再动手改商品</b>。</p>
+  <div id="g2"></div>
+</section>
+
+<!-- ============ STEP 3 ============ -->
+<section>
+  <div class="sec-head"><span class="no">STEP 3</span><h2>10/12 中午 · 上架与详情页</h2></div>
+  <div id="g3"></div>
+  <h3 style="font-size:15px;margin:14px 0 6px">挂链地图（先填这张表，STPE 4 按表逐条重挂）</h3>
+  <table>
+    <thead><tr><th style="width:34%">笔记标题</th><th style="width:15%">发布日</th><th style="width:19%">挂的商品</th><th style="width:16%">商品 ID（旧→新）</th><th style="width:16%">置顶评论蓝链</th></tr></thead>
+    <tbody>
+      <tr><td>① 秋招漏投太亏了｜67家企业的网申截止日期</td><td>10/08 07:05</td><td>19.9</td><td></td><td>待补</td></tr>
+      <tr><td>② 两眼一睁就是投！银行网申这周就关还傻等</td><td>10/08 11:47</td><td>19.9</td><td></td><td>待补</td></tr>
+      <tr><td>③ 银行秋招：今天就有4家要截止了</td><td>10/08 15:42</td><td>19.9</td><td></td><td>待补</td></tr>
+      <tr><td>④ 简历模板免费领｜应届生直接套</td><td>10/08 10:00</td><td>简历包 9.9</td><td></td><td>待补</td></tr>
+      <tr><td>⑤ 时间表更新日志｜中行中信今天24点截止，招行明天</td><td>10/09 11:20</td><td>19.9</td><td></td><td>已补</td></tr>
+      <tr><td>⑥ 网申投递避坑实操</td><td>10/09 17:00</td><td>9.9 + 25.9</td><td></td><td>已补</td></tr>
+      <tr><td>⑦ 今日其余笔记（13:00 / 18:00 等）</td><td>10/09</td><td>干货/不挂</td><td></td><td>—</td></tr>
+      <tr><td>（10/10–10/11 新发笔记，逐条续填）</td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ STEP 4 ============ -->
+<section>
+  <div class="sec-head"><span class="no">STEP 4</span><h2>10/12 下午 · 重挂商品 + 客服体系</h2></div>
+  <div id="g4"></div>
+</section>
+
+<!-- ============ STEP 5 ============ -->
+<section>
+  <div class="sec-head"><span class="no">STEP 5</span><h2>10/12 晚 · 发布、自测、复盘</h2></div>
+  <div id="g5"></div>
+</section>
+
+<!-- ============ 熔断 ============ -->
+<section style="border-bottom:none">
+  <div class="sec-head"><span class="no">熔断</span><h2>当天出这三种情况，立即切规则</h2></div>
+  <div class="melt"><b>① 挂链失效且 24 小时内修不完</b> → 暂停发新笔记，先把「已发笔记 → 商品」链路全量修通。流量在、转化断＝白烧曝光，修链路优先级高于更新。</div>
+  <div class="melt"><b>② 升级后聚光仍不可用</b> → 投流杠杆只剩薯条（只买曝光涨粉、不认成交）。此时 docx 12 月的 455 单 / 净利 1 万 需按新口径重算，把 12 月目标降到「笔面季自然流 + 矩阵 4–5 品」可支撑的区间，别用旧数字排产。</div>
+  <div class="melt"><b>③ 换主体导致销量与评价归零</b> → 30 天内不追利润，考核改为「评价数与店铺分」：用 9.9 简历包冲 30–50 单评价（这是店铺权重和日后流水凭证的原始数据），同时把老客售后与更新履约全部收到站内群聊，避免主体切换造成断服。</div>
+  <div class="melt" style="background:var(--gold-soft);border-color:#E6D2A8"><b>红线（升级前后都适用）</b>：站内不留微信/QQ、不写绝对化用语（最/第一/永久/包过）、不引导站外交易、素材只用自有或已授权。任一条中招都会击穿「90 天内无重大违规」这条资格线——升级成功也可能被追回。</div>
+</section>
+
+</main>
+<footer><div class="wrap">
+  依据：《作战计划-小红书求职资料项目-2026-10-09.docx》第 3.1、4.2、6.2、8.1、11、11.1、附录 A/B 章；蓝色链接文案见 blue_link_copy.xml；自动回复见 warroom_autoreply.xml（<b>注意该文件价格仍是旧的 29.9 / 17 家，执行前须改为 19.9 / 67 家＋13 家银行</b>）。清单勾选状态保存在本机浏览器，换设备或清理浏览器数据会重置。<br/>生成时间 2026-10-09 13:20 ｜ 账号 1163622308
+</div></footer>
+
+<script>
+const DATA = {
+ g1:[
+  ["all","备份旧店数据：商品列表、销量、评价数、店铺分截图存档","换主体会重置信用积累与评价（docx 第 11 章原话），先留证据再动手。"],
+  ["all","填完上面「挂链地图」表：逐条点开已发笔记，记录商品组件与置顶评论蓝链状态","升级后靠这张表逐条核对，避免「以为挂上了其实没挂」。"],
+  ["hard","清点已发笔记数，确认 ≥ 30 篇（报白硬门槛之一）","docx 11 章：笔记不少于 30 篇。不够就把 10/10–10/11 排满。"],
+  ["all","备 3–5 篇存货（含 1 篇节点型），确保 10/12 当天不断更","升级日最忙，断更会同时损失搜索长尾与升级流量。"],
+  ["all","把交付件公式重算成静态值或另存一次（消除「须 Ctrl+Alt+F9 刷新」），交付只留 zip＋PDF 预览","否则买家（WPS/手机）打开看到 0 或空白，而卖点是「剩余天数自动倒计时」。"],
+  ["all","自动回复三组问答改价改规格：19.9 元 / 67 家＋13 家银行","现有存档仍是「29.9 元 / 17 家」，与终版不符，是退款与差评第一来源。"],
+  ["all","权益分层写死并准备详情页文案：19.9＝当前版本一次性；25.9＝时间表＋12 套模板；29.9＝更新到网申结束＋银行专项＋群内答疑","现在 19.9 承诺「每周更新免费拿」，与 29.9 卖的「更新服务」重叠，买家会问为什么要再买。"],
+  ["all","确认站内群聊已建（群聊无粉丝门槛，不必等千粉）","docx 8.1 已修正为无门槛；旧文件写「粉丝破千才建群」是过期信息。"],
+  ["hard","红线自查一遍已发笔记与详情页：站外联系方式、绝对化用语（最/第一/永久/包过）","升级资格含「90 天内无重大违规」，自毁成本极高。"],
+  ["all","素材台账：列出 12 套简历模板与全部配图的来源/授权状态，无法证明自有的先下架或替换","这一项直接关系到能不能规模化卖以及资格线，属最高风险项。"]
+ ],
+ g2:[
+  ["all","① 主体与类目：店铺主体是个人 / 个体户 / 企业？商品类目路径是否＝正式「电子资源」？截图","docx 11.1 明确要求确认「挂正式类目还是替代类目」，至今未完成。"],
+  ["all","② 保证金与实际扣点（费率）：记下具体金额与比例，回填净利口径（当前按 0.95×0.9≈22 元/单）","扣点与 docx 假设不一致时，所有单量目标要重算。"],
+  ["all","③ 投流权限：能否开通聚光？蓝 V 是否已认证？起充多少？","不能开 ⇒ 12 月 455 单 / 1 万净利 无杠杆支撑，必须重定目标。"],
+  ["all","④ 商品 ID 是否变化：拿新旧商品链接各点一次对比","ID 变=所有挂链失效，必须走 STEP 4 全量重挂。"],
+  ["all","⑤ 客服入口：确认店铺客服在千帆后台的欢迎语 / 自动回复位置（与专业号私信是两套）","漏配会让升级后的新流量无人应答。"],
+  ["all","⑥ 90 天违规自查：平台通知中心有无警告/扣分记录","这是资格线的组成部分，有问题当天就要申诉或整改。"]
+ ],
+ g3:[
+  ["all","上架第一批 4 个 SKU：9.9 简历包 / 19.9 时间表 / 25.9 组合 / 29.9 升级包","docx 4.2：第一批三品，29.9 因秋招窗口只剩 6 周而提前上。"],
+  ["all","主推只保留 3 个（组合 25.9 / 升级包 29.9 / 99 诊断），其余只做露出","docx 4.3：主推过多会稀释主推点击率。"],
+  ["all","商品标题关键词化：秋招 / 2027届 / 网申截止 / 时间表 / 简历模板 / 应届生","约七成流量来自搜索，关键词要进标题、正文、标签、商品标题四处。"],
+  ["all","详情页按事实卡写全 5 项：包含内容 / 数量 / 格式 / 更新机制 / 售后口径","虚拟商品 90% 纠纷来自「说发的和实际不一致」。"],
+  ["all","详情页附「核实状态」说明（11 家已截止、15 家弱来源），与交付件一致","否则「67 家已核实」构成虚假宣传。"],
+  ["b","B 分支：新店重新创建全部 SKU，旧店商品保留为归档（不删，留售后入口）","换主体后旧订单售后仍需可达；删店会丢历史记录。"],
+  ["a","A 分支：确认旧 SKU 是否需重新提交类目资质，避免下架后无法重新上架","主体不变时最大的坑是商品被下架待审。"],
+  ["all","用自己账号下一单自测全链路：商品卡 → 支付 → 自动发货 → 群入口（自测单不计入业绩）","docx 6.3 的晨检就要求「确认真实首单，自测单不计入」。"],
+  ["all","水印与下载链接保护确认：交付文件水印、链接加密、必要时限时查看","附录 B 的盗版防护要求，升级后流量变大更要防搬运。"]
+ ],
+ g4:[
+  ["all","按「挂链地图」逐条检查已发笔记的商品组件是否仍可点、是否指向新商品","这是升级当天最容易漏、损失最直接的一项。"],
+  ["a","A 分支：抽查 2 篇笔记即可（商品 ID 未变），其余抽查置顶评论蓝链是否失效","抽样即可，把时间留给内容。"],
+  ["b","B 分支：<b>全量重挂</b>——每一篇旧笔记 + 每条置顶评论蓝链都重挂一次，逐条打勾","商品 ID 变化后旧链接全部失效，漏一篇=该篇流量白来。"],
+  ["all","补 10/08 三篇的置顶首评与组合蓝链（文案见 blue_link_copy.xml，口径统一为 19.9/25.9）","appendix 的可执行提醒：挂 19.9 的笔记必须同时露出组合 25.9。"],
+  ["all","千帆后台配置客服欢迎语 + 3 组自动问答（简历模板 / 时间表 / 怎么买），口径＝19.9、67 家＋13 家银行","专业号私信与店铺客服是两套，两边都要配。"],
+  ["all","专业号私信自动回复同步更新（价格、家数、群入口）","旧文案仍在线上，改完才算闭环。"],
+  ["b","B 分支：给已购老客发一条站内公告（群聊或私信），说明主体变更后更新与售后仍由本群承接","避免老客以为店跑了，也避免「更新履约断服」引发的退款。"],
+  ["all","检查「拍下更新包的进群领持续更新」这条链路：商品详情 → 自动回复 → 群入口，实走一遍","docx 8.1 的三重功能要真能跑通，不能只写在方案里。"]
+ ],
+ g5:[
+  ["all","发布「店铺升级＋上新」笔记（合规写法：讲新增的品类与内容，不写资质促销）","吃店铺冷启动流量与商品搜索流量。"],
+  ["all","记录升级首日基线：店铺访客 / 商品曝光 / 商品点击 / 支付转化 四段数据","这是新漏斗的起点；docx 3.2 的 3% 点击、10% 支付属乐观假设，要用实测校准。"],
+  ["all","22:00 复盘三问：①订单是否受影响 ②挂链是否全通 ③聚光权限结论","docx 6.3 的 22 点自动复盘固定动作。"],
+  ["all","按实测转化率重算 10 月剩余单量目标（若支付转化只有 5%，单量需求翻倍）","docx 3.2 自己注明：若实测 5%，单量需求翻倍。"],
+  ["all","确定 10/13 起发布节奏：一天一篇、主窗口 15:00–16:30，节点篇按截止时刻倒推","实测 15:42 发＝799 观看，07:05＝34、11:47＝66；「上午吃长尾」暂未被验证。"],
+  ["all","写明日三件事进日历：①9.9 冲销量评价 ②笔面日历首批核验 ③10/15 决策节点（单篇曝光≥500、点击率≥3%、评论 0 变正）","把 10/12 的成果接进后续节奏，避免升级完就松劲。"]
+ ]
+};
+const KEYS = {all:'t-all',a:'t-a',b:'t-b',hard:'t-hard'};
+const LABEL = {all:'通用',a:'A 分支',b:'B 分支',hard:'硬门槛'};
+document.querySelectorAll('section > div[id^="g"]').forEach(function(host){
+  const list = DATA[host.id] || [];
+  host.innerHTML = list.map(function(it, i){
+    const k = host.id + '-' + i;
+    return '<label class="item" id="it-'+k+'">'+
+      '<input type="checkbox" data-k="'+k+'">'+
+      '<span class="txt"><span class="tag '+KEYS[it[0]]+'">'+LABEL[it[0]]+'</span>'+it[1]+
+      '<span class="why">'+it[2]+'</span></span></label>';
+  }).join('');
+});
+const boxes = Array.from(document.querySelectorAll('.item input'));
+const KEY = 'xhs-store-1012-v1';
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(boxes.map(b=>b.checked))); }catch(e){} }
+function load(){ try{ const d = JSON.parse(localStorage.getItem(KEY)||'[]'); boxes.forEach((b,i)=>{ if(d[i]) b.checked = true; }); }catch(e){} }
+function paint(){
+  boxes.forEach(function(b){
+    const item = b.closest('.item');
+    item.classList.toggle('done', b.checked);
+  });
+  const n = boxes.filter(b=>b.checked).length;
+  document.getElementById('pgt').textContent = '进度 ' + n + ' / ' + boxes.length;
+  document.getElementById('pgb').style.width = (boxes.length? (n/boxes.length*100):0) + '%';
+  save();
+}
+boxes.forEach(b=>b.addEventListener('change', paint));
+function allDone(){ boxes.forEach(b=>b.checked=true); paint(); }
+function allClear(){ boxes.forEach(b=>b.checked=false); paint(); }
+load(); paint();
+</script>
+</body>
+</html>

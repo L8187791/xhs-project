@@ -1,0 +1,193 @@
+{
+ "meta": {
+  "skill": "求职时间表 AI 助手",
+  "version": "v1.0.15",
+  "data_date": "2026-10-10",
+  "company_count": 131,
+  "supplement_pool": 11,
+  "verify_status_order": [
+   "官网原文",
+   "企业招聘系统",
+   "就业网转发",
+   "官网已核验-今日截止",
+   "确认滚动",
+   "第三方汇总",
+   "待核实"
+  ],
+  "two_axes": {
+   "source_level": {
+    "A": "企业自己写的",
+    "B": "二手或我们核过",
+    "C": "第三方未核",
+    "⚪": "滚动（不参与可信度分级）"
+   },
+   "date_form": {
+    "hard": "硬日期",
+    "rolling": "滚动·无固定截止",
+    "to_verify": "有日期待核实",
+    "none": "未列明日期"
+   }
+  }
+ },
+ "fields": [
+  {
+   "key": "no",
+   "cn": "序号",
+   "type": "int",
+   "desc": "表内序号，无业务含义"
+  },
+  {
+   "key": "company",
+   "cn": "企业名称",
+   "type": "str",
+   "desc": "匹配用户提到的公司名，支持模糊匹配"
+  },
+  {
+   "key": "industry",
+   "cn": "行业分类",
+   "type": "str",
+   "desc": "国企/央企、互联网、银行、科技/硬件、快消、专业服务、券商、新能源/汽车 等"
+  },
+  {
+   "key": "ownership",
+   "cn": "企业性质",
+   "type": "str",
+   "desc": "国企、央企、民企、外企"
+  },
+  {
+   "key": "batch",
+   "cn": "批次",
+   "type": "str",
+   "desc": "正式批、提前批、补录"
+  },
+  {
+   "key": "direction",
+   "cn": "招聘方向",
+   "type": "str",
+   "desc": "岗位方向，如 软件/硬件/影像/产品"
+  },
+  {
+   "key": "location",
+   "cn": "工作地点",
+   "type": "str",
+   "desc": "可含多个城市，用 / 分隔；也可能写「全国」"
+  },
+  {
+   "key": "degree",
+   "cn": "学历要求",
+   "type": "str",
+   "desc": "本科及以上 / 硕士及以上 等"
+  },
+  {
+   "key": "deadline",
+   "cn": "网申截止日期",
+   "type": "date",
+   "desc": "YYYY-MM-DD；为空表示无固定截止"
+  },
+  {
+   "key": "days_left",
+   "cn": "剩余天数",
+   "type": "str",
+   "desc": "Excel 活公式原文，供留档；技能回答请用 days_from_today"
+  },
+  {
+   "key": "days_from_today",
+   "cn": "距今天数",
+   "type": "int",
+   "desc": "负数=已截止；null=无固定截止日。数据生成时算好"
+  },
+  {
+   "key": "apply_url",
+   "cn": "投递入口",
+   "type": "str",
+   "desc": "官网或招聘页地址"
+  },
+  {
+   "key": "note",
+   "cn": "备注",
+   "type": "str",
+   "desc": "如具体时点、特殊要求"
+  },
+  {
+   "key": "verified_at",
+   "cn": "核验日期",
+   "type": "date",
+   "desc": "这条信息是哪天核的"
+  },
+  {
+   "key": "verify_status",
+   "cn": "核实状态",
+   "type": "enum",
+   "desc": "核验状态（强→弱）：官网原文 > 企业招聘系统 > 就业网转发 > 官网已核验 > 确认滚动 > 第三方汇总 > 待核实",
+   "enums": [
+    "官网原文",
+    "企业招聘系统",
+    "就业网转发",
+    "官网已核验-今日截止",
+    "确认滚动",
+    "第三方汇总",
+    "待核实"
+   ]
+  },
+  {
+   "key": "source",
+   "cn": "数据来源",
+   "type": "str",
+   "desc": "数据来源（含 URL 或文字描述）；等级见 verify_status"
+  },
+  {
+   "key": "source_level",
+   "cn": "来源可信度",
+   "type": "str",
+   "desc": "A 企业自己写的 / B 二手或我们核过 / C 第三方未核 / ⚪ 滚动（不参与可信度分级）",
+   "enums": [
+    "A",
+    "B",
+    "C",
+    "⚪"
+   ]
+  },
+  {
+   "key": "date_form",
+   "cn": "日期形态",
+   "type": "str",
+   "desc": "hard 硬日期 / rolling 滚动·无固定截止 / to_verify 有日期待核实 / none 未列明日期",
+   "enums": [
+    "hard",
+    "rolling",
+    "to_verify",
+    "none"
+   ]
+  }
+ ],
+ "enums": {
+  "verify_status": [
+   "官网原文",
+   "企业招聘系统",
+   "就业网转发",
+   "官网已核验-今日截止",
+   "确认滚动",
+   "第三方汇总",
+   "待核实"
+  ],
+  "weak_status": [
+   "第三方汇总",
+   "待核实"
+  ],
+  "weak_hint": "遇到 weak_status 时，回答必须提醒用户「来源较弱，投递前请自己再点一遍官网」"
+ },
+ "query_recipes": {
+  "本周截止的银行": "industry 含「银行」且 0<=days_from_today<=7，按 days_from_today 升序",
+  "某公司截止时间": "company 模糊匹配；输出 deadline/days_from_today/verify_status/verified_at/apply_url",
+  "按地点筛": "location 模糊匹配（如「成都」）",
+  "未截止的国企": "ownership/industry 含国企 且 days_from_today>=0",
+  "无固定截止的": "days_from_today === null"
+ },
+ "hard_rules": [
+  "只回答数据里有的；没有的明确说「表里没有这家」",
+  "绝不编造或推算日期",
+  "必须标注 verify_status",
+  "不承诺结果（不写包过/保证）",
+  "不评价企业好坏、不推荐投哪家"
+ ]
+}

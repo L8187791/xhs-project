@@ -1,0 +1,34 @@
+# 依赖与安装产物
+# node_modules 在本目录是一个 junction → ~/.dsh/profiles/node_modules（陈旧的 0.1.5 依赖树），
+# 由 tools/repair.cjs 在安装期创建，不属于源码，绝不能进仓库。
+/node_modules/
+
+# 运行时产物（配置与状态文件落在 DSH 主目录，不放仓库；这里再兜一层防止误提交）
+dispatch-agent-team.json
+dispatch-agent-team-sessions.json
+dispatch-agent-team-status.json
+*.tmp
+
+# 临时探针目录与取证输出（tools/session-probe.cjs / asar-probe.cjs 的 --extract 目标）
+/.probe/
+/probe/
+
+# 崩溃恢复备份（profile 的 cordis.patch.yml.bak-*，若被拷进本目录也不提交）
+*.bak
+*.bak-*
+
+# 编辑器与系统垃圾
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/
+
+# 审查历史与维护者笔记（含本机真实路径/用户名，不进仓库；只在你本机查阅）
+# MAINTAINER-NOTES.md = 设计取舍 + 事故记录 + 实现细节（README 只留面向使用者的部分）
+REVIEW-*.md
+MAINTAINER-NOTES.md
+/docs/reviews/
+# NVIDIA 驱动日志残留（进程 cwd 落在本目录时会自动生成）
+/NVIDIA Corporation/

@@ -1,0 +1,74 @@
+[
+ {
+  "record_id": "SAqbXAfpM15bWO2fr1ovvq",
+  "date": "2026-10-14T00:00:00Z",
+  "level": "A\u5c42",
+  "topic": "\u672c\u5468\u56db\u5bb6\u7f51\u7533\u8981\u5173\uff0c\u6309\u987a\u5e8f\u6295",
+  "status": "\u5df2\u53d1",
+  "note_head": "09:00 \u5df2\u53d1\uff08L 11:4x \u56de\u4f20\uff09\u00b7\u5904\u7f5a\u671f\u4e0d\u6302\u94fe\u00b7\u9009\u9898\u6309\u53d1\u5e03\u53f0\u8d26\u6743\u5a01\u6e90\u66f4\u6b63\uff08\u539f\u5199\u300c\u4eca\u8d77\u4e09\u59294\u5bb6"
+ },
+ {
+  "record_id": "WLUMxTv46qGSAukiiiQZKo",
+  "date": "2026-10-14T00:00:00Z",
+  "level": "B\u5c42",
+  "topic": "\u53cc\u975e\u53cb\u597d\u7684\u4f01\u4e1a\uff0c\u6211\u6574\u7406\u6210\u6e05\u5355\u4e86",
+  "status": "\u5df2\u53d1",
+  "note_head": "12:30 \u5df2\u53d1\uff08L 11:43 \u56de\u4f20\uff09\u00b7\u5e26\u9644\u4ef6PDF(\u53cc\u975e\u6e05\u535510\u5bb6)\u00b724h \u6570\u636e 10/15 "
+ },
+ {
+  "record_id": "HW8mpF7zBd0s2dSHqtTm3k",
+  "date": "2026-10-15T00:00:00Z",
+  "level": "A\u5c42",
+  "topic": "\u79cb\u62db\u4eca\u5929\u5173\u4e24\u5bb6\uff0c\u4e00\u5bb6\u592e\u4f01\u4e00\u5bb6\u94f6\u884c",
+  "status": "\u5f85\u53d1",
+  "note_head": "09:00\u00b7\u7a3f+3\u56fe+\u684c\u9762\u5305\u5c31\u7eea\u00b7340\u5b57\u00b7P0=0(P1=2\u65f6\u6548\u56fa\u6709)\u00b7\u6807\u9898\u7ecf\u6211\u65b936\u7bc7\u540e\u53f0\u5b9e\u6d4b\u6539"
+ },
+ {
+  "record_id": "Q9VhgHSOjiwekwQ9gEN1HO",
+  "date": "2026-10-15T00:00:00Z",
+  "level": "B\u5c42",
+  "topic": "\u53cc\u975e\u8fdb\u4e0d\u4e86\u5927\u5382\uff0c\u53bb\u5b83\u6295\u7684\u516c\u53f8\u8bd5\u8bd5",
+  "status": "\u5f85\u53d1",
+  "note_head": "12:30\u00b7389\u5b57\u00b7P0=P1=P2=0\u00b7\u6807\u7b7e\u52a0\u56de#\u5927\u5382\u5e7c\u5e74\u4f53\u00b7\u539f\u6807\u9898\u300c\u5927\u5382\u5e7c\u5e74\u4f53\u300d\u4e0e1014B\u649e"
+ },
+ {
+  "record_id": "KRvzB2PkfOPcVEB8hqzQE3",
+  "date": "2026-10-16T00:00:00Z",
+  "level": "A\u5c42",
+  "topic": "\u79cb\u62db\u660e\u5929\u5b89\u6c38\u622a\u6b62\uff0c\u4f60\u586b\u5230\u54ea\u6b65\u4e86",
+  "status": "\u5df2\u653e\u884c",
+  "note_head": "09:00\u00b7\u2705\u5df2\u5b9a\u7a3f\uff08\u5361 WB134\uff09\u00b714\u5b57\u6807\u9898/330\u5b57/P0=0/P1=2\u65f6\u6548\u56fa\u6709/\u4e94\u67e50.0"
+ },
+ {
+  "record_id": "Onw9v1L3mclqxPFxWZaYAk",
+  "date": "2026-10-16T00:00:00Z",
+  "level": "B\u5c42",
+  "topic": "\u53cc\u975e\u79cb\u62db\u8fd9\u6279\u514d\u7b14\u8bd5\u7684\uff0c\u4e0d\u7528\u5237\u9898",
+  "status": "\u5df2\u653e\u884c",
+  "note_head": "12:30\u00b7307\u5b57\u00b7P0=P1=P2=0\u00b7\u4e94\u67e50.012\u00b7\u53ea\u70b9\u534e\u80fd/\u8fbe\u80fd2\u5bb6\u5e76\u6807\u6ce8\u8f6c\u8ff0\uff08\u8868\u5185\u65e0\u7b14\u8bd5"
+ },
+ {
+  "record_id": "gflbvFMi1ISw4nln1QdZq8",
+  "date": "2026-10-14T00:00:00Z",
+  "level": "C\u5c42",
+  "topic": "26\u5c4a\u662f\u4e0d\u662f\u88ab\u79cb\u62db\u5fd8\u4e86\uff1f\u4f46\u8fd9\u4e9b\u4f01\u4e1a\u8fd8\u5728\u62db",
+  "status": "\u5df2\u53d1",
+  "note_head": "20:30\u219220:5x \u5df2\u53d1\uff08L 20:5x \u56de\u4f20\uff09\u00b7\u4f8b\u5916\u653e\u884c\u767b\u8bb0 EX-20261014-01\uff1a\u7a3f"
+ },
+ {
+  "record_id": "o3eX6wpDLLFOndzcOwS1fQ",
+  "date": "2026-10-15T00:00:00Z",
+  "level": "C\u5c42",
+  "topic": "\u6211\u628a\u62db\u5f80\u5c4a\u751f\u7684\u90a3\u6279\u6295\u4e86\u4e00\u904d",
+  "status": "\u5f85\u53d1",
+  "note_head": "20:30\u00b7315\u5b57\u00b7\u7b2c\u4e00\u4eba\u79f0\u7ecf\u5386\u578b\uff08\u7ea2\u72d0\u5b9e\u8bc1\uff1a\u53cd\u76f4\u89c9\u578b\u6700\u5dee0.075/\u7ecf\u5386\u578b0.191\uff09\u00b7\u4eba\u7fa4\u8bcd\u300c"
+ },
+ {
+  "record_id": "I1CToLVGgeZFfha5p5IjBz",
+  "date": "2026-10-16T00:00:00Z",
+  "level": "C\u5c42",
+  "topic": "\u79cb\u62db\u6361\u6f0f\uff08\u5f85 D \u4f9b\u6570\uff09",
+  "status": "\u5f85\u53d1",
+  "note_head": "20:30\u00b7\ud83d\udd34\u7f3a\u7a3f\u00b7\u7ea2\u72d0\u8bc4\u520641\uff08C\u5c42\u6700\u9ad8\u00b7\u7ef4\u5ea61\u6700\u9ad80.086\uff09\u00b7D 15:00\u524d\u4f9b3-5\u5bb6+\u65e5\u671f"
+ }
+]

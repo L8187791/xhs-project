@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小红书热门笔记数据分析报告</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 16px;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .report-header {
+            background: linear-gradient(135deg, #ff2442 0%, #ff6b81 100%);
+            color: white;
+            padding: 20px 24px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .report-header h1 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        .report-header .keyword {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .report-header .total {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 4px;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        }
+        .card-title-row {
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+        }
+        .card-index {
+            font-size: 15px;
+            font-weight: 700;
+            color: #ff2442;
+            min-width: 20px;
+        }
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-decoration: none;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            transition: color 0.2s;
+        }
+        .card-title:hover {
+            color: #ff2442;
+        }
+        .card-meta {
+            font-size: 13px;
+            color: #999;
+            padding: 8px 0;
+        }
+        .author-link {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .author-link:hover {
+            color: #ff2442;
+        }
+        .meta-divider {
+            margin: 0 6px;
+        }
+        .pub-time {
+            color: #999;
+        }
+        .card-scores {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .score-tag {
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+        .score-tag.relevance {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .score-tag.popularity {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        .score-tag.recency {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        .card-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            margin: 0 -16px;
+            background: linear-gradient(135deg, #fff5f5, #fff);
+        }
+        .interaction-count {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ff2442;
+        }
+        .detail-stats {
+            font-size: 12px;
+            color: #666;
+        }
+        .view-note-btn {
+            color: #ff2442;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+        .view-note-btn:hover {
+            opacity: 0.7;
+            text-decoration: underline;
+        }
+        .data-note {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 20px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+        }
+        .section-header {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #ff6b81 0%, #ff2442 100%);
+            border-radius: 8px;
+        }
+        .section-header h2 {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="report-header">
+            <h1>小红书热门笔记数据分析报告</h1>
+            <div class="keyword">关键词：四大 秋招 | 时间范围：近30天</div>
+            <div class="total">共找到 50 条相关笔记</div>
+        </div>
+
+        
+        <div class="card-grid">
+            
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">1.</span>
+                <a href="https://www.xiaohongshu.com/explore/69d79faa00000000210123e2" class="card-title" target="_blank">四大优雅</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/69ae280b000000003301d0d7" class="author-link" target="_blank">孝义（1w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：4月10日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.22</span>
+                <span class="score-tag popularity">热度 3.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 5w+互动</span>
+                <span class="detail-stats">👍4w+ ⭐1w+</span>
+                <a href="https://www.xiaohongshu.com/explore/69d79faa00000000210123e2" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">2.</span>
+                <a href="https://www.xiaohongshu.com/explore/6acb52b4000000000b007ee7" class="card-title" target="_blank">《四大饿人》</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/593d0f0f50c4b42edbc38773" class="author-link" target="_blank">v小饼干-虚哥（5w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：10月11日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.2</span>
+                <span class="score-tag popularity">热度 1.0</span>
+                <span class="score-tag recency">时效 2.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 1992互动</span>
+                <span class="detail-stats">👍1898 ⭐76</span>
+                <a href="https://www.xiaohongshu.com/explore/6acb52b4000000000b007ee7" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">3.</span>
+                <a href="https://www.xiaohongshu.com/explore/68f8966900000000030385ca" class="card-title" target="_blank">高中四大幻神</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/60c0aca800000000010028e5" class="author-link" target="_blank">环球浙观（2w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：10月22日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.17</span>
+                <span class="score-tag popularity">热度 3.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 21w+互动</span>
+                <span class="detail-stats">👍13w+ ⭐7w+</span>
+                <a href="https://www.xiaohongshu.com/explore/68f8966900000000030385ca" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">4.</span>
+                <a href="https://www.xiaohongshu.com/explore/6a4dd939000000000702e3db" class="card-title" target="_blank">〖四大教主／小窗meme〗</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/6782334e000000000801b64d" class="author-link" target="_blank">广义相对论〖（5000+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：7月8日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.17</span>
+                <span class="score-tag popularity">热度 3.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 7w+互动</span>
+                <span class="detail-stats">👍5w+ ⭐2w+</span>
+                <a href="https://www.xiaohongshu.com/explore/6a4dd939000000000702e3db" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">5.</span>
+                <a href="https://www.xiaohongshu.com/explore/6a68aa3d0000000004029370" class="card-title" target="_blank">四大爆改小孩</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/6a486d800000000010000801" class="author-link" target="_blank">COISINI（1584粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：7月28日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.17</span>
+                <span class="score-tag popularity">热度 3.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 5w+互动</span>
+                <span class="detail-stats">👍3w+ ⭐1w+</span>
+                <a href="https://www.xiaohongshu.com/explore/6a68aa3d0000000004029370" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">6.</span>
+                <a href="https://www.xiaohongshu.com/explore/6a05a56f000000003502550b" class="card-title" target="_blank">人生四大巅峰时期</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/5ec2c8d20000000001002164" class="author-link" target="_blank">琅琊榜（4432粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：5月14日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.17</span>
+                <span class="score-tag popularity">热度 3.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 24w+互动</span>
+                <span class="detail-stats">👍21w+ ⭐3w+</span>
+                <a href="https://www.xiaohongshu.com/explore/6a05a56f000000003502550b" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">7.</span>
+                <a href="https://www.xiaohongshu.com/explore/6aafb6c3000000000b00e6dd" class="card-title" target="_blank">你说四大皆空</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/62878e670000000021029580" class="author-link" target="_blank">无敌永恒大王（8w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：9月20日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.15</span>
+                <span class="score-tag popularity">热度 2.0</span>
+                <span class="score-tag recency">时效 1.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 1w+互动</span>
+                <span class="detail-stats">👍5000+ ⭐730</span>
+                <a href="https://www.xiaohongshu.com/explore/6aafb6c3000000000b00e6dd" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">8.</span>
+                <a href="https://www.xiaohongshu.com/explore/6a9213c7000000002400653e" class="card-title" target="_blank">古代四大cp，太好磕了</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/650198320000000002011e85" class="author-link" target="_blank">古人颜值社（13w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：8月29日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.13</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.5</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 2w+互动</span>
+                <span class="detail-stats">👍1w+ ⭐5000+</span>
+                <a href="https://www.xiaohongshu.com/explore/6a9213c7000000002400653e" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">9.</span>
+                <a href="https://www.xiaohongshu.com/explore/6aa633ec00000000290124b9" class="card-title" target="_blank">留影速通四大试炼教程</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/5f9f7e150000000001006ab5" class="author-link" target="_blank">Sky光遇Coco（5w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：9月13日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.13</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.5</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 4w+互动</span>
+                <span class="detail-stats">👍3w+ ⭐5000+</span>
+                <a href="https://www.xiaohongshu.com/explore/6aa633ec00000000290124b9" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">10.</span>
+                <a href="https://www.xiaohongshu.com/explore/69ecbce20000000023017b40" class="card-title" target="_blank">四大教主</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/60483876000000000100594f" class="author-link" target="_blank">萌苗木（5000+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：4月25日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.22</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 2w+互动</span>
+                <span class="detail-stats">👍1w+ ⭐5000+</span>
+                <a href="https://www.xiaohongshu.com/explore/69ecbce20000000023017b40" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">11.</span>
+                <a href="https://www.xiaohongshu.com/explore/6a4ba328000000000f01544d" class="card-title" target="_blank">四大导演</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/66301dab000000000303194b" class="author-link" target="_blank">梦.芸汐（2607粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：7月6日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.22</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 2w+互动</span>
+                <span class="detail-stats">👍1w+ ⭐5000+</span>
+                <a href="https://www.xiaohongshu.com/explore/6a4ba328000000000f01544d" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">12.</span>
+                <a href="https://www.xiaohongshu.com/explore/6ac1fd840000000018016c8e" class="card-title" target="_blank">临床四大怪</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/69450324000000003202708c" class="author-link" target="_blank">久咪（992粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：10月4日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.2</span>
+                <span class="score-tag popularity">热度 1.0</span>
+                <span class="score-tag recency">时效 1.5</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 1551互动</span>
+                <span class="detail-stats">👍1302 ⭐181</span>
+                <a href="https://www.xiaohongshu.com/explore/6ac1fd840000000018016c8e" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">13.</span>
+                <a href="https://www.xiaohongshu.com/explore/69e77c85000000001f000407" class="card-title" target="_blank">四大情绪价值</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/69ae280b000000003301d0d7" class="author-link" target="_blank">孝义（1w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：4月22日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.2</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 2w+互动</span>
+                <span class="detail-stats">👍1w+ ⭐5000+</span>
+                <a href="https://www.xiaohongshu.com/explore/69e77c85000000001f000407" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">14.</span>
+                <a href="https://www.xiaohongshu.com/explore/69da0340000000001a028ac4" class="card-title" target="_blank">数学四大禁术</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/68e472880000000037030f64" class="author-link" target="_blank">数涂（5000+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：4月11日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.15</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 2w+互动</span>
+                <span class="detail-stats">👍1w+ ⭐1w+</span>
+                <a href="https://www.xiaohongshu.com/explore/69da0340000000001a028ac4" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">15.</span>
+                <a href="https://www.xiaohongshu.com/explore/6a4a739d0000000016026195" class="card-title" target="_blank">四大教主的擦除meme？！🫨</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/638c1f97000000001f01c8b2" class="author-link" target="_blank">mo鱼（3186粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：7月5日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.15</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 4w+互动</span>
+                <span class="detail-stats">👍2w+ ⭐1w+</span>
+                <a href="https://www.xiaohongshu.com/explore/6a4a739d0000000016026195" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">16.</span>
+                <a href="https://www.xiaohongshu.com/explore/69d774500000000022028dff" class="card-title" target="_blank">全网四大满级外卖小哥</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/68dcd268000000003201f250" class="author-link" target="_blank">飛哥呦（15w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：4月9日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.15</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 4w+互动</span>
+                <span class="detail-stats">👍2w+ ⭐1w+</span>
+                <a href="https://www.xiaohongshu.com/explore/69d774500000000022028dff" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">17.</span>
+                <a href="https://www.xiaohongshu.com/explore/69e7a044000000001a02dcd0" class="card-title" target="_blank">我把港南四大</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/5f479f7400000000010046eb" class="author-link" target="_blank">十十辛（167粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：4月22日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.15</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 3w+互动</span>
+                <span class="detail-stats">👍2w+ ⭐5000+</span>
+                <a href="https://www.xiaohongshu.com/explore/69e7a044000000001a02dcd0" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">18.</span>
+                <a href="https://www.xiaohongshu.com/explore/69f08e7c0000000037034945" class="card-title" target="_blank">四大秒切战斗形态</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/69ae280b000000003301d0d7" class="author-link" target="_blank">孝义（1w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：4月29日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.15</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 3w+互动</span>
+                <span class="detail-stats">👍2w+ ⭐1w+</span>
+                <a href="https://www.xiaohongshu.com/explore/69f08e7c0000000037034945" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">19.</span>
+                <a href="https://www.xiaohongshu.com/explore/6abcfcb1000000001a0274df" class="card-title" target="_blank">四大执政的冷知识</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/682afc74000000000d0082c7" class="author-link" target="_blank">怪笑猫猫帽（1w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：9月30日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.15</span>
+                <span class="score-tag popularity">热度 1.0</span>
+                <span class="score-tag recency">时效 1.5</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 1541互动</span>
+                <span class="detail-stats">👍1215 ⭐308</span>
+                <a href="https://www.xiaohongshu.com/explore/6abcfcb1000000001a0274df" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">20.</span>
+                <a href="https://www.xiaohongshu.com/explore/676b81cb00000000140271e6" class="card-title" target="_blank">之前那个四大美人的…</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/63494a14000000001901e0e4" class="author-link" target="_blank">TID（7w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：12月25日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.15</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 4w+互动</span>
+                <span class="detail-stats">👍4w+ ⭐5000+</span>
+                <a href="https://www.xiaohongshu.com/explore/676b81cb00000000140271e6" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">21.</span>
+                <a href="https://www.xiaohongshu.com/explore/69cf94c3000000002102e410" class="card-title" target="_blank">矩形四大折叠模型！听懂掌声！</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/5e7b212f000000000100a633" class="author-link" target="_blank">亮亮初中数学（28w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：4月3日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.13</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 4w+互动</span>
+                <span class="detail-stats">👍2w+ ⭐1w+</span>
+                <a href="https://www.xiaohongshu.com/explore/69cf94c3000000002102e410" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">22.</span>
+                <a href="https://www.xiaohongshu.com/explore/68ecef1600000000050325b0" class="card-title" target="_blank">早期抽象界的四大天王/.🌚</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/5d6e587200000000010004c5" class="author-link" target="_blank">『美汁汁』（5000+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：10月13日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.13</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 4w+互动</span>
+                <span class="detail-stats">👍3w+ ⭐5000+</span>
+                <a href="https://www.xiaohongshu.com/explore/68ecef1600000000050325b0" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">23.</span>
+                <a href="https://www.xiaohongshu.com/explore/6a519f30000000002103fbb6" class="card-title" target="_blank">[montagem game meme背景]四大天王⊙﹏⊙</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/689f47dd000000001a024554" class="author-link" target="_blank">Kurrr（2w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：7月11日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.13</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 2w+互动</span>
+                <span class="detail-stats">👍1w+ ⭐5000+</span>
+                <a href="https://www.xiaohongshu.com/explore/6a519f30000000002103fbb6" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">24.</span>
+                <a href="https://www.xiaohongshu.com/explore/69a983d5000000002602ee31" class="card-title" target="_blank">幸好四大美人早就拍完了！</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/66f6c5e4000000001d032bf3" class="author-link" target="_blank">花满心时（1524粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：3月5日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.13</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 2w+互动</span>
+                <span class="detail-stats">👍2w+ ⭐3965</span>
+                <a href="https://www.xiaohongshu.com/explore/69a983d5000000002602ee31" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">25.</span>
+                <a href="https://www.xiaohongshu.com/explore/6ac2df290000000014038c9e" class="card-title" target="_blank">四大菩萨、福泽深远、福泽长远</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/69533767000000003702dbf8" class="author-link" target="_blank">景用功（正能亮传递）（147粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：10月5日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.13</span>
+                <span class="score-tag popularity">热度 1.0</span>
+                <span class="score-tag recency">时效 1.5</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 3818互动</span>
+                <span class="detail-stats">👍1293 ⭐151</span>
+                <a href="https://www.xiaohongshu.com/explore/6ac2df290000000014038c9e" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">26.</span>
+                <a href="https://www.xiaohongshu.com/explore/68ce8090000000001203c4f2" class="card-title" target="_blank">小说中的四大美丽病症</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/5f2bda250000000001008c3a" class="author-link" target="_blank">躲小猫（8w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：9月20日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.13</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 4w+互动</span>
+                <span class="detail-stats">👍3w+ ⭐1w+</span>
+                <a href="https://www.xiaohongshu.com/explore/68ce8090000000001203c4f2" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">27.</span>
+                <a href="https://www.xiaohongshu.com/explore/69f9da55000000003501c5da" class="card-title" target="_blank">四大天王</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/63552e60000000001901e342" class="author-link" target="_blank">茜吸昱🐟（2753粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：5月5日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.22</span>
+                <span class="score-tag popularity">热度 2.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 1w+互动</span>
+                <span class="detail-stats">👍5000+ ⭐2592</span>
+                <a href="https://www.xiaohongshu.com/explore/69f9da55000000003501c5da" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">28.</span>
+                <a href="https://www.xiaohongshu.com/explore/6a0a7d7d000000003601eeb1" class="card-title" target="_blank">四大忧郁之地</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/629c5c7b00000000190283ab" class="author-link" target="_blank">雅鑫.湘『萱草花』（1702粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：5月18日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.2</span>
+                <span class="score-tag popularity">热度 2.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 1w+互动</span>
+                <span class="detail-stats">👍5000+ ⭐1336</span>
+                <a href="https://www.xiaohongshu.com/explore/6a0a7d7d000000003601eeb1" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">29.</span>
+                <a href="https://www.xiaohongshu.com/explore/6a60b1020000000022018661" class="card-title" target="_blank">四大混王</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/66fa3abb000000000d026243" class="author-link" target="_blank">鹤鱼（2w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：7月22日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.2</span>
+                <span class="score-tag popularity">热度 2.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 1w+互动</span>
+                <span class="detail-stats">👍1w+ ⭐1710</span>
+                <a href="https://www.xiaohongshu.com/explore/6a60b1020000000022018661" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">30.</span>
+                <a href="https://www.xiaohongshu.com/explore/6ab5e6f1000000001a02806f" class="card-title" target="_blank">古代四大女神~</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/650198320000000002011e85" class="author-link" target="_blank">古人颜值社（14w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：9月25日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.2</span>
+                <span class="score-tag popularity">热度 1.0</span>
+                <span class="score-tag recency">时效 1.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 3553互动</span>
+                <span class="detail-stats">👍2507 ⭐997</span>
+                <a href="https://www.xiaohongshu.com/explore/6ab5e6f1000000001a02806f" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        </div>
+
+        
+
+        <div class="data-note">
+            数据来源：小红书热门笔记搜索，每日更新最新热门内容<br>
+            备注：互动数据为入库快照，实时数据可能持续增长
+        </div>
+    </div>
+</body>
+</html>

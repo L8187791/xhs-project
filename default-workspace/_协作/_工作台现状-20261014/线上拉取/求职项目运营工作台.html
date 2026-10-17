@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html data-page-node-id="2xHveea9ZK8fjHTwCgrFlP" lang="zh-CN">
+<head data-page-node-id="cDJwCTxIFXu38BEc16cNbl">
+<script data-page-node-id="usdP0AeuOZV9wzlBx7GQWU" src="/page/page_comm/inject.js"></script>
+<meta data-page-node-id="IuM1I8zMde59gOJZKPIDzK" charset="UTF-8">
+<meta data-page-node-id="w7NrdPRLneaxf1nVzgt8Xf" content="width=device-width, initial-scale=1.0" name="viewport">
+<title data-page-node-id="NpDvOdn4ktFBSx0foancuN" data-pnid-children="8qCYifWQyfLyQ2qIz3ptiw">小L整理求职资料 · 运营工作台 v2.0</title>
+<style data-page-node-id="eEyFOLktQlDXwP5cqDv5l2" data-pnid-children="AMzz9NhE7KFreajKkbYL59">
+  :root{
+    --bg:#f4f6fb; --panel:#ffffff; --ink:#151a26; --ink2:#3c4557; --muted:#7b8496;
+    --line:#e6e9f2; --line2:#eef1f7; --brand:#ff2e4d; --brand-soft:#fff0f2;
+    --blue:#2f6bff; --blue-soft:#eef3ff; --amber:#f59e0b; --amber-soft:#fff7e8;
+    --green:#12a35b; --green-soft:#eafaf1; --violet:#7c5cff; --violet-soft:#f2eeff;
+    --shadow:0 1px 2px rgba(20,26,40,.04),0 8px 24px -12px rgba(20,26,40,.14);
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.55; padding:22px 18px 60px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto}
+  section{margin-top:22px}
+  .sec-head{display:flex;align-items:baseline;gap:10px;margin:0 4px 12px;flex-wrap:wrap}
+  .sec-head h2{font-size:15.5px;font-weight:800;letter-spacing:.2px}
+  .sec-head .en{font-size:11px;color:var(--muted);letter-spacing:1.4px;text-transform:uppercase;font-weight:700}
+  .sec-head .note{margin-left:auto;font-size:12px;color:var(--muted)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .pad{padding:20px}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    display:flex;flex-wrap:wrap;align-items:center;gap:14px;justify-content:space-between;
+    background:linear-gradient(120deg,#ffffff 0%,#fff6f7 60%,#fdf1f3 100%);
+    border:1px solid var(--line);border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow);
+  }
+  .brand{display:flex;align-items:center;gap:13px}
+  .logo{
+    width:46px;height:46px;border-radius:13px;flex:0 0 auto;
+    background:linear-gradient(135deg,#ff2e4d,#ff6b81);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;
+    box-shadow:0 8px 18px -8px rgba(255,46,77,.65);
+  }
+  .brand h1{font-size:19px;font-weight:800;letter-spacing:.3px}
+  .brand p{font-size:12.5px;color:var(--muted)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{
+    font-size:12px;font-weight:600;padding:6px 11px;border-radius:999px;
+    background:#fff;border:1px solid var(--line);color:var(--ink2);white-space:nowrap;
+  }
+  .chip.dot::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle;background:var(--green)}
+  .chip.live::before{background:var(--green);animation:pulse 1.8s infinite}
+  .chip.warn::before{background:var(--amber)}
+  .chip.risk::before{background:var(--brand);animation:pulse 1.8s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+  /* ---------- hero ---------- */
+  .hero{display:grid;grid-template-columns:1.35fr 1fr;gap:16px}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}}
+  .north{padding:20px 22px}
+  .north .tagline{font-size:12px;font-weight:700;color:var(--brand);letter-spacing:1.5px;text-transform:uppercase}
+  .north h3{font-size:22px;font-weight:800;margin:7px 0 4px;letter-spacing:.2px}
+  .north .sub{font-size:13px;color:var(--muted)}
+  .progress{height:14px;border-radius:999px;background:#f0f2f8;margin:18px 0 9px;overflow:hidden;border:1px solid var(--line2)}
+  .progress span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#ff2e4d,#ff7a3d)}
+  .prog-meta{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink2);font-weight:600;gap:10px;flex-wrap:wrap}
+  .prog-meta b{font-size:20px;color:var(--ink)}
+  .node{padding:20px 22px;background:linear-gradient(150deg,#fff9f9,#ffffff 60%)}
+  .node .hd{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+  .node .hd .flag{font-size:18px}
+  .node .hd b{font-size:14.5px}
+  .countdown{display:flex;align-items:flex-end;gap:10px;margin:2px 0 12px;flex-wrap:wrap}
+  .countdown .big{font-size:clamp(24px,5.4vw,40px);font-weight:850;line-height:1;color:var(--brand);letter-spacing:-1px;white-space:nowrap}
+  .countdown .unit{font-size:13.5px;font-weight:700;color:var(--ink2);padding-bottom:5px}
+  .node ul{list-style:none;font-size:12.8px;color:var(--ink2);display:grid;gap:7px}
+  .node li{display:flex;gap:8px;align-items:flex-start}
+  .node li::before{content:"▸";color:var(--brand);font-weight:800;flex:0 0 auto}
+
+  /* ---------- kpi ---------- */
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:14px}
+  @media(max-width:520px){.kpis{grid-template-columns:1fr}}
+  .kpi{padding:17px 18px;position:relative;overflow:hidden}
+  .kpi .k-label{font-size:12px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:6px}
+  .kpi .k-val{font-size:30px;font-weight:850;letter-spacing:-.5px;margin:5px 0 2px}
+  .kpi .k-sub{font-size:11.5px;color:var(--muted)}
+  .kpi .k-sub b{color:var(--ink2)}
+  .kpi .bar{position:absolute;left:0;top:0;height:100%;width:4px}
+  .kpi.r .bar{background:var(--brand)} .kpi.b .bar{background:var(--blue)}
+  .kpi.a .bar{background:var(--amber)} .kpi.v .bar{background:var(--violet)}
+  .kpi.g .bar{background:var(--green)}
+
+  .grid3{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
+  @media(max-width:860px){.grid3{grid-template-columns:1fr}}
+
+  /* ---------- tiers ---------- */
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:860px){.tiers{grid-template-columns:1fr}}
+  .tier{padding:16px 18px 18px;border:1px solid var(--line);border-radius:14px;background:#fff;position:relative;box-shadow:var(--shadow)}
+  .tier.on{border-color:#ffd0d8;background:linear-gradient(150deg,#fff8f9,#fff)}
+  .tier .tn{font-size:11.5px;font-weight:800;letter-spacing:1px;color:var(--muted);text-transform:uppercase;padding-right:74px}
+  .tier .tp{font-size:27px;font-weight:850;margin:5px 0 8px;letter-spacing:-.5px}
+  .tier .tp small{font-size:12px;font-weight:700;color:var(--muted)}
+  .tier ul{list-style:none;font-size:12.2px;color:var(--ink2);display:grid;gap:6px}
+  .tier li{display:flex;gap:7px}
+  .tier li::before{content:"▸";color:var(--brand);font-weight:800;flex:0 0 auto}
+  .tier .badge{position:absolute;right:14px;top:15px;font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:999px}
+  .badge.live{background:var(--green-soft);color:#0b7a44}
+  .badge.wait{background:var(--amber-soft);color:#a96a05}
+  .badge.hold{background:#f1f3f8;color:var(--muted)}
+
+  /* ---------- content ops ---------- */
+  .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+  .tag{font-size:12px;font-weight:600;padding:5px 10px;border-radius:8px;background:var(--brand-soft);color:#c81e3c;border:1px solid #ffdde3}
+  .rows{display:grid;gap:11px;margin-top:6px}
+  .row{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:start;padding:11px 13px;background:#fafbfe;border:1px solid var(--line2);border-radius:11px}
+  .row.full{grid-template-columns:1fr}
+  @media(max-width:640px){.row{grid-template-columns:1fr}}
+  .row .h{font-size:12.5px;font-weight:700;color:var(--ink2)}
+  .row .v{font-size:13px;color:var(--ink)}
+  .mono{font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:12.5px}
+  .hi{color:var(--brand);font-weight:800}
+
+  /* ---------- data health ---------- */
+  .stat-line{display:grid;grid-template-columns:132px 1fr 52px;align-items:center;gap:12px;padding:8px 0}
+  @media(max-width:640px){.stat-line{grid-template-columns:104px 1fr 44px;gap:8px}}
+  .stat-line .sl{font-size:12.5px;color:var(--ink2);font-weight:600}
+  .stat-line .sv{font-size:13px;font-weight:800;text-align:right}
+  .track{height:10px;border-radius:999px;background:#eef1f7;overflow:hidden}
+  .track span{display:block;height:100%;border-radius:999px}
+
+  /* ---------- table ---------- */
+  table{width:100%;border-collapse:collapse;font-size:12.8px}
+  thead th{
+    text-align:left;font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);
+    font-weight:800;padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap;
+  }
+  tbody td{padding:9px 10px;border-bottom:1px solid var(--line2);color:var(--ink2);vertical-align:top}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:#fafbfe}
+  .pill{font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;white-space:nowrap;display:inline-block}
+  .pill.soon{background:var(--brand-soft);color:#c81e3c}
+  .pill.wk{background:var(--amber-soft);color:#a96a05}
+  .pill.ok{background:var(--green-soft);color:#0b7a44}
+  .pill.mut{background:#f1f3f8;color:var(--muted)}
+  .today-row{background:#fff8f9 !important}
+  .tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:0 8px 6px}
+  .tblwrap table{min-width:460px}
+
+  /* ---------- rules ---------- */
+  .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:11px}
+  @media(max-width:640px){.rules{grid-template-columns:1fr}}
+  .rule{display:flex;gap:11px;align-items:flex-start;padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:#fff}
+  .rule .ick{flex:0 0 auto;width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .rule.red .ick{background:var(--brand-soft)} .rule.amber .ick{background:var(--amber-soft)}
+  .rule.green .ick{background:var(--green-soft)} .rule.blue .ick{background:var(--blue-soft)}
+  .rule b{font-size:13px;display:block;margin-bottom:2px}
+  .rule p{font-size:12px;color:var(--muted)}
+  .cutbox{margin-top:11px;padding:12px 15px;border:1px dashed var(--line);border-radius:12px;background:#fbfcfe;font-size:12px;color:var(--muted);line-height:1.85}
+  .cutbox b{color:var(--ink2)}
+  .notebox{margin-top:11px;padding:12px 15px;border:1px solid #ffe7bd;border-radius:12px;background:var(--amber-soft);font-size:12px;color:#8a5b05;line-height:1.8}
+  .notebox b{color:#7a4e00}
+
+  /* ---------- dynamic modules ---------- */
+  .dyn{padding:18px 20px}
+  .dyn-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+  .dyn-top h2{font-size:15.5px;font-weight:800}
+  .dyn-top .stat{font-size:12px;color:var(--ink2);background:#f4f6fb;border:1px solid var(--line);border-radius:999px;padding:4px 11px;font-weight:600}
+  .dyn-top .stat b{color:var(--brand);font-weight:850}
+  .dyn-top .grow{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+  .btn{
+    font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;border-radius:10px;padding:8px 14px;
+    border:1px solid var(--line);background:#fff;color:var(--ink2);transition:.15s;white-space:nowrap;
+  }
+  .btn:hover{border-color:#c9d2e8;background:#fafbff}
+  .btn.primary{background:linear-gradient(135deg,#ff2e4d,#ff5c73);color:#fff;border-color:transparent;box-shadow:0 6px 14px -8px rgba(255,46,77,.8)}
+  .btn.primary:hover{filter:brightness(1.05)}
+  .btn.ghost{background:#f7f9fd}
+  .dyn-form{display:none;grid-template-columns:repeat(4,1fr);gap:9px;padding:14px;margin-bottom:14px;background:#fafbfe;border:1px dashed var(--line);border-radius:12px}
+  .dyn-form.open{display:grid}
+  @media(max-width:860px){.dyn-form{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.dyn-form{grid-template-columns:1fr}}
+  .dyn-form input,.dyn-form select{
+    font-family:inherit;font-size:13px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);width:100%;
+  }
+  .dyn-form input:focus,.dyn-form select:focus{outline:none;border-color:#ffb3c0;box-shadow:0 0 0 3px rgba(255,46,77,.08)}
+  .dyn-form .span2{grid-column:span 2}
+  @media(max-width:520px){.dyn-form .span2{grid-column:span 1}}
+  .dyn-form .submit{grid-column:1/-1;display:flex;gap:9px;justify-content:flex-end}
+  .dyn-list{display:grid;gap:9px}
+  .drow{
+    display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;
+    padding:11px 13px;border:1px solid var(--line2);border-radius:11px;background:#fff;transition:.15s;
+  }
+  .drow:hover{border-color:#dce3f2;background:#fdfdff}
+  .drow .body{min-width:0}
+  .drow .t{font-size:13.5px;font-weight:700;color:var(--ink);word-break:break-word}
+  .drow .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px;align-items:center}
+  .drow .note{font-size:11.5px;color:var(--muted)}
+  .drow .acts{display:flex;gap:6px;flex:0 0 auto}
+  .mini{font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;border:1px solid transparent;white-space:nowrap;cursor:pointer;font-family:inherit}
+  .mini.type{background:#f4f6fb;color:var(--ink2);border-color:var(--line)}
+  .mini.p0{background:var(--brand-soft);color:#c81e3c} .mini.p1{background:var(--amber-soft);color:#a96a05} .mini.p2{background:#f1f3f8;color:var(--muted)}
+  .mini.a{background:var(--blue-soft);color:#1c4fd6} .mini.b{background:var(--violet-soft);color:#5a3fd6}
+  .mini.s-todo{background:#f1f3f8;color:#5b6478} .mini.s-doing{background:var(--amber-soft);color:#a96a05}
+  .mini.s-done{background:var(--green-soft);color:#0b7a44} .mini.s-ready{background:var(--blue-soft);color:#1c4fd6}
+  .mini.st{cursor:pointer;border:1px solid rgba(0,0,0,.05)}
+  .mini.st:hover{filter:brightness(.96)}
+  .mini.del{background:#fff;color:var(--muted);border-color:var(--line)}
+  .mini.del:hover{color:#c81e3c;border-color:#ffd0d8;background:var(--brand-soft)}
+  .dyn-empty{padding:26px 16px;text-align:center;color:var(--muted);font-size:13px;background:#fbfcfe;border:1px dashed var(--line);border-radius:12px;line-height:1.9}
+  .dyn-empty b{color:var(--ink2)}
+  .dyn-toast{
+    position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);opacity:0;
+    background:#151a26;color:#fff;font-size:13px;font-weight:600;padding:11px 20px;border-radius:11px;
+    box-shadow:0 12px 30px -10px rgba(20,26,40,.5);transition:.25s;z-index:99;pointer-events:none;
+  }
+  .dyn-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .bar-strip{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+  .bar-strip .f{font-size:12px;font-weight:700;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink2);cursor:pointer;font-family:inherit}
+  .bar-strip .f.on{background:#151a26;color:#fff;border-color:#151a26}
+
+  .linkcard{display:flex;align-items:center;gap:12px;padding:14px 18px;margin-bottom:12px;border:1px solid #dbe4ff;border-radius:12px;
+    background:linear-gradient(120deg,#f5f9ff,#eef3ff);text-decoration:none;color:var(--ink2);font-size:13px;font-weight:700}
+  .linkcard:hover{border-color:#b9cdff;background:linear-gradient(120deg,#eef5ff,#e6efff)}
+  .linkcard .ico{font-size:20px;flex:0 0 auto}
+  .linkcard .go{margin-left:auto;color:#2f6bff;font-weight:800;white-space:nowrap}
+  @media(max-width:640px){.linkcard{flex-wrap:wrap}.linkcard .go{margin-left:0}}
+  .kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px;margin-bottom:14px}
+  .kv .box{background:#fafbfe;border:1px solid var(--line2);border-radius:11px;padding:11px 13px}
+  .kv .k{font-size:11.5px;color:var(--muted);font-weight:700}
+  .kv .v{font-size:19px;font-weight:850;margin-top:2px}
+
+  /* ---------- plan / suspend ---------- */
+  .planhead{font-size:12.5px;font-weight:800;letter-spacing:.5px;margin:16px 0 9px;display:flex;align-items:center;gap:8px;color:var(--ink2)}
+  .planhead:first-child{margin-top:0}
+  .planhead .pdot{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+  .planhead .pdot.p0{background:var(--brand)} .planhead .pdot.p1{background:var(--amber)} .planhead .pdot.p2{background:var(--green)}
+  .susp{display:grid;gap:9px;margin-top:6px}
+  .susp .s{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:12px 15px;border:1px solid var(--line2);border-radius:11px;background:#fafbfe}
+  .susp .num{width:24px;height:24px;border-radius:8px;background:var(--violet-soft);color:#5a3fd6;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex:0 0 auto}
+  .susp .t{font-size:13px;font-weight:700;color:var(--ink)}
+  .susp .d{font-size:12px;color:var(--muted);margin-top:2px}
+
+  footer{margin-top:26px;padding:16px 20px;border:1px solid var(--line);border-radius:var(--radius);background:#fbfcfe;color:var(--muted);font-size:11.8px;line-height:1.8}
+  footer b{color:var(--ink2)}
+  .srcline{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .srcline span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:11px}
+</style>
+</head>
+<body data-page-node-id="Cb2oPoYqB4c5Arvrwbzwzm">
+<div data-page-node-id="NlmObP33nLy3OjqHmvuCmD" class="wrap">
+
+  <div data-page-node-id="oqy3dY2VK0ZMdDOzFKgIjt" class="topbar">
+    <div data-page-node-id="bjGwTeAXsoF6TuqumwQODZ" class="brand">
+      <div data-page-node-id="nUaFGGOFnQX67ZaHRXKASk" class="logo"><!--pnid:LFYYHxsbJQfQ8hSaKMT9TG-->L</div>
+      <div data-page-node-id="TwC70KqT96frEsk6CVLxaV">
+        <h1 data-page-node-id="cEjOSYhaTwmE8fCVOKzSew"><!--pnid:wunUNr8MvHifVZ66tR5p51-->小L整理求职资料（秋招版）· 运营工作台</h1>
+        <p data-page-node-id="zzogSp8R8qLh7hG64Ke4qC"><!--pnid:9nBv40ohXUEi0q4N9Lsovo-->单店作战指挥所 ｜ 数据截至 2026-10-14 ｜ 口径源：总作战计划 <b data-page-node-id="Vm1dzOynXeltskTwY2eQZs"><!--pnid:KCqMSv0Dloc9zeClokaMM9-->v3.1</b><!--pnid:gEQmh2sZ5ZbTHKCOqmgsKo-->（豆包编制）＋ 主文档已停更（并入 v3.1）＋ 守则速查</p>
+      </div>
+    </div>
+    <div data-page-node-id="2vuQqfolBr7Yl1HMyLV0Us" class="chips">
+      <span data-page-node-id="gT4mb9L3NQIiZ049KtKkqC" class="chip dot risk live"><!--pnid:zC0ixCSnGs5CEaCOFbLcVB-->阶段：处罚期 第 3 天（至 10/19 15:58）</span>
+      <span data-page-node-id="FKDzZRfleiJ1Z4KRDr9VB6" class="chip dot"><!--pnid:8P4KusFoP5YRqIY3DJu4y7-->数据时效：数据日 10-14（当日）</span>
+      <span data-page-node-id="pdi3p37b7Bwtz575LJGhNq" class="chip"><!--pnid:K5PwoBlkwivJThF3tKdsZT-->19.9 在售 · 49.9 待上架</span>
+      <span data-page-node-id="s4WONDFNTuj5QMnPTrpgWO" class="chip dot" id="dbChip"><!--pnid:GpTddrOYtpQVjuiznAWA01-->数据源连接中…</span>
+    </div>
+  </div>
+
+  <section data-page-node-id="rEYWVXI5qLgrNR4CtsTE5D" class="hero">
+    <div data-page-node-id="97yhXuQVJlWGDCSfg6oTuy" class="card north">
+      <div data-page-node-id="TywZ5I58BRmMQW36ezWwsA" class="tagline"><!--pnid:1tQifu2ieoaCrzOAvpcTcY-->唯一北极星</div>
+      <h3 data-page-node-id="dkSyavVeVqzNjB4hMFcmql"><!--pnid:rWsIbg8zBuJU9PjjCvtrdl-->30 天内，19.9 卖出 30 单</h3>
+      <div data-page-node-id="5mrqCnR8fuHbhsNPerrd72" class="sub"><!--pnid:hWLX3ZGoBwTy0qoERAPSwS-->产品矩阵：19.9 时间表（在售）＋ 49.9「半年全套」（10/19 上架）＋ 99.9 全流程包（暂缓）</div>
+      <div data-page-node-id="of9MzVX0LESoE5W3iV2ZeH" class="progress"><span data-page-node-id="8AjPN18vFzFC6yE5lbK4dZ" style="width:3.33%"></span></div>
+      <div data-page-node-id="uwAhaeeKAa39MXAO8oDHNI" class="prog-meta">
+        <div data-page-node-id="2qpOiVKEVSKDrw35HmSBrp"><b data-page-node-id="a142ntIqRb6Ot9IKazulS6"><!--pnid:ZqTqK5KfZOXyNkmKsWV8P3-->1</b><!--pnid:zRQqVUNLLBLmz4QOTGfIrV--> / 30 单</div>
+        <div data-page-node-id="sVrPzkDTbpRVH7Z2nyOnAf" style="text-align:right"><!--pnid:DAn6d5OSuIHWeYCkTHBnU7-->距目标尚需 <b data-page-node-id="Vhhmeqlj29AfJGasRXysuh" style="color:#ff2e4d"><!--pnid:FKHKE1MmtWgUG4LYxmPA5x-->29</b><!--pnid:KCFN9IqyTDR6IwUHlmhugZ--> 单<br data-page-node-id="ppo9pNttafPCgYY4YLLN7R"><span data-page-node-id="FWVE3amakjZ9fbUGdUUO9N" style="font-weight:600; color:var(--muted)"><!--pnid:3CYLWTidkF9KE7mHIezlEZ-->首单 10-12 破 · 网盘交付 · 无沟通自动下单 · 来源《本周12家》</span></div>
+      </div>
+    </div>
+    <div data-page-node-id="wJxcQeMgiGMLLg5veEd4Io" class="card node">
+      <div data-page-node-id="vXS9hN6xsK3u8zZSwwF9cM" class="hd"><span data-page-node-id="adnXyjbqpToTcZg3USasaA" class="flag"><!--pnid:S33ojkGDEP3AYP3ls4Y2Sf-->⏳</span><b data-page-node-id="WdmaBTn8TLdm75nKax4ybr"><!--pnid:OfPbfPks2XsC33GmApRFcC-->处罚期倒计时</b></div>
+      <div data-page-node-id="wm68Q2STtGgq6Ree6mhgxE" class="countdown">
+        <div data-page-node-id="ub9c9ySOxwgJJhxIbjrBSy" class="big"><!--pnid:1O8dOnd2NUY1Ozg6VdH1N4-->剩 5 天</div>
+        <div data-page-node-id="5Dogr096Sx5qlZfA0Ll4hs" class="unit"><!--pnid:THEZxhgL6EPcMUdJl4rvHF-->10/19 15:58 处罚期结束<br data-page-node-id="WzNjRXgqgKC6SoaMjdCE8c"><!--pnid:xTvAsN6PvyLQCKZgN7LkTW-->（7 天期 · 今日第 3 天）</div>
+      </div>
+      <ul data-page-node-id="JedE8PivpLIJxQx9DAb6Lg">
+        <li data-page-node-id="ZRSgeWChzoR5BP1LmQhUTv"><b data-page-node-id="bjpgxZ3AQQQv5oiJySKGF4"><!--pnid:iv6d7CNdKUJHi5IlAYhkKG-->10/12 15:58</b><!--pnid:tzhRXGXc2DGVgeHzYbls9N--> 处罚开始（7 天，至 10/19 15:58）；申诉已提 1 次版本 A（只提一次）</li>
+        <li data-page-node-id="WFhW6mzAzppa422PehImxh"><b data-page-node-id="QAQGVY3uLF7Xi7qrEmIaJv"><!--pnid:oUWaCMYy7OVDTfRuz9AT5v-->10/13–10/19</b><!--pnid:PhKlNP66LVuGebER2GW9JL--> 处罚期纪律：不登录账号 / 不投流 / 不站外导流 / 不评论区导购 / 不私信催单；稳定 1–2 条/天养流量</li>
+        <li data-page-node-id="Mb8s1zLuPSrjCI4apqRFI1"><b data-page-node-id="uWZGAS5X1kJMgirjsNSS2u"><!--pnid:hRSb7CSAgtCEimpBduVi4p-->10/19</b><!--pnid:gzcsojODKY5NsM1PhaXnN5--> 商业权益恢复 → 上架 49.9「半年全套」；<b data-page-node-id="dvV5YsMb1ET0r67wrIaVAl"><!--pnid:P309XSkVBOn0IhfQ0RQJhF-->10/19–10/26</b><!--pnid:SI2iPw0nDkDvtajLFnpSbF--> 回暖周</li>
+        <li data-page-node-id="YegcoThh9mlybY8nuWAgaE"><b data-page-node-id="pg7AOOxzOXUiRl1PVUcK2t"><!--pnid:euIqtVocV2MVQKdn2qVERd-->10/31</b><!--pnid:q2XklFJT6AwubVgNPhTPlH--> 弹性判据：49.9 转化率 ≥ 19.9 的 40% → 11 月上 99 档；&lt;40% → 封顶</li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-page-node-id="CXgp8blegwyQl4noLOEyEU">
+    <div data-page-node-id="VVGQenBch5gJQW5l0tttHH" class="sec-head"><h2 data-page-node-id="9y3AjxOwyK01n75nqhZr8i"><!--pnid:DOxw7YaQKyXeEMgycCw6OT-->产品与价格档</h2><span data-page-node-id="XI5YWM9WykgGXauFgpQ5xK" class="en"><!--pnid:eP2T7oKVVd8kyQI5rumgKl-->Tiers</span><span data-page-node-id="DsZf8qvEM03hYfp4BOUlzg" class="note"><!--pnid:NXP1itBlNzQxf3MawgOqZw-->哑铃两档：19.9 入门 + 99.9 高端；不做 1–9.9 元引流款（v2.0 避雷①）</span></div>
+    <div data-page-node-id="1Tm5CsDILn9QQYo3Tzmx9B" class="tiers">
+      <div data-page-node-id="OSEBYlLQ4R6RHNs19KoDQp" class="tier on">
+        <span data-page-node-id="i5veykpxUbAYGDaGxfsC6B" class="badge live"><!--pnid:DTEH9aiTcfuVNkrHcGuIKN-->在售</span>
+        <div data-page-node-id="GWBUyBGQLQenrlxiVmMHdL" class="tn"><!--pnid:PvQgm2HTFMdZ0voA1RKsa5-->L1 · 时间表</div>
+        <div data-page-node-id="0L31vea25ZGPIwpxOYXLJl" class="tp"><!--pnid:yv76uTL1LqXQIGtKrAOCmC-->¥19.9<small data-page-node-id="s6eusY2a3FsIxDt16SAFcs"><!--pnid:Gtr0HRsxEFBzecKbTMhgIO--> / 份</small></div>
+        <ul data-page-node-id="eim7pkOJN8dlHbxITBGUyb">
+          <li data-page-node-id="lcPw6unu0pqK3RybacFK1T"><!--pnid:7zYgY0OjxolGjIR0kYeoOo-->131 家网申截止时间表（对外口径）</li>
+          <li data-page-node-id="ZPIjDnChulLnsuhDMPsDts"><!--pnid:vIUx9Mo1m5juvswPUhjj51-->北极星主品：30 天内卖 30 单</li>
+          <li data-page-node-id="6Esr4XhGgFu0v2rPzIglwQ"><!--pnid:Itb24kZZLMlzHb6DEyDL54-->详情页用户手工替换中（修「2027届」违规）</li>
+        </ul>
+      </div>
+      <div data-page-node-id="iQG90DQceg34v0OswnlQ7L" class="tier">
+        <span data-page-node-id="BXKGqYrguewD4AAl1QM8Ih" class="badge wait"><!--pnid:uIEgYHl3A7QHL49gwJs4Hr-->10/19 上架</span>
+        <div data-page-node-id="kgC53k1GUyKcSUAIJfc6E1" class="tn"><!--pnid:L2vmQMyw4lWU9iDUsKl1fn-->L2 · 半年全套</div>
+        <div data-page-node-id="X20D27J4ooQreOAxCTpHOi" class="tp"><!--pnid:ohn7qoKWybNJ0ruGRBYQZG-->¥49.9<small data-page-node-id="6nllvNPqMcDmc1sp0d8YBD"><!--pnid:XkWHp6qxDHnwfNVHK5jPKk--> / 份</small></div>
+        <ul data-page-node-id="tvVqyVD0GXqeAiNf3X8ZcM">
+          <li data-page-node-id="V6fozN9ItzGP3ctsdeXGRL"><!--pnid:CTsmPjuzmoFdRzqaloDSnT-->分行业清单包（A 层按行业切）</li>
+          <li data-page-node-id="NEzWVzMbaZAmB1yEan43hH"><!--pnid:Dik78zpPk2T0X9ufyT99kv-->承诺边界 2027-04 · 半月更 · 禁考试线</li>
+          <li data-page-node-id="18z0QvPtSsV4HvPzqjCAO4"><!--pnid:6jPTSzEY1uBYZy2y6c5RE3-->定位弹性测试工具，非收入工具</li>
+        </ul>
+      </div>
+      <div data-page-node-id="r4LLpu3XLAWPU64USg1osG" class="tier">
+        <span data-page-node-id="stUHqwN2DaXpEjcA60nnUY" class="badge hold"><!--pnid:Ub37rBiBsbZZ89kNgaUREb-->暂缓</span>
+        <div data-page-node-id="HZOri9bKnFim8OMWqyIdkQ" class="tn"><!--pnid:DOnqfuAaqPYEgorkdvnOwe-->L3 · 全流程包</div>
+        <div data-page-node-id="ZPrBYzi9O3tABf5AncGiPE" class="tp"><!--pnid:6eKmF8YyIjC2xAgmycAJuO-->¥99.9<small data-page-node-id="f4xKbh7qBlaAcgurcBbtXC"><!--pnid:faqU0dt1hY71b2FY60PdEn--> / 份</small></div>
+        <ul data-page-node-id="ZtD6d3lHCZOTkbZLK0Cujv">
+          <li data-page-node-id="8tUYE6rnP2JeA1htfeRAo3"><!--pnid:a1lm640ubARkwrQqYxGAqM-->时间表 + 简历模板 + 笔面试资料</li>
+          <li data-page-node-id="i4F4oDCcNlpRPu3a4DVFjh"><!--pnid:DH5Q9YuUaGqPXKPeoRwgRU-->10/31 判据达标才上（转化率 ≥40%）</li>
+          <li data-page-node-id="AAOLTFlp7TsTY3sKBkv9Af"><!--pnid:rYBfXFUiZzwyjSANLTqUz3-->v2.0 明确「99 暂缓」，非 10/14 上架</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section data-page-node-id="Go1Nfy2HI3P4DyMWBQ4znc">
+    <div data-page-node-id="L799nI6dvjU9Qtisyf9snq" class="sec-head"><h2 data-page-node-id="roeAKQMUdFqYPmwpr30cdV"><!--pnid:NlasCr2aMwOJGpgtAaOCie-->店铺脉搏</h2><span data-page-node-id="5rTYfiDYspNEvORuGzacgm" class="en"><!--pnid:UJk9tXsZfD5iafUtwN5O3p-->Pulse</span><span data-page-node-id="cKR6Ed2GrzY4KQlsmrbNMH" class="note"><!--pnid:C8HWxR6bZwFdM5HQGf3LV3-->粉丝/成交/店铺分取自「店铺数据」最新一条；带 ★ 者为磁盘可验证常量</span></div>
+    <div data-page-node-id="ZTcOVl3060VX38udJw6mWb" class="kpis">
+      <div data-page-node-id="KzA45jQHccP1PQMPyyy9VY" class="card kpi r"><div data-page-node-id="337tXQWOr2wR2MH7Fjwejo" class="bar"></div>
+        <div data-page-node-id="YJVvBgjDWhIeFhAnyvkaZo" class="k-label"><!--pnid:0AJxIozXoaDBtk9NT0LUw2-->粉丝数</div>
+        <div data-page-node-id="OoGQMbQNGyaNXv1mrfglSd" class="k-val"><span data-page-node-id="jFSGy7J996uHRvWH44SmEr" data-sp-bindable="database" data-sp-database-id="Vdd0Fs70cCWYWUNaWDOpfY" id="kpiFans"><!--pnid:haOHbNSuzjQIW3Hc8NOfwv-->—</span></div>
+        <div data-page-node-id="r5DAME0jnzhPFDC51TMvyE" class="k-sub"><!--pnid:RhH8eTKZd8Rr1QqA8Knu3B-->最新一条店铺数据</div>
+      </div>
+      <div data-page-node-id="4XK3oGbRWTtvpooM6GJU7q" class="card kpi g"><div data-page-node-id="rFyBpztAUgfsjfNZmWEjeI" class="bar"></div>
+        <div data-page-node-id="Us8va8cw4MF5dsfyFxTUpQ" class="k-label"><!--pnid:cnAhu8wrzZhbkR2lTZetQC-->累计成交单量</div>
+        <div data-page-node-id="RLwypgabHWsbVQm5S2aEgW" class="k-val"><span data-page-node-id="aQROZx6ybhSBFU8OiatNxv" data-sp-bindable="database" data-sp-database-id="Vdd0Fs70cCWYWUNaWDOpfY" id="kpiOrders"><!--pnid:gmUN93otg1FWLklHwRVIDU-->—</span></div>
+        <div data-page-node-id="zNN4PhK6D2i4msaakFz5rU" class="k-sub"><!--pnid:h1CArD9feW8jHVQve89V23-->北极星 1 / 30（首单 10-12）</div>
+      </div>
+      <div data-page-node-id="Pmm0woaZ8RqyGS4bS50Tm9" class="card kpi b"><div data-page-node-id="IsDoY4AJLgJLYyJFNpBGXU" class="bar"></div>
+        <div data-page-node-id="x1Cz7OAI2MMslv6AAkISQS" class="k-label"><!--pnid:WTSOMIggD9DX5Ye5RrIIII-->店铺分</div>
+        <div data-page-node-id="2TPwZxPYplk7x5sLEPElS0" class="k-val"><span data-page-node-id="Y2t1CxnsiPsksYG0F9O1Nr" data-sp-bindable="database" data-sp-database-id="Vdd0Fs70cCWYWUNaWDOpfY" id="kpiScore"><!--pnid:eXI0WUGT2EHHeQzhpNsLyh-->—</span></div>
+        <div data-page-node-id="434qIf9exLgEsJ6gJojauK" class="k-sub"><!--pnid:rCFGmgwanThIzziieRu4dG-->≤4.6 需留意 · 4.6 以上有流量加成</div>
+      </div>
+      <div data-page-node-id="CBo1Q1NCi7qlp7CRtuAso1" class="card kpi a"><div data-page-node-id="0mcnkv5ehIgHYf8D7l4FTZ" class="bar"></div>
+        <div data-page-node-id="zREnhMjZ8PGtXPBfJW6ICc" class="k-label"><!--pnid:vKQNlvlh5JGhZpSMQ6N7Uv-->待办未完成</div>
+        <div data-page-node-id="j0AHv9zmRHZTTCdKSpdVaa" class="k-val"><span data-page-node-id="XQpnKxmTAT6ty3Kzg3Uqam" data-sp-bindable="database" data-sp-database-id="jXSNAphTmjKYhdWjMJV6oM" id="kpiTodo"><!--pnid:ga7e72Y4eMT4qnDLYTvZyu-->—</span></div>
+        <div data-page-node-id="4nFfdyNsHjBCWWCbGNHXmz" class="k-sub"><!--pnid:0fVeO9jORIpGJ6jeWfuSMF-->来自「求职项目·待办清单」</div>
+      </div>
+      <div data-page-node-id="NAu8rZ4WiB027UkPlnyqYL" class="card kpi v"><div data-page-node-id="VhOqnA3abQKuMH2Pz3yOY3" class="bar"></div>
+        <div data-page-node-id="2PBuniIAeuKHndy354czvx" class="k-label"><!--pnid:R5nVKiQrqYPGqmMbVijxEe-->发布排期条数</div>
+        <div data-page-node-id="XTq0sb6ygQTifTNnlmGY8c" class="k-val"><span data-page-node-id="uxVNaqGUcWoycpSCr5yEZb" data-sp-bindable="database" data-sp-database-id="UcSbMf8BXQQjx06jvOM7To" id="kpiSch"><!--pnid:TyqmQekdeGOKlaLJKxtL3e-->—</span></div>
+        <div data-page-node-id="ldrG2H9il1tCR2iFed8Qrm" class="k-sub"><!--pnid:oBXN2gWaJo56jQkmXCWum8-->来自「求职项目·发布排期」</div>
+      </div>
+      <div data-page-node-id="rpRhf4oRoEydx42IVkAWTu" class="card kpi r"><div data-page-node-id="H7hUW4ruJkKneBEDa9LFQf" class="bar"></div>
+        <div data-page-node-id="qEBc1haMC3asPbuCR14XLG" class="k-label"><!--pnid:jI6X3au4IuUqrkYU5Ek0MN-->★ 对外家数</div>
+        <div data-page-node-id="fndNwoWCVml3KmvdI0R4lc" class="k-val"><!--pnid:dvsrMeAGCJHcMH9rJVQLWw-->131</div>
+        <div data-page-node-id="tbGKtk5ZOsKRqZGEFJMWIP" class="k-sub"><!--pnid:pQk1bQJhlWOrliYh7MJyTg-->内部主表 200（v1.0.21）· 对外交付 131</div>
+      </div>
+      <div data-page-node-id="dxLwKUSM97XZOAjEB185Fl" class="card kpi g"><div data-page-node-id="pdmUW1Xi1NiejwHoLtRkbG" class="bar"></div>
+        <div data-page-node-id="9fGdsuox3Q5PhzPSrZX9wh" class="k-label"><!--pnid:ZezgZW2tdmq8C70WBmkHdb-->获赞与收藏</div>
+        <div data-page-node-id="GYLR01jK86RkfLJ4zSUqJG" class="k-val"><span data-page-node-id="rAhtTpoR3afaVaY77A7BXn" data-sp-bindable="database" data-sp-database-id="Vdd0Fs70cCWYWUNaWDOpfY" id="kpiLikes"><!--pnid:0i6HEiMiH684MAuinUxD2V-->—</span></div>
+        <div data-page-node-id="WR1IJPkGupz2mvx8KxwKLH" class="k-sub"><!--pnid:2uNJGyHsdL9YvZ7EP6yvno-->来自「求职项目·店铺数据」最新快照</div>
+      </div>
+    </div>
+  </section>
+
+  <!--pnid:Swmids37E1fltIODnKg1f9--><!-- 数据快照模块（2026-10-14 新增：曝光等数据列表） -->
+  <section data-page-node-id="amooElkgy8YbeGrb4sqABA">
+    <div data-page-node-id="OWqb5LTzTiqjyeLYDngxdX" class="sec-head"><h2 data-page-node-id="DHwIrT2Htxz8jKRFUujlBy"><!--pnid:Lx9lQFLUG0tsJNxWNP0Qpp-->数据快照（曝光等）</h2><span data-page-node-id="WbN191WJxCh5K01chdfyNu" class="en"><!--pnid:PUtEP5S2Gba4N50JJtPpo9-->Metrics · 可编辑</span><span data-page-node-id="Lyca9vHSNvhiaNKiFpoYNp" class="note"><!--pnid:kJG6wF3GQ4yYCA6prcMWzZ-->大盘 + 单篇 Top · 数据存于「求职项目·数据快照」</span></div>
+    <div data-page-node-id="uvcaq4W61oMOoEfLSn94pQ" class="card dyn">
+      <div data-page-node-id="L1eGxeovIVMhlwgnD9IofC" class="dyn-top">
+        <h2 data-page-node-id="9v0Bd3owS1QPtvTARGFQab"><!--pnid:saEwfAIWSqKeiaQ7cPqSn1-->近7日大盘</h2>
+        <span data-page-node-id="Tw7OAnntcTPR2RgyZ3Elzm" class="stat"><!--pnid:S1xDbVlP8PQ3SBRElQBaJv-->曝光 <b data-page-node-id="oouom97XOaEJoWk7sU7EUf" data-sp-bindable="database" data-sp-database-id="OuIVbXUEGn1oG72I74wT3q" id="snapExp"><!--pnid:XnWOLwyueKZkNJf5fvnCl0-->—</b><!--pnid:VzfnoXPYWxN4DovHtBjdzH--> · 观看 <b data-page-node-id="JmgSL0CbUKsjsBkH8W8L1S" data-sp-bindable="database" data-sp-database-id="OuIVbXUEGn1oG72I74wT3q" id="snapView"><!--pnid:q6LcISNgfRYvjIMYGKpojW-->—</b><!--pnid:oCtknVt6qYm33RuMP1XTIT--> · CTR <b data-page-node-id="r8Jn3HnnadZMmj9GiRBi6Z" data-sp-bindable="database" data-sp-database-id="OuIVbXUEGn1oG72I74wT3q" id="snapCtr"><!--pnid:9797GZAnMVNlsl3xalV9e2-->—</b><!--pnid:sZoe0uxu4pVsPeb9UoM9LY--> · 发布 <b data-page-node-id="VFF7BvHezg84CjoL8FBZ2A" data-sp-bindable="database" data-sp-database-id="OuIVbXUEGn1oG72I74wT3q" id="snapPosts"><!--pnid:fNODhT5uxPFdhr6mS5MeOe-->—</b><!--pnid:ddtU4XHvJbP31NZNmmMnOq--> 篇 · 成交 <b data-page-node-id="pvMtL0b95AJw8CTrbK3ie7" data-sp-bindable="database" data-sp-database-id="OuIVbXUEGn1oG72I74wT3q" id="snapOrder"><!--pnid:AANEwLDJNvYIHV7DSaVEYh-->—</b></span>
+        <div data-page-node-id="0eqpy9iC1krcQHmFtt2jdS" class="grow"><button data-page-node-id="RmKspxDm4MQJQaEVmcvgNN" class="btn primary" id="snapAddBtn" type="button"><!--pnid:hVA1DlrYsGZ6xxEYEnmVBF-->＋ 录入数据</button></div>
+      </div>
+      <form data-page-node-id="bqcgYWqfagF71qSMUqzsty" autocomplete="off" class="dyn-form" id="snapForm">
+        <input data-page-node-id="fIPnZfJUY9WDDeRFuaigDo" class="span2" name="s_title" placeholder="标题 / 统计口径" required type="text">
+        <select data-page-node-id="mdxorBB1eGsnpGOrtndUnp" name="s_type"><option data-page-node-id="sVLbtWxgM7UM0Q3gov2bDI" value><!--pnid:S4ZpPUqhzlGf7cvkaIcTk7-->类型…</option></select>
+        <input data-page-node-id="htK8x0cbaoBAT9iGowDvFy" name="s_date" type="date">
+        <input data-page-node-id="JZEuTUI5i9M2GaejD4ffV0" name="s_exp" placeholder="曝光" type="number">
+        <input data-page-node-id="hqqQKGXsLKlrdJfXg9BFxf" name="s_view" placeholder="观看" type="number">
+        <input data-page-node-id="M20G1kZ8N867C4u4RDU6ZU" name="s_ctr" placeholder="封面CTR%" step="0.1" type="number">
+        <input data-page-node-id="kcVZMfwCooSiD7yHG87JkH" name="s_like" placeholder="点赞" type="number">
+        <input data-page-node-id="OdWtScxE6qVIF1nSwSsFC5" name="s_cmt" placeholder="评论" type="number">
+        <input data-page-node-id="FMip3DVBWbWYBmUprF0DGN" name="s_fav" placeholder="收藏" type="number">
+        <input data-page-node-id="vO6Rjsry2N8umy7lqzJ5yw" name="s_share" placeholder="分享" type="number">
+        <input data-page-node-id="GOGtyZ6ZzusLR5ulT1pWbx" name="s_posts" placeholder="发布篇数" type="number">
+        <input data-page-node-id="uWXwBZX9QRus3kOGrQSEp2" name="s_fans" placeholder="粉丝数" type="number">
+        <input data-page-node-id="VpDSpwOvJPTXIyuerP6Dzu" name="s_order" placeholder="成交单量" type="number">
+        <input data-page-node-id="UQ1HFLypdENxUvGytRM29Y" class="span2" name="s_note" placeholder="备注（可选）" type="text">
+        <div data-page-node-id="yjeSUsiDHmPrbGbeZpm79O" class="submit"><button data-page-node-id="rBgd1cc1bVoBqS6pKIQrpP" class="btn" id="snapCancel" type="button"><!--pnid:UEep63WDwAaomYXJpG9PWr-->取消</button><button data-page-node-id="soe87d3PXuapcMI53MfKL6" class="btn primary" id="snapSubmit" type="submit"><!--pnid:3ifgaJIX2FzTgyHLz8CHJP-->保存数据</button></div>
+      </form>
+      <div data-page-node-id="sSPE952LFA42ypALtHu8uR" class="dyn-list" id="snapList"></div>
+    </div>
+  </section>
+
+  <!--pnid:81rzD2EFZ8oK2cF0EzZyiz--><!-- 计划看板模块（2026-10-14 合并自「求职项目计划看板」页） -->
+  <section data-page-node-id="JxpVgec7xVoYlrXG80N7sR">
+    <div data-page-node-id="XLjrHv7bvluQsCFoUC3ko2" class="sec-head"><h2 data-page-node-id="17AQLKdx6627H1iLKbQC6N"><!--pnid:qPoMFy3yvdeFaRPHD9TC0B-->计划看板</h2><span data-page-node-id="ZzvubzESkC1ioX3zLfuTG1" class="en"><!--pnid:yw7LIMQsrTMSqPK7cJ2rSf-->Plan · 月目标 → 周任务 → 每日待办</span><span data-page-node-id="fn8BvJSltgCGSKZjsbWAI1" class="note"><!--pnid:MWIvQmegvTNiAWUUrUDqRm-->逾期自动顺延 · 数据存于资料库「求职项目计划看板」</span></div>
+    <div data-page-node-id="3uixDWi3n74MmwaxCQv5XG" class="card dyn">
+      <div data-page-node-id="5cWwVJMQasVDvIVFUjzfOc" class="dyn-top">
+        <h2 data-page-node-id="wSyeRoOEQ4MXj75Er58ThG"><!--pnid:Kzm4P2fLura2stojLqkXsH-->计划总览</h2>
+        <span data-page-node-id="1GQZ4wZrfODiIooQ02HM3f" class="stat"><!--pnid:ilr2UIWXFiyJ5O6m0jIs2Q-->完成率 <b data-page-node-id="F261ObVfXvnaxCXkPuP0XU" data-sp-bindable="database" data-sp-database-id="hbb5VOa9AbbGmepzoYiwRL" id="planCntRate"><!--pnid:GttonDCtVKh2uNxLGia3a6-->—</b><!--pnid:p2oc8me76B8pkZYEnayk5z--> · 今日待办 <b data-page-node-id="60E7xdB1uiTqr5zRkIXS8T" data-sp-bindable="database" data-sp-database-id="hbb5VOa9AbbGmepzoYiwRL" id="planCntToday"><!--pnid:mjOeOHUJ04Tj8FRzv156tz-->—</b><!--pnid:L1yAR8abamSJHj6ZLhFojH--> · 逾期 <b data-page-node-id="t1oBn03sMNEJLhaR6p7NaS" data-sp-bindable="database" data-sp-database-id="hbb5VOa9AbbGmepzoYiwRL" id="planCntLate"><!--pnid:tBkarCw9EYDwcU1FBYk5Ur-->—</b></span>
+        <div data-page-node-id="clYOoLnrl24IsSeqrlay7U" class="grow"><a data-page-node-id="zZhJOe0LSO5yiFBgWSnuFJ" class="btn primary" href="https://workbuddy.link/p/OSnKjhSKgnom7SFcVv2Pfn" rel="noopener" target="_blank"><!--pnid:lFf0PMGsX6mktNk3tkKbDG-->打开完整计划看板 ↗</a></div>
+      </div>
+      <div data-page-node-id="B5eJAR30tO32RdjfukZZwK" class="dyn-list" id="planTodayList"></div>
+    </div>
+  </section>
+
+  <!--pnid:IIuuxq8F1qmOtifhMGAgOj--><!-- ============ 动态模块 1：运营待办 ============ -->
+  <section data-page-node-id="3K7ShyPW3AqvbZrnT7XOKX">
+    <div data-page-node-id="ctBdzxgMhB0DaVacIq9V6Q" class="sec-head"><h2 data-page-node-id="Crx1YpspK8YVunb3LVNz0Z"><!--pnid:ZY471WJZaZtx1SvQ5BrHGe-->运营待办</h2><span data-page-node-id="f8FhsxVPNdirVNVyXf4fJX" class="en"><!--pnid:k3YLMFhQ8uF2c7FspK4frl-->To-do · 可编辑</span><span data-page-node-id="8Fn1SzYh0J2ZJIiDPR7ExK" class="note"><!--pnid:8sv4hxYfrcIKvTx5Vib4TK-->点击状态可循环切换 · 数据存于资料库「求职项目·待办清单」</span></div>
+    <div data-page-node-id="k6S55B0A3Q0dRnrKPlV39N" class="card dyn">
+      <div data-page-node-id="iLVD2bJONFyMaUgELMdIl3" class="dyn-top">
+        <h2 data-page-node-id="SlAcgrd9iZGm3lJjWW7LAE"><!--pnid:4in5sHBAslQxLROjy7CdnF-->待办清单</h2>
+        <span data-page-node-id="4GxxPN3SAsD7Vxu5Qyf4la" class="stat"><!--pnid:NecSzPELghfhElNTOCiQCA-->待办 <b data-page-node-id="JGBhtiAXdxqs36cpHQmspX" data-sp-bindable="database" data-sp-database-id="jXSNAphTmjKYhdWjMJV6oM" id="todoCntTodo"><!--pnid:56jk9Gm21DNA3TxAUZlz8r-->—</b><!--pnid:a6I289tmyKQcthRZrESe9B--> · 进行中 <b data-page-node-id="hpP8Y1V98nRknJW8g6mIg9" data-sp-bindable="database" data-sp-database-id="jXSNAphTmjKYhdWjMJV6oM" id="todoCntDoing"><!--pnid:IpOea4AMqi8Wox3uBiAchz-->—</b><!--pnid:6shTiGQx5Z3BVpdL17hMbs--> · 已完成 <b data-page-node-id="4seSXtBbfl8EgLYzT04D6H" data-sp-bindable="database" data-sp-database-id="jXSNAphTmjKYhdWjMJV6oM" id="todoCntDone"><!--pnid:IrUPYJI4fx9kRCnPTsFCDS-->—</b></span>
+        <div data-page-node-id="i9tVV70Hgfs2HoYLPOFvfb" class="grow">
+          <button data-page-node-id="b7d7fCLUbBGimBneE4Sgqd" class="btn ghost" id="todoRefresh" type="button"><!--pnid:5XUkQqUspujMgGZJTbhtNO-->刷新</button>
+          <button data-page-node-id="mYMCrkpfMtM40H2nBWSMLn" class="btn primary" id="todoAddBtn" type="button"><!--pnid:oP2IvE0vnb7FQMJTdajy1q-->＋ 新增待办</button>
+        </div>
+      </div>
+      <form data-page-node-id="mhGHWnanvqAzIkXNpPjfvQ" autocomplete="off" class="dyn-form" id="todoForm">
+        <input data-page-node-id="VXHCNgA20D6SEsziQ5XaWh" class="span2" name="t_item" placeholder="待办事项（必填）" required type="text">
+        <select data-page-node-id="idgbhFKH7rkOanoD6lrg5x" name="t_type"><option data-page-node-id="IuHTNSMM3lFb9rF6SOAZnE" value><!--pnid:Fb9or4RJWQQJ09puZB6tsA-->类型…</option></select>
+        <select data-page-node-id="HUMKTXvnBJ6kpmMSFABlnZ" name="t_pri"><option data-page-node-id="MgBY9GFyQRvO2L7fuoLYWN" value><!--pnid:VLFfVN3xBDKkQuSGwPYtmK-->优先级…</option></select>
+        <select data-page-node-id="KvygA38sBUW4lMRth1gzdU" name="t_status"><option data-page-node-id="VHQ2eWtXJwI6RTM2qfPRmd" value><!--pnid:mF1dIVjCRDRMcPf119Drcx-->状态…</option></select>
+        <input data-page-node-id="782Y9FggQmHlGlmUEnJOLV" name="t_due" type="date">
+        <select data-page-node-id="v5btPOi1SGitUDU4SVF2KT" name="t_owner"><option data-page-node-id="WmrRdYfccM17CDKm1Xau85" value><!--pnid:JDAeMIHIB5uCa21jGAhYp2-->负责人…</option></select>
+        <input data-page-node-id="BP5jXGXmUiUSZSqvp4Co9Y" class="span2" name="t_note" placeholder="备注（可选）" type="text">
+        <div data-page-node-id="O0b5yYg8XdWmk9pSx11iNR" class="submit"><button data-page-node-id="CnozF3X6xN3nKsXPnVnXuS" class="btn" id="todoCancel" type="button"><!--pnid:uNnJqNF4QNCaUyYcpoo31y-->取消</button><button data-page-node-id="cZjc8Nq9Yt26bOIlEHI4bw" class="btn primary" id="todoSubmit" type="submit"><!--pnid:tmyhIfhhWpXr54WJ555QHV-->保存待办</button></div>
+      </form>
+      <div data-page-node-id="2LJDkrcpArirSMlypzYPvb" class="bar-strip" id="todoFilter">
+        <button data-page-node-id="5qqFYF4IxVYkEpwK8PhGic" class="f on" data-f="全部" type="button"><!--pnid:fXp1rFGjBZLi1zzaIjwpXq-->全部</button>
+        <button data-page-node-id="SUdMK3di7w3MLjjsNgb1Jt" class="f" data-f="待办" type="button"><!--pnid:zrceDjBk4zlqmlUduO8nE8-->待办</button>
+        <button data-page-node-id="flTokxzVrIRUwPQjCASAMy" class="f" data-f="进行中" type="button"><!--pnid:aMBwS2aGLeEG54sMNAmXgK-->进行中</button>
+        <button data-page-node-id="h0UGMsSxILLkueb5esOl26" class="f" data-f="已完成" type="button"><!--pnid:mnSI8C2ythIuB5dxI09tcN-->已完成</button>
+        <button data-page-node-id="KpxAdIfX3fpmYqU5r0e3e1" class="f" data-f="今日待做" type="button"><!--pnid:MVZcXoDdxJveW1rHTWeagS-->今日待做</button>
+        <button data-page-node-id="GfSrHXaoYNWnSrQNhj3NVP" class="f" data-f="本周待做" type="button"><!--pnid:uNcpjdHwAgPs4oxC9VZLq4-->本周待做</button>
+      </div>
+      <div data-page-node-id="UCwuVn0x7xQGKsUTarPqX2" class="dyn-list" id="todoList"></div>
+    </div>
+  </section>
+
+  <!--pnid:kbINaJ3DvpOdXxUv1KD4th--><!-- ============ 动态模块 2：发布排期 ============ -->
+  <section data-page-node-id="18S1PiXeeR64jd6saasDeI">
+    <div data-page-node-id="jshclgDfGn5amaSf8Xnl85" class="sec-head"><h2 data-page-node-id="QC7odOknMEyprXF2okgKNv"><!--pnid:PbF9RJnXz8h4RG26BYG5OY-->发布排期</h2><span data-page-node-id="vFCj3r6FS8iz0bfTdBgxrW" class="en"><!--pnid:02CleobAwSzmW18KVy00oA-->Schedule · 可编辑</span><span data-page-node-id="vWe75ipfEgJiZsDSYPrdrO" class="note"><!--pnid:qH7F5SxZRzZLh9aPVj0LSM-->点击状态可切换 待发→已放行→已发 · 数据存于「求职项目·发布排期」</span></div>
+    <div data-page-node-id="anET9qWpYPExKLga2WMsve" class="card dyn">
+      <div data-page-node-id="q8GLgicJFf9RaMA75zW0a3" class="dyn-top">
+        <h2 data-page-node-id="H1WMukzyvfLCWcSI6WuPza"><!--pnid:NIVAyGX0Smq9Yv58IxQsSP-->排期表</h2>
+        <span data-page-node-id="VsHkadLo206ap16HA61fs7" class="stat"><!--pnid:k7RF4bmKIBWu7D4xj6CWSY-->共 <b data-page-node-id="JLDDksJ4HKKQohAgJMvBSw" data-sp-bindable="database" data-sp-database-id="UcSbMf8BXQQjx06jvOM7To" id="schCnt"><!--pnid:o1IEN5cndXxCU1EHhe7tH5-->—</b><!--pnid:5skLWw8eNqkHLrv80qcQAi--> 条</span>
+        <div data-page-node-id="yYqgS1kD9QqfobKPFby0N9" class="grow">
+          <button data-page-node-id="AP43zOwxXoB7HgEy62ZaQd" class="btn ghost" id="schRefresh" type="button"><!--pnid:x3OOSLjlTCrWfaojc7dlv1-->刷新</button>
+          <button data-page-node-id="nVewSYAVfqmzNYpgWLVO9P" class="btn primary" id="schAddBtn" type="button"><!--pnid:rwxJ4GxO1zRVcgIwUkeKck-->＋ 新增排期</button>
+        </div>
+      </div>
+      <form data-page-node-id="9XXU1uaHue79z8KlAqhPGh" autocomplete="off" class="dyn-form" id="schForm">
+        <input data-page-node-id="X8aWaOPp6Aw0oXJUnmKtzG" name="s_date" type="date">
+        <select data-page-node-id="P0vr9HK3dzdt0rqG4VYldv" name="s_level"><option data-page-node-id="ZSK4KgEQrDOeXCVa5zAzVU" value><!--pnid:i0JIweia6JHP6gCUjXhkWI-->层级…</option></select>
+        <select data-page-node-id="EbQYHSRfmOI7P8s6mOYfxG" name="s_product"><option data-page-node-id="SG2lTVdc5Z1npGHTPGHMya" value><!--pnid:YQ1Gl5CMSpYas3zu1VZYoF-->挂载商品…</option></select>
+        <select data-page-node-id="cZxPWrhto1SrdJd5YR5prb" name="s_status"><option data-page-node-id="iQzcKivNrQBO7ZDHWU1zVs" value><!--pnid:PUemxAHScQVZ1kv4Dd7imd-->状态…</option></select>
+        <input data-page-node-id="yzEcYOkpsGnWPePigUh0kA" class="span2" name="s_topic" placeholder="选题（必填）" required type="text">
+        <input data-page-node-id="Fag4cW6gxSBKI9e6FHGMnv" class="span2" name="s_note" placeholder="备注（可选）" type="text">
+        <div data-page-node-id="U6FHlhxcLIHryoG6zRLrUS" class="submit"><button data-page-node-id="fjSBkfhUGHB3qEGhhho41Q" class="btn" id="schCancel" type="button"><!--pnid:hCJUjUFFyVenOrccWvw3Xo-->取消</button><button data-page-node-id="fze7q9dZaNddXFTO7oXSlH" class="btn primary" id="schSubmit" type="submit"><!--pnid:K4LXtrFfH2F9KH0aX8ESga-->保存排期</button></div>
+      </form>
+      <div data-page-node-id="r2iuu3zjIlwecyGKaW3uej" class="dyn-list" id="schList"></div>
+    </div>
+  </section>
+
+  <!--pnid:OUvzCabQakSaLEQjrTn3uN--><!-- ============ 动态模块 3：店铺脉搏数据录入 ============ -->
+  <section data-page-node-id="d7jFFIGt4U6EdHXxfZVtEU">
+    <div data-page-node-id="Oqz5pZq8wkcGNbDxTsntPM" class="sec-head"><h2 data-page-node-id="O8GE5pwHLfoGXswzUhKw3J"><!--pnid:oa9oseU4fvGl52v8oqATrJ-->店铺脉搏 · 数据录入</h2><span data-page-node-id="lSp397f2w71oY5slb9Gg3L" class="en"><!--pnid:QJcDxqlZ418AeoLpOOshgX-->Store Metrics · 可编辑</span><span data-page-node-id="DUSfcruum8m7pYwYkvVPMF" class="note"><!--pnid:x6Z1J1tAoYdcWG9Njmfquh-->数字留给你填 · 存于资料库「求职项目·店铺数据」</span></div>
+    <div data-page-node-id="p96CuWxpeE2prUpH02nVdO" class="card dyn">
+      <div data-page-node-id="TO8avvIdQ6hOoO8IptswXE" class="dyn-top">
+        <h2 data-page-node-id="xbKAQuqsQwhGcZMwP2Ytou"><!--pnid:pgocQDIgEnWrmqdb4u8nD3-->最新快照</h2>
+        <span data-page-node-id="WgI5i1eoWYqvKex5fV2uRa" class="stat" id="storeDate"><!--pnid:TKULTwgaePOkjgZ1X1uk2m-->尚无记录</span>
+        <div data-page-node-id="D63vPKWjSMPaV5ExjCjf6S" class="grow">
+          <button data-page-node-id="YLy2iD8KlgkIWwGcMQSOC4" class="btn ghost" id="storeRefresh" type="button"><!--pnid:7fI69Hn7IORI0Odkipxw4e-->刷新</button>
+          <button data-page-node-id="GZjwB8crBURxmrU6xLeAvJ" class="btn primary" id="storeAddBtn" type="button"><!--pnid:gNsx6ao2mL9xKZLlp9fEm0-->＋ 录入一条</button>
+        </div>
+      </div>
+      <div data-page-node-id="WOUvVFFiW8Ef2YV9cs9O42" class="kv" id="storeKv"></div>
+      <form data-page-node-id="1MXzF72nxdLBLmv9ytP6p8" autocomplete="off" class="dyn-form" id="storeForm">
+        <input data-page-node-id="PQcYwVOP6UC365J9TOda6Y" name="m_date" type="date">
+        <input data-page-node-id="OFIDZrPyEPKq94bsPnhkit" min="0" name="m_fans" placeholder="粉丝数" step="1" type="number">
+        <input data-page-node-id="YJkWuHVDQrMB4LEzSC0CjH" min="0" name="m_orders" placeholder="累计成交单量" step="1" type="number">
+        <input data-page-node-id="4edkcr2qju8PeSYpl3MVTX" min="0" name="m_imp" placeholder="曝光" step="1" type="number">
+        <input data-page-node-id="SEgiuyXy2j2hDl822XCm7r" min="0" name="m_view" placeholder="观看" step="1" type="number">
+        <input data-page-node-id="529ZY6iWI0FjNYvcKw7C6w" name="m_ctr" placeholder="商品卡点击率 %（如 3.2）" step="0.01" type="number">
+        <input data-page-node-id="pUfbNI3O6oHlf9gsFIGvcQ" min="0" name="m_refund" placeholder="退款数" step="1" type="number">
+        <input data-page-node-id="S9mzrUUe96XoveLkHkMKYA" name="m_score" placeholder="店铺分（如 4.8）" step="0.1" type="number">
+        <input data-page-node-id="E1NfJrsfJZNuPcNc5UE8b7" min="0" name="m_likes" placeholder="获赞与收藏" step="1" type="number">
+        <input data-page-node-id="0mxYEueK8dXp2dZHNVOsrE" min="0" name="m_posts" placeholder="昨日发布篇数" step="1" type="number">
+        <input data-page-node-id="eOi2qunX8AWz7JDdRV9ADP" class="span2" name="m_note" placeholder="备注（可选）" type="text">
+        <div data-page-node-id="SZT1EFBcPtpmLEmgJ4ETqR" class="submit"><button data-page-node-id="PlTMC1WkiLYqmh9SjwQbb5" class="btn" id="storeCancel" type="button"><!--pnid:lxZupG99ZBQ3PD4egpVKUf-->取消</button><button data-page-node-id="wbYRgRUWMACUPM0YUdn89C" class="btn primary" id="storeSubmit" type="submit"><!--pnid:ilodOEDz4meQjLddTkKkbh-->保存</button></div>
+      </form>
+      <div data-page-node-id="BTVsOope1rGLrRCDTq4RC4" class="dyn-list" id="storeList"></div>
+    </div>
+  </section>
+
+  <section data-page-node-id="oIePQ7SYVPxopDRWquCQwY">
+    <div data-page-node-id="GleeYaAeggnR5GCrXbLUWN" class="sec-head"><h2 data-page-node-id="8Wt4dtP2hmEuBpiNYJjMB9"><!--pnid:u36evOUMVJIvTe61NjJ2Kl-->昨日笔记明细</h2><span data-page-node-id="qnLXW8z59Rhl24IgfAoPHR" class="en"><!--pnid:d3YW5zcIerJnj62AistPnW-->Notes · 可编辑</span><span data-page-node-id="3Q0XfcfzspslHKFkJt94cs" class="note"><!--pnid:tPaoemPl6LP3H1Jcm8jKcv-->每篇一行 · 存于资料库「求职项目·笔记明细」</span></div>
+    <div data-page-node-id="sAKVwFzgJ35gPjBef6nK9N" class="card dyn">
+      <div data-page-node-id="QYGfx6OPiVvMM3noIM1JS5" class="dyn-top">
+        <h2 data-page-node-id="hoGfdRh4bzs06zuLnSYfOr"><!--pnid:mySkB9QAcgSXxvJSGpanaO-->笔记数据</h2>
+        <span data-page-node-id="OXh4wn5emzRB8s01f5Lkyr" class="stat" id="noteCnt"><!--pnid:0D6q3cmNuAZ8YSG4EH6KYa-->—</span>
+        <div data-page-node-id="tNjPIGS3DNGxHdMfJZl4W3" class="grow">
+          <button data-page-node-id="zmerBaMhVPnY56I7PjEWW2" class="btn ghost" id="noteRefresh" type="button"><!--pnid:U4eGe0fsOHwwHSJ2E2inkH-->刷新</button>
+          <button data-page-node-id="EVx6FxhnKtNzdEFpOm68sb" class="btn primary" id="noteAddBtn" type="button"><!--pnid:KjwoIJIIEFEgY1clCOwcAn-->＋ 录入一篇</button>
+        </div>
+      </div>
+      <form data-page-node-id="RHDK0glZIvYulwFvVQdAKO" autocomplete="off" class="dyn-form" id="noteForm">
+        <input data-page-node-id="G5lai0Bw6sWUkYgu8c1fsk" name="n_date" type="date">
+        <input data-page-node-id="sslntnjR4mvNnH4s3TCfD9" class="span2" name="n_title" placeholder="笔记标题（必填）" required type="text">
+        <select data-page-node-id="pqDEiMl8IONORhD4WrXOIm" name="n_level"><option data-page-node-id="bGDvoNpY6E77Ews3aYSfsU" value><!--pnid:OaeMnAOvYa0L1636CthgEs-->层级…</option><option data-page-node-id="kHlch1JlwVFbCsR0CBCB9P" value="A层"><!--pnid:9YCuwu2jgFD67P5xvZim2z-->A层</option><option data-page-node-id="CiJZHYTQVxxS2CDVOkUnSn" value="B层"><!--pnid:lllJfj9kASUimM5ZlpeqnC-->B层</option><option data-page-node-id="GKx9rDBkjLI7Ol7WBSDalw" value="B层·往届生"><!--pnid:Xdmldol4T92G3BdvQziC0j-->B层·往届生</option></select>
+        <input data-page-node-id="IleafPweApSlLKi8QusaIi" min="0" name="n_view" placeholder="浏览" step="1" type="number">
+        <input data-page-node-id="C7k8AxOzsHKTprpS4IAFzK" min="0" name="n_like" placeholder="点赞" step="1" type="number">
+        <input data-page-node-id="PypUmnJk2ut8c7TUHBY0NG" min="0" name="n_fav" placeholder="收藏" step="1" type="number">
+        <input data-page-node-id="cdcIKfftTIFhm3T3YFvlKH" min="0" name="n_cmt" placeholder="评论" step="1" type="number">
+        <input data-page-node-id="HkTENXnBgvpnhJPdBZtFCe" class="span2" name="n_note" placeholder="备注（可选）" type="text">
+        <div data-page-node-id="C0SjD4dt6rWk6eWCMJjqMv" class="submit"><button data-page-node-id="CO5nHTKQBFxgz2HdjcXx0q" class="btn" id="noteCancel" type="button"><!--pnid:hBmgBe1QbjlzPheafhLbtO-->取消</button><button data-page-node-id="shE1Id85Sv2wbqBoUoFruL" class="btn primary" id="noteSubmit" type="submit"><!--pnid:9VjxgKCKa5205Z3ZCK8vXB-->保存笔记</button></div>
+      </form>
+      <div data-page-node-id="i5WEWiDTd2QVNIxVq2KwiH" class="dyn-list" id="noteList"></div>
+    </div>
+  </section>
+
+  <section data-page-node-id="LQ7UaPBHPWrn01FYJqAUeI">
+    <div data-page-node-id="CCqdHj3sei177eIVXvXz09" class="sec-head"><h2 data-page-node-id="zyUA6v1ehnab9nKD71A4RM"><!--pnid:9Oj3wDr3fQs7pwO8VVODP7-->昨日复盘结论</h2><span data-page-node-id="kp9sE6jbDvnNXhrswW3uWq" class="en"><!--pnid:NEp3dOYFyqtwITyBm8q0et-->Review · 可编辑</span><span data-page-node-id="OAUYA3UAMcy8sQek1Qu0rl" class="note"><!--pnid:LWRo4a2EQDy5lCl5GusP6q-->做对了什么 / 做错了什么 / 明天最重要的一件事 · 存于「求职项目·每日复盘」</span></div>
+    <div data-page-node-id="Aqi7Er6KSe9slivOfd6Opj" class="card dyn">
+      <div data-page-node-id="bno9PwtRjQxMcyq1A58NF4" class="dyn-top">
+        <h2 data-page-node-id="K8mrCgzpS9GxI94iHCLEwO"><!--pnid:duVR7A4zUM0nNeOsaTTufu-->最近一次复盘</h2>
+        <span data-page-node-id="fLoaioqZJcNU40efXe0OTS" class="stat" id="revDate"><!--pnid:eKND9u38tJGtw7NsgUQaRX-->尚无记录</span>
+        <div data-page-node-id="fPufyAUQgQRTR0daTGo2By" class="grow">
+          <button data-page-node-id="fCLn8QSr30LZU75KHTeBLx" class="btn ghost" id="revRefresh" type="button"><!--pnid:LoOULlfyoVXqrDUFj2XZIC-->刷新</button>
+          <button data-page-node-id="hKuNRxUtYNiMrNSa3MEGWS" class="btn primary" id="revAddBtn" type="button"><!--pnid:MAOUeTmIbcm2KuF8WftruV-->＋ 写今日复盘</button>
+        </div>
+      </div>
+      <div data-page-node-id="vuahTOF95RRUPkwfzNSdke" class="kv" id="revKv"></div>
+      <form data-page-node-id="DfDV2VQlPwiQoxQb0LzTKm" autocomplete="off" class="dyn-form" id="revForm">
+        <input data-page-node-id="fGXX01q3KbUaa1yjLFNcGw" name="r_date" type="date">
+        <input data-page-node-id="UMd29QNi2RsggUDpFxlfhO" class="span2" name="r_good" placeholder="今天做对了什么" type="text">
+        <input data-page-node-id="QfOIpXI56DbthORISw0Oj0" class="span2" name="r_bad" placeholder="今天做错了什么" type="text">
+        <input data-page-node-id="RUmBF9hORBQq7280xGdtLW" class="span2" name="r_next" placeholder="明天最重要的一件事" type="text">
+        <div data-page-node-id="UuxRehDknCeVNTMTKF2ATr" class="submit"><button data-page-node-id="6YmRVOxtJZBMJUH4ge17tM" class="btn" id="revCancel" type="button"><!--pnid:KNOTNo4bRdOgSxvSASymIB-->取消</button><button data-page-node-id="7Za1gXywCDiuEOuiEPkCyt" class="btn primary" id="revSubmit" type="submit"><!--pnid:iLPzmZsARjnqBnl2OoSPgu-->保存复盘</button></div>
+      </form>
+      <div data-page-node-id="O2k0n6BS9puOvhqjAOnXVD" class="dyn-list" id="revList"></div>
+    </div>
+  </section>
+
+  <section data-page-node-id="t82MLlSHsngyDONNxP0fFZ" class="grid3">
+    <div data-page-node-id="0OAQ9xDqB5ptOxnFk4LcLM" class="card pad">
+      <div data-page-node-id="C8POB1zG2v3womX3vFv7QS" class="sec-head" style="margin:0 0 12px"><h2 data-page-node-id="cQsIYog6CuSuxMLKPXOpdv"><!--pnid:BsPyoaHfgaCg4K5bQMcU4C-->内容作战纪律</h2><span data-page-node-id="4F2PXS9dxWaQhnBs6zZSZb" class="en"><!--pnid:4SWsfKPKGPCu8i1IjfUetv-->Content · v2.0</span></div>
+      <div data-page-node-id="jJRDfltYKlZLyKSFdcKsEI" class="rows">
+        <div data-page-node-id="EMbnQllQzLq6RIC0LJxDp6" class="row"><div data-page-node-id="DEZelqqzQ4rNybUB9FGTEg" class="h"><!--pnid:nfX1rCvkVKAal9RGyr32Wo-->发布时段</div><div data-page-node-id="BBZoCZQLtQvMZGSoOFCR7X" class="v"><!--pnid:y64Hwwptf2dppuA2Z7l4hn-->A 层 <span data-page-node-id="n7I5oxZ2KgYivQrVJJ2Iav" class="hi"><!--pnid:l6UzAa2GbynfjUjmIxD0AB-->09:00</span><!--pnid:ILhdS71k2mDKXpbpFo2rXe--> ｜ B 层 <span data-page-node-id="zZdcXPIApb9pNvhl7c35hz" class="hi"><!--pnid:4myaopUPVOpBpo4JI5z1gg-->12:30</span><!--pnid:V3A8EZfH8GKFVrJsrn9OEg--> ｜ 往届生 18:00（参考模板 · 具体时刻由 WB 自定）</div></div>
+        <div data-page-node-id="LImSdqXxkHPokJjXfC5syf" class="row"><div data-page-node-id="5jTZfjVPbV9urqKe19i89D" class="h"><!--pnid:9CKNSgqQnCD8aerHMPsKxf-->内容比例</div><div data-page-node-id="YVyFlY9h1n3C2PqLlIMj6w" class="v"><!--pnid:5FybWW9PNHfdIbfbG5qQfG-->每日截止提醒 <span data-page-node-id="4GORE27utRNd7vAyYI0sst" class="hi"><!--pnid:IHvlcqKh2ICorG7rXBRicj-->50%</span><!--pnid:0aMUlSfjOYemBhGGCBZZIS--> ＋ 求职方法论 <span data-page-node-id="zCbZOJ9gh7rBTk61rLM9io" class="hi"><!--pnid:KMGMZIJO9me7hsaP4iuqTV-->30%</span><!--pnid:aYqKEpfDg6ibvkBijVdbas--> ＋ 产品种草 <span data-page-node-id="T6z4bsjlHaWoJD6cYLfSzz" class="hi"><!--pnid:UuljSIw65ZVhZ02vDkBX3u-->20%</span><!--pnid:4nE9xFEnVV5o3a4yZZ6Dpg-->（不 100% 广告）</div></div>
+        <div data-page-node-id="vkHi8f29PUgke7oLk5lEmC" class="row"><div data-page-node-id="SoxkQVr13tg54k49A9tz0e" class="h"><!--pnid:4TovGmTH5ZxClj0jE8usgh-->切分人群</div><div data-page-node-id="Kki5j0VUSQSu8A6kmQkxj0" class="v"><!--pnid:vQhB1NxtJ7d7Q5rK61a5zh-->A 层按行业（银行线 / 国企线 / 互联网线）；B 层按人群（26届 / 27届 / 往届生）；不做「所有应届生必看」</div></div>
+        <div data-page-node-id="EyzvNvsSIrYbPqo92CfBIT" class="row"><div data-page-node-id="MOuLdufDRlflbwL0JE2ElB" class="h"><!--pnid:3ZPXeer81y9kwJyce26AKD-->封面模板</div><div data-page-node-id="7BZQIZXuXz1JUwNECk1ZTg" class="v"><!--pnid:4TxDzswOldcYgL8e6A4aoe-->固定 5 图：P1 封面 / P2 清单卡 / P3 官网核验 / P4 避坑便签 / P5 产品卡 ｜ 配色：冷白纸底 + 黑字 + 红印章</div></div>
+        <div data-page-node-id="5VG9hgw92rGKtzFvzHhIcI" class="row"><div data-page-node-id="sjtOHezjGFdZEL0DkBytCy" class="h"><!--pnid:r1VunFVfRTacjDapKMTBDe-->产量</div><div data-page-node-id="AKjAq5QltrZzOfMzCo34mn" class="v"><!--pnid:74FvRAKg6m7w7Mm59YXqC9-->处罚期稳定 <span data-page-node-id="wFYZp5u0fxtGkoqtKhQyP5" class="hi"><!--pnid:88kYPDOdnBA5q9jggDy991-->1–2 条/天</span><!--pnid:4hZrHXBlK10uRgV42hJaGq-->养流量；恢复期 A 层每日必发（不断更）</div></div>
+        <div data-page-node-id="hXSOnM8QE8gq4mgVBRYoB9" class="row"><div data-page-node-id="BKK5wg3kT47ytUBa6EAErE" class="h"><!--pnid:bTDHpZtq1cssmsNvCEszt4-->标题上限</div><div data-page-node-id="Sz63xACDQ5KQk9SPPJqovq" class="v"><!--pnid:xYHn5yhBHwUHlb5NANE54W-->≤ <span data-page-node-id="9Dv5IlCxdGaFCwnmGFcBwn" class="hi"><!--pnid:DYk2M6w4TzUKS2SCsEIjKW-->20 字</span><!--pnid:OVOSlGgPVHzqd1kGN1HFHH-->（守则 62）</div></div>
+        <div data-page-node-id="DHF4pehzp0BK6kfnRBsnLn" class="row full">
+          <div data-page-node-id="LuWFIrT89evbTDF76Fw974">
+            <div data-page-node-id="EK6JZtc7gJnTXGRo1cdpLG" class="h" style="margin-bottom:8px"><!--pnid:oKhF9Dbq3QZIu2apOXTu0m-->A 层标签（8 个 · 窄 ≥4 / 泛 ≤2）</div>
+            <div data-page-node-id="cqlglLN6GXdwlFWZI4aagZ" class="tags">
+              <span data-page-node-id="4mnzm4XMryCZOnvklmYkdt" class="tag"><!--pnid:vx3PJMw8IftFNvp26JO5p7-->#秋招</span><span data-page-node-id="gNALq6Zz3jrwVC7jhEioyw" class="tag"><!--pnid:BcycvE1SDyBkOD2dAnlIr4-->#网申</span><span data-page-node-id="Vvfkli3IETpjl0FWTrXHVD" class="tag"><!--pnid:TwlTEiBA1wWXGMBdW52ytE-->#银行秋招</span>
+              <span data-page-node-id="Ko5on1anbkQvEsGf3DLIwx" class="tag"><!--pnid:9FvJoXHNlI7VMvBRqV93Jl-->#央国企</span><span data-page-node-id="hWYnP6iBex7AzGmYnK6xwq" class="tag"><!--pnid:Lx6lK9cKUerVf1WTrUBmNS-->#秋招投递</span><span data-page-node-id="RNZLt7WbDqa7fZ0ifG2RWe" class="tag"><!--pnid:9rjXk6nQrItbxblwqwClHH-->#网申截止</span>
+              <span data-page-node-id="hAi4R9FAhmUG4RzuG0TEl4" class="tag"><!--pnid:W3DAMfhAcLYlUQnAYiv1zG-->#应届生求职</span><span data-page-node-id="Kdr23fKRWYtA8HyKShYGA0" class="tag"><!--pnid:7ywMLZJPQh2CfYXn7FB1nF-->#2026秋招</span>
+            </div>
+          </div>
+        </div>
+        <div data-page-node-id="ayFFZiH7ZBTmeE5U2m1pME" class="row"><div data-page-node-id="Qi67IZThGYDSDU3QtAqfZw" class="h"><!--pnid:dgVA01jNuSPXglSTGCE1Gs-->赛道边界</div><div data-page-node-id="JEc6XxV9iE9J9NqQPte4es" class="v"><!--pnid:Y4acbiM9k1rxkoXkjU9Z08-->✅ 网申投递（截止/节奏/填表/核验） ｜ ❌ 面试 / 笔试 / 简历模板 / offer / 职业规划</div></div>
+      </div>
+    </div>
+    <div data-page-node-id="Cw5CkUIQnRCO4PQLfMtXWR" class="card pad">
+      <div data-page-node-id="oo3llyqwFdjUFCjX3HgPIB" class="sec-head" style="margin:0 0 12px"><h2 data-page-node-id="DhGpyl0X7ZEld6gtP6MeYf"><!--pnid:ICkHVaXk1jyymJb6fzbo6H-->数据源健康度</h2><span data-page-node-id="cGNR3ShYObMFaBc2wpfeDj" class="en"><!--pnid:TPDOtM1QlgtnQu2eIohYq6-->Data Health</span></div>
+      <div data-page-node-id="fJOmqivgRFJAVgGvys2lJX" class="stat-line"><div data-page-node-id="e0lZsS7hq8cDXddWMJqIpP" class="sl"><!--pnid:WcyWM4W9l3lKxHSRpZXuzK-->总条目（对外）</div><div data-page-node-id="MJheI6dI4NxtZU3KRwyVv4" class="track"><span data-page-node-id="Hu29d8M8g9z8wxJpqAUrbg" style="width:100%; background:var(--blue)"></span></div><div data-page-node-id="alt6IabHSICmOX2C42tuNO" class="sv"><!--pnid:UxhHhonBKRt1bNgpUb2nq0-->131</div></div>
+      <div data-page-node-id="THXUMUPkL3gYJhPJPj06pK" class="stat-line"><div data-page-node-id="DNWLvGuVRAqibdUiFdVDOL" class="sl"><!--pnid:f3aDod7c4LtVJ50h088M8O-->进行中</div><div data-page-node-id="9p8qFFHe4D3ACD8KqQGicj" class="track"><span data-page-node-id="rvF4nXtJIDKdYDQJcOY4bn" style="width:85%; background:var(--green)"></span></div><div data-page-node-id="OMGl3QSuzNj8Co8ZFIsswn" class="sv"><!--pnid:gu5atwmY1nREwAXP6BugTN-->112</div></div>
+      <div data-page-node-id="mVaNZhLOmr9G9WOYOjTQfA" class="stat-line"><div data-page-node-id="7GHfM0olGZrN9vGa838LOy" class="sl"><!--pnid:vVm32iATqvY1TZ7tvoSBRZ-->已截止</div><div data-page-node-id="FB3RWuejnhq45t3LsDAjvX" class="track"><span data-page-node-id="GuAim8OGqY9dwxe5iF2LGy" style="width:14%; background:var(--muted)"></span></div><div data-page-node-id="QejahnQmd12ac0L1T28skm" class="sv"><!--pnid:DkZuGazIPMo57Vo5qaWVq1-->19</div></div>
+      <div data-page-node-id="yVcyKUpIGoKmrpm7h9tRrR" class="stat-line"><div data-page-node-id="j4S6KLXeH66b5CKvP6ayUN" class="sl"><!--pnid:jW3MGbyC9GSSRVBRGKI59P-->今日截止</div><div data-page-node-id="sjoNW0QJGHpVWsCh353hKF" class="track"><span data-page-node-id="pGGYAJBjxbPJsGn5boG0C6" style="width:6%; background:var(--brand)"></span></div><div data-page-node-id="DGIMDPQmYefxid98BmcUZi" class="sv"><!--pnid:LGwIJdYfO0slEOPlwS7r6v-->2</div></div>
+      <div data-page-node-id="U86HLMoe1I5fVZvfr6C0Q8" class="stat-line"><div data-page-node-id="MZZzh8D7UhG6WzUnww4mYF" class="sl"><!--pnid:bbwo6pM5M5JAOabOOFs5rv-->7 天内截止</div><div data-page-node-id="DVkdfyHZ0LWRqpc3tKgCOG" class="track"><span data-page-node-id="T1rMPr82RgqrmOSieJpQRS" style="width:22%; background:var(--amber)"></span></div><div data-page-node-id="jygiFyQVRfDSVRawwk9VpK" class="sv"><!--pnid:Tbrb1tWmMSBzjZxEeL7KVW-->10</div></div>
+      <div data-page-node-id="NgLoFttzJLHrgdBgNKXsKC" class="stat-line"><div data-page-node-id="2zApYAqRrcnVAkVK84DCsQ" class="sl"><!--pnid:aRQEPjLkqHp5GDKJksY4U5-->日期缺口</div><div data-page-node-id="e7yJ88uupdKPQPXr31883i" class="track"><span data-page-node-id="FReHfYAxyqjwtyYpYTHvkA" style="width:19%; background:#c7cbd8"></span></div><div data-page-node-id="A1FAzbQjwlRIEeA36CuEQz" class="sv"><!--pnid:JX1FNvDMKZQOkjRz7btVRk-->24</div></div>
+      <div data-page-node-id="FFkBZQ9JuRk02n0ksJVKX9" style="border-top:1px dashed var(--line); margin:12px 0 10px"></div>
+      <div data-page-node-id="96kJHZzaluOhHybO1c6sbY" style="font-size:12px; color:var(--muted); font-weight:700; letter-spacing:.4px; margin-bottom:8px"><!--pnid:oa6V3nG7jHTebKuYwTtYWg-->来源等级分布（两轴：source_level × date_form）</div>
+      <div data-page-node-id="mL3XbHSluDfTJIyxLYtZUS" class="tags" style="gap:6px">
+        <span data-page-node-id="aoKpBn9v9ENZI4hq487fx9" class="tag" style="background:var(--green-soft); color:#0b7a44; border-color:#cdeede"><!--pnid:gEGW5bncDSoaMnjeKJIXjr-->A · 33</span>
+        <span data-page-node-id="PUiruPts65KdIHVqBEam5n" class="tag" style="background:var(--blue-soft); color:#1c4fd6; border-color:#d7e2ff"><!--pnid:ey8qd0OwiIosbN3VWOMZnV-->B · 37</span>
+        <span data-page-node-id="94OgoX7xG6vlrSY8I8yAMF" class="tag" style="background:var(--amber-soft); color:#a96a05; border-color:#ffe7bd"><!--pnid:HwRjGN4pSZOIwNz6Htc0mK-->C · 50</span>
+        <span data-page-node-id="6edHMoBVcXXRllUEqPsnSU" class="tag" style="background:#f1f3f8; color:#8a93a6; border-color:#e6e9f2"><!--pnid:QSVQ8s7OlZeDOggMqL2lcg-->⚪ · 11</span>
+      </div>
+      <div data-page-node-id="SaWVkJPz4SoDOuitpZUyfF" style="font-size:11.5px; color:var(--muted); margin-top:9px"><!--pnid:mKVrERIQNokMBzl7rqMhYI-->date_form：hard 107 ｜ rolling 17 ｜ none 5 ｜ to_verify 2</div>
+      <div data-page-node-id="udSFSGFLyG0i9PamyHZzpK" style="font-size:11.5px; color:var(--muted); margin-top:6px"><!--pnid:iVTXnzEaRa1HwqLRJjK6CK-->⚠️ 数据日 10-14（当日）；对外交付仍 131 家、内部源已扩至 200 家；发布前须增量核验（红线③）</div>
+    </div>
+  </section>
+
+  <section data-page-node-id="5tockdp1Nn0zTZQ9ZxLEgr">
+    <div data-page-node-id="bVW8vuCpZgsVSOyFGYvDCg" class="sec-head"><h2 data-page-node-id="dUKc3jzlMvp8RcYk3rnvmG"><!--pnid:l0fo1FqPLiwVcrE2dCqofz-->近期截止盯盘</h2><span data-page-node-id="jYlRyPalzJM16Gb8kwDsNQ" class="en"><!--pnid:5UlM4kMv0nfU5l0r6nBaV9-->Deadline Watch</span><span data-page-node-id="l10eODcR2JWwYDRrqnxOTv" class="note"><!--pnid:O8PPHOSuAg3kimYZ1t3zS1-->下表为最近 12 家 · 数据日 10-11，发布前需增量核验</span></div>
+    <a data-page-node-id="96KDd46dA18FLEd7wBlXEV" class="linkcard" href="https://www.workbuddy.cn/space/d/1sa4Q1goMZoyubtjNngPPA" rel="noopener" target="_blank">
+      <span data-page-node-id="HpxLM0r7LV7vT1keZf1jP0" class="ico"><!--pnid:VoXhvCBGGl5MehxC3CKbuj-->📋</span>
+      <span data-page-node-id="V9ACOEEbzxOYqP6CphINqz"><!--pnid:nu3KNc6M9fRRFiqjndNdXR-->打开「岗位台账」独立页：全量 131 家，可搜索、按来源等级 / 投递状态 / 企业性质筛选、点选标记</span>
+      <span data-page-node-id="27Oh6S33GqYa7MkE7OfEq8" class="go"><!--pnid:j66QJRo96RIbhO0BDb0FkC-->打开 →</span>
+    </a>
+    <div data-page-node-id="WwBJzrUx1sRoCvimd0vI1v" class="card" style="padding:6px 0 8px">
+      <div data-page-node-id="t1U8UovE6Np2ZzFqh6QpH8" class="tblwrap">
+        <table data-page-node-id="5qLXkmqh4767r79S1FLrKT">
+          <thead data-page-node-id="IIfOUdsXUejy0wdwJSUtu7"><tr data-page-node-id="71c5BJlgULAmLR7QMUKPWv"><th data-page-node-id="wwBxcWmMpyDW1DPRanC3ac"><!--pnid:MTzV6Dunkka1OHgOMMz4uM-->截止日</th><th data-page-node-id="s4LtHJA5L3kf6SbIzxNzHw"><!--pnid:7PCdHiLmtZLQ8ncOPC3DWz-->企业</th><th data-page-node-id="estCRdq5kWCZLQvtfAUNEM"><!--pnid:lHhwuZacr6IiSWYzqIIFzC-->性质 / 行业</th><th data-page-node-id="wtHMVKgC5Eu76sMixic09i"><!--pnid:33AJVTmL9tvWxNZYI39Qnx-->核验来源</th><th data-page-node-id="wNGtl2PtSiGyAFD6Tmbkwm"><!--pnid:j2HxnbnZnrasx0l5HLGDTn-->紧迫度</th></tr></thead>
+          <tbody data-page-node-id="2CIbGqnT3pBbnvJN2R1PXN">
+            <tr data-page-node-id="p5Hw80MDCNmoIfEmW9wlqt" class="today-row"><td data-page-node-id="028SGeGNinmc9vejbrmapt" class="mono"><!--pnid:NX2ft7cFwM1jtZSQZ048iH-->10-14</td><td data-page-node-id="GCg0aKAXK93bl48nZZFcvn"><b data-page-node-id="o9RveD1NS9WIKJ9RWVSeLZ"><!--pnid:P3PRLKDANJn7avQzMt14gc-->浙江省储备粮管理集团</b></td><td data-page-node-id="V61cSNSCnjM2MPDnUujNWi"><!--pnid:wEC15bJNYNWhh3tGFllOvj-->国企/央企</td><td data-page-node-id="KAu3KtDWlIy38rqYwMvMpw"><!--pnid:WtClc7921BNV3l8edvIjQi-->第三方汇总</td><td data-page-node-id="jfRYV0KsFz4KGcr6HPYcXB"><span data-page-node-id="5QHXoujWzySh8YvRFj9xso" class="pill soon"><!--pnid:GWsbS4s3jDMvzlesKV6Cqk-->今日截止</span></td></tr>
+            <tr data-page-node-id="kPeQI3tzmHoV6vmBxd56K5"><td data-page-node-id="Mlr7v0HtmDwQitnXQEOo4V" class="mono"><!--pnid:RsVltnogSds3YKRLjxRsGt-->10-15</td><td data-page-node-id="zI7YqXOz1XTkLqCOrO1aMb"><!--pnid:Jr7vT1Go7ckDkJtdL0wMbx-->中国石油</td><td data-page-node-id="mnvGEHZHJPgkdVEqt5ex8R"><!--pnid:Z6SDc9z1c6baBL2WsWx9X9-->国企/央企</td><td data-page-node-id="oiuG5BIGpXlLcZKHsbKPKX"><!--pnid:et8eTdHIqHEf2tyhwQRA9T-->第三方汇总</td><td data-page-node-id="cPLjRd649azMO18VtbIr1z"><span data-page-node-id="oWpBvFDU787NTZCjGBr7JW" class="pill soon"><!--pnid:mxpzotwwpFUC9tmMSMYhYz-->D‑1</span></td></tr>
+            <tr data-page-node-id="WReivwa1ycimSmx5jCrGas"><td data-page-node-id="JA1CRpJJ4zNxNRzydAXCpa" class="mono"><!--pnid:Di35EMJrHIJU3DqvyAnSxu-->10-15</td><td data-page-node-id="CIbwNUpBM45taAiUdcJSNs"><!--pnid:02wmmBzjAZuMmaAHUk0fOl-->广发银行</td><td data-page-node-id="6e1tKLJeOSqtCqr3gaoKAf"><!--pnid:BsoBSo6s8uNn3IFxCrPVy9-->股份制银行</td><td data-page-node-id="2evaaDigVVZBGRSZEx7K1s"><!--pnid:6UEsSel7bLobFGMPYkShHh-->就业网转发</td><td data-page-node-id="ZkiRygoeyjSyUgckI2EL24"><span data-page-node-id="MgN8cNcJxqqXeFWmcBwHyA" class="pill soon"><!--pnid:I4enTnVnhwf03n66H5SoHq-->D‑1</span></td></tr>
+            <tr data-page-node-id="UOaiH6Aq1RSVFCVRHfuz14"><td data-page-node-id="ySc2PShZy7fxycXqlsl7Ea" class="mono"><!--pnid:CAFJyCnWpdTsU34qASot6B-->10-16</td><td data-page-node-id="AHvNHPUiBh41QKNsHayHFr"><!--pnid:o3gnYNrnuvFMhAQuIaarlE-->安永 EY</td><td data-page-node-id="nkWa5IXenLh2HXwIXyKgys"><!--pnid:HAN2Tf97BhmQauuEXQM2Dy-->专业服务</td><td data-page-node-id="r0eE5hNNap9SV6laVQupmi"><!--pnid:6z9IxKu8bH9MFduEdxGDay-->第三方汇总</td><td data-page-node-id="FYRjMOCU8T6tXyDS82gV0z"><span data-page-node-id="xbko1v76pk01B4jxWBhUeC" class="pill wk"><!--pnid:iLAISXEQ6Qdx5IPOwK1n71-->D‑2</span></td></tr>
+            <tr data-page-node-id="wCJSo76mG7EGvYu8KxTntM"><td data-page-node-id="3S8X0cAaX3oNroXsmR26Uy" class="mono"><!--pnid:6AM4FnR5UIUTRewpitOY9U-->10-17</td><td data-page-node-id="oPBgJcMKjB06pLiDkXoysM"><!--pnid:lC98LkuOdI0CRswaDz2jzs-->华为</td><td data-page-node-id="M1hauinKhg2uGDbC0JznUB"><!--pnid:NPfE4gAWKiUyShPCGc8S9M-->科技/硬件</td><td data-page-node-id="Rwa91SHnOwlQv88bX6uljB"><!--pnid:v2Og2o3LL37tkXNITUprbi-->第三方汇总</td><td data-page-node-id="aNO2rkHCiRS43WcGdG86Yq"><span data-page-node-id="cE6JHPEZITp0rkqvKqC65R" class="pill wk"><!--pnid:cg33l9fMjmjlllQkCDjF3h-->D‑3</span></td></tr>
+            <tr data-page-node-id="H3sGiDXaQYiwxnNrzRP541"><td data-page-node-id="2iI3aa468b35XFjSAsZq3w" class="mono"><!--pnid:oawJdvYy5kXs1PBX8XCnAX-->10-18</td><td data-page-node-id="jHbp2xJrK1EcpMG7KxzNhF"><!--pnid:5bf6LrE5TdD5wQoP7lCPAn-->中国华电</td><td data-page-node-id="DX9teE0KzUddJK72dAGgX1"><!--pnid:BFKCUSehTCR3LImlFtpLMH-->国企/央企</td><td data-page-node-id="5Qehz2LlIDPqB8xWjoYDFv"><!--pnid:TstXIrVloh9JnJS1hWwT7R-->官网原文</td><td data-page-node-id="ZI8DIWe9s4kFZoFE8iNsys"><span data-page-node-id="FEQrrSF4Ow1E5sArmHwOTU" class="pill wk"><!--pnid:shRNHgpOVtNGGrrhcFBKZE-->D‑4</span></td></tr>
+            <tr data-page-node-id="Z9i5oJ6py64hFBbuRC9CCK"><td data-page-node-id="ZfGbdajk1LlBNFwWw1Y5oR" class="mono"><!--pnid:VU0VON5zWiBN3lGsIC24a5-->10-18</td><td data-page-node-id="LSP3cljCxZluowSbEociFS"><!--pnid:NSp8JDIC7CebksY1QEWW0z-->交通银行</td><td data-page-node-id="xPiIHlB9IhtBoDBGylScg0"><!--pnid:krMAWnebQupovj8qO3dR1j-->国有六大行</td><td data-page-node-id="tGoJC26TAmFpYHPOoJeEvI"><!--pnid:93vkShZ0FUXi7rxaoldd8G-->就业网转发</td><td data-page-node-id="l67ApVpgLY7PDpQPhc6GDn"><span data-page-node-id="FapKoeLgPgib9tkR0VVVEp" class="pill wk"><!--pnid:5AJX9fFOlprvux2IDicg0f-->D‑4</span></td></tr>
+            <tr data-page-node-id="94YnxxwRfIigRFu1Q2MQ0l"><td data-page-node-id="xqSnyVCIZoolWRMeXdtsU9" class="mono"><!--pnid:x8EkV2ZhlzGXnpdwGWG2R9-->10-18</td><td data-page-node-id="ih8qIOxpfnSmSsTg3Hy2uq"><!--pnid:wfh2Sx10u2xa8ewOjpucV3-->渤海银行</td><td data-page-node-id="D6tECR5QHjp6azFi6hrjDr"><!--pnid:vCAHqUUeLkrQ9ifEZVX7BD-->股份制银行</td><td data-page-node-id="r4AOBG8RcDzGr6CgFII9EL"><!--pnid:dIoBmdjUZDf73pynrxLeoK-->第三方汇总</td><td data-page-node-id="fArYd3Rx6T7eEbvP1LHFaF"><span data-page-node-id="lCJdz6RZiTKmEmCeUvqx7i" class="pill wk"><!--pnid:nd8G1YKZhaJAOqn4PB1fB5-->D‑4</span></td></tr>
+            <tr data-page-node-id="LaIjoIxR5LZ4aCxDzTxLAB"><td data-page-node-id="qwC2pg23ydohALRrMPb692" class="mono"><!--pnid:1f7NwqfMeuHHpqBqHPFyMV-->10-19</td><td data-page-node-id="6Ex9a7aspkFX4dJq5Q3SAU"><!--pnid:AyanpasN3EfBiNAg7kefQK-->中国五矿集团</td><td data-page-node-id="gKYmkpM93KsvLgO2ow9YDN"><!--pnid:tADssm54QfJgCYoKhDU4Dw-->国企/央企</td><td data-page-node-id="nsHZnJokaY2SBkX8Q46fXj"><!--pnid:tfR6eZQJTUPiobpVd4s6W6-->就业网转发</td><td data-page-node-id="Ni5Czt2sllWOg561Aju5bF"><span data-page-node-id="hhPNRnv4HTLOWnxSmiXZxT" class="pill ok"><!--pnid:W66wh4TmlJvdpjkdqfySzp-->D‑5</span></td></tr>
+            <tr data-page-node-id="M0ZBnWgejOwEdDbqBf7KZs"><td data-page-node-id="he7mygb0a44vP76CbwF1x5" class="mono"><!--pnid:cR0Korr6f49AAkraSCpUmG-->10-20</td><td data-page-node-id="s1s7lOLas8PO8m7JHCimgU"><!--pnid:PM2FjmMFrwwi0wGSwHtvil-->中国电信</td><td data-page-node-id="9e1FuEmiQXyaMDI96dhVIx"><!--pnid:brYOS0zhjO5kYJwJBRNkqj-->国企/央企</td><td data-page-node-id="jsjwQjM1Gh3jKSpsdq50oK"><!--pnid:sffLNOlQHE1tnpvlkRtSxM-->就业网转发</td><td data-page-node-id="AysDkG6cAoEslorq4Mt32E"><span data-page-node-id="JAdYaqBKk1ZBVQpNZsPOTO" class="pill ok"><!--pnid:J8xkAD1srM27bWPR8TYtky-->D‑6</span></td></tr>
+            <tr data-page-node-id="bPp2tpON2xDosb7p3P5rp4"><td data-page-node-id="RAW8whzaOnZS14mkRFjzp1" class="mono"><!--pnid:gc1rnDAlHxR8f2bHNayf7n-->10-20</td><td data-page-node-id="7XJ3ctyJnCEH6jxBXd610I"><!--pnid:rZN8vsm5mvepWyeDSjmYEb-->国家管网</td><td data-page-node-id="MZC9ZYargNz4BCHvn9uDuL"><!--pnid:ADQpDQ1i00az96Aa8IKEnH-->国企/央企</td><td data-page-node-id="qRS3efDoV2XlCYnsKu143L"><!--pnid:reB4vRujSLe77wFFN4IWrd-->就业网转发</td><td data-page-node-id="HxN24eXKAeExOJ4liXgdFd"><span data-page-node-id="4WwU7vwF8gZvH8pekWXkj3" class="pill ok"><!--pnid:djvKqgHTLkvQ0Cy6NjmP0K-->D‑6</span></td></tr>
+            <tr data-page-node-id="EjwuSZZIwsM9mGJ395RDzi"><td data-page-node-id="Na4k5J3DJoxOg47X6gVwGT" class="mono"><!--pnid:Lx78GUx13g4uneNOU3ckMO-->10-20</td><td data-page-node-id="iaC8ajaIjtA9kT7xTiaBWq"><!--pnid:waaVyrobWOWwyjgpB4J6XK-->网易</td><td data-page-node-id="RkR7S81LHE0yrsAGHaDdpM"><!--pnid:1xXJ6GccswY9M6UeQwWgvb-->互联网</td><td data-page-node-id="oPrTc9QO2KbTQssxZYXkwU"><!--pnid:ew7izxB33t8hpf7rgQUK3J-->第三方汇总</td><td data-page-node-id="wg9SlQQSgEKX5GVEocCF91"><span data-page-node-id="jpNYh2hZKW0cNOEjPl1QTk" class="pill ok"><!--pnid:hBhrnAJwItsS8mp2i4wefB-->D‑6</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section data-page-node-id="qQzAd0dl1ehRG84Ym26e4D">
+    <div data-page-node-id="JPbZfNVqeQOttQZQBCNHSf" class="sec-head"><h2 data-page-node-id="0JUL4ERxxSEFgKP3rT4P1C"><!--pnid:NSRW3N3cmcp97UYzxV4Kcq-->竞品拆解策略</h2><span data-page-node-id="NW1UYOc4aJwHAxE5FeAXrb" class="en"><!--pnid:aHRrxAu82NEdCLMLPkMzke-->Benchmark · v2.0 新增</span><span data-page-node-id="upafDYN9O2RPCDdShbOXsR" class="note"><!--pnid:qtHyZ64zjsPkftWxaHyX2J-->基于 11 个竞品案例深度拆解（虚拟研究学苑框架）</span></div>
+
+    <div data-page-node-id="TFHsIjeZ9on8h1UJ2WjySk" class="card pad" style="margin-bottom:16px">
+      <div data-page-node-id="CSw7M2YMqiK6zpfcCVWAiG" class="sec-head" style="margin:0 0 10px"><h2 data-page-node-id="lGdKRceJVx60QwnNZy6RLj"><!--pnid:t5rkPzC7XxPfqUEoSAoZo6-->7 条必做</h2><span data-page-node-id="m9rwSRxxkbrl6VRoijEsjq" class="en"><!--pnid:eOXTmt9fKpumRlu6m4rTlH-->Do</span></div>
+      <div data-page-node-id="gAsxHlbrSQ412geh9ooyRx" class="tblwrap wide" style="padding:0">
+        <table data-page-node-id="RE34FvfGMfs3ngXwXSuJsY">
+          <thead data-page-node-id="ZjSdNeymle7dCavDB7p8PC"><tr data-page-node-id="LuVlWG2Ik2hKsOaPh6gAnq"><th data-page-node-id="pHhidpLQGtVK3xUsiwtAXi"><!--pnid:NFnEbF94HrWRza8ctZgeDm-->#</th><th data-page-node-id="nJiRotrhp7Agz9uKnJtLHT"><!--pnid:Tvv5jPamN5KRoIedokBMjq-->策略</th><th data-page-node-id="CHl843nlpXBps74SY0Rk6l"><!--pnid:4Rk88xswmvmh6XSsZnU2Ca-->依据（竞品）</th><th data-page-node-id="hrlDq4hzFoWVoeROFW2gQI"><!--pnid:qckukF83mJfPfrPy5sPr6v-->我们怎么做</th></tr></thead>
+          <tbody data-page-node-id="8b5gOqZbV0458DrStsfxO6">
+            <tr data-page-node-id="sBluh09ukaI4zuJ31lx959"><td data-page-node-id="4RhFv57LogfmybDiEUNCuA" class="mono"><!--pnid:xByBX8JKFVjNBp7CtJQD1A-->1</td><td data-page-node-id="0dvPYKVgk0hc3yMw2PCxHq"><b data-page-node-id="QSiwaWQ2ev0nSRxrxu6dHF"><!--pnid:StREji6nPoTRuXHOoXWaDi-->人设必须立起来</b></td><td data-page-node-id="duyh9IokwNmtvNz03uiCKK"><!--pnid:1HfvNeryhzdknZfamQDlqO-->婉清学姐（8年HR，6.3万件）· 朱迪学姐（上岸，4.8万件）· 法学朵拉（五院四系+上岸，3755件）</td><td data-page-node-id="Do2TfYcrEBoFLEOTWGnXKu"><!--pnid:49lKAJSnopF2Ecq0xBbjq4-->处罚期后贴简介「盯截止日的学姐」；每篇第一人称；持续输出「我是怎么查官网的」</td></tr>
+            <tr data-page-node-id="Nb2qgWwYiFzwJfyZmT6R2o"><td data-page-node-id="JIurn2yqnQoy3Yy5TN7zSG" class="mono"><!--pnid:7NC3yV4KKiOnmSKMvRV0GI-->2</td><td data-page-node-id="B4h3XPuZVp7PL0lq0SGkst"><b data-page-node-id="MOJiLV6cIT7GSAM6KKeiic"><!--pnid:eWuZ0RfJY637ON7JH1tsz0-->切细分人群</b></td><td data-page-node-id="CsxYKcj8k3iZgEjhy83JLn"><!--pnid:2l3pyJJfzvqYLNeepwZmtP-->环境人（环境专业，39.9）· 法学朵拉（法学，0.1–478）· MinNan（往届生，29.9–69.9）</td><td data-page-node-id="RCYTS3KMgb87uU6sCzPSTf"><!--pnid:IvJQOWVwra4QuJSHZEhjRp-->A 层按行业切（银行/国企/互联网）；B 层按人群切（26届/27届/往届生）</td></tr>
+            <tr data-page-node-id="0p7Qj0SOFt3lxbUQbbtl9a"><td data-page-node-id="qNcWAV5nCpIgkCOIO1a5hX" class="mono"><!--pnid:R7gKU11Kja9ltHTXLDObOy-->3</td><td data-page-node-id="jqOW26GLaXf7EIM8cvxaH1"><b data-page-node-id="HU03K53qIOkc4q6UbIaL7u"><!--pnid:T9CAkiuRrUZwxhJlL8TPj6-->产品打包提升客单价</b></td><td data-page-node-id="sexRM8qedFiudsJN2auJC7"><!--pnid:jlXIF7VlqFQK2OnZ2hWcUm-->朱迪学姐（表格+题库+面经，9.99–98.88）· 法学朵拉（0.1–478 全价格带）</td><td data-page-node-id="3Abie4KZh91riIfqn82Xvo"><!--pnid:v4FtLg8pGAfuNKsUeB9joz-->L1（19.9）先跑通；L2（49.9 分行业清单包）回暖周上；L3（99.9）= 时间表+简历模板+笔面试</td></tr>
+            <tr data-page-node-id="5Gy9Spc70pqaFryNxcogCO"><td data-page-node-id="hJ06kKPjZIgR2VRajJCmF2" class="mono"><!--pnid:kpdFN34AxvdLVcdZcKKTLb-->4</td><td data-page-node-id="wc7AODHJv8U5IIBDo0ZqgZ"><b data-page-node-id="0eVr4Ff3XfGunvzssDGHDR"><!--pnid:43T4UPp4TdKF52SOVXp1md-->商品页信息密度拉满</b></td><td data-page-node-id="TRhks4BeuhnzfzphJrjnKa"><!--pnid:DBdR2esntDSX4KZ56GelwV-->环境人（功能点+数据可视化+社会认同）· 婉清（已售6.3万+/评价4.1万+/53人正在看）</td><td data-page-node-id="jvLB9RmHAW0dBdHDO16QQR"><!--pnid:vm04HmHHAJemp0JbMsz3AB-->首图列「包含什么」；二图数据可视化；三图社会认同；每出一单更新「已售XX件」</td></tr>
+            <tr data-page-node-id="E66pbwJJzayoY5rTHy3eGS"><td data-page-node-id="mwAR8uBOacQDFn3S9Esrb7" class="mono"><!--pnid:w1CtT4DXTRBkUEf0zGeDsH-->5</td><td data-page-node-id="1NfbYfzYaNN79eCNBhnFA9"><b data-page-node-id="gPog4cpRWuPwD3fYxrPAu2"><!--pnid:pwATxon0xXkWNyTD8Zncer-->视觉风格统一</b></td><td data-page-node-id="gIOSFA2oN0ybbsyMWClgPP"><!--pnid:7oELSvYDQAGK9fOlIXAkgC-->环境人（绿色系统一）· MinNan（实景背景+大字标题）</td><td data-page-node-id="6mRz7vUHzoL9zlcBMlUFcw"><!--pnid:x8Jkzsp19hSZz8SRjp9TZ5-->固定配色（冷白纸底+黑字+红印章）+ 固定 5 图结构</td></tr>
+            <tr data-page-node-id="g9cUu5M84VtixBxuro1Ui7"><td data-page-node-id="3xZA6ticTuogZlldXd12e6" class="mono"><!--pnid:PqNJT6DrFn5Uu0xGb9atHd-->6</td><td data-page-node-id="seoPy7HoOsgit3JLXmZ0RN"><b data-page-node-id="A41sbGVEVo7lpgOt3tjA1t"><!--pnid:GQroNLMSfxGGTIm2ZRAFx9-->每日短笔记保持活跃</b></td><td data-page-node-id="nwk8HZOQEqjuBXUfVRYzfp"><!--pnid:Rz0ap4qBsFM9uElx9shcbS-->环境人（每日精选岗位帖）· 婉清（每日校招信息 40%）</td><td data-page-node-id="xPJDkDcDkgLNBQ9UhAyCU8"><!--pnid:cZPOEqBHtAA4kN5RdJDYhd-->A 层每日发（今天截止提醒）；哪怕当天截止少也发；处罚期后恢复日更</td></tr>
+            <tr data-page-node-id="h3y6s4yCEkixbLcmwIQVpb"><td data-page-node-id="gSgzGk1lzHRJKV705kg3tF" class="mono"><!--pnid:nEEnyQQvVk4Vl2qSEIgQiE-->7</td><td data-page-node-id="aHvdNNCNstk8xZVgENc0v2"><b data-page-node-id="VhT4wRXdUIFWAUwD8BGKjo"><!--pnid:GrPKgYBNgZ6pFnYqwNN6vU-->内容混合策略</b></td><td data-page-node-id="3CTsxkDnuY53f1QCNg7Adj"><!--pnid:mBIfSMr6z3S6tCeGct1DfC-->婉清（求职建议 30%）· 朱迪（30%）· 牛马学姐（干货感强）</td><td data-page-node-id="zw0jCwR9b5XrAMhf0f0dqU"><!--pnid:644jmgLP5geEuyrLCY51KB-->比例 50% 截止提醒 + 30% 方法论 + 20% 种草；不 100% 广告</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div data-page-node-id="Mf55DlLoUSFpVJYDrhGoXk" class="card pad">
+      <div data-page-node-id="ggr6F8K9RehhddD2HfMTY1" class="sec-head" style="margin:0 0 10px"><h2 data-page-node-id="GCmx0bkCyr5U9680zRLFGj"><!--pnid:T8c3Vyww8gI2g6Kkzy8H6R-->8 条避雷</h2><span data-page-node-id="hVQzuSfb5kjWVXV1EwUSun" class="en"><!--pnid:Vcaql40fOqUCgDOBwk9r0B-->Don't</span></div>
+      <div data-page-node-id="pYmreN0PJB05M7ZL5GJ7SM" class="tblwrap wide" style="padding:0">
+        <table data-page-node-id="2XyCZR6np4016tI5yhrIY6">
+          <thead data-page-node-id="9DNT2QwSCHToWT7ylBzeOe"><tr data-page-node-id="FdMnf1IThE85R2Yg1QmyUs"><th data-page-node-id="49EGFenImszrtqFzVO5VIQ"><!--pnid:6hlDS5kpj4Fv2KnZBTt6pm-->#</th><th data-page-node-id="mFzaDYb5gtARZ4OwzaLyJJ"><!--pnid:njI2jeqbHJcdDzeuRseW0j-->避雷项</th><th data-page-node-id="govLAfw86VyVt55LputAG5"><!--pnid:uuA4HJVrp8GHcCh4OQ3kTT-->反面教材</th><th data-page-node-id="7F4VIzm37HVYkmjdXpmpN4"><!--pnid:4ZGSd5rcw4ZRU3gGtIkR0G-->我们怎么做</th></tr></thead>
+          <tbody data-page-node-id="7wZNQELmJEVQAavXNfEzzo">
+            <tr data-page-node-id="moT5uKn2ieVIH1SZOpa62W"><td data-page-node-id="aBZ5UUTl4PxyVAqQmRlDL9" class="mono"><!--pnid:MYzVPB40TedbAhbLK2AJZA-->1</td><td data-page-node-id="pe6rDtwMFfpuUBVU6wK0C1"><b data-page-node-id="XD4M8WHaBR3plt1OQDDXKY"><!--pnid:Zmp3luavrscY89RM1ZvXso-->不做超低价引流款</b></td><td data-page-node-id="4RBRWOtbnSS5e8ZgdmD4Xb"><!--pnid:5jsnmCwU5N1FZe3ZFzWWFB-->今天投什么（0.19 元引流款，拉低品牌定位）</td><td data-page-node-id="1Aft1TGVLCEFIQMZSbUqAe"><!--pnid:9eQi8wGTWaCeCtN44S9arM-->哑铃两档 19.9 + 99.9；不做 1–9.9 元引流款</td></tr>
+            <tr data-page-node-id="qWyVi3cuaUDNuvP90jxbuL"><td data-page-node-id="Io7L88c9A6Nx5wpvcdd1Mx" class="mono"><!--pnid:RrOOnqcmtQ8TIpls6pYYHK-->2</td><td data-page-node-id="iTo4S55JXd26kUQGMOOzBN"><b data-page-node-id="szfpXTmrFbVALlvOwM7IDa"><!--pnid:LZylqh5wcMug6galZVeK44-->不刷好评</b></td><td data-page-node-id="E61tCJC0ruK0eoHr8tC6cp"><!--pnid:o1bwW7qnXmLp3Q1NP7YRFt-->今天投什么（评论区模板化好评，损伤信任）</td><td data-page-node-id="38i7ay6RpyjiLOr9WrK0J8"><!--pnid:HsCye8TurSMzsLwz0TyFV4-->真实出单后引导真实评价；不扣1发资料、不互赞互评</td></tr>
+            <tr data-page-node-id="elxFMNNUUk4mdmGWfiewYH"><td data-page-node-id="PITqlK6shMUJGHsGtLvc6k" class="mono"><!--pnid:egWeeVxBZmtsIMT2eiWfaO-->3</td><td data-page-node-id="TbGJfwek5yrOQZuC6YZTvQ"><b data-page-node-id="wZMoknbBjhOclRBqJGGkLt"><!--pnid:VeZQuxVLl2XT5YaeO1PBsx-->不按城市切人群</b></td><td data-page-node-id="yes1ppUdk7z3nzu9RBXXvh"><!--pnid:LSJU0tbKShQZxeALYRlVQB-->就业摆渡人（北京专场，500 粉做不起来）</td><td data-page-node-id="YylwlOF2ApsCaQcQg8rjN6"><!--pnid:BXEOklMJ1zYwowNP92APQL-->按行业切、按人群切，不按城市</td></tr>
+            <tr data-page-node-id="ADRJlyxmMOJbkFp98sBKGk"><td data-page-node-id="zJ5bOMUq7euIcV7mtbGtrS" class="mono"><!--pnid:JhWikJiMDfRC9lbtQlMzVN-->4</td><td data-page-node-id="SIyKZqhLWYLrrzLQ4y3XR9"><b data-page-node-id="MOB8ouOfjbYlRMcDU4zyjz"><!--pnid:QTwOWYNsojGq2iPGcaE7tX-->不断更</b></td><td data-page-node-id="bPiPOHZ9dxgnKll8poiaL2"><!--pnid:Dg208zJ8Wlu7zonA3AycrW-->就业摆渡人（断更 3 个月）</td><td data-page-node-id="3BGct26aLlCqFRdtqlARG2"><!--pnid:Vq2zV4ZpbIVtAs6qkCy3MG-->A 层每日必发；提前备库存稿；当天截止少也发</td></tr>
+            <tr data-page-node-id="IOTBp61IKEIapqAF6GstwL"><td data-page-node-id="1PtXlf3uU8vto1pPQvUnIU" class="mono"><!--pnid:LkghA7XyeaorDiYENyzqCh-->5</td><td data-page-node-id="e6Mw7lGRQQcDvwaGNXdzqa"><b data-page-node-id="J9AL5M0bsXTem9DaviMAPf"><!--pnid:xEwfnXmgY9z0YtyFbIJ7Ro-->不做纯品牌号无人设</b></td><td data-page-node-id="kA5vdaI3BbLGM8Z4EXC1u0"><!--pnid:NXzufVMmClX7u3lLvRFfov-->校招推推（纯品牌号，5 年已售仅 692 件）</td><td data-page-node-id="WuYpQBZ2Kfyu7cRrpi1cmh"><!--pnid:2u5Ewy8napl4kJrFmABOAz-->每篇都要有「我」——我帮你查了、我帮你整理了</td></tr>
+            <tr data-page-node-id="AFlqaAtvTTuh2Cr7hZP4eh"><td data-page-node-id="XbX24ALk3w5jxeQ4ga4riN" class="mono"><!--pnid:B8A518Oa0gQ9MVMABhTsfb-->6</td><td data-page-node-id="7rGAOp3wSqOYZiEJ0FaSQX"><b data-page-node-id="NXXpIXlndTkkEMJCJk1yjO"><!--pnid:k2i7chCr9QxQGSqWUatBq3-->不做服务型产品</b></td><td data-page-node-id="f6KbOqNbF4KYx1qmpQT6n2"><!--pnid:5JGrWQmvVw5ZuJ81SDuRKp-->法学朵拉（面试辅导/陪跑 478，销量极低）</td><td data-page-node-id="Tj6Cc2vqpqPMfBSHhASuQJ"><!--pnid:d64JMcQsw6KAMajJZI3mYa-->只做标品（时间表/清单包/资料包）；不做 1v1 服务</td></tr>
+            <tr data-page-node-id="6baY3ffpyzfuKwwOIjQg48"><td data-page-node-id="i3EW5HDg3rKDbJRlntUczN" class="mono"><!--pnid:Nh2bNYQ3h8A334A4ZBd5dq-->7</td><td data-page-node-id="7A1JJytstzHJXOkT0rk6IA"><b data-page-node-id="R5U098C0hQIAA1MKcfYuuA"><!--pnid:M4S5MfmdEMZQBqZSM4jqWb-->不两头都做</b></td><td data-page-node-id="3xvzfBFMUPSqlh8mRo0A8H"><!--pnid:ewyl3u6cCZr6zBRm71aqLS-->日更工具流 vs 爆款人设流，两头都做=两头都做不好</td><td data-page-node-id="9KRlbVJMaIoFQCrXzPL1En"><!--pnid:NdytwzcH2DW4DnZyZeYGSG-->选日更工具流（靠搜索流量）；人设是加分项不是核心</td></tr>
+            <tr data-page-node-id="XwDrjSUCEMjEumC3sDMcRo"><td data-page-node-id="RzUcZyHQ269Tag5mVUlYHL" class="mono"><!--pnid:diZK7Kxw4wWxzZ6DwR8k2s-->8</td><td data-page-node-id="GKEnpwI0olBdEZz2kNmO4g"><b data-page-node-id="H7ytlZsPkcrSNY7PXiAxRd"><!--pnid:NfkRHbwhzPVDM7KTlL13EX-->不封面风格混乱</b></td><td data-page-node-id="gHDj0f7AlVLB0aG5fXDztf"><!--pnid:GxMtaKu9F1Kj8UfXWDmTev-->今天投什么（5 种封面混用）· 就业摆渡人（风格混乱）</td><td data-page-node-id="tOwRXLQoz51tPg9Vs3Nfqf"><!--pnid:aZ6FTFNATmUa11iHHuo3t3-->固定封面模板、固定配色；不要一篇一个样</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section data-page-node-id="qzkE1TgqszdfDhsEv04Aog">
+    <div data-page-node-id="T5fSNR8MQTebtCjUKzC7OZ" class="sec-head"><h2 data-page-node-id="RlXzdO7O7OThpQgQfJfWyv"><!--pnid:DXC6237WaD80pT7S7DNv1B-->后续规划</h2><span data-page-node-id="4lBAhX8aOdbm3qLb48WP0W" class="en"><!--pnid:SWTJoGW19lMSE4RA0aPpYx-->Roadmap · v2.0</span><span data-page-node-id="8Ar4ND65SPdkbjIieXucFL" class="note"><!--pnid:m28pxjSuwgmKMXbbfZXODV-->P0 处罚期结束立刻做 · P1 回暖周后 · P2 跑通模型后</span></div>
+    <div data-page-node-id="RU4K7naATNqKX1tAc2zSX6" class="grid3">
+      <div data-page-node-id="Fm9c55SO32ldGau6i5CfjC" class="card pad">
+        <div data-page-node-id="a9OkSmakOsWXcCETpKqavK" class="planhead"><span data-page-node-id="3JgYvIJVYRs6xVB4GePnBy" class="pdot p0"></span><!--pnid:4VPdyotk8A0PSjYsluI8TS-->🔴 P0 · 10/19 处罚期结束后立刻做</div>
+        <div data-page-node-id="EKxzCs7PAkf6KCkII4a7jb" class="tblwrap" style="padding:0">
+          <table data-page-node-id="ravsq5R1r8PcuMtZqTHV6W">
+            <thead data-page-node-id="KrkzTSHd4xTm5oRBv7an75"><tr data-page-node-id="XOZ5Ug0OY3CrSc8QjzNoPi"><th data-page-node-id="WwHXzXk9NOaUrWGPiz6jZL"><!--pnid:yLurLPbn3zZlj2tQ4Hb9Ak-->#</th><th data-page-node-id="qfH5nmoRhWfllxD4Eyyo7e"><!--pnid:S5N6a9kORD0NB5RVbS0koT-->动作</th><th data-page-node-id="4m5zOqS5CSiazBigUhKiaT"><!--pnid:hTrkdxwz7Bmg4q5AziRvqt-->预期效果</th></tr></thead>
+            <tbody data-page-node-id="Hz6szScjbLvZCsWKxZ9wui">
+              <tr data-page-node-id="xwk8MSE0kmIaacsM9ZBwNt"><td data-page-node-id="3G7tnr2yTNkM6DZnjCabaZ" class="mono"><!--pnid:DUmXGndZbThS97aQKJne0s-->1</td><td data-page-node-id="lk0F56t7L54zBvroqFGtZP"><!--pnid:geOpMSiJVc5x7ppIHRzsf3-->贴人设简介——「盯截止日的学姐」</td><td data-page-node-id="OFddQvomEgLHbIYj1krmLJ"><!--pnid:EMjZmYtn4PipWtDMDEyIGI-->建立信任，提升转化</td></tr>
+              <tr data-page-node-id="ZUPwD9MnjzwBVtFqK9CJg3"><td data-page-node-id="VGsLSzgrCp5tmPGwTaJEfB" class="mono"><!--pnid:IEqdU8Vy9RaswBsdYM8WjC-->2</td><td data-page-node-id="iLzqX67xwD50lBPIXXc76q"><!--pnid:focRjULgzqZKY7EVpmoFwN-->恢复 A 层每日截止提醒笔记发布</td><td data-page-node-id="JxxgDlRUhwjM9ldputuBYW"><!--pnid:P9atmJImHld8pydBtka9tN-->恢复搜索流量</td></tr>
+              <tr data-page-node-id="qG26tFMqUvl61cLlpFZU1s"><td data-page-node-id="b1jYGMzEFBP0p6XRd7OuZY" class="mono"><!--pnid:zE0M3PpYgUtLiniJtcqdVB-->3</td><td data-page-node-id="aigS9RdbMW2ShuXew6orPs"><!--pnid:IPzapXFza8QdmO5iFbh3Gi-->商品页信息密度升级（功能点+数据+社会认同标签）</td><td data-page-node-id="QeItlsavzXQjzCFABY0MTM"><!--pnid:qGNjUZDXGOTKLpScIGnhhD-->提升转化率</td></tr>
+              <tr data-page-node-id="6VWmtS7rwJjJG87FAui4AO"><td data-page-node-id="gMvAssAsZJP6e3migqqsyG" class="mono"><!--pnid:vOSWLyfNFpfBdYn7Qh3hu4-->4</td><td data-page-node-id="KxYMpDjper1ARO7Pjb07fm"><!--pnid:a7dqzDqbUstsPYku6uYS3B-->上架 49.9「半年全套」档</td><td data-page-node-id="GHrIBsyO8jMHkuHFVueyyE"><!--pnid:oVXx0turMvHv1OVMBNlDAm-->提升客单价</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div data-page-node-id="fCThRVxRcCXspSR5IPyIE5" class="planhead"><span data-page-node-id="yvZG355drSOAZhpSPIMVY8" class="pdot p1"></span><!--pnid:aBCdbx6tGbYbOpQFXOSOyM-->🟡 P1 · 首单破了 / 回暖周后做</div>
+        <div data-page-node-id="bfTzf1AS0uUI6hKqDCPSC3" class="tblwrap" style="padding:0">
+          <table data-page-node-id="lkla7r9Xns2NYNEzHmGUVS">
+            <thead data-page-node-id="wzOufzlusfxkFj08Uxqy8h"><tr data-page-node-id="2wCpuMtN1N3UDcCX53oGoy"><th data-page-node-id="H476D7ZKeqcxmwfpCELZKU"><!--pnid:fvc4J09wPfpKTNkqUjxI2r-->#</th><th data-page-node-id="fh5W2XYYTZyNFPBfS4QGO0"><!--pnid:lidp3LbmzeqiUwl44QCiqH-->动作</th><th data-page-node-id="xgT5Aj2iInyDk7Try2T9k2"><!--pnid:RUfEpoxT86ONLCDzDcs384-->预期效果</th></tr></thead>
+            <tbody data-page-node-id="sGzzaP828v63HtFi2pjk0D">
+              <tr data-page-node-id="s0dpbxwDOtpYyp4bMa93dZ"><td data-page-node-id="UykLiK8sNtCEk4fL0KU9yW" class="mono"><!--pnid:F1CnGdWBHpI0EdBlRf1rmq-->5</td><td data-page-node-id="rFrLD2WF3jaww7PvLg9Ezg"><!--pnid:OZOTWHtwjPErdYZpinSdqu-->统一所有笔记封面风格</td><td data-page-node-id="dfjet21K3JU1ha3lZvr0d6"><!--pnid:i9hNthDfYhdeBGBHI1JnTJ-->品牌识别</td></tr>
+              <tr data-page-node-id="recdFJNOgYhDNaq32hPiH4"><td data-page-node-id="HRqACkIyBAlbojxGGTwzgJ" class="mono"><!--pnid:iZW0IQBv4cwSLzrrvPxTqT-->6</td><td data-page-node-id="8hQvrCAEwJwFEy4MqZIM92"><!--pnid:cSAi4iUnSFyNRNoDWU0niI-->内容混合——加入求职方法论干货（B 层）</td><td data-page-node-id="ccGEc8Wzl53ze0Nz0GoEJ3"><!--pnid:2f366Q6Az7V2qVIskTVrs1-->引流</td></tr>
+              <tr data-page-node-id="YAlyQyYyJMksXCwN5gZ11Q"><td data-page-node-id="F9yaYByGP6CjzZxqIXpreU" class="mono"><!--pnid:u9ww24YaItDVMajcYzxRtK-->7</td><td data-page-node-id="QDWhlMqjDMZ8YsEUhDT9iC"><!--pnid:RpVDhLQns4uH14H5hpwCh3-->评论区 / 竞品采集启动</td><td data-page-node-id="qeENzG8rz2McNl2rNr4qSX"><!--pnid:adEt8WE0sE3xNy4CJeF7pL-->持续优化选题</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div data-page-node-id="A2QXYEKFy4iecChxKMPNTp" class="planhead"><span data-page-node-id="CwAbxXoLiMojOOgQg3cYO9" class="pdot p2"></span><!--pnid:ENIx0GkaRIpQpeZVC8Dyip-->🟢 P2 · 跑通模型后做</div>
+        <div data-page-node-id="h7nnmrf0CM6vbjrSCZV7XO" class="tblwrap" style="padding:0">
+          <table data-page-node-id="8wufN0LB6RWYOJkt4mkqKk">
+            <thead data-page-node-id="aUHGQcLuFAEqbO28ic5I8g"><tr data-page-node-id="bOlkelK952sW033RCImxU1"><th data-page-node-id="X5yYz0g12B7mcO3Xv7po0c"><!--pnid:hQQlIcZJSVVGKqd7CHm9QW-->#</th><th data-page-node-id="o33QgAhVfcBa97mlMSOlOe"><!--pnid:JAeZHLvBYdLsrn6PH1Dfax-->动作</th><th data-page-node-id="rNiuYdrUfVPihLwt9Fz13d"><!--pnid:2Fi8CMIcKJkF4Hkur5IHxP-->预期效果</th></tr></thead>
+            <tbody data-page-node-id="5BZz3sTn0h0OACGKG1rTs7">
+              <tr data-page-node-id="PyowtwSFEPeMzsFruNi4a4"><td data-page-node-id="BzFikxXPUqBOGOh5zR9wzy" class="mono"><!--pnid:TW5pXF0hp4dBSoIDWjH6Tu-->8</td><td data-page-node-id="ZNPjCE4KU4qJzM92Q6QwNa"><!--pnid:FWyA2FKVV0A1opUGaD8i2x-->上架 99.9「全流程包」档</td><td data-page-node-id="ulTNSk3mGkfaEmaXbCE87g"><!--pnid:aovpFx8bEXr1zUc0bKSArt-->客单价翻倍</td></tr>
+              <tr data-page-node-id="WgIvESRH4msYapDnaatMKh"><td data-page-node-id="Sbta9JT4hImsEYTdzzhy62" class="mono"><!--pnid:Yc29nlGenEOGKEMQ52fHkU-->9</td><td data-page-node-id="HpqMufDqwg8Gh39ZJqQ4nF"><!--pnid:CfpnmYn68o7qzKkl3g4ti3-->追投薯条到已验证的爆款笔记</td><td data-page-node-id="clpTQzHgyV1SrOx9NxPeeR"><!--pnid:b1IFxAtZcMbkTmWTYjG0bz-->放大流量</td></tr>
+              <tr data-page-node-id="1buPQtIYkqgxF71OgRNtUd"><td data-page-node-id="uTSMvOowbgcieWeQ2kUtGd" class="mono"><!--pnid:c8hAFWwk2xy0zgKOxvIsPN-->10</td><td data-page-node-id="n8BdKUD1hPUnR0fAC00Ld7"><!--pnid:zRh76lxYoz36ORzSWItMUw-->往届生人群单独切一个内容线</td><td data-page-node-id="E7iygtj5bQyy21xXq5yZBD"><!--pnid:c3RqBnULO2uu7VJdru6qUy-->切细分人群</td></tr>
+              <tr data-page-node-id="05p8Av8BQ7iWcrLY5UZTl0"><td data-page-node-id="2NAo18hH7iTzMKJcDHYU78" class="mono"><!--pnid:8ckOUWdYpiH8ZMu1fCQo1c-->11</td><td data-page-node-id="eWkDfL35NK6Jm9HdrEJhZA"><!--pnid:HQLNsGxPeGxXZ8zmAuPrWR-->考试线再扩（49.9 春招线 2027-01~04）</td><td data-page-node-id="UtMppeSrBW0AU9UW0SJEUy"><!--pnid:LU7CPiutKZ5kMCPmQTjtxd-->长线布局</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div data-page-node-id="ky4WZTSXWBDRAOjvmotsmN" class="card pad">
+        <div data-page-node-id="vNFlwIhNB04jDz84rYktwL" class="sec-head" style="margin:0 0 10px"><h2 data-page-node-id="WzPo7iNLKpKP1a6Rtv8Pd7"><!--pnid:0a6WLTqWDejw6VZWh2nTQl-->时段规划</h2><span data-page-node-id="wTeuIYigayXsBs2Ugq61it" class="en"><!--pnid:UVqw11YiOShJlJOfXObC1d-->Timeline</span></div>
+        <div data-page-node-id="oezZRY4LwI9U6VrAL9uxy6" class="tblwrap" style="padding:0">
+          <table data-page-node-id="qv7OYVRPQ80d1JtaANxTq0">
+            <thead data-page-node-id="61zoH7HlQeU71xx938ErRZ"><tr data-page-node-id="uQoO3Qm5Lqm2G2CJlrhr4C"><th data-page-node-id="rH2izGNefyfBQbglbo4E8U"><!--pnid:9H4G3TH7SuqsP0NJJc5tOJ-->时段</th><th data-page-node-id="B91ROOHsUzjOLOkXhKoUKm"><!--pnid:XGBbhv3m52NIcbF0hnWvLZ-->动作</th></tr></thead>
+            <tbody data-page-node-id="9YHQfL8bccL1pfho3C7CuG">
+              <tr data-page-node-id="NHRj71iFJS9Azup5w3BdZz"><td data-page-node-id="eMGjlicm3ZYMcFS4zrnpsX"><b data-page-node-id="Wp1fQQM3xhZrf2Ygk8bJ5C"><!--pnid:QTKQj6qUjU8SApg3fxEkUY-->10/13–10/19</b><br data-page-node-id="hNyIygvlKCRq6bFp4wawlQ"><span data-page-node-id="lLRnuuuex3agJyhhohJF6d" class="pill soon"><!--pnid:LEvL2YnH4glnefY62bj9b1-->处罚期</span></td><td data-page-node-id="xldv4kLnIP6mtHR4DtUSAb"><!--pnid:E5ACufcgfGaQdIsgF2fh5t-->不登录任何账号、不登创作者中心、不投流、不站外导流、不评论区导购、不私信催单；稳定发 1–2 条/天养流量；数据用户手机手工回传</td></tr>
+              <tr data-page-node-id="udn4qYiAH12fwoEbKUR4mJ"><td data-page-node-id="zzdVXAHBTaUwGkY5VFvdWf"><b data-page-node-id="dFgyDVx3AuBot3zzPrwOos"><!--pnid:LJmzAH2oGZHqZM85oDuQf1-->10/19–10/26</b><br data-page-node-id="WB2AIp8ssL4gLSjhVtogES"><span data-page-node-id="6L1zJKyIrWMUaTbewOncho" class="pill wk"><!--pnid:XVz6102GIkpGDwLkRM8Hgv-->回暖周</span></td><td data-page-node-id="zcrC30Ffx9JfBVXZ3XRl05"><!--pnid:okC2ePTHrUtdf7U1QsrD3r-->商业权益恢复后流量养回；49.9「半年全套」新建上架（承诺边界 2027-04，半月更；禁考试线；第三方未核 ≤3/10 明标待核）</td></tr>
+              <tr data-page-node-id="Hxqpkqzrhz5zeUrDMPHb1A"><td data-page-node-id="E0MRHaLrnXacobqNv9pS5p"><b data-page-node-id="TcKz8sQdcIqGID556IKDfF"><!--pnid:Mr4VJsb9hYo2QEBE8NQKDL-->10/31</b><br data-page-node-id="HzbE71qSiy6YeFoAMJfIdE"><span data-page-node-id="GOzREaP8tjyEfXHUvRB8qI" class="pill ok"><!--pnid:G1jgaVVkPii4CdZymKoqLe-->弹性判据</span></td><td data-page-node-id="ypEo0xHwJLbezEGCZJxUmR"><!--pnid:F6UVE9NicyiKjtXHA8G8Hx-->49.9 转化率 ≥ 19.9 的 40% → 11 月上 99 档；&lt;40% → 封顶；三周 0 单且 19.9 无增量 → 问题在流量</td></tr>
+              <tr data-page-node-id="CDRFy5iE46qUpP7UKCySNA"><td data-page-node-id="qmIV52ODCNQqOW9McMEQoS"><b data-page-node-id="tqvCsferFDPbwB6CpCFjnI"><!--pnid:d8rxFQ9w579nSQpm2QGaru-->2027 年</b></td><td data-page-node-id="wDscmJQMUrg1cZiSqrlaIs"><!--pnid:MfPHolP4BQmd3HPuvK7roX-->考试线再扩；49.9 春招线（2027-01~04）内容备料</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div data-page-node-id="k2xRJsTWk37Ha1ug3OayNG" class="sec-head" style="margin:18px 0 6px"><h2 data-page-node-id="CmhhXJ73yNrPXuDdPEpLPF"><!--pnid:7xqCOyd3IOt26Xniua5Faj-->当前挂起</h2><span data-page-node-id="qkDhJ1xdSYfdbjtmYI3kqh" class="en"><!--pnid:wlxQgx3jKNL16F21hfPpA8-->Paused</span></div>
+        <div data-page-node-id="9j2p52h7BbrN6JHIu2iSnW" class="susp">
+          <div data-page-node-id="M8lpZ3H5X8FHsr2WqKq1Mj" class="s"><div data-page-node-id="yh79QZYq9DMvDKZ7h9AZCR" class="num"><!--pnid:QcVH6JzpCQVIi5kU7leGSZ-->1</div><div data-page-node-id="8z6iEG30JUD2V0UGzXG6ZC"><div data-page-node-id="m1hPBEvESFYtQXcdxfJjYb" class="t"><!--pnid:lSp4n51aEKpuPgXJQtEaG8-->49.9 更新频率</div><div data-page-node-id="vLJk6KrLcBoyXQWngbvrub" class="d"><!--pnid:Qwd6PqqqKbM0FMYfuKUeIa-->待豆包给维护量测算后，用户拍板</div></div></div>
+          <div data-page-node-id="EngFnL1O8nj1YGXhSCyY9O" class="s"><div data-page-node-id="KBNRDkIZfB4TW4AmW9N1ob" class="num"><!--pnid:PV1QA4wLwhlQyEp099AOcf-->2</div><div data-page-node-id="9aEBRcGAnk6u9qRabEXmjq"><div data-page-node-id="lNOs6wwN2BVmbrim5Y9fYs" class="t"><!--pnid:IXay4DptpDILyGU3YIjBgf-->评论区 / 竞品采集</div><div data-page-node-id="nZC05a7QQJbx23mRgtnfA1" class="d"><!--pnid:Hbr8SejgAJi2h9M3M1Ngrg-->WB 出稿跑顺后另行派卡</div></div></div>
+          <div data-page-node-id="BdhHvYL7a4snbKDuWUcLdY" class="s"><div data-page-node-id="ZAFf8efLc20hmuaur8a72q" class="num"><!--pnid:Ny20e4FFgqJzAtuojZXe6z-->3</div><div data-page-node-id="TlwiOogsBC7lwOHy3A6p42"><div data-page-node-id="OqYo7gcTjuBh0NQ3bcw4NS" class="t"><!--pnid:aQbKDM308tDKaJyKeiHXGr-->99.9 档是否改为「全年订阅档」</div><div data-page-node-id="chFllpmznSHcDBXWeVUerJ" class="d"><!--pnid:XiUsQSVaLWhb2gDSn1eFub-->知识库建议，待用户拍板</div></div></div>
+          <div data-page-node-id="DhQigrwXeihSFL6ss0SzXB" class="s"><div data-page-node-id="2NRvAGaMw9BnhXwD05MQfi" class="num"><!--pnid:RpQVirHz8mdIPXjJa7RSX1-->4</div><div data-page-node-id="F2dJ3Og9XBzpTLV4DZ3dPZ"><div data-page-node-id="DOwDYy59bkz5phWnx11tmv" class="t"><!--pnid:Evj9zqT9TDO45IXMyMfvmr-->AI 内容是否在商品页声明</div><div data-page-node-id="2HWNe9S7w3tINSwGpos3PX" class="d"><!--pnid:yBBpUGOt9RXYxXzpbV5IfH-->知识库建议勾选 AI 生成，待确认</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-page-node-id="cN4d687MJBNMUyI4bXzSGN">
+    <div data-page-node-id="IpMH6jBObaRHpG4t0gDGkx" class="sec-head"><h2 data-page-node-id="K3nxbWMcnGoMrA1eQfYArv"><!--pnid:wCADfUF4CHx0AonZaDCRje-->红线与纪律快查</h2><span data-page-node-id="9NaVcYOx0Ddn6AzwDgvX5M" class="en"><!--pnid:1DGOlO2hAi2zyYgvCYCTsG-->Red Lines · DB54 简化版</span><span data-page-node-id="kva22iV8P7Ck06SgxJq8ke" class="note"><!--pnid:Ds2GZ2OTYrPNm9zs0XRawJ-->v2.0 §四：只保留 3 条硬规则</span></div>
+    <div data-page-node-id="Cu85dBxy7pkx7oVNsvk9gA" class="rules">
+      <div data-page-node-id="icI3kuNfGxiFqEW4O0eTwU" class="rule red"><div data-page-node-id="TUBvROVlAzZIR1QOn7W7Ob" class="ick"><!--pnid:1BpSJsoDunk5L3HBTfm4z0-->⛔</div><div data-page-node-id="PNlGgkKKxiorvpe4FakUyQ"><b data-page-node-id="DF0VKN1pIHZWwpy5QdAScY"><!--pnid:fG20dMLaXXZ5ut13uMvFQp-->① P0 红线不能碰</b><p data-page-node-id="9lJgR0bIcOTfEGCGh3cqww"><!--pnid:TDhAByEi4JNZTmA38xGNxy-->对外口径家数 = 131；禁「最 / 绝对 / 第一 / 全网独家」极限词；禁站外引流（微信/QQ/电话邮箱）；禁虚假承诺（必过/保证上岸/内推）；禁刷好评 / 扣1发资料 / 互赞互评</p></div></div>
+      <div data-page-node-id="9ixCaIEfVQjYuCeRbunkk7" class="rule amber"><div data-page-node-id="7JdcbZjtcBIDYlge7mdltU" class="ick"><!--pnid:fnAO5PC7Su05vt5NUGRSUT-->👁️</div><div data-page-node-id="1yvnkF0QULHanaHhzZMsIZ"><b data-page-node-id="kjGiOKztRxzGNyJswjBkYr"><!--pnid:ZwMgeU2cveZawQBhwqwFpA-->② 发布前用户审一次</b><p data-page-node-id="Wh8vagKOKg3i3n0kZSrZug"><!--pnid:4qq28UzJtPk0Jyqn9ubkYE-->所有笔记发布前必须给用户看一遍，用户拍板后再发</p></div></div>
+      <div data-page-node-id="renniHfdGikEbfNNy9zZfn" class="rule blue"><div data-page-node-id="UOeJZDtJKpbdA1fyJz6Llg" class="ick"><!--pnid:HnRB9zD8jweWTyKLDThSTe-->🧭</div><div data-page-node-id="5x2IkouWJN4HzJclA0mOr1"><b data-page-node-id="ltPsdTRw0zMeasxvuc8UT8"><!--pnid:BQgEJt38vmtJ1PIhyTGzGI-->③ 数据回磁盘核实</b><p data-page-node-id="8M3uCfH8H0OzVUEoqIkO38"><!--pnid:G9z8OLCID1lYddV08pRiad-->所有数字 / 事实必须回 200 家主表（timetable.json）实跑核验，不采信单方报告；时效来源未核验标「待核」</p></div></div>
+    </div>
+    <div data-page-node-id="NRZhBi9xEMHikal4XtUeJH" class="notebox"><b data-page-node-id="ChvDw9tmLkOZ2d7zaXcxrj"><!--pnid:3KT3HKIbj0HaOEIYTcs0Zv-->带链口径（执行项，非红线）：</b><!--pnid:b3XN9HsHp1f8uTaDEtXOGm-->处罚期<b data-page-node-id="gwnL1c4obhVoqJbGPN0bZ8"><!--pnid:qQulHVoOEMNwGDQVDn67AD-->不挂链</b><!--pnid:EBJVf5pedDwChgJQ1JlNeC-->（按 DB48）——排期表「挂载商品」一律记「无」。10/19 回暖周后再定挂链比例。（2026-10-14 你拍板）</div>
+    <div data-page-node-id="3MZ6gi8PAZ9b5vTCnMf2WX" class="cutbox"><b data-page-node-id="dkO8Ganme7L3MbiQr6wfGX"><!--pnid:f5XNNu1jSGL40JCgRyQ6JM-->DB54 已砍掉的旧规则：</b><!--pnid:9BiSj8LUWJmsMLKXQYsXwC-->三层闸门全审 · 亮点自查 4 项 · 必审不抽样 · 自测报告 · 六步流程 · 二创避重记录 · §22 二创重复检测 · 封面留白口径 v4.31 · <b data-page-node-id="bERdKS5oe0JllfWkHLaTj6"><!--pnid:aOSD7yJbBxG8pDy8zCTvrY-->跨店同质化五维度（R8）</b><!--pnid:K13ixWxPSY9MK6nwePRgRp-->。<br data-page-node-id="Amk56ogXK4WSrl0R4MK8tL"><!--pnid:C9yc6cbhVEJklhMvLzixhx-->AI 现在自己定标题 / 首评 / 配图 / 措辞 / 发布时间 / 选题小调整；只保上面 3 条硬规则 + 发布前用户审一次。<br data-page-node-id="JqxS31hIprQVo77DGYyqLU"><!--pnid:YYa7yutn19saZKgE4qZfBi-->🔸 跨店同质化五维度已于 2026-10-14 由你确认「随 DB54 一并取消」，本页不再作为硬约束展示。</div>
+  </section>
+
+  <section data-page-node-id="GxIi0oGTsa7ftlZdORZ7FW">
+    <div data-page-node-id="638fdkPEFVfUuOOOoud5I6" class="sec-head"><h2 data-page-node-id="QbNqnkfstBfxiTqNIPwPtX"><!--pnid:DlMBhwRfc2lHsl88h3fvlR-->版本与资产牌</h2><span data-page-node-id="RrychrEWyt952lXbguMNqv" class="en"><!--pnid:HqvyRJJB9CJbjujbhFJUGz-->Versions</span></div>
+    <div data-page-node-id="4uggYgOYFcYWuy6lBqM6d0" class="kpis">
+      <div data-page-node-id="h26E8PHJOGLFWwbrp7WH78" class="card kpi r"><div data-page-node-id="NP5Md19so6h1RS8DM9efqE" class="bar"></div><div data-page-node-id="kzfvySpu9BKmkWPKLgRB8N" class="k-label"><!--pnid:g7uZUFYCGtbOtBhqZNViRy-->总作战计划</div><div data-page-node-id="c1TpT77cpD81MaZ3TGaxat" class="k-val" style="font-size:24px"><!--pnid:RBMW6VVjzkKr1kbuFnoWKR-->v3.1</div><div data-page-node-id="skynLfcakiPKLwoy82B42q" class="k-sub"><!--pnid:AC7JxGS53hLkAJX2NXRrM4-->豆包编制 · 10-14 合并版</div></div>
+      <div data-page-node-id="SWMI7cREJxZQWrBRzYxHoC" class="card kpi v"><div data-page-node-id="HtiowNltiBLg1X92Pmon1P" class="bar"></div><div data-page-node-id="1OQLHQ3FNpr7GXPjrV1hwS" class="k-label"><!--pnid:Dc6yLBid6mIAHGKal6eoOo-->主文档</div><div data-page-node-id="qGBI9Ed3LzKOIVgVdfD17o" class="k-val" style="font-size:24px"><!--pnid:VMURMjYAkl24TQQPwsBizk-->已停更</div><div data-page-node-id="GN3umbIK9YvTr3u6Vdcv3p" class="k-sub"><!--pnid:8c5PM0BGsQRzqovP8KWtAT-->v4.45 已并入总作战计划 v3.1</div></div>
+      <div data-page-node-id="VhZ9vs7z1tIZr6GvJxVnLP" class="card kpi b"><div data-page-node-id="g8BTrgjAW04Zly8yuiKt4S" class="bar"></div><div data-page-node-id="f2IUDiWautyy8YLob92FNQ" class="k-label"><!--pnid:lLErkgPvi132BTWjO0uW93-->技能包</div><div data-page-node-id="1gkbZtrWvIzODs7S0indqt" class="k-val" style="font-size:24px"><!--pnid:1lridnDNe9qkFpBCNPHKpN-->v1.0.21</div><div data-page-node-id="KxBr5T1D78xFVGFtuKm4L8" class="k-sub"><!--pnid:hCRYiF7p2fXXgD2u8xleWo-->200 家（内部）· 对外 131 / 数据日 10-14</div></div>
+      <div data-page-node-id="5oMCTnSrOjYf61pdCehwgm" class="card kpi g"><div data-page-node-id="dpNebhcgKfqvceFhhPL8H5" class="bar"></div><div data-page-node-id="2QGsUJ5qxacfl7MpCGrIvY" class="k-label"><!--pnid:eGNk0mpfF7TdVrUDfbd19f-->合规闸门</div><div data-page-node-id="5GY3sRAmlcNpdsBCpGrnrY" class="k-val" style="font-size:24px"><!--pnid:cOL5fVC7csGEausTAVaQf2-->v3.8</div><div data-page-node-id="xuAMZ4hYpQY60ZQxoYGZv5" class="k-sub"><!--pnid:zERH8EhENKIHtlePRNunwV-->P0 阻断 / P1·P2 提示</div></div>
+    </div>
+  </section>
+
+  <footer data-page-node-id="xcWPpG0GNJPUM60Fql1jfp">
+    <div data-page-node-id="tZR55RYaEOKpt5zsoTObju"><b data-page-node-id="Jy5SDO8pOYAcQdMjR9t1fc"><!--pnid:LWff8mvkaqkqk2C8xoMza1-->三方分工（10-15 正式版）</b><!--pnid:WqY0iEDZKRzH1hNQo7zmjQ--> ｜ W：对外核验＋选题定题＋出稿＋配图＋终判＋排期表＋工作台数据 ｜ D：主表采集/补全/回写（先出清单→W 确认）＋每周维护＋出稿后机器核对＋竞品周扫＋商品页建议 ｜ 用户：后台操作＋数据回传＋所有拍板 ｜ 详见 _协作/三方分工正式版_20261015.md</div>
+    <div data-page-node-id="DOFnEoFDt8usjXJ8AT5mbf" style="margin-top:8px"><b data-page-node-id="s2rtbCRqSMtj1z0bPvwWHW"><!--pnid:QzdMYLA7lFdu6itA75cizy-->口径来源（磁盘可验证）</b></div>
+    <div data-page-node-id="7JPIfmRY5qNpQi1vbROgtd" class="srcline">
+      <span data-page-node-id="EL0JBD65u2hlGbHDIyO0pB"><!--pnid:KYArW3ZHKcO0PweNfGsOpU-->求职项目总作战计划-v3.0.md（豆包 · 现行 v3.1）</span>
+      <span data-page-node-id="taL4oTOws7k2YaA0pqePJW"><!--pnid:L8ouy27VlXGFukdhrRKhga-->技能包_时间表查询官/data/timetable.json</span>
+      <span data-page-node-id="jLA1sEojiXs7vDF12MiAdD"><!--pnid:aKl3fgQojSyP2Qi5G2JqrP-->求职项目进展.md（v4.45 已停更 · 并入 v3.1）</span>
+      <span data-page-node-id="NVFVW5LwzLItlIumA4LLl9"><!--pnid:5KNZu8ZwpE43SqmDKv4iF0-->主运营工作守则.md</span>
+      <span data-page-node-id="PODzxEkTQfbWFkUQinQsDW"><!--pnid:syXYZrOeiVPYSgEMw5MaLY-->_协作/卡索引.md · inbox/outbox</span>
+      <span data-page-node-id="YsYmslMPVJGtCjPgQJha4j"><!--pnid:UgZY4B6K33r2tXgRMmtQEI-->_协作/inbox/裁定卡-DB48 / DB54</span>
+    </div>
+    <div data-page-node-id="RNkHWTc7NBdT3OXRhXqAZJ" style="margin-top:8px"><!--pnid:FqkKNqyAbnO2mHRjpyNILt-->⚠️ 店铺粉丝数、成交量等<b data-page-node-id="9BEG4KvL68Vxpr2FW4Myx3"><!--pnid:wFuvucy95mAtPf3zSW0Pz6-->平台端数据</b><!--pnid:Xl5eAHvlvNnf85ycLqUTej-->本机无留痕，需你在 App 后台回传后补入（v2.0：A 店售卖端<b data-page-node-id="8zUpW0j0ugFo6wJzrSVAYI"><!--pnid:AxSXOASn02mlDGdW0OYq6c-->仅有成交量、无访客中段数据</b><!--pnid:NCvtNorVgURLaIznSQbHDL-->，故曝光/观看/点击率可能填不了）。数据时效以核验日期为准，第三方汇总 / 待核实条目请以官网为准。</div>
+  </footer>
+
+</div>
+<div data-page-node-id="nFrmhnd5M1BfUydyCVIQO1" class="dyn-toast" id="toast"><!--pnid:VC9vQuWgF2iX5Nhj9mu46u-->已保存</div>
+
+<script data-page-node-id="zBdqVY1aoM2k3wP89NgvWq" data-pnid-children="Qbf8B74Rb84xKV4OAtGOn5">
+(function () {
+  'use strict';
+
+  var TODO_DB = 'jXSNAphTmjKYhdWjMJV6oM';
+  var SCH_DB = 'UcSbMf8BXQQjx06jvOM7To';
+  var STORE_DB = 'Vdd0Fs70cCWYWUNaWDOpfY';
+  var TODO_FIELDS = ['事项', '类型', '优先级', '状态', '截止日', '负责人', '备注'];
+  var SCH_FIELDS = ['计划日期', '层级', '选题', '挂载商品', '状态', '备注'];
+  var TODO_CYCLE = ['待办', '进行中', '已完成'];
+  var SCH_CYCLE = ['待发', '已放行', '已发'];
+  var CACHE_TODO = 'wb_workbench_todo_form_v1';
+  var CACHE_SCH = 'wb_workbench_sch_form_v1';
+  var CACHE_STORE = 'wb_workbench_store_form_v1';
+
+  var SP = window.__SMART_PAGE__;
+  var db = SP && SP.database ? SP.database : null;
+  var OPTIONS = {};
+  var DATA = { todos: [], sch: [], store: [], notes: [], review: [], todoFilter: '全部' };
+
+  /* ---------- utilities ---------- */
+  function esc(s) {
+    if (s === null || s === undefined) return '';
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function $(id) { return document.getElementById(id); }
+  function dshort(v) { return v ? String(v).substr(0, 10) : ''; }
+  function toast(msg) {
+    var t = $('toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.className = 'dyn-toast show';
+    window.setTimeout(function () { t.className = 'dyn-toast'; }, 1900);
+  }
+  function todayStr() {
+    var d = new Date(), m = d.getMonth() + 1, day = d.getDate();
+    return d.getFullYear() + '-' + (m < 10 ? '0' + m : m) + '-' + (day < 10 ? '0' + day : day);
+  }
+  function daysFrom(v) {
+    if (!v) return null;
+    var t = new Date(todayStr() + 'T00:00:00Z').getTime();
+    var d = new Date(String(v).substr(0, 10) + 'T00:00:00Z').getTime();
+    if (isNaN(d)) return null;
+    return Math.round((d - t) / 86400000);
+  }
+  function setBound(el, dbId) {
+    if (!el) return;
+    try {
+      el.setAttribute('data-sp-bindable', 'database');
+      el.setAttribute('data-sp-database-id', dbId);
+    } catch (e) {}
+  }
+
+  /* ---------- local form cache (DSDK008) ---------- */
+  function cacheLoad(key, form) {
+    if (!form) return;
+    try {
+      var raw = window.localStorage.getItem(key);
+      if (!raw) return;
+      var obj = JSON.parse(raw);
+      Object.keys(obj).forEach(function (n) {
+        var el = form.querySelector('[name="' + n + '"]');
+        if (el && el.type !== 'submit' && el.type !== 'button') {
+          if (el.tagName === 'SELECT' && !el.options.length) return;
+          el.value = obj[n];
+        }
+      });
+    } catch (e) {}
+  }
+  function cacheSave(key, form) {
+    if (!form) return;
+    try {
+      var obj = {};
+      var nodes = form.querySelectorAll('input,select,textarea');
+      for (var i = 0; i < nodes.length; i++) {
+        var el = nodes[i];
+        if (!el.name || el.type === 'submit' || el.type === 'button') continue;
+        if (/password|secret|token|key|密码|身份证/i.test(el.name)) continue;
+        if (el.hasAttribute('data-no-cache')) continue;
+        obj[el.name] = el.value;
+      }
+      window.localStorage.setItem(key, JSON.stringify(obj));
+    } catch (e) {}
+  }
+  function cacheClear(key) {
+    try { window.localStorage.removeItem(key); } catch (e) {}
+  }
+  function bindCache(form, key) {
+    if (!form) return;
+    var timer = null;
+    function handler() {
+      if (timer) window.clearTimeout(timer);
+      timer = window.setTimeout(function () { cacheSave(key, form); }, 300);
+    }
+    form.addEventListener('input', handler);
+    form.addEventListener('change', handler);
+  }
+
+  /* ---------- select options (from getSchema) ---------- */
+  function renderSelects(form, fields, dbId) {
+    if (!form) return;
+    fields.forEach(function (f) {
+      var el = form.querySelector('[name="' + f.name + '"]');
+      if (!el || el.tagName !== 'SELECT') return;
+      var opts = (OPTIONS[dbId] || {})[f.field];
+      if (!opts) return;
+      var head = el.querySelector('option[value=""]');
+      el.innerHTML = '';
+      if (head) el.appendChild(head);
+      else {
+        var o0 = document.createElement('option');
+        o0.value = ''; o0.textContent = f.label;
+        el.appendChild(o0);
+      }
+      opts.forEach(function (opt) {
+        var o = document.createElement('option');
+        o.value = opt.id;
+        o.textContent = opt.text;
+        el.appendChild(o);
+      });
+    });
+  }
+
+  /* ---------- paginated load (DSDK014) ---------- */
+  function paginate(fetchFn, cb) {
+    var acc = [];
+    function step(startCursor, guard) {
+      if (guard > 100) { cb(acc); return; }
+      fetchFn(200, startCursor).then(function (result) {
+        if (result && result.results) acc = acc.concat(result.results);
+        var next = result ? result.nextCursor : '';
+        if (result && result.hasMore && next && next !== startCursor && result.results && result.results.length) {
+          step(next, guard + 1);
+        } else {
+          cb(acc);
+        }
+      }).catch(function (err) {
+        if (window.console) console.error('[database] 加载失败', err);
+        cb(acc);
+      });
+    }
+    step('', 0);
+  }
+
+  function fetchTodos(pageSize, startCursor) {
+    return db.query({
+      databaseId: 'jXSNAphTmjKYhdWjMJV6oM',
+      sorts: [{ property: '截止日', direction: 'ascending' }],
+      pageSize: pageSize,
+      startCursor: startCursor
+    });
+  }
+
+  function fetchSch(pageSize, startCursor) {
+    return db.query({
+      databaseId: 'UcSbMf8BXQQjx06jvOM7To',
+      sorts: [{ property: '计划日期', direction: 'ascending' }],
+      pageSize: pageSize,
+      startCursor: startCursor
+    });
+  }
+
+  function fetchStore(pageSize, startCursor) {
+    return db.query({
+      databaseId: 'Vdd0Fs70cCWYWUNaWDOpfY',
+      sorts: [{ property: '记录日期', direction: 'descending' }],
+      pageSize: pageSize,
+      startCursor: startCursor
+    });
+  }
+
+  function readSelects(schema) {
+    var map = {};
+    (schema && schema.properties ? schema.properties : []).forEach(function (f) {
+      if ((f.type === 'select' || f.type === 'multi_select') && f.config && f.config.options) {
+        map[f.name] = f.config.options;
+      }
+    });
+    return map;
+  }
+
+  function loadSchemaTodo(cb) {
+    db.getSchema({ databaseId: 'jXSNAphTmjKYhdWjMJV6oM' }).then(function (schema) {
+      OPTIONS['jXSNAphTmjKYhdWjMJV6oM'] = readSelects(schema);
+      cb();
+    }).catch(function (err) {
+      if (window.console) console.error('[database] schema 加载失败', err);
+      cb();
+    });
+  }
+
+  function loadSchemaSch(cb) {
+    db.getSchema({ databaseId: 'UcSbMf8BXQQjx06jvOM7To' }).then(function (schema) {
+      OPTIONS['UcSbMf8BXQQjx06jvOM7To'] = readSelects(schema);
+      cb();
+    }).catch(function (err) {
+      if (window.console) console.error('[database] schema 加载失败', err);
+      cb();
+    });
+  }
+
+  /* ---------- status pills ---------- */
+  function statusClass(v) {
+    if (v === '待办') return 's-todo';
+    if (v === '进行中') return 's-doing';
+    if (v === '已完成') return 's-done';
+    if (v === '待发') return 's-todo';
+    if (v === '已放行') return 's-ready';
+    if (v === '已发') return 's-done';
+    return 's-todo';
+  }
+  function priClass(v) {
+    if (v === 'P0') return 'p0';
+    if (v === 'P1') return 'p1';
+    return 'p2';
+  }
+  function levelClass(v) { return v === 'A层' ? 'a' : 'b'; }
+
+  /* ---------- DOM helpers ---------- */
+  function mk(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== null && text !== undefined) e.textContent = text;
+    return e;
+  }
+  function emptyBox(title, desc) {
+    var d = mk('div', 'dyn-empty');
+    if (title) { d.appendChild(mk('b', null, title)); d.appendChild(document.createElement('br')); }
+    if (desc) d.appendChild(document.createTextNode(desc));
+    return d;
+  }
+  function rowShell(dbLiteral) {
+    var row = mk('div', 'drow');
+    row.setAttribute('data-sp-bindable', 'database');
+    row.setAttribute('data-sp-database-id', dbLiteral);
+    return row;
+  }
+  function statusBtn(actDb, rid, st) {
+    var b = mk('button', 'mini st ' + statusClass(st), st);
+    b.type = 'button';
+    b.setAttribute('data-act', 'cycle');
+    b.setAttribute('data-db', actDb);
+    b.setAttribute('data-rid', rid || '');
+    b.title = '点击切换状态';
+    return b;
+  }
+  function delBtn(actDb, rid) {
+    var b = mk('button', 'mini del', '删除');
+    b.type = 'button';
+    b.setAttribute('data-act', 'del');
+    b.setAttribute('data-db', actDb);
+    b.setAttribute('data-rid', rid || '');
+    b.title = '删除该条';
+    return b;
+  }
+  function clearNode(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+
+  /* ---------- render: todos ---------- */
+  function renderTodos() {
+    var box = $('todoList');
+    if (!box) return;
+    var all = DATA.todos || [];
+    var cntDoing = 0, cntDone = 0, cntOpen = 0;
+    all.forEach(function (r) {
+      if (r['状态'] === '已完成') cntDone++;
+      else if (r['状态'] === '进行中') { cntDoing++; cntOpen++; }
+      else cntOpen++;
+    });
+    var setN = function (id, v) {
+      var n = $(id);
+      if (n) { n.textContent = v; setBound(n, TODO_DB); }
+    };
+    setN('todoCntTodo', cntOpen);
+    setN('todoCntDoing', cntDoing);
+    setN('todoCntDone', cntDone);
+    setN('kpiTodo', cntOpen);
+
+    var pad2 = function (n) { return n < 10 ? '0' + n : '' + n; };
+    var iso2 = function (d) { return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); };
+    var nowD = new Date();
+    var todayS = iso2(nowD);
+    var weekEndS = iso2(new Date(nowD.getTime() + (6 - ((nowD.getDay() + 6) % 7)) * 86400000));
+    var dueOf = function (r) { return r['截止日'] ? String(r['截止日']).substr(0, 10) : null; };
+    var isOpen = function (r) { return r['状态'] !== '已完成'; };
+    var isDaily = function (r) { var v = r['每日循环']; return v === true || v === 'true' || v === 'True' || v === '是' || v === 1; };
+    var inToday = function (r) { if (!isOpen(r)) return false; if (isDaily(r)) return true; var d = dueOf(r); return !!d && d <= todayS; };
+    var inWeek = function (r) { if (!isOpen(r)) return false; if (isDaily(r)) return true; var d = dueOf(r); return !!d && d <= weekEndS; };
+    var cntToday = all.filter(inToday).length;
+    var cntWeek = all.filter(inWeek).length;
+    var rows = all.filter(function (r) {
+      if (DATA.todoFilter === '全部') return true;
+      if (DATA.todoFilter === '今日待做') return inToday(r);
+      if (DATA.todoFilter === '本周待做') return inWeek(r);
+      return r['状态'] === DATA.todoFilter;
+    });
+    var PRI_ORDER = { 'P0': 0, 'P1': 1, 'P2': 2 };
+    rows.sort(function (a, b) {
+      var pa = PRI_ORDER[a['优先级']] === undefined ? 3 : PRI_ORDER[a['优先级']];
+      var pb = PRI_ORDER[b['优先级']] === undefined ? 3 : PRI_ORDER[b['优先级']];
+      if (pa !== pb) return pa - pb;
+      var da = a['截止日'] ? String(a['截止日']).substr(0, 10) : '9999-12-31';
+      var dbb = b['截止日'] ? String(b['截止日']).substr(0, 10) : '9999-12-31';
+      if (da !== dbb) return da < dbb ? -1 : 1;
+      return 0;
+    });
+
+    clearNode(box);
+    if (!all.length) {
+      box.appendChild(emptyBox('还没有待办', '点击右上角「＋ 新增待办」把第一条记下来。'));
+      return;
+    }
+    var strip = mk('div', 'note', '今日待做 ' + cntToday + ' 条 · 本周待做 ' + cntWeek + ' 条（不含已完成）');
+    strip.setAttribute('style', 'display:block;margin:0 0 8px;font-weight:700;');
+    box.appendChild(strip);
+    if (DATA.todoFilter === '今日待做' || DATA.todoFilter === '本周待做') {
+      var gh0 = mk('div', 'note', '【' + DATA.todoFilter + '】');
+      gh0.setAttribute('style', 'display:block;margin:12px 0 4px;font-weight:700;');
+      box.appendChild(gh0);
+    }
+    if (!rows.length) {
+      box.appendChild(emptyBox('', '当前筛选下没有记录。'));
+      return;
+    }
+
+    var lastPri = null;
+    rows.forEach(function (r) {
+      var st = r['状态'] || '待办';
+      var pri = r['优先级'] || '';
+      if (pri !== lastPri) {
+        lastPri = pri;
+        var gh = mk('div', 'note', '【' + (pri || '未分级') + '】');
+        gh.setAttribute('style', 'display:block;margin:12px 0 4px;font-weight:700;');
+        box.appendChild(gh);
+      }
+      var typ = r['类型'] || '';
+      var own = r['负责人'] || '';
+      var due = dshort(r['截止日']);
+      var dd = daysFrom(r['截止日']);
+      var row = rowShell('jXSNAphTmjKYhdWjMJV6oM');
+      row.appendChild(statusBtn(TODO_DB, r.record_id, st));
+      var body = mk('div', 'body');
+      body.appendChild(mk('div', 't', r['事项'] || '(无标题)'));
+      var meta = mk('div', 'meta');
+      if (typ) meta.appendChild(mk('span', 'mini type', typ));
+      if (pri) meta.appendChild(mk('span', 'mini ' + priClass(pri), pri));
+      if (own) meta.appendChild(mk('span', 'note', '负责：' + own));
+      if (due) {
+        var cls = dd !== null && dd <= 1 ? 'p0' : (dd !== null && dd <= 7 ? 'p1' : 'p2');
+        var label = dd === null ? due : (dd < 0 ? due + '·已过期' : (dd === 0 ? due + '·今天' : due + '·D+' + dd));
+        meta.appendChild(mk('span', 'mini ' + cls, label));
+      }
+      if (r['备注']) meta.appendChild(mk('span', 'note', r['备注']));
+      body.appendChild(meta);
+      row.appendChild(body);
+      var acts = mk('div', 'acts');
+      acts.appendChild(delBtn(TODO_DB, r.record_id));
+      row.appendChild(acts);
+      box.appendChild(row);
+    });
+  }
+
+  /* ---------- render: schedule ---------- */
+  function renderSch() {
+    var box = $('schList');
+    if (!box) return;
+    var all = DATA.sch || [];
+    var cnt = $('schCnt');
+    if (cnt) { cnt.textContent = all.length; setBound(cnt, SCH_DB); }
+
+    clearNode(box);
+    if (!all.length) {
+      box.appendChild(emptyBox('还没有排期', '点击右上角「＋ 新增排期」把下一篇记下来。'));
+      return;
+    }
+    var rows = all.slice();
+    rows.sort(function (a, b) {
+      var da = a['计划日期'] ? String(a['计划日期']).substr(0, 10) : '9999-12-31';
+      var dbb = b['计划日期'] ? String(b['计划日期']).substr(0, 10) : '9999-12-31';
+      return da < dbb ? -1 : (da > dbb ? 1 : 0);
+    });
+    rows.forEach(function (r) {
+      var st = r['状态'] || '待发';
+      var lvl = r['层级'] || '';
+      var prod = r['挂载商品'] || '';
+      var dts = dshort(r['计划日期']);
+      var row = rowShell('UcSbMf8BXQQjx06jvOM7To');
+      row.appendChild(statusBtn(SCH_DB, r.record_id, st));
+      var body = mk('div', 'body');
+      var title = mk('div', 't');
+      if (dts) {
+        var dateSpan = mk('span', 'mono', dts);
+        dateSpan.style.fontWeight = '800';
+        dateSpan.style.color = '#2f6bff';
+        title.appendChild(dateSpan);
+        title.appendChild(document.createTextNode(' '));
+      }
+      title.appendChild(document.createTextNode(r['选题'] || '(无选题)'));
+      body.appendChild(title);
+      var meta = mk('div', 'meta');
+      if (lvl) meta.appendChild(mk('span', 'mini ' + levelClass(lvl), lvl));
+      if (prod) meta.appendChild(mk('span', 'mini type', '挂：' + prod));
+      if (r['备注']) meta.appendChild(mk('span', 'note', r['备注']));
+      body.appendChild(meta);
+      row.appendChild(body);
+      var acts = mk('div', 'acts');
+      acts.appendChild(delBtn(SCH_DB, r.record_id));
+      row.appendChild(acts);
+      box.appendChild(row);
+    });
+  }
+
+  /* ---------- render: store metrics ---------- */
+  function fmt(v) { return (v === null || v === undefined || v === '') ? '—' : String(v); }
+  function renderStore() {
+    var rows = DATA.store || [];
+    var latest = rows.length ? rows[0] : null;
+    var setK = function (id, v) {
+      var n = $(id);
+      if (n) { n.textContent = v; setBound(n, STORE_DB); }
+    };
+    setK('kpiFans', latest ? fmt(latest['粉丝数']) : '—');
+    setK('kpiOrders', latest ? fmt(latest['成交单量']) : '—');
+    setK('kpiScore', latest ? fmt(latest['店铺分']) : '—');
+    setK('kpiLikes', (latest && latest['获赞与收藏'] !== null && latest['获赞与收藏'] !== undefined) ? fmt(latest['获赞与收藏']) : '—');
+
+    var dateEl = $('storeDate');
+    if (dateEl) dateEl.textContent = latest && latest['记录日期'] ? '最新记录：' + dshort(latest['记录日期']) : '尚无记录';
+
+    var kv = $('storeKv');
+    if (kv) {
+      clearNode(kv);
+      var items = latest ? [
+        ['记录日期', dshort(latest['记录日期'])],
+        ['粉丝数', latest['粉丝数']],
+        ['成交单量', latest['成交单量']],
+        ['曝光', latest['曝光']],
+        ['观看', latest['观看']],
+        ['商品卡点击率', (latest['商品卡点击率'] === null || latest['商品卡点击率'] === undefined) ? '' : latest['商品卡点击率'] + '%'],
+        ['退款数', latest['退款数']],
+        ['店铺分', latest['店铺分']],
+        ['获赞与收藏', latest['获赞与收藏']],
+        ['昨日发布篇数', latest['昨日发布篇数']]
+      ] : [['提示', '还没有店铺数据']];
+      items.forEach(function (it) {
+        var b = mk('div', 'box');
+        b.appendChild(mk('div', 'k', it[0]));
+        b.appendChild(mk('div', 'v', fmt(it[1])));
+        kv.appendChild(b);
+      });
+    }
+
+    var list = $('storeList');
+    if (!list) return;
+    clearNode(list);
+    if (!rows.length) {
+      list.appendChild(emptyBox('还没有店铺数据', '点击右上角「＋ 录入一条」把今天的后台数字记下来。'));
+      return;
+    }
+    rows.forEach(function (r) {
+      var row = rowShell('Vdd0Fs70cCWYWUNaWDOpfY');
+      var badge = mk('span', 'mini s-done', dshort(r['记录日期']) || '—');
+      badge.style.cursor = 'default';
+      row.appendChild(badge);
+      var body = mk('div', 'body');
+      body.appendChild(mk('div', 't', '粉丝 ' + fmt(r['粉丝数']) + ' · 成交 ' + fmt(r['成交单量']) + ' · 店铺分 ' + fmt(r['店铺分'])));
+      var meta = mk('div', 'meta');
+      meta.appendChild(mk('span', 'note', '曝光 ' + fmt(r['曝光']) + ' · 观看 ' + fmt(r['观看']) + ' · 点击率 ' + fmt(r['商品卡点击率']) + '% · 退款 ' + fmt(r['退款数'])));
+      if (r['备注']) meta.appendChild(mk('span', 'note', r['备注']));
+      body.appendChild(meta);
+      row.appendChild(body);
+      var acts = mk('div', 'acts');
+      acts.appendChild(delBtn(STORE_DB, r.record_id));
+      row.appendChild(acts);
+      list.appendChild(row);
+    });
+  }
+
+  /* ---------- writes ---------- */
+  function nextStatus(current, cycle) {
+    var i = cycle.indexOf(current);
+    return cycle[(i + 1) % cycle.length];
+  }
+  function doUpdateTodo(rid, next) {
+    return db.updateRecord({ databaseId: 'jXSNAphTmjKYhdWjMJV6oM', recordId: rid, properties: { '状态': { select: next } } });
+  }
+  function doUpdateSch(rid, next) {
+    return db.updateRecord({ databaseId: 'UcSbMf8BXQQjx06jvOM7To', recordId: rid, properties: { '状态': { select: next } } });
+  }
+  function cycleStatus(did, rid, current) {
+    if (!db) return;
+    var isTodo = did === TODO_DB;
+    var next = nextStatus(current, isTodo ? TODO_CYCLE : SCH_CYCLE);
+    var p = isTodo ? doUpdateTodo(rid, next) : doUpdateSch(rid, next);
+    p.then(function () { toast('状态已更新为「' + next + '」'); refreshAll(); })
+      .catch(function (err) {
+        if (window.console) console.error('[database] 更新失败', err);
+        toast('更新失败，请重试');
+      });
+  }
+  function doDeleteTodo(rid) { return db.deleteRecord({ databaseId: 'jXSNAphTmjKYhdWjMJV6oM', recordId: rid }); }
+  function doDeleteSch(rid) { return db.deleteRecord({ databaseId: 'UcSbMf8BXQQjx06jvOM7To', recordId: rid }); }
+  function removeRow(dbId, rid) {
+    if (!db) return;
+    if (!window.confirm('确定删除这条记录吗？删除后不可恢复。')) return;
+    var p = dbId === TODO_DB ? doDeleteTodo(rid) : doDeleteSch(rid);
+    p.then(function () { toast('已删除'); refreshAll(); })
+      .catch(function (err) {
+        if (window.console) console.error('[database] 删除失败', err);
+        toast('删除失败，请重试');
+      });
+  }
+  function submitTodo(form) {
+    if (!db) { toast('未连接数据源'); return; }
+    var item = form.querySelector('[name="t_item"]').value.trim();
+    if (!item) { toast('请填写待办事项'); return; }
+    var props = { '事项': { text: item } };
+    var t = form.querySelector('[name="t_type"]').value; if (t) props['类型'] = { select: t };
+    var p = form.querySelector('[name="t_pri"]').value; if (p) props['优先级'] = { select: p };
+    var s = form.querySelector('[name="t_status"]').value; props['状态'] = { select: s || '待办' };
+    var d = form.querySelector('[name="t_due"]').value; if (d) props['截止日'] = { date: d };
+    var o = form.querySelector('[name="t_owner"]').value; if (o) props['负责人'] = { select: o };
+    var n = form.querySelector('[name="t_note"]').value.trim(); if (n) props['备注'] = { text: n };
+
+    var btn = $('todoSubmit');
+    if (btn) { btn.disabled = true; btn.textContent = '保存中…'; }
+    db.addRecord({ databaseId: 'jXSNAphTmjKYhdWjMJV6oM', properties: props })
+      .then(function () {
+        cacheClear(CACHE_TODO);
+        form.reset();
+        toast('待办已添加');
+        refreshAll();
+      })
+      .catch(function (err) {
+        if (window.console) console.error('[database] 添加失败', err);
+        toast('添加失败，请重试');
+      })
+      ['finally'](function () {
+        if (btn) { btn.disabled = false; btn.textContent = '保存待办'; }
+      });
+  }
+  function submitSch(form) {
+    if (!db) { toast('未连接数据源'); return; }
+    var topic = form.querySelector('[name="s_topic"]').value.trim();
+    if (!topic) { toast('请填写选题'); return; }
+    var props = { '选题': { text: topic } };
+    var d = form.querySelector('[name="s_date"]').value; props['计划日期'] = { date: d || todayStr() };
+    var l = form.querySelector('[name="s_level"]').value; if (l) props['层级'] = { select: l };
+    var pr = form.querySelector('[name="s_product"]').value; if (pr) props['挂载商品'] = { select: pr };
+    var s = form.querySelector('[name="s_status"]').value; props['状态'] = { select: s || '待发' };
+    var n = form.querySelector('[name="s_note"]').value.trim(); if (n) props['备注'] = { text: n };
+
+    var btn = $('schSubmit');
+    if (btn) { btn.disabled = true; btn.textContent = '保存中…'; }
+    db.addRecord({ databaseId: 'UcSbMf8BXQQjx06jvOM7To', properties: props })
+      .then(function () {
+        cacheClear(CACHE_SCH);
+        form.reset();
+        toast('排期已添加');
+        refreshAll();
+      })
+      .catch(function (err) {
+        if (window.console) console.error('[database] 添加失败', err);
+        toast('添加失败，请重试');
+      })
+      ['finally'](function () {
+        if (btn) { btn.disabled = false; btn.textContent = '保存排期'; }
+      });
+  }
+
+  function submitStore(form) {
+    if (!db) { toast('未连接数据源'); return; }
+    var props = {};
+    var d = form.querySelector('[name="m_date"]').value;
+    props['记录日期'] = { date: d || todayStr() };
+    function num(name, field) {
+      var raw = form.querySelector('[name="' + name + '"]').value;
+      if (raw === '' || raw === null) return;
+      var v = parseFloat(raw);
+      if (!isNaN(v)) props[field] = { number: v };
+    }
+    num('m_fans', '粉丝数');
+    num('m_orders', '成交单量');
+    num('m_imp', '曝光');
+    num('m_view', '观看');
+    num('m_ctr', '商品卡点击率');
+    num('m_refund', '退款数');
+    num('m_score', '店铺分');
+    num('m_likes', '获赞与收藏');
+    num('m_posts', '昨日发布篇数');
+    var n = form.querySelector('[name="m_note"]').value.trim();
+    if (n) props['备注'] = { text: n };
+
+    var btn = $('storeSubmit');
+    if (btn) { btn.disabled = true; btn.textContent = '保存中…'; }
+    db.addRecord({ databaseId: 'Vdd0Fs70cCWYWUNaWDOpfY', properties: props })
+      .then(function () {
+        cacheClear(CACHE_STORE);
+        form.reset();
+        toast('店铺数据已保存');
+        refreshAll();
+      })
+      .catch(function (err) {
+        if (window.console) console.error('[database] 添加失败', err);
+        toast('添加失败，请重试');
+      })
+      .finally(function () {
+        if (btn) { btn.disabled = false; btn.textContent = '保存'; }
+      });
+  }
+
+  /* ---------- notes（求职项目·笔记明细） ---------- */
+  function fetchNotes(pageSize, startCursor) {
+    return db.query({
+      databaseId: 'rC5M6ZpFotkzyCLJ3SVPr2',
+      sorts: [{ property: '记录日期', direction: 'descending' }],
+      pageSize: pageSize,
+      startCursor: startCursor
+    });
+  }
+  function renderNotes() {
+    var rows = DATA.notes || [];
+    var cnt = $('noteCnt');
+    if (cnt) cnt.textContent = rows.length + ' 篇';
+    var box = $('noteList');
+    if (!box) return;
+    clearNode(box);
+    if (!rows.length) {
+      box.appendChild(emptyBox('还没有笔记明细', '每天把已发笔记的浏览/点赞/收藏/评论记一行，才知道什么内容好。'));
+      return;
+    }
+    rows.forEach(function (r) {
+      var row = rowShell('');
+      var body = mk('div', 'body');
+      body.appendChild(mk('div', 't', r['标题'] || '(无标题)'));
+      var meta = mk('div', 'meta');
+      if (r['层级']) meta.appendChild(mk('span', 'mini ' + levelClass(r['层级']), r['层级']));
+      var d = dshort(r['记录日期']);
+      if (d) meta.appendChild(mk('span', 'note', d));
+      var nums = [['浏览', r['浏览']], ['赞', r['点赞']], ['藏', r['收藏']], ['评', r['评论']]];
+      nums.forEach(function (p) {
+        if (p[1] === null || p[1] === undefined || p[1] === '') return;
+        meta.appendChild(mk('span', 'mini', p[0] + ' ' + p[1]));
+      });
+      if (r['备注']) meta.appendChild(mk('span', 'note', r['备注']));
+      body.appendChild(meta);
+      row.appendChild(body);
+      box.appendChild(row);
+    });
+  }
+  function submitNote(form) {
+    if (!db) { toast('未连接数据源'); return; }
+    var t = form.querySelector('[name="n_title"]').value.trim();
+    if (!t) { toast('标题必填'); return; }
+    var props = {};
+    props['标题'] = { text: t };
+    var d = form.querySelector('[name="n_date"]').value;
+    props['记录日期'] = { date: d || todayStr() };
+    var lv = form.querySelector('[name="n_level"]').value;
+    if (lv) props['层级'] = { select: lv };
+    function nn(name, field) {
+      var raw = form.querySelector('[name="' + name + '"]').value;
+      if (raw === '' || raw === null) return;
+      var v = parseFloat(raw);
+      if (!isNaN(v)) props[field] = { number: v };
+    }
+    nn('n_view', '浏览'); nn('n_like', '点赞'); nn('n_fav', '收藏'); nn('n_cmt', '评论');
+    var nt = form.querySelector('[name="n_note"]').value.trim();
+    if (nt) props['备注'] = { text: nt };
+    var btn = $('noteSubmit');
+    if (btn) { btn.disabled = true; btn.textContent = '保存中…'; }
+    db.addRecord({ databaseId: 'rC5M6ZpFotkzyCLJ3SVPr2', properties: props })
+      .then(function () {
+        form.reset();
+        toast('笔记数据已保存');
+        refreshAll();
+      })
+      .catch(function (err) {
+        if (window.console) console.error('[database] 笔记添加失败', err);
+        toast('添加失败，请重试');
+      })
+      .finally(function () {
+        if (btn) { btn.disabled = false; btn.textContent = '保存笔记'; }
+      });
+  }
+
+  /* ---------- review（求职项目·每日复盘） ---------- */
+  function fetchReview(pageSize, startCursor) {
+    return db.query({
+      databaseId: 'QQG7aeUbL9a1ytGAtHwFKs',
+      sorts: [{ property: '记录日期', direction: 'descending' }],
+      pageSize: pageSize,
+      startCursor: startCursor
+    });
+  }
+  function renderReview() {
+    var rows = DATA.review || [];
+    var latest = rows.length ? rows[0] : null;
+    var dEl = $('revDate');
+    if (dEl) dEl.textContent = latest && latest['记录日期'] ? '最新记录：' + dshort(latest['记录日期']) : '尚无记录';
+    var kv = $('revKv');
+    if (!kv) return;
+    clearNode(kv);
+    var items = latest ? [
+      ['做对了什么', latest['做对了什么']],
+      ['做错了什么', latest['做错了什么']],
+      ['明天最重要的一件事', latest['明天最重要的一件事']]
+    ] : [['提示', '还没有复盘记录']];
+    items.forEach(function (it) {
+      var b2 = mk('div', 'box');
+      b2.appendChild(mk('div', 'k', it[0]));
+      var v = (it[1] === null || it[1] === undefined || it[1] === '') ? '—' : String(it[1]);
+      b2.appendChild(mk('div', 'v', v));
+      kv.appendChild(b2);
+    });
+    var lbox = $('revList');
+    if (lbox) clearNode(lbox);
+  }
+  function submitReview(form) {
+    if (!db) { toast('未连接数据源'); return; }
+    var props = {};
+    var d = form.querySelector('[name="r_date"]').value;
+    props['记录日期'] = { date: d || todayStr() };
+    function tt(name, field) {
+      var v = form.querySelector('[name="' + name + '"]').value.trim();
+      if (v) props[field] = { text: v };
+    }
+    tt('r_good', '做对了什么'); tt('r_bad', '做错了什么'); tt('r_next', '明天最重要的一件事');
+    if (!props['做对了什么'] && !props['做错了什么'] && !props['明天最重要的一件事']) {
+      toast('至少填一项'); return;
+    }
+    var btn = $('revSubmit');
+    if (btn) { btn.disabled = true; btn.textContent = '保存中…'; }
+    db.addRecord({ databaseId: 'QQG7aeUbL9a1ytGAtHwFKs', properties: props })
+      .then(function () {
+        form.reset();
+        toast('复盘已保存');
+        refreshAll();
+      })
+      .catch(function (err) {
+        if (window.console) console.error('[database] 复盘添加失败', err);
+        toast('添加失败，请重试');
+      })
+      .finally(function () {
+        if (btn) { btn.disabled = false; btn.textContent = '保存复盘'; }
+      });
+  }
+
+  /* ---------- refresh ---------- */
+  function refreshAll() {
+    paginate(fetchTodos, function (rows) { DATA.todos = rows; renderTodos(); });
+    paginate(fetchSch, function (rows) { DATA.sch = rows; renderSch(); });
+    paginate(fetchStore, function (rows) { DATA.store = rows; renderStore(); });
+    paginate(fetchNotes, function (rows) { DATA.notes = rows; renderNotes(); });
+    paginate(fetchReview, function (rows) { DATA.review = rows; renderReview(); });
+  }
+
+  function degradeNotice() {
+    var boxes = [$('todoList'), $('schList'), $('storeList'), $('noteList'), $('revList')];
+    boxes.forEach(function (box) {
+      if (!box) return;
+      clearNode(box);
+      box.appendChild(emptyBox('尚未连接数据源', '本页的待办、排期与店铺数据存于资料库数据表，请在资料库中打开本页以启用编辑。'));
+    });
+  }
+
+  function init() {
+    var chip = $('dbChip');
+    if (!db) { if (chip) chip.textContent = '静态模式（未连接数据源）'; degradeNotice(); return; }
+    if (chip) chip.textContent = '数据源已连接';
+
+    loadSchemaTodo(function () {
+      renderSelects($('todoForm'), [
+        { name: 't_type', field: '类型' }, { name: 't_pri', field: '优先级' },
+        { name: 't_status', field: '状态' }, { name: 't_owner', field: '负责人' }
+      ], TODO_DB);
+      cacheLoad(CACHE_TODO, $('todoForm'));
+      refreshAll();
+    });
+    loadSchemaSch(function () {
+      renderSelects($('schForm'), [
+        { name: 's_level', field: '层级' }, { name: 's_product', field: '挂载商品' }, { name: 's_status', field: '状态' }
+      ], SCH_DB);
+      cacheLoad(CACHE_SCH, $('schForm'));
+    });
+    cacheLoad(CACHE_STORE, $('storeForm'));
+
+    try { db.onUpdated(function () { refreshAll(); }); } catch (e) {}
+
+    document.addEventListener('click', function (e) {
+      var el = e.target;
+      if (!el || !el.getAttribute) return;
+      var act = el.getAttribute('data-act');
+      if (act === 'cycle') {
+        cycleStatus(el.getAttribute('data-db'), el.getAttribute('data-rid'), el.textContent);
+      } else if (act === 'del') {
+        removeRow(el.getAttribute('data-db'), el.getAttribute('data-rid'));
+      }
+    });
+
+    var todoForm = $('todoForm');
+    if (todoForm) {
+      todoForm.addEventListener('submit', function (e) { e.preventDefault(); submitTodo(todoForm); });
+      bindCache(todoForm, CACHE_TODO);
+    }
+    var schForm = $('schForm');
+    if (schForm) {
+      schForm.addEventListener('submit', function (e) { e.preventDefault(); submitSch(schForm); });
+      bindCache(schForm, CACHE_SCH);
+    }
+
+    var storeForm = $('storeForm');
+    if (storeForm) {
+      storeForm.addEventListener('submit', function (e) { e.preventDefault(); submitStore(storeForm); });
+      bindCache(storeForm, CACHE_STORE);
+    }
+
+    var toggle = function (formId, btnId, cancelId) {
+      var f = $(formId);
+      var b = $(btnId);
+      if (b && f) b.addEventListener('click', function () { f.className = f.className.indexOf('open') < 0 ? 'dyn-form open' : 'dyn-form'; });
+      var c = $(cancelId);
+      if (c && f) c.addEventListener('click', function () { f.className = 'dyn-form'; });
+    };
+    toggle('todoForm', 'todoAddBtn', 'todoCancel');
+    toggle('schForm', 'schAddBtn', 'schCancel');
+    toggle('storeForm', 'storeAddBtn', 'storeCancel');
+    var tr = $('todoRefresh'); if (tr) tr.addEventListener('click', refreshAll);
+    var sr = $('schRefresh'); if (sr) sr.addEventListener('click', refreshAll);
+    var mr = $('storeRefresh'); if (mr) mr.addEventListener('click', refreshAll);
+    var noteForm = $('noteForm');
+    if (noteForm) noteForm.addEventListener('submit', function (e) { e.preventDefault(); submitNote(noteForm); });
+    var revForm = $('revForm');
+    if (revForm) revForm.addEventListener('submit', function (e) { e.preventDefault(); submitReview(revForm); });
+    toggle('noteForm', 'noteAddBtn', 'noteCancel');
+    toggle('revForm', 'revAddBtn', 'revCancel');
+    var nr = $('noteRefresh'); if (nr) nr.addEventListener('click', refreshAll);
+    var rr2 = $('revRefresh'); if (rr2) rr2.addEventListener('click', refreshAll);
+
+    var bar = $('todoFilter');
+    if (bar) bar.addEventListener('click', function (e) {
+      var f = e.target && e.target.getAttribute ? e.target.getAttribute('data-f') : null;
+      if (!f) return;
+      DATA.todoFilter = f;
+      var kids = bar.querySelectorAll('.f');
+      for (var i = 0; i < kids.length; i++) {
+        kids[i].className = kids[i].getAttribute('data-f') === f ? 'f on' : 'f';
+      }
+      renderTodos();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+<!--pnid:fwE7a9PSqXGDCiWiRg8k0v--><!-- 计划看板模块（2026-10-14 合并自「求职项目计划看板」页 · 月目标→周任务→每日待办） -->
+<script data-page-node-id="6C8DXAi2ylxZAEykyPpSfD" data-pnid-children="ZTHQiLeAIkp62PACipERk8">
+(function() {
+  var db = (typeof window !== 'undefined' && typeof window.__SMART_PAGE__ !== 'undefined' && window.__SMART_PAGE__ && window.__SMART_PAGE__.database) ? window.__SMART_PAGE__.database : null;
+  if (!db) return; // 无 SDK 环境静默降级，静态内容照常展示
+  var DATABASE_ID = 'hbb5VOa9AbbGmepzoYiwRL';
+  function p2(n) { return (n < 10 ? '0' : '') + n; }
+  var d0 = new Date();
+  var TODAY = d0.getFullYear() + '-' + p2(d0.getMonth() + 1) + '-' + p2(d0.getDate());
+  function txt(v) {
+    if (v === null || v === undefined) return '';
+    if (typeof v === 'object') { if (Array.isArray(v)) return v.map(function(x) { return x.text || x; }).join('、'); return v.text || ''; }
+    return String(v);
+  }
+  function setK(id, v) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = v;
+    el.setAttribute('data-sp-bindable', 'database');
+    el.setAttribute('data-sp-database-id', DATABASE_ID);
+  }
+  function loadData(startCursor, acc, guard) {
+    acc = acc || []; guard = guard || 0;
+    if (guard > 100) { render(acc); return; }
+    db.query({ databaseId: DATABASE_ID, pageSize: 200, startCursor: startCursor }).then(function(result) {
+      acc = acc.concat(result.results || []);
+      var next = result.nextCursor;
+      if (result.hasMore && next && next !== startCursor && (result.results || []).length) {
+        return loadData(next, acc, guard + 1);
+      }
+      render(acc);
+    }).catch(function(err) { console.error('[plan] 加载失败:', err); });
+  }
+  function render(rows) {
+    var total = rows.length, done = 0, todayCnt = 0, lateCnt = 0, todayRows = [];
+    rows.forEach(function(r) {
+      var st = txt(r['状态']);
+      var d = r['计划日期'] || '';
+      var ds = typeof d === 'string' ? d.slice(0, 10) : '';
+      if (st === '已完成') done++;
+      if (txt(r['层级']) === '每日待办' && st !== '已完成') {
+        if (ds && ds < TODAY) lateCnt++;
+        else if (ds === TODAY) { todayCnt++; todayRows.push(r); }
+      }
+    });
+    setK('planCntRate', total ? Math.round(done * 100 / total) + '%' : '—');
+    setK('planCntToday', String(todayCnt));
+    setK('planCntLate', String(lateCnt));
+    var list = document.getElementById('planTodayList');
+    if (!list) return;
+    list.textContent = '';
+    if (!todayRows.length) {
+      var e = document.createElement('div');
+      e.style.padding = '8px 2px'; e.style.color = '#646a73'; e.style.fontSize = '13px';
+      e.textContent = '今日暂无计划待办';
+      list.appendChild(e);
+    }
+    todayRows.forEach(function(r) {
+      var it = document.createElement('div');
+      it.style.padding = '8px 4px'; it.style.borderBottom = '1px dashed #e5e6eb'; it.style.fontSize = '13px';
+      var t = document.createElement('b'); t.textContent = txt(r['任务名']); it.appendChild(t);
+      var m = document.createElement('span');
+      m.style.color = '#646a73'; m.style.marginLeft = '10px';
+      m.textContent = txt(r['负责人']) + ' · ' + txt(r['状态']);
+      it.appendChild(m);
+      list.appendChild(it);
+    });
+  }
+  loadData();
+})();
+</script>
+
+<!--pnid:tTjzQKKZljMIZ5p6GFPjTw--><!-- 数据快照模块脚本（2026-10-14 新增） -->
+<script data-page-node-id="GUpWojLTRPgSp5BVaENd1w" data-pnid-children="eKNk6if5kQYcktUntFnDvr">
+(function() {
+  var db = (typeof window !== 'undefined' && typeof window.__SMART_PAGE__ !== 'undefined' && window.__SMART_PAGE__ && window.__SMART_PAGE__.database) ? window.__SMART_PAGE__.database : null;
+  if (!db) return;
+  var DATABASE_ID = 'OuIVbXUEGn1oG72I74wT3q';
+  var OPTS = {};
+  function txt(v) {
+    if (v === null || v === undefined) return '';
+    if (typeof v === 'object') { if (Array.isArray(v)) return v.map(function(x) { return x.text || x; }).join('、'); return v.text || ''; }
+    return String(v);
+  }
+  function setK(id, v) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = v;
+    el.setAttribute('data-sp-bindable', 'database');
+    el.setAttribute('data-sp-database-id', DATABASE_ID);
+  }
+  function renderSelect() {
+    var sel = document.querySelector('[name="s_type"]');
+    if (!sel) return;
+    (OPTS['类型'] || []).forEach(function(o) {
+      var op = document.createElement('option');
+      op.value = o.id; op.textContent = o.text;
+      sel.appendChild(op);
+    });
+  }
+  function loadData(startCursor, acc, guard) {
+    acc = acc || []; guard = guard || 0;
+    if (guard > 100) { render(acc); return; }
+    db.query({ databaseId: DATABASE_ID, pageSize: 200, startCursor: startCursor }).then(function(result) {
+      acc = acc.concat(result.results || []);
+      var next = result.nextCursor;
+      if (result.hasMore && next && next !== startCursor && (result.results || []).length) {
+        return loadData(next, acc, guard + 1);
+      }
+      render(acc);
+    }).catch(function(err) { console.error('[snap] 加载失败:', err); });
+  }
+  function fmt(n) {
+    if (n === null || n === undefined || n === '') return '—';
+    var v = Number(n);
+    if (isNaN(v)) return '—';
+    return String(v);
+  }
+  function render(rows) {
+    var macro = [], single = [];
+    rows.forEach(function(r) {
+      if (txt(r['类型']) === '大盘') macro.push(r); else single.push(r);
+    });
+    macro.sort(function(a, b) { return String(b['记录日期'] || '').localeCompare(String(a['记录日期'] || '')); });
+    single.sort(function(a, b) { return Number(b['曝光'] || 0) - Number(a['曝光'] || 0); });
+    var m = macro[0] || {};
+    setK('snapExp', fmt(m['曝光']));
+    setK('snapView', fmt(m['观看']));
+    setK('snapCtr', (m['封面点击率(%)'] === undefined || m['封面点击率(%)'] === null) ? '—' : m['封面点击率(%)'] + '%');
+    setK('snapPosts', fmt(m['发布篇数']));
+    setK('snapOrder', fmt(m['成交单量']));
+    var list = document.getElementById('snapList');
+    if (!list) return;
+    list.textContent = '';
+    var ordered = macro.concat(single);
+    if (!ordered.length) {
+      var e0 = document.createElement('div');
+      e0.style.padding = '8px 2px'; e0.style.color = '#646a73'; e0.style.fontSize = '13px';
+      e0.textContent = '暂无数据快照';
+      list.appendChild(e0);
+      return;
+    }
+    ordered.forEach(function(r) {
+      var row = document.createElement('div');
+      row.style.padding = '10px 4px'; row.style.borderBottom = '1px dashed #e5e6eb'; row.style.fontSize = '13px';
+      var t = document.createElement('b'); t.textContent = txt(r['标题']); row.appendChild(t);
+      var tag = document.createElement('span');
+      tag.style.marginLeft = '8px'; tag.style.fontSize = '12px'; tag.style.color = '#7b8496';
+      tag.textContent = txt(r['类型']);
+      row.appendChild(tag);
+      var nums = document.createElement('div');
+      nums.style.color = '#3c4557'; nums.style.marginTop = '3px';
+      nums.textContent = '曝光 ' + fmt(r['曝光']) + ' · 观看 ' + fmt(r['观看']) + ' · CTR ' + fmt(r['封面点击率(%)']) + '% · 点赞 ' + fmt(r['点赞']) + ' · 评论 ' + fmt(r['评论']) + ' · 收藏 ' + fmt(r['收藏']) + ' · 分享 ' + fmt(r['分享']);
+      row.appendChild(nums);
+      var meta = document.createElement('div');
+      meta.style.color = '#7b8496'; meta.style.fontSize = '12px'; meta.style.marginTop = '2px';
+      var d = r['记录日期'] || '';
+      meta.textContent = (typeof d === 'string' ? d.slice(0, 10) : '') + ' ' + txt(r['备注']);
+      row.appendChild(meta);
+      list.appendChild(row);
+    });
+  }
+  var CACHE_KEY = 'sp_form_snap_' + DATABASE_ID;
+  var CACHE_FIELDS = ['s_title', 's_type', 's_date', 's_exp', 's_view', 's_ctr', 's_like', 's_cmt', 's_fav', 's_share', 's_posts', 's_fans', 's_order', 's_note'];
+  var timer = null;
+  var form = document.getElementById('snapForm');
+  function saveCache() {
+    try {
+      var data = {};
+      CACHE_FIELDS.forEach(function(n) { var el = form.querySelector('[name="' + n + '"]'); if (el) data[n] = el.value; });
+      localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+    } catch (e) {}
+  }
+  function restoreCache() {
+    try {
+      var raw = localStorage.getItem(CACHE_KEY);
+      if (!raw) return;
+      var data = JSON.parse(raw) || {};
+      CACHE_FIELDS.forEach(function(n) {
+        var el = form.querySelector('[name="' + n + '"]');
+        if (el && data[n] !== undefined && data[n] !== null) el.value = data[n];
+      });
+    } catch (e) {}
+  }
+  if (form) {
+    form.style.display = 'none';
+    form.addEventListener('input', function() { if (timer) clearTimeout(timer); timer = setTimeout(saveCache, 300); });
+    form.addEventListener('change', function() { if (timer) clearTimeout(timer); timer = setTimeout(saveCache, 300); });
+    var addBtn = document.getElementById('snapAddBtn');
+    if (addBtn) addBtn.addEventListener('click', function() { form.style.display = form.style.display === 'none' ? '' : 'none'; });
+    var cancelBtn = document.getElementById('snapCancel');
+    if (cancelBtn) cancelBtn.addEventListener('click', function() { form.style.display = 'none'; try { localStorage.removeItem(CACHE_KEY); } catch (e) {} });
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('snapSubmit');
+      if (btn) { btn.disabled = true; btn.textContent = '保存中...'; }
+      function num(name) { var el = form.querySelector('[name="' + name + '"]'); var v = el && el.value; return (v === '' || v === null) ? null : parseFloat(v); }
+      var props = { '标题': { text: form.querySelector('[name="s_title"]').value } };
+      var typeSel = form.querySelector('[name="s_type"]');
+      if (typeSel.value) props['类型'] = { select: typeSel.value };
+      var dv = form.querySelector('[name="s_date"]').value;
+      if (dv) props['记录日期'] = { date: dv };
+      var map = { '曝光': 's_exp', '观看': 's_view', '封面点击率(%)': 's_ctr', '点赞': 's_like', '评论': 's_cmt', '收藏': 's_fav', '分享': 's_share', '发布篇数': 's_posts', '粉丝数': 's_fans', '成交单量': 's_order' };
+      Object.keys(map).forEach(function(k) { var v = num(map[k]); if (v !== null && !isNaN(v)) props[k] = { number: v }; });
+      var note = form.querySelector('[name="s_note"]').value;
+      if (note) props['备注'] = { text: note };
+      db.addRecord({ databaseId: DATABASE_ID, properties: props }).then(function() {
+        try { localStorage.removeItem(CACHE_KEY); } catch (e) {}
+        form.reset(); form.style.display = 'none';
+        loadData();
+      }).catch(function(err) { console.error('[snap] 提交失败:', err); }).then(function() {
+        if (btn) { btn.disabled = false; btn.textContent = '保存数据'; }
+      });
+    });
+  }
+  db.getSchema({ databaseId: DATABASE_ID }).then(function(schema) {
+    (schema.properties || []).forEach(function(f) {
+      if ((f.type === 'select' || f.type === 'multi_select') && f.config && f.config.options) OPTS[f.name] = f.config.options;
+    });
+    renderSelect();
+    restoreCache();
+    loadData();
+  }).catch(function(err) { console.error('[snap] schema 加载失败:', err); loadData(); });
+})();
+</script>
+
+</body>
+</html>

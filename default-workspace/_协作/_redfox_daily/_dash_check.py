@@ -1,0 +1,11 @@
+# -*- coding: utf-8 -*-
+b = open(r"D:\小红书项目\default-workspace\_协作\_驾驶舱复刻\L 的工作台.html", "rb").read()
+s = b.decode("utf-8")
+print("div_open", s.count("<div"), "div_close", s.count("</div>"))
+print("script_open", s.count("<script"), "script_close", s.count("</script>"))
+print("table_open", s.count("<table"), "table_close", s.count("</table>"))
+print("ul_open", s.count("<ul"), "ul_close", s.count("</ul>"))
+print("li_open", s.count("<li>"), "li_close", s.count("</li>"))
+print("section_open", s.count("<section"), "section_close", s.count("</section>"))
+print("CARDS_array", s.count("const CARDS=["), "PEND_array", s.count("const PEND=["))
+print("case5", s.count("案例五"), "wb211", s.count("WB211"))

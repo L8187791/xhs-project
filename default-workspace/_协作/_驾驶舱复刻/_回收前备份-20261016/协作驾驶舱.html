@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>协作驾驶舱</title>
+<style>
+  :root{
+    --bg:#f5f7fa; --card:#ffffff; --card2:#f0f3f7; --line:#e2e8f0;
+    --txt:#1a2332; --sub:#5a6b7d; --dim:#8b98a9;
+    --green:#16a34a; --yellow:#a16207; --red:#dc2626; --gray:#64748b; --blue:#4a7dbd;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:"Segoe UI","Microsoft YaHei",system-ui,sans-serif;padding:24px;line-height:1.5}
+  .wrap{max-width:1180px;margin:0 auto}
+  header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+  h1{font-size:22px;font-weight:700;letter-spacing:1px}
+  .meta{color:var(--dim);font-size:12px}
+  .grid{display:grid;gap:16px}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:0 1px 3px rgba(16,24,40,.06)}
+  .kpi .label{color:var(--sub);font-size:12px;margin-bottom:6px}
+  .kpi .value{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums}
+  .kpi .note{font-size:11px;color:var(--dim);margin-top:4px}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:820px){.cols{grid-template-columns:1fr}}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 1px 3px rgba(16,24,40,.06)}
+  .panel h2{font-size:15px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .step{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px dashed var(--line)}
+  .step:last-child{border-bottom:none}
+  .step .dot{margin-top:5px;flex-shrink:0}
+  .step .txt{flex:1;font-size:13px}
+  .step .txt .d{color:var(--dim);font-size:11.5px;margin-top:2px}
+  .step .who{font-size:11px;color:var(--sub);flex-shrink:0;background:var(--card2);border:1px solid var(--line);border-radius:6px;padding:2px 8px;white-space:nowrap}
+  .g{background:var(--green)}.y{background:var(--yellow)}.r{background:var(--red)}.gr{background:var(--gray)}.b{background:var(--blue)}
+  .ct{color:var(--green)}.cy{color:var(--yellow)}.cr{color:var(--red)}.cg{color:var(--gray)}.cb{color:var(--blue)}
+  .signals{display:flex;flex-direction:column;gap:10px}
+  .sig{display:flex;gap:12px;align-items:flex-start;background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .sig .dot{margin-top:5px;flex-shrink:0}
+  .sig .body{flex:1;font-size:13px}
+  .sig .b .d{color:var(--dim);font-size:11.5px;margin-top:3px}
+  .cd{font-variant-numeric:tabular-nums;font-weight:700;font-size:15px}
+  .cards{display:flex;flex-direction:column;gap:8px}
+  .cardrow{display:flex;gap:10px;align-items:center;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:12.5px}
+  .cardrow .id{font-family:Consolas,monospace;color:var(--blue);font-weight:700;flex-shrink:0}
+  .cardrow .s{color:var(--sub);flex:1}
+  .tag{font-size:10.5px;padding:2px 8px;border-radius:20px;flex-shrink:0;border:1px solid}
+  .tag.g{color:var(--green);background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.3)}
+  .tag.y{color:var(--yellow);background:rgba(234,179,8,.08);border-color:rgba(234,179,8,.3)}
+  .tag.r{color:var(--red);background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.3)}
+  .tag.gr{color:var(--gray);background:rgba(100,116,139,.08);border-color:rgba(100,116,139,.3)}
+  footer{margin-top:20px;color:var(--dim);font-size:11px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <h1>协作驾驶舱</h1>
+      <div class="meta">医美线 + 求职线 · 单屏看进度 · 由 C（策略线）刷新维护</div>
+    </div>
+    <div class="meta">数据快照：2026-10-16</div>
+  </header>
+
+  <div class="grid">
+
+    <!-- ① 关键数字 -->
+    <div class="kpis">
+      <div class="kpi"><div class="label">求职转化率（最硬数字）</div><div class="value cr">0.02%</div><div class="note">4461 观看 → 1 单 · 目标 0.25%（差 12.5 倍）</div></div>
+      <div class="kpi"><div class="label">求职已成交</div><div class="value cy">1 单</div><div class="note">19.9 · 处罚期不挂链</div></div>
+      <div class="kpi"><div class="label">主表秋招企业</div><div class="value cb">200 家</div><div class="note">A/B 已核 123 · 硬截止 106</div></div>
+      <div class="kpi"><div class="label">往届可投（已核）</div><div class="value cg">29 家</div><div class="note">28 明确 + 1 部分 · 权威源 v1.0.26</div></div>
+      <div class="kpi"><div class="label">医美候选池</div><div class="value ct">24 家</div><div class="note">冻结 · 待确认项清零</div></div>
+      <div class="kpi"><div class="label">49.9 上架</div><div class="value cy">顺延</div><div class="note">约 10/22–24 · 19.9 照常 10/19</div></div>
+    </div>
+
+    <!-- ② 两线仪表盘 -->
+    <div class="cols">
+      <div class="panel">
+        <h2><span class="dot b"></span>医美线 · 0 → 第一笔 ¥3000</h2>
+        <div class="step"><span class="dot g"></span><div class="txt"><div class="t">L1 候选池核验</div><div class="d">24 家冻结 · UY+优颜嘉已入池 · 待确认清零</div></div><span class="who">L</span></div>
+        <div class="step"><span class="dot y"></span><div class="txt"><div class="t">诊断包出稿</div><div class="d">美熙 v1.2 定稿可发 · 媚颜 v1.0 可发 · <b>悠美丽思批2 已派工（C18 · 10/16 20:00 交稿）</b></div></div><span class="who">W</span></div>
+        <div class="step"><span class="dot g"></span><div class="txt"><div class="t">屏2同行数据口径</div><div class="d">已回填 · 跨平台允许 / 停更降级 / 水位兜底（C14）</div></div><span class="who">C</span></div>
+        <div class="step"><span class="dot g"></span><div class="txt"><div class="t">抽检美熙</div><div class="d">🟢 v1.2 定稿可发（数据全实证，零豆包源）· 工商金矿：医疗公司上月刚开业，首谈弹药 +1</div></div><span class="who">C</span></div>
+        <div class="step"><span class="dot gr"></span><div class="txt"><div class="t">媚颜长图渲染</div><div class="d">v1.0 已就绪 · 待通知 W 渲染</div></div><span class="who">W</span></div>
+        <div class="step"><span class="dot r"></span><div class="txt"><div class="t">首触项项</div><div class="d">钩子已发 · 沉默 24h+ · 今晚 20:00–21:30 放一次好奇心钩子，周日不回冷藏两周 · 王艳艳保持暗线</div></div><span class="who">L</span></div>
+        <div class="step"><span class="dot gr"></span><div class="txt"><div class="t">约谈报价 → 签约</div><div class="d">C3 话术 / C4 条款（媚焕公司主签）</div></div><span class="who">L</span></div>
+        <div class="step"><span class="dot gr"></span><div class="txt"><div class="t">收款 ¥3000（里程碑）</div><div class="d">首案赚案例不赚钱 · 钱在第二、三家</div></div><span class="who">—</span></div>
+      </div>
+
+      <div class="panel">
+        <h2><span class="dot b"></span>求职线 · 0 → 月净 ¥10000</h2>
+        <div class="step"><span class="dot y"></span><div class="txt"><div class="t">10/16 三层已就绪·待发布</div><div class="d">A 安永截止 09:00 ／ B 免笔试 12:30 ／ C 晚截止 20:30 · 桌面「待发包-20261016-ABC层」· 发后 30 分钟内上首评</div></div><span class="who">L</span></div>
+        <div class="step"><span class="dot y"></span><div class="txt"><div class="t">M0 处罚期收尾</div><div class="d">零违规 + 攒 12 篇库存 · <span id="cd" class="cd cy">计算中…</span></div></div><span class="who">全员</span></div>
+        <div class="step"><span class="dot gr"></span><div class="txt"><div class="t">M1 店铺升级 + 回暖周</div><div class="d">解禁当天：升级 → 19.9 上架 → 链路自测 → 挂链（A+C）</div></div><span class="who">L/W</span></div>
+        <div class="step"><span class="dot gr"></span><div class="txt"><div class="t">M2 秋招冲刺（49.9 主力）</div><div class="d">49.9 顺延 10/22–24 · Z3 五件已全交（提前 4 天）</div></div><span class="who">W</span></div>
+        <div class="step"><span class="dot gr"></span><div class="txt"><div class="t">M3 穿越季节断层</div><div class="d">11/15 启用 D 层 · 12 月 A 层断料风险</div></div><span class="who">C/W</span></div>
+        <div class="step"><span class="dot gr"></span><div class="txt"><div class="t">M4 稳定达标（月净 1 万）</div><div class="d">前提：转化率 0.02% → 0.25%</div></div><span class="who">全员</span></div>
+      </div>
+    </div>
+
+    <!-- ③ 今日行动 + 等待信号 -->
+    <div class="panel">
+      <h2><span class="dot y"></span>等待信号 · 今日行动</h2>
+      <div class="signals">
+        <div class="sig"><span class="dot y"></span><div class="body"><b>🔴 等：报白审核结果（今日出）</b> · L 10/16 回传「已在报白审核中」<div class="d">升 S 级（部分）· <b>通过</b> → 10/19 照上 19.9（缓冲做详情页终稿＋链路自测）；<b>驳回</b> → 🔴 公开检索口径「驳回后须间隔 5–7 天再报」⇒ <b>10/19 上架不成立，顺延</b>，当天只做升级与沉淀。L 已定：<b>四项今晚答复</b>（结果／报白对象／店铺主体类型／同主体外站店流水≥6000？）· A 层表述项已改由 W 按 Z6-3 三步方案执行（L 判定前 W 不改稿不落档）</div></div></div>
+        <div class="sig"><span class="dot r"></span><div class="body"><b>等：项项回复</b>（医美首触前置·沉默 24h+）<div class="d">今晚 20:00–21:30 一次好奇心钩子（不催、不追问）；周日仍不回 → 冷藏两周，转 2/3 号目标 · 诊断包随时可发</div></div></div>
+        <div class="sig"><span class="dot y"></span><div class="body"><b>等：10/19 15:58 处罚期解禁</b> · 还剩 <span class="cy cd" id="cd2">…</span><div class="d">解禁当天四连：店铺升级 → 记录漏斗基线 → 上架 19.9 → 链路自测</div></div></div>
+        <div class="sig"><span class="dot b"></span><div class="body"><b>L 待办：数据回传三时点</b><div class="d">10/16 08:43（10/15 A）｜12:13（10/15 B）｜20:2x（10/15 C）满 24h 回传四项：曝光/观看｜赞/藏/评｜涨粉｜店铺访问</div></div></div>
+        <div class="sig"><span class="dot b"></span><div class="body"><b>W 待办：悠美丽思批2 启动（C 已放行）</b><div class="d">美熙已终判收口 · C16/C17 派工已闭环（提前）· 10/17：主表维护 + 竞品扫 + 周度复盘 + 固定回执</div></div></div>
+      </div>
+    </div>
+
+    <!-- ④ 最新卡片流 -->
+    <div class="panel">
+      <h2><span class="dot g"></span>最新卡片流（新 → 旧）</h2>
+      <div class="cards">
+        <div class="cardrow"><span class="id">10/16 包</span><span class="s">发布包 · A 安永截止／B 免笔试／C 晚截止三层定稿，桌面待发包已就绪（09:00 / 12:30 / 20:30）</span><span class="tag y">待 L 发布</span></div>
+        <div class="cardrow"><span class="id">WB182</span><span class="s">回执 · 全表对外口径清洗收口：累计 141/200 行改动，C 复核通过，L 已追认</span><span class="tag g">已闭环</span></div>
+        <div class="cardrow"><span class="id">医美线</span><span class="s">美熙数据实核 → 诊断包 v1.2 定稿可发（美团 2199 实锤／抖音源移除／工商登记实锤）</span><span class="tag g">已闭环</span></div>
+        <div class="cardrow"><span class="id">WB181</span><span class="s">回执 · C17 完成：17 行亲核口径改写 + 发现全表 72 行同类裂缝</span><span class="tag g">已闭环</span></div>
+        <div class="cardrow"><span class="id">C17</span><span class="s">派工卡 · 17 行核验来源改亲核口径（提前完成）</span><span class="tag g">已闭环</span></div>
+        <div class="cardrow"><span class="id">WB180</span><span class="s">回执 · C16 全落地（提前 6 天）：14 家来源补列，零编造链接</span><span class="tag g">已闭环</span></div>
+        <div class="cardrow"><span class="id">C16</span><span class="s">派工卡 · CSV 补 14 家新入招往届企业的来源 URL</span><span class="tag g">已闭环</span></div>
+        <div class="cardrow"><span class="id">WB179</span><span class="s">回执 · C15 闭环：卖点定稿「含 29 家已核实的企业」· 权威源 v1.0.26</span><span class="tag g">已闭环</span></div>
+        <div class="cardrow"><span class="id">C15</span><span class="s">裁定卡 · WB178 两处口径纠正（W 前提纠正：31 行 = 29 家企业）</span><span class="tag g">已闭环</span></div>
+        <div class="cardrow"><span class="id">WB178</span><span class="s">交付卡 · 往届字段收口：亲核 56 家 → 29 招往届 · 权威源回写 v1.0.25</span><span class="tag g">已闭环</span></div>
+        <div class="cardrow"><span class="id">C14</span><span class="s">裁定卡 · 屏2同行数据口径 + L1 剩余项盘点（医美线）</span><span class="tag g">已落盘</span></div>
+        <div class="cardrow"><span class="id">C13</span><span class="s">裁定卡 · WB176 四项 SKU 决策（49.9=B 时效订阅型等）</span><span class="tag g">已回执</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>双击即开 · 无外部依赖 · 每次状态变化由 C 重写本文件刷新数据 · 快照 2026-10-16</footer>
+</div>
+
+<script>
+  function tick(){
+    var target = new Date("2026-10-19T15:58:00");
+    var now = new Date();
+    var diff = target - now;
+    var txt;
+    if(diff <= 0){ txt = "已解禁"; }
+    else{
+      var h = Math.floor(diff/3600000);
+      var m = Math.floor(diff%3600000/60000);
+      if(h >= 24){ txt = Math.floor(h/24) + " 天 " + (h%24) + " 小时"; }
+      else{ txt = h + " 小时 " + m + " 分"; }
+    }
+    var a=document.getElementById("cd"), b=document.getElementById("cd2");
+    if(a) a.textContent = txt;
+    if(b) b.textContent = txt;
+  }
+  tick(); setInterval(tick, 60000);
+</script>
+</body>
+</html>

@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小红书热门笔记数据分析报告</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 16px;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .report-header {
+            background: linear-gradient(135deg, #ff2442 0%, #ff6b81 100%);
+            color: white;
+            padding: 20px 24px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .report-header h1 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+        .report-header .keyword {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .report-header .total {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 4px;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        }
+        .card-title-row {
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+        }
+        .card-index {
+            font-size: 15px;
+            font-weight: 700;
+            color: #ff2442;
+            min-width: 20px;
+        }
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a1a1a;
+            text-decoration: none;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            transition: color 0.2s;
+        }
+        .card-title:hover {
+            color: #ff2442;
+        }
+        .card-meta {
+            font-size: 13px;
+            color: #999;
+            padding: 8px 0;
+        }
+        .author-link {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .author-link:hover {
+            color: #ff2442;
+        }
+        .meta-divider {
+            margin: 0 6px;
+        }
+        .pub-time {
+            color: #999;
+        }
+        .card-scores {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .score-tag {
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+        .score-tag.relevance {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .score-tag.popularity {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        .score-tag.recency {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        .card-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            margin: 0 -16px;
+            background: linear-gradient(135deg, #fff5f5, #fff);
+        }
+        .interaction-count {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ff2442;
+        }
+        .detail-stats {
+            font-size: 12px;
+            color: #666;
+        }
+        .view-note-btn {
+            color: #ff2442;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: opacity 0.2s;
+        }
+        .view-note-btn:hover {
+            opacity: 0.7;
+            text-decoration: underline;
+        }
+        .data-note {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 20px;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+        }
+        .section-header {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #ff6b81 0%, #ff2442 100%);
+            border-radius: 8px;
+        }
+        .section-header h2 {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="report-header">
+            <h1>小红书热门笔记数据分析报告</h1>
+            <div class="keyword">关键词：毕业一年 找工作 | 时间范围：近30天</div>
+            <div class="total">共找到 50 条相关笔记</div>
+        </div>
+
+        
+        <div class="card-grid">
+            
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">1.</span>
+                <a href="https://www.xiaohongshu.com/explore/6acb8fb1000000000200c16a" class="card-title" target="_blank">我找工作be like：</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/5d36c8ab0000000016008a41" class="author-link" target="_blank">娱圈星叙官（24w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：10月11日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.19</span>
+                <span class="score-tag popularity">热度 2.0</span>
+                <span class="score-tag recency">时效 2.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 1w+互动</span>
+                <span class="detail-stats">👍1w+ ⭐691</span>
+                <a href="https://www.xiaohongshu.com/explore/6acb8fb1000000000200c16a" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">2.</span>
+                <a href="https://www.xiaohongshu.com/explore/6a940910000000002a03db57" class="card-title" target="_blank">原来已经毕业一年了吗</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/635b23b4000000001802c266" class="author-link" target="_blank">4605（晗少（151w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：8月30日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.23</span>
+                <span class="score-tag popularity">热度 3.0</span>
+                <span class="score-tag recency">时效 0.5</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 7w+互动</span>
+                <span class="detail-stats">👍7w+ ⭐3004</span>
+                <a href="https://www.xiaohongshu.com/explore/6a940910000000002a03db57" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">3.</span>
+                <a href="https://www.xiaohongshu.com/explore/6ab8e81b000000001c00d387" class="card-title" target="_blank">还找工作</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/65ec8a02000000000500808a" class="author-link" target="_blank">王玉柱（10w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：9月27日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.22</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 1.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 2w+互动</span>
+                <span class="detail-stats">👍2w+ ⭐1253</span>
+                <a href="https://www.xiaohongshu.com/explore/6ab8e81b000000001c00d387" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">4.</span>
+                <a href="https://www.xiaohongshu.com/explore/6ab73eb6000000001402f711" class="card-title" target="_blank">2001 年的找工作：</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/677ce52a000000000801c279" class="author-link" target="_blank">推推说（1084粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：9月26日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.17</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 1.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 3w+互动</span>
+                <span class="detail-stats">👍3w+ ⭐3258</span>
+                <a href="https://www.xiaohongshu.com/explore/6ab73eb6000000001402f711" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">5.</span>
+                <a href="https://www.xiaohongshu.com/explore/6aa28fe7000000000d025bfc" class="card-title" target="_blank">找工作难，不是你的问题</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/620645bb000000001000512f" class="author-link" target="_blank">张机（33w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：9月10日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.13</span>
+                <span class="score-tag popularity">热度 3.0</span>
+                <span class="score-tag recency">时效 0.5</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 6w+互动</span>
+                <span class="detail-stats">👍4w+ ⭐2w+</span>
+                <a href="https://www.xiaohongshu.com/explore/6aa28fe7000000000d025bfc" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">6.</span>
+                <a href="https://www.xiaohongshu.com/explore/6aa7c94300000000110320a0" class="card-title" target="_blank">⚠️找工作避雷</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/69fcaff60000000002002804" class="author-link" target="_blank">睡不够（155粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：9月14日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.22</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.5</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 2w+互动</span>
+                <span class="detail-stats">👍2w+ ⭐129</span>
+                <a href="https://www.xiaohongshu.com/explore/6aa7c94300000000110320a0" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">7.</span>
+                <a href="https://www.xiaohongshu.com/explore/6758153c000000000203552a" class="card-title" target="_blank">不愿再找工作</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/664772c50000000003033849" class="author-link" target="_blank">墨镜小龙（7w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：12月10日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.19</span>
+                <span class="score-tag popularity">热度 3.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 7w+互动</span>
+                <span class="detail-stats">👍6w+ ⭐5000+</span>
+                <a href="https://www.xiaohongshu.com/explore/6758153c000000000203552a" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">8.</span>
+                <a href="https://www.xiaohongshu.com/explore/6a965cfd00000000280342ef" class="card-title" target="_blank">我找工作belike:</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/61e930510000000010007f61" class="author-link" target="_blank">JYK（695粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：9月1日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.19</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.5</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 3w+互动</span>
+                <span class="detail-stats">👍3w+ ⭐1118</span>
+                <a href="https://www.xiaohongshu.com/explore/6a965cfd00000000280342ef" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">9.</span>
+                <a href="https://www.xiaohongshu.com/explore/67728bf4000000000900e0ea" class="card-title" target="_blank">年后找工作🐴住</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/5bb4e8f0aa7db30001be3aed" class="author-link" target="_blank">君君在成长（3w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：12月30日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.19</span>
+                <span class="score-tag popularity">热度 3.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 13w+互动</span>
+                <span class="detail-stats">👍8w+ ⭐4w+</span>
+                <a href="https://www.xiaohongshu.com/explore/67728bf4000000000900e0ea" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">10.</span>
+                <a href="https://www.xiaohongshu.com/explore/6a2ef89a00000000070296a4" class="card-title" target="_blank">毕业一年的社会化指南</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/5c2752590000000006027e7c" class="author-link" target="_blank">小昱碎碎念（827粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：6月15日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.19</span>
+                <span class="score-tag popularity">热度 3.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 6w+互动</span>
+                <span class="detail-stats">👍4w+ ⭐2w+</span>
+                <a href="https://www.xiaohongshu.com/explore/6a2ef89a00000000070296a4" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">11.</span>
+                <a href="https://www.xiaohongshu.com/explore/6a1d5fbf0000000036031309" class="card-title" target="_blank">14人找工作被骗</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/66718f5d000000000d0245a3" class="author-link" target="_blank">邱小萱Rose（5000+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：6月1日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.17</span>
+                <span class="score-tag popularity">热度 3.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 9w+互动</span>
+                <span class="detail-stats">👍8w+ ⭐1885</span>
+                <a href="https://www.xiaohongshu.com/explore/6a1d5fbf0000000036031309" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">12.</span>
+                <a href="https://www.xiaohongshu.com/explore/6a0c1c50000000003502df9a" class="card-title" target="_blank">法学生毕业找工作现状</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/67d6d190000000000e01edb2" class="author-link" target="_blank">枣弟（414粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：5月19日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.15</span>
+                <span class="score-tag popularity">热度 3.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 6w+互动</span>
+                <span class="detail-stats">👍6w+ ⭐3019</span>
+                <a href="https://www.xiaohongshu.com/explore/6a0c1c50000000003502df9a" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">13.</span>
+                <a href="https://www.xiaohongshu.com/explore/67e3bd9c000000000903830f" class="card-title" target="_blank">找工作抓住这些信息差！</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/63c17688000000002702ab00" class="author-link" target="_blank">通通都来（4577粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：3月26日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.14</span>
+                <span class="score-tag popularity">热度 3.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 39w+互动</span>
+                <span class="detail-stats">👍20w+ ⭐18w+</span>
+                <a href="https://www.xiaohongshu.com/explore/67e3bd9c000000000903830f" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">14.</span>
+                <a href="https://www.xiaohongshu.com/explore/698d5c200000000028008366" class="card-title" target="_blank">分享一些找工作渠道</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/6257ee35000000001000f7ae" class="author-link" target="_blank">冤种小徐（10w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：2月12日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.13</span>
+                <span class="score-tag popularity">热度 3.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 5w+互动</span>
+                <span class="detail-stats">👍2w+ ⭐3w+</span>
+                <a href="https://www.xiaohongshu.com/explore/698d5c200000000028008366" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">15.</span>
+                <a href="https://www.xiaohongshu.com/explore/67d000ed000000002a00dc94" class="card-title" target="_blank">大学生找工作现状be like：</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/648fc5ef000000000f007434" class="author-link" target="_blank">葡萄陛下（43w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：3月11日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.13</span>
+                <span class="score-tag popularity">热度 3.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 5w+互动</span>
+                <span class="detail-stats">👍4w+ ⭐2459</span>
+                <a href="https://www.xiaohongshu.com/explore/67d000ed000000002a00dc94" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">16.</span>
+                <a href="https://www.xiaohongshu.com/explore/69ce631d00000000200396f0" class="card-title" target="_blank">不同阶段找工作的态度belike。。。</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/67dcdc13000000000e02c605" class="author-link" target="_blank">佳路临轮胎（打工版）（4463粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：4月2日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.13</span>
+                <span class="score-tag popularity">热度 3.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 7w+互动</span>
+                <span class="detail-stats">👍6w+ ⭐5000+</span>
+                <a href="https://www.xiaohongshu.com/explore/69ce631d00000000200396f0" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">17.</span>
+                <a href="https://www.xiaohongshu.com/explore/693a5cf6000000000d00d0df" class="card-title" target="_blank">现在找工作都这么难了吗？！</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/604e1cdf000000000101c5b5" class="author-link" target="_blank">J姐（40w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：12月11日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.13</span>
+                <span class="score-tag popularity">热度 3.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 5w+互动</span>
+                <span class="detail-stats">👍4w+ ⭐3271</span>
+                <a href="https://www.xiaohongshu.com/explore/693a5cf6000000000d00d0df" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">18.</span>
+                <a href="https://www.xiaohongshu.com/explore/671c6bc4000000001600ef4c" class="card-title" target="_blank">找工作看过来，全是干货</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/5fdf507e000000000100765c" class="author-link" target="_blank">谢大宝子（5w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：10月26日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.13</span>
+                <span class="score-tag popularity">热度 3.0</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 5w+互动</span>
+                <span class="detail-stats">👍2w+ ⭐2w+</span>
+                <a href="https://www.xiaohongshu.com/explore/671c6bc4000000001600ef4c" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">19.</span>
+                <a href="https://www.xiaohongshu.com/explore/6accd58e000000001501153a" class="card-title" target="_blank">低精力/启动困难找工作sop</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/5a8ad769e8ac2b4df1ed1a43" class="author-link" target="_blank">汤小鱼（1592粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：10月12日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.11</span>
+                <span class="score-tag popularity">热度 1.0</span>
+                <span class="score-tag recency">时效 2.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 1711互动</span>
+                <span class="detail-stats">👍830 ⭐873</span>
+                <a href="https://www.xiaohongshu.com/explore/6accd58e000000001501153a" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">20.</span>
+                <a href="https://www.xiaohongshu.com/explore/6acedeb8000000001c00c72e" class="card-title" target="_blank">“叔叔，吃饱了才有力气找工作！”</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/65a77a0200000000080041e9" class="author-link" target="_blank">哈尔滨日报社（65w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：10月14日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.11</span>
+                <span class="score-tag popularity">热度 1.0</span>
+                <span class="score-tag recency">时效 2.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 1860互动</span>
+                <span class="detail-stats">👍1780 ⭐29</span>
+                <a href="https://www.xiaohongshu.com/explore/6acedeb8000000001c00c72e" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">21.</span>
+                <a href="https://www.xiaohongshu.com/explore/69f3503700000000350237b4" class="card-title" target="_blank">找工作</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/601565c30000000001005e2a" class="author-link" target="_blank">快乐小汪汪（120粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：4月30日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.25</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 4w+互动</span>
+                <span class="detail-stats">👍1w+ ⭐2w+</span>
+                <a href="https://www.xiaohongshu.com/explore/69f3503700000000350237b4" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">22.</span>
+                <a href="https://www.xiaohongshu.com/explore/69cf8679000000001a031e89" class="card-title" target="_blank">找工作暂停</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/617e2ec9000000000201f931" class="author-link" target="_blank">ly（84粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：4月3日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.22</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 2w+互动</span>
+                <span class="detail-stats">👍5000+ ⭐845</span>
+                <a href="https://www.xiaohongshu.com/explore/69cf8679000000001a031e89" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">23.</span>
+                <a href="https://www.xiaohongshu.com/explore/69dd13d1000000002202692e" class="card-title" target="_blank">上代人找工作😉vs这代人找工作😖</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/5b118ba0e8ac2b57d592af2e" class="author-link" target="_blank">鬼话怨湾区分怨（3363粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：4月14日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.22</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 3w+互动</span>
+                <span class="detail-stats">👍2w+ ⭐1774</span>
+                <a href="https://www.xiaohongshu.com/explore/69dd13d1000000002202692e" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">24.</span>
+                <a href="https://www.xiaohongshu.com/explore/6a269bee000000001602629a" class="card-title" target="_blank">《粉领找工作》</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/61b7ef110000000010007af6" class="author-link" target="_blank">就是狗航（16w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：6月8日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.19</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 2w+互动</span>
+                <span class="detail-stats">👍2w+ ⭐1049</span>
+                <a href="https://www.xiaohongshu.com/explore/6a269bee000000001602629a" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">25.</span>
+                <a href="https://www.xiaohongshu.com/explore/69b13e590000000022022960" class="card-title" target="_blank">找工作就得装</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/5dc044bc000000000100be71" class="author-link" target="_blank">小韩求职记（日更版（2w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：3月12日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.19</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 2w+互动</span>
+                <span class="detail-stats">👍1w+ ⭐5000+</span>
+                <a href="https://www.xiaohongshu.com/explore/69b13e590000000022022960" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">26.</span>
+                <a href="https://www.xiaohongshu.com/explore/6ac6402d0000000015002653" class="card-title" target="_blank">国庆后找工作SOP</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/5a8ad769e8ac2b4df1ed1a43" class="author-link" target="_blank">汤小鱼（1592粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：10月7日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.17</span>
+                <span class="score-tag popularity">热度 1.0</span>
+                <span class="score-tag recency">时效 1.5</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 2798互动</span>
+                <span class="detail-stats">👍1412 ⭐1375</span>
+                <a href="https://www.xiaohongshu.com/explore/6ac6402d0000000015002653" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">27.</span>
+                <a href="https://www.xiaohongshu.com/explore/69d7a64b0000000023027385" class="card-title" target="_blank">邪修找工作就是快</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/65313f51000000002a02be3a" class="author-link" target="_blank">藤老师认知思维（9w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：4月10日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.15</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 2w+互动</span>
+                <span class="detail-stats">👍1w+ ⭐5000+</span>
+                <a href="https://www.xiaohongshu.com/explore/69d7a64b0000000023027385" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">28.</span>
+                <a href="https://www.xiaohongshu.com/explore/6ab2944c00000000180044c6" class="card-title" target="_blank">gap很久后找工作sop</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/5a8ad769e8ac2b4df1ed1a43" class="author-link" target="_blank">汤小鱼（1592粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：9月22日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.15</span>
+                <span class="score-tag popularity">热度 1.5</span>
+                <span class="score-tag recency">时效 1.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 5000+互动</span>
+                <span class="detail-stats">👍3574 ⭐4003</span>
+                <a href="https://www.xiaohongshu.com/explore/6ab2944c00000000180044c6" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">29.</span>
+                <a href="https://www.xiaohongshu.com/explore/6a101bc20000000035032077" class="card-title" target="_blank">找工作 我被诈骗了</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/68b837070000000019022bfb" class="author-link" target="_blank">土豆爱吃薯片（失业版）（334粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：5月22日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.15</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 2w+互动</span>
+                <span class="detail-stats">👍1w+ ⭐4337</span>
+                <a href="https://www.xiaohongshu.com/explore/6a101bc20000000035032077" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title-row">
+                <span class="card-index">30.</span>
+                <a href="https://www.xiaohongshu.com/explore/699edf490000000015038b75" class="card-title" target="_blank">邪修找工作就是快！</a>
+            </div>
+            <div class="card-meta">
+                <a href="https://www.xiaohongshu.com/user/profile/619a5e90000000001000c85b" class="author-link" target="_blank">不做人事的猕猴唐（11w+粉）</a>
+                <span class="meta-divider">·</span>
+                <span class="pub-time">发布日期：2月25日</span>
+            </div>
+            
+            <div class="card-scores">
+                <span class="score-tag relevance">相关性 6.15</span>
+                <span class="score-tag popularity">热度 2.5</span>
+                <span class="score-tag recency">时效 0.0</span>
+            </div>
+            
+            <div class="card-stats">
+                <span class="interaction-count">🔥 2w+互动</span>
+                <span class="detail-stats">👍1w+ ⭐1w+</span>
+                <a href="https://www.xiaohongshu.com/explore/699edf490000000015038b75" class="view-note-btn" target="_blank">查看作品 ↗</a>
+            </div>
+        </div>
+        
+        </div>
+
+        
+
+        <div class="data-note">
+            数据来源：小红书热门笔记搜索，每日更新最新热门内容<br>
+            备注：互动数据为入库快照，实时数据可能持续增长
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,305 @@
+# -*- coding: utf-8 -*-
+"""
+19.9 产品图重出（3 张，3:4）
+风格：清爽 / 求职向 / 不花哨
+配色：浅底 + 深蓝主色 #1F3864 + 红 #C00000 仅作强调
+铁律：思源宋体只排汉字，标点/空格/英数走 Noto Sans SC
+"""
+import os, glob
+from PIL import Image, ImageDraw, ImageFont
+
+W, H = 1242, 1656  # 3:4，接近小红书商品图标准
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "04 产品图")
+
+# ---------- 颜色 ----------
+NAVY = (31, 56, 100)        # #1F3864 主色
+NAVY_L = (74, 111, 165)     # 次级蓝
+RED = (192, 0, 0)           # #C00000 强调
+INK = (34, 38, 45)          # 正文深灰
+GRAY = (122, 131, 145)      # 次要灰
+LGRAY = (176, 184, 196)
+BG = (250, 251, 253)        # 米白底
+BG2 = (241, 244, 249)       # 浅蓝灰块 #F1F4F9
+LINE = (208, 215, 229)      # #D0D7E5 边框
+WHITE = (255, 255, 255)
+
+# ---------- 字体（双字体铁律）----------
+def _font(paths, size):
+    for p in paths:
+        if os.path.exists(p):
+            return ImageFont.truetype(p, size)
+    raise RuntimeError("no font: %s" % paths)
+
+# 汉字：思源宋体（本机实测仅 Heavy 一个字重）
+# 英数/空格/标点：Noto Sans SC（本机实测有 Bold / Medium / Regular）
+HAN_CANDIDATES = [
+    r"C:\Windows\Fonts\Source Han Serif SC Heavy (TrueType).ttf",
+    r"C:\Windows\Fonts\SourceHanSerifSC-Heavy.otf",
+    r"C:\Windows\Fonts\simhei.ttf",
+]
+HAN_REG_CANDIDATES = [
+    # 思源宋体本机只有 Heavy；正文汉字降级到 Noto Sans SC 以保清爽
+    r"C:\Windows\Fonts\Source Han Serif SC Heavy (TrueType).ttf",
+    r"C:\Windows\Fonts\msyh.ttc",
+]
+LAT_CANDIDATES = [
+    r"C:\Windows\Fonts\Noto Sans SC Bold (TrueType).otf",
+    r"C:\Windows\Fonts\msyhbd.ttc",
+]
+LAT_MED_CANDIDATES = [
+    r"C:\Windows\Fonts\Noto Sans SC Medium (TrueType).otf",
+    r"C:\Windows\Fonts\msyh.ttc",
+]
+LAT_REG_CANDIDATES = [
+    r"C:\Windows\Fonts\Noto Sans SC (TrueType).otf",
+    r"C:\Windows\Fonts\msyh.ttc",
+]
+
+def han_b(s):  return _font(HAN_CANDIDATES, s)
+def han_r(s):  return _font(HAN_REG_CANDIDATES, s)
+def lat_b(s):  return _font(LAT_CANDIDATES, s)
+def lat_m(s):  return _font(LAT_MED_CANDIDATES, s)
+def lat_r(s):  return _font(LAT_REG_CANDIDATES, s)
+
+# ---------- 文本渲染：汉字用宋体，其余走无衬线 ----------
+def is_han(ch):
+    o = ord(ch)
+    return (0x4E00 <= o <= 0x9FFF) or (0x3400 <= o <= 0x4DBF)
+
+def draw_mixed(d, xy, text, hsize, lsize=None, hcolor=INK, lcolor=None,
+               han_fn=han_b, lat_fn=lat_b, gap=0):
+    """逐字分流渲染。汉字 -> 宋体；标点/空格/英数 -> 无衬线。"""
+    if lsize is None: lsize = hsize
+    lcolor = lcolor or hcolor
+    x, y = xy
+    for ch in text:
+        if is_han(ch):
+            f = han_fn(hsize); c = hcolor
+        else:
+            f = lat_fn(lsize); c = lcolor
+        d.text((x, y), ch, font=f, fill=c)
+        x += d.textlength(ch, font=f) + gap
+    return x
+
+def measure(d, text, hsize, lsize=None, han_fn=han_b, lat_fn=lat_b, gap=0):
+    if lsize is None: lsize = hsize
+    w = 0.0
+    for ch in text:
+        f = han_fn(hsize) if is_han(ch) else lat_fn(lsize)
+        w += d.textlength(ch, font=f) + gap
+    return w
+
+def wrap_mixed(d, text, maxw, hsize, lsize=None, han_fn=han_b, lat_fn=lat_b, gap=0):
+    lines, cur = [], ""
+    for ch in text:
+        if measure(d, cur + ch, hsize, lsize, han_fn, lat_fn, gap) > maxw and cur:
+            lines.append(cur); cur = ch
+        else:
+            cur += ch
+    if cur: lines.append(cur)
+    return lines
+
+def rrect(d, box, r, fill=None, outline=None, width=1):
+    d.rounded_rectangle(box, radius=r, fill=fill, outline=outline, width=width)
+
+def base_canvas():
+    img = Image.new("RGB", (W, H), BG)
+    return img, ImageDraw.Draw(img)
+
+def top_brand(d, x=92, y=96):
+    """左上角店名 + 右上角价格牌"""
+    d.text((x, y), "小 L 整理求职资料", font=lat_b(38), fill=GRAY)
+    # 价格牌
+    label = "19.9"
+    f = lat_b(52)
+    tw = d.textlength(label, font=f)
+    pw, ph = tw + 72, 88
+    rrect(d, (W - 92 - pw, y - 14, W - 92, y - 14 + ph), 20, fill=RED)
+    d.text((W - 92 - pw + 36, y - 14 + 16), label, font=f, fill=WHITE)
+
+def bottom_bar(d, text, size=40):
+    bh = 116
+    d.rectangle((0, H - bh, W, H), fill=NAVY)
+    # 底栏文字自动缩字号以适配宽度（左右各留 72px 安全边距）
+    fs = size
+    while fs > 26:
+        f_h, f_l = han_b(fs), lat_b(fs)
+        tw = measure(d, text, fs, fs, han_b, lat_b)
+        if tw <= W - 144:
+            break
+        fs -= 2
+    tw = measure(d, text, fs, fs, han_b, lat_b)
+    draw_mixed(d, ((W - tw) / 2, H - bh + (bh - fs) / 2 - 6), text, fs, fs, WHITE, WHITE)
+
+def footnote(d, text, y):
+    f = lat_r(30)
+    tw = measure(d, text, 30, 30, han_r, lat_r)
+    draw_mixed(d, ((W - tw) / 2, y), text, 30, 30, LGRAY, LGRAY,
+               han_fn=han_r, lat_fn=lat_r)
+
+
+# ============================================================
+# 图 1 · 主图
+# ============================================================
+def fig1():
+    img, d = base_canvas()
+    # 顶部左侧竖条（细，不要色块压迫感）
+    d.rectangle((0, 0, 14, H), fill=NAVY)
+    top_brand(d)
+
+    L = 160
+    # 主标题：2026秋招 / 网申截止时间表
+    y = 470
+    draw_mixed(d, (L, y), "2026", 128, 128, NAVY, NAVY)          # 数字走无衬线
+    draw_mixed(d, (L + measure(d, "2026", 128, 128, han_b, lat_b) + 8, y), "秋招", 128, 128, NAVY, NAVY)
+    y += 176
+    draw_mixed(d, (L, y), "网申截止时间表", 128, 128, NAVY, NAVY)
+
+    # 短横线
+    y += 200
+    d.rectangle((L, y, L + 132, y + 10), fill=RED)
+
+    # 副标题
+    y += 76
+    sub = "131 家企业 · 逐条标核实状态"
+    draw_mixed(d, (L, y), sub, 48, 48, INK, GRAY)
+    y += 86
+    sub2 = "每周五更新一版"
+    draw_mixed(d, (L, y), sub2, 48, 48, INK, GRAY)
+
+    # 中部信息卡（3 个小方块）
+    y += 150
+    cards = [
+        ("131", "家企业", "逐条列出"),
+        ("8", "个字段", "含投递入口"),
+        ("每周", "五更新", "到手至 2027.7"),
+    ]
+    cw, chh, gap = 320, 178, 27
+    for i, (big, mid, small) in enumerate(cards):
+        x = L + i * (cw + gap)
+        rrect(d, (x, y, x + cw, y + chh), 18, fill=BG2, outline=LINE, width=2)
+        draw_mixed(d, (x + 28, y + 26), big, 56, 56, NAVY, NAVY)
+        draw_mixed(d, (x + 28, y + 96), mid, 36, 36, INK, INK)
+        draw_mixed(d, (x + 28, y + 136), small, 28, 28, GRAY, GRAY, han_fn=han_r, lat_fn=lat_r)
+
+    bottom_bar(d, "Excel + PDF  手机电脑都能看")
+    p = os.path.join(OUT, "19.9产品_图1_主图.png")
+    img.save(p, "PNG"); print("saved", p, img.size)
+
+
+# ============================================================
+# 图 2 · 你会拿到什么
+# ============================================================
+def fig2():
+    img, d = base_canvas()
+    d.rectangle((0, 0, 14, H), fill=NAVY)
+    top_brand(d)
+
+    L = 160
+    y = 400
+    draw_mixed(d, (L, y), "你会拿到什么", 96, 96, NAVY, NAVY)
+    y += 150
+    d.rectangle((L, y, L + 132, y + 10), fill=RED)
+
+    items = [
+        ("01", "Excel 主表", "131 家企业 · 可按截止日排序"),
+        ("02", "PDF 预览", "手机上快速翻，通勤也能看"),
+        ("03", "简称对照", "输「工行」也能查到"),
+        ("04", "每周更新", "每周五新版发更新群"),
+        ("05", "免费小工具", "「网申截止速查」单查一家"),
+    ]
+    y += 92
+    rowh = 168
+    for i, (num, title, desc) in enumerate(items):
+        ry = y + i * rowh
+        # 左侧序号
+        draw_mixed(d, (L, ry + 6), num, 54, 54, RED, RED)
+        # 标题行
+        draw_mixed(d, (L + 116, ry), title, 50, 50, INK, INK)
+        # 描述行（次要色 + 常规字重）
+        draw_mixed(d, (L + 116, ry + 72), desc, 34, 34, GRAY, GRAY,
+                   han_fn=han_r, lat_fn=lat_r)
+        if i < len(items) - 1:
+            d.line((L + 116, ry + rowh - 32, W - L, ry + rowh - 32), fill=LINE, width=2)
+
+    bottom_bar(d, "覆盖 2026 秋招  银行 / 央国企 / 互联网 / 快消")
+    p = os.path.join(OUT, "19.9产品_图2_内容清单.png")
+    img.save(p, "PNG"); print("saved", p, img.size)
+
+
+# ============================================================
+# 图 3 · 对比图（收藏一篇笔记 vs 这份表）
+# ============================================================
+def fig3():
+    img, d = base_canvas()
+    d.rectangle((0, 0, 14, H), fill=NAVY)
+    top_brand(d)
+
+    L = 160
+    y = 360
+    draw_mixed(d, (L, y), "收藏一篇笔记", 84, 84, NAVY, NAVY)
+    y += 122
+    draw_mixed(d, (L, y), "和这份表的区别", 84, 84, NAVY, NAVY)
+    y += 130
+    d.rectangle((L, y, L + 132, y + 10), fill=RED)
+
+    y += 96
+    # 两栏
+    colw = (W - 2 * L - 40) // 2
+    x1, x2 = L, L + colw + 40
+    headh = 84
+
+    # 表头：左灰（普通）、右蓝（推荐）
+    rrect(d, (x1, y, x1 + colw, y + headh), 14, fill=BG2, outline=LINE, width=2)
+    t = "收藏一篇笔记"
+    tw = measure(d, t, 40, 40, han_b, lat_b)
+    draw_mixed(d, (x1 + (colw - tw) / 2, y + 22), t, 40, 40, GRAY, GRAY)
+
+    rrect(d, (x2, y, x2 + colw, y + headh), 14, fill=NAVY)
+    t2 = "这份表会一直更新"
+    tw2 = measure(d, t2, 40, 40, han_b, lat_b)
+    draw_mixed(d, (x2 + (colw - tw2) / 2, y + 22), t2, 40, 40, WHITE, WHITE)
+
+    # 内容行
+    left = [
+        "只能看到那一次的内容",
+        "后来新增的企业看不到",
+        "改过截止日的不知道",
+        "得自己一家家去查",
+    ]
+    right = [
+        "每周五核一遍，同步更新",
+        "新增的企业会加进表里",
+        "改过截止日的会同步过来",
+        "到手就能按截止日排着投",
+    ]
+    yy = y + headh + 30
+    rowh = 132
+    for i in range(len(left)):
+        r = yy + i * rowh
+        rrect(d, (x1, r, x1 + colw, r + rowh - 24), 12, fill=WHITE, outline=LINE, width=2)
+        lines = wrap_mixed(d, left[i], colw - 56, 32, 32, han_r, lat_r)
+        # 垂直居中
+        ty = r + (rowh - 24 - len(lines) * 46) / 2 + 4
+        for ln in lines:
+            draw_mixed(d, (x1 + 28, ty), ln, 32, 32, GRAY, GRAY, han_fn=han_r, lat_fn=lat_r)
+            ty += 46
+
+        rrect(d, (x2, r, x2 + colw, r + rowh - 24), 12, fill=BG2, outline=LINE, width=2)
+        # 右侧加个小圆点标记
+        d.ellipse((x2 + 22, r + (rowh - 24) / 2 - 10, x2 + 42, r + (rowh - 24) / 2 + 10), fill=NAVY)
+        lines = wrap_mixed(d, right[i], colw - 84, 32, 32, han_b, lat_b)
+        ty = r + (rowh - 24 - len(lines) * 46) / 2 + 4
+        for ln in lines:
+            draw_mixed(d, (x2 + 58, ty), ln, 32, 32, INK, INK)
+            ty += 46
+
+    footnote(d, "来源可信度分 A / B / C，弱来源如实标注", yy + 4 * rowh + 10)
+    bottom_bar(d, "不编日期 · 核验不到一律标「待确认」")
+    p = os.path.join(OUT, "19.9产品_图3_对比.png")
+    img.save(p, "PNG"); print("saved", p, img.size)
+
+
+if __name__ == "__main__":
+    print("fonts OK:", os.path.basename(_font(HAN_CANDIDATES, 20).path))
+    fig1(); fig2(); fig3()

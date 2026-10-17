@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L 的工作台 · 离线版</title>
+<style>
+:root{
+  --bg:#f6f6fb; --panel:#ffffff; --line:#ececf4; --line2:#f3f3f9;
+  --ink:#1b1b28; --ink2:#3d3d52; --mut:#71718a; --mut2:#9a9ab0;
+  --vio:#6c5ce7; --vio2:#8b7bf7; --vio-soft:#f1eeff;
+  --g:#12a06a; --g-soft:#e7f7ef; --r:#e5484d; --r-soft:#fdecec;
+  --y:#c98a00; --y-soft:#fdf3e0; --b:#2f6fe4; --b-soft:#eaf1fe;
+  --shadow:0 1px 2px rgba(28,28,60,.04),0 8px 24px rgba(28,28,60,.05);
+}
+*{box-sizing:border-box}
+html{color-scheme:light}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font:14px/1.62 "Segoe UI","Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+ -webkit-font-smoothing:antialiased}
+a{color:var(--vio);text-decoration:none}
+code,kbd,.mono{font-family:"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace;font-size:12.5px}
+.wrap{display:flex;min-height:100vh}
+
+/* ---------- 侧栏 ---------- */
+.side{width:244px;flex:0 0 244px;background:#fff;border-right:1px solid var(--line);
+ position:sticky;top:0;height:100vh;overflow:auto;padding:16px 12px 28px}
+.brand{display:flex;gap:10px;align-items:center;padding:4px 6px 14px}
+.logo{width:38px;height:38px;border-radius:12px;flex:0 0 38px;
+ background:linear-gradient(135deg,#7b6cf6,#a99bff);color:#fff;font-weight:700;
+ display:flex;align-items:center;justify-content:center;font-size:17px;
+ box-shadow:0 6px 14px rgba(108,92,231,.28)}
+.brand b{display:block;font-size:14.5px;letter-spacing:.2px}
+.brand span{display:block;font-size:11px;color:var(--mut2);margin-top:1px}
+.grp{margin:12px 0 2px;padding:0 8px;font-size:10.5px;letter-spacing:1.4px;color:var(--mut2);font-weight:600}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav a{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:9px;
+ color:var(--ink2);font-size:13.4px;cursor:pointer;user-select:none}
+.nav a .ic{width:16px;text-align:center;color:var(--mut2);font-size:12px}
+.nav a:hover{background:#fafaff}
+.nav a.on{background:var(--vio-soft);color:#5b4bd6;font-weight:600}
+.nav a.on .ic{color:var(--vio)}
+.nav a .bd{margin-left:auto;font-size:10.5px;padding:1px 6px;border-radius:20px;
+ background:#f4f4fa;color:var(--mut);font-weight:600}
+.nav a.on .bd{background:#fff;color:var(--vio)}
+.bd.pink{background:#ffe9f0;color:#e0466f}
+.bd.g{background:var(--g-soft);color:var(--g)}
+
+/* ---------- 主区 ---------- */
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);
+ backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+ padding:12px 24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.topbar h1{margin:0;font-size:16px;font-weight:700;letter-spacing:.2px}
+.topbar .crumb{font-size:11.5px;color:var(--mut2);margin-left:2px}
+.spacer{flex:1}
+.pill{font-size:11.5px;padding:4px 10px;border-radius:20px;background:#f4f4fa;color:var(--mut);
+ border:1px solid var(--line);white-space:nowrap}
+.pill.v{background:var(--vio-soft);color:#5b4bd6;border-color:#e6e0ff}
+.pill.g{background:var(--g-soft);color:var(--g);border-color:#d5f0e2}
+.btn{font:inherit;font-size:12.5px;padding:6px 12px;border-radius:9px;border:1px solid var(--line);
+ background:#fff;color:var(--ink2);cursor:pointer}
+.btn:hover{border-color:#dcd8f5;background:#fafaff}
+.btn.p{background:var(--vio);border-color:var(--vio);color:#fff}
+.btn.p:hover{background:#5b4bd6}
+.content{padding:20px 24px 56px;max-width:1280px;width:100%}
+.page{display:none;animation:fade .18s ease}
+.page.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+
+/* ---------- 卡片 ---------- */
+.grid{display:grid;gap:14px}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g21{grid-template-columns:1.35fr 1fr}
+@media(max-width:1100px){.g4{grid-template-columns:repeat(2,1fr)}.g3,.g2,.g21{grid-template-columns:1fr}}
+@media(max-width:720px){.g4{grid-template-columns:1fr}.side{display:none}}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow)}
+.kpi .lb{font-size:11.5px;color:var(--mut);letter-spacing:.4px}
+.kpi .vl{font-size:24px;font-weight:700;letter-spacing:-.4px;margin:6px 0 2px;font-variant-numeric:tabular-nums}
+.kpi .vl small{font-size:12.5px;font-weight:600;color:var(--mut);margin-left:3px}
+.kpi .ft{font-size:11.5px;color:var(--mut2)}
+.kpi.hl{border-color:#e6e0ff;background:linear-gradient(180deg,#fbfaff,#fff)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:var(--shadow);margin-top:14px}
+.panel>h2{margin:0 0 12px;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
+.panel>h2 .sub{font-size:11.5px;color:var(--mut2);font-weight:400;margin-left:auto}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--vio);flex:0 0 8px}
+.dot.g{background:var(--g)}.dot.r{background:var(--r)}.dot.y{background:var(--y)}.dot.b{background:var(--b)}
+.dot.gr{background:#c9c9d6}
+.note{font-size:12px;color:var(--mut);background:#fbfbfe;border:1px dashed var(--line);border-radius:10px;padding:9px 11px;margin-top:10px}
+.note b{color:var(--ink2)}
+.step{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px dashed var(--line2)}
+.step:last-child{border-bottom:0}
+.step .dot{margin-top:7px}
+.step .txt{flex:1;min-width:0}
+.step .t{font-size:13.4px;font-weight:600}
+.step .d{font-size:12.2px;color:var(--mut);margin-top:1px}
+.who{font-size:10.5px;font-weight:700;color:var(--mut);background:#f4f4fa;border-radius:6px;padding:2px 6px;flex:0 0 auto}
+.sig{display:flex;gap:11px;align-items:flex-start;padding:10px;border:1px solid var(--line);
+ border-radius:11px;background:#fff;margin-bottom:9px}
+.sig:last-child{margin-bottom:0}
+.sig .dot{margin-top:6px}
+.sig .body{font-size:13px}
+.sig .body .d{font-size:12.1px;color:var(--mut);margin-top:3px}
+.cardrow{display:flex;gap:10px;align-items:baseline;padding:9px 2px;border-bottom:1px dashed var(--line2);font-size:12.8px}
+.cardrow:last-child{border-bottom:0}
+.cardrow .id{flex:0 0 86px;font-weight:700;color:var(--vio);font-size:12.2px;font-family:"Cascadia Mono",Consolas,monospace}
+.cardrow .s{flex:1;min-width:0;color:var(--ink2)}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;white-space:nowrap;font-weight:600}
+.tag.g{background:var(--g-soft);color:var(--g)}
+.tag.y{background:var(--y-soft);color:var(--y)}
+.tag.r{background:var(--r-soft);color:var(--r)}
+.tag.b{background:var(--b-soft);color:var(--b)}
+.tag.gr{background:#f4f4fa;color:var(--mut)}
+.tag.v{background:var(--vio-soft);color:#5b4bd6}
+.bars{display:flex;flex-direction:column;gap:9px;margin-top:4px}
+.bar{display:flex;align-items:center;gap:10px;font-size:12.4px}
+.bar .n{flex:0 0 132px;color:var(--ink2)}
+.bar .track{flex:1;height:10px;background:#f4f4fa;border-radius:20px;overflow:hidden}
+.bar .fill{height:100%;border-radius:20px;background:linear-gradient(90deg,#8b7bf7,#6c5ce7)}
+.bar .fill.g{background:linear-gradient(90deg,#4fc98e,#12a06a)}
+.bar .fill.y{background:linear-gradient(90deg,#f0c268,#c98a00)}
+.bar .fill.r{background:linear-gradient(90deg,#f08b8f,#e5484d)}
+.bar .fill.b{background:linear-gradient(90deg,#6ea4f5,#2f6fe4)}
+.bar .v{flex:0 0 74px;text-align:right;color:var(--mut);font-variant-numeric:tabular-nums}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--line2);vertical-align:top}
+th{position:sticky;top:0;background:#fbfbfe;font-weight:600;color:var(--mut);font-size:11.5px;z-index:2}
+tbody tr:hover{background:#fbfbff}
+td.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.tscroll{max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:12px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:2px 0 12px}
+.chip{font-size:12.2px;padding:5px 11px;border-radius:20px;border:1px solid var(--line);background:#fff;color:var(--mut);cursor:pointer}
+.chip:hover{border-color:#dcd8f5}
+.chip.on{background:var(--vio-soft);border-color:#e6e0ff;color:#5b4bd6;font-weight:600}
+input.search{font:inherit;font-size:12.6px;padding:7px 11px;border-radius:9px;border:1px solid var(--line);width:230px;outline:none}
+input.search:focus{border-color:#cfc7f7;box-shadow:0 0 0 3px #f1eeff}
+pre.cmd{margin:8px 0 0;background:#1e1e2c;color:#e8e8f4;border-radius:10px;padding:11px 12px;
+ overflow:auto;font-size:12px;line-height:1.6;position:relative}
+pre.cmd .cp{position:absolute;right:8px;top:8px;font-size:11px;background:#33334a;color:#cdcdea;
+ border:1px solid #43435e;border-radius:7px;padding:2px 7px;cursor:pointer}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:5px 12px;font-size:12.6px}
+.kv .k{color:var(--mut)}
+ul.tight{margin:6px 0 0;padding-left:18px;font-size:12.8px}
+ul.tight li{margin:3px 0}
+.footer{margin-top:26px;font-size:11.5px;color:var(--mut2);text-align:center;line-height:1.9}
+.hr{height:1px;background:var(--line);margin:14px 0}
+.pg{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--mut)}
+mark{background:#fff3c4;padding:0 2px;border-radius:3px}
+.ok{color:var(--g);font-weight:700}.no{color:var(--r);font-weight:700}.wn{color:var(--y);font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<aside class="side">
+  <div class="brand">
+    <div class="logo">L</div>
+    <div><b>L 的工作台</b><span>求职 + 医美 两线并行 · 离线可用 · 双击即开</span></div>
+  </div>
+
+  <div class="grp">内容生产</div>
+  <nav class="nav">
+    <a data-p="overview" class="on"><span class="ic">▣</span>工作台总览</a>
+    <a data-p="today"><span class="ic">◲</span>今日三层发布<span class="bd pink">3</span></a>
+  </nav>
+
+  <div class="grp">出稿纪律</div>
+  <nav class="nav">
+    <a data-p="chain"><span class="ic">⇢</span>出稿全链与分工</a>
+    <a data-p="gate"><span class="ic">⚑</span>红线与闸门</a>
+  </nav>
+
+  <div class="grp">数据核验</div>
+  <nav class="nav">
+    <a data-p="master"><span class="ic">▤</span>主表 200 家<span class="bd">200</span></a>
+    <a data-p="events"><span class="ic">◎</span>今日新发事件<span class="bd">4</span></a>
+  </nav>
+
+  <div class="grp">产品与交付</div>
+  <nav class="nav">
+    <a data-p="sku"><span class="ic">◆</span>产品与上架（SKU）</a>
+    <a data-p="skills"><span class="ic">⌘</span>技能中枢<span class="bd">12</span></a>
+  </nav>
+
+  <div class="grp">协作留痕</div>
+  <nav class="nav">
+    <a data-p="cards"><span class="ic">▧</span>卡片流与索引<span class="bd">26</span></a>
+    <a data-p="risks"><span class="ic">⚠</span>风险与待判<span class="bd pink">7</span></a>
+  </nav>
+
+  <div class="grp">留档与拆解</div>
+  <nav class="nav">
+    <a data-p="medical"><span class="ic">⊕</span>医美线 · 0→首单</a>
+    <a data-p="cases"><span class="ic">✦</span>爆款案例拆解分析</a>
+  </nav>
+
+  <div class="note" style="margin-top:16px;font-size:11.4px">
+    数据快照 <b>2026-10-17</b><br>
+    权威源 v1.0.27（updated 10-17 07:30）<br>
+    无外部依赖 · 断网可用
+  </div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <h1 id="ttl">工作台总览</h1>
+    <span class="crumb" id="crumb">内容生产 / 全局</span>
+    <div class="spacer"></div>
+    <span class="pill v">⏱ 处罚期解禁 <b id="cd">计算中…</b></span>
+    <span class="pill">数据快照 2026-10-17</span>
+    <span class="pill g">离线可用</span>
+    <button class="btn" onclick="window.print()">打印 / PDF</button>
+  </div>
+
+  <div class="content">
+
+  <!-- ================= 1 总览 ================= -->
+  <section class="page on" id="p-overview">
+    <div class="grid g4">
+      <div class="kpi hl"><div class="lb">已成交（北极星）</div><div class="vl">1<small>/ 30</small></div>
+        <div class="ft">首单 10-12 破 · 目标月净 ¥10000</div></div>
+      <div class="kpi"><div class="lb">转化率（观看 → 成交）</div><div class="vl">0.02<small>%</small></div>
+        <div class="ft">4461 观看 → 1 单 · M4 前提 0.25%</div></div>
+      <div class="kpi"><div class="lb">内容互动（优秀档）</div><div class="vl">10.45<small>%</small></div>
+        <div class="ft">CTR 20.02% · 收藏 4.39% · 评论率 0.56%（唯一未达标）</div></div>
+      <div class="kpi"><div class="lb">主表规模</div><div class="vl">200<small>行</small></div>
+        <div class="ft">今日截止 1 家 · 明日 5 家 · 7 天内 18 家 <span class="mono">（实跑 2026-10-17）</span></div></div>
+    </div>
+    <div class="note" style="margin-top:-2px">⚠️ <b>数据来源标注</b>：成交 / 转化率 / 互动率 / 评论率 四项为 <b>L 平台回传口径</b>（截至 10-15，W 无平台权限、不可实测）；主表规模 4 项为 <b>W 实跑</b> <span class="mono">timetable.json</span> v1.0.27。改数须以实跑或回传截图为准，禁止推算。</div>
+
+    <div class="panel">
+      <h2><span class="dot"></span>内容生产链路<span class="sub">数据池 → 选题 → 成稿 → 合规闸门 → 交付发布 → 数据回传 → 复盘</span></h2>
+      <div class="grid g4" style="gap:10px">
+        <div class="kpi" style="padding:11px 13px"><div class="lb">S1 · 数据池</div>
+          <div class="ft" style="margin-top:5px">主表 200 家（v1.0.27）<br>回写四件套齐</div></div>
+        <div class="kpi" style="padding:11px 13px"><div class="lb">S2 · 选题</div>
+          <div class="ft" style="margin-top:5px">红狐评分 + 六维<br>我方实测 A 优先</div></div>
+        <div class="kpi" style="padding:11px 13px"><div class="lb">S3 · 成稿</div>
+          <div class="ft" style="margin-top:5px">二创六步 + 五查<br>标题 5 查（含图内）</div></div>
+        <div class="kpi" style="padding:11px 13px"><div class="lb">S4 · 闸门</div>
+          <div class="ft" style="margin-top:5px">compliance_gate<br>P0 显式传路径</div></div>
+      </div>
+      <div class="note">发布件的最后一道：<b>md5 对照而非目测</b>（C03 固化）→ 三层自检 → 落档 <span class="mono">_协作\发布包\</span> → 桌面待发包 → L 发布。出图/文自动进「小红书爆款内容创作专家」<span class="mono">ex_addd74ZDOS00</span>。</div>
+    </div>
+
+    <div class="grid g21">
+      <div class="panel">
+        <h2><span class="dot y"></span>本周待办</h2>
+        <div class="step"><span class="dot g"></span><div class="txt"><div class="t">今日三层发布（09:00 / 12:30 / 20:30）</div><div class="d"><b>10/17：A 层已发（08:54 L 上报·国家平台入口篇·308 汉字·红狐 0 命中）</b>｜🔴 <b>但平台侧仍「笔记审核中」（浏览 0）—— 发布 ≠ 过审，10/18 前复查</b>｜B 层 12:30：<b>🟢 已发（L 14:3x 上报「12 点多已发」· 325 汉字 · 红狐 0 · 桌面件↔正本四项逐字比对全一致 → 发布版本＝定稿版本，无返工）</b> · C 层 20:30：<b>🟢 已发（L 20:3x 上报 · 332 汉字 · 红狐 0 · 桌面件↔正本四项逐字比对全一致 → 发布版本＝定稿版本，无返工）</b>｜🆕 <b>14:00 W 二轮已完成</b>：第 2 篇库存稿定稿（网申必填项自查 · 328 汉字 · 三关 ✅ · 红线 0）＋ 卡索引补登 C48／C49／C50（210→214 行）｜🔴 <b>红狐首跑命中「毕业证」，而本地闸门 P0=0 未报</b> → 又一次实证「红狐 ≠ 本地闸门」，已同义改写并复跑清零｜首评由 L 手动发（发完 30 分钟后·红线第 4 条 v2）｜🆕 <b>「AI辅助」角标已结案</b>：主页封面（含 10-16 C 层）均有 → <b>系平台侧持续性叠加、非 B 层偶发</b>；是否影响分发 <b>W 不推断</b>｜🟢 <b>近7日大盘口径已结案</b>（L 20:0x）：曝光按<b>滚动 7 天</b>统计，2.5万（10-09~10-15）vs 1.7万（10-10~10-16）＝<b>窗口起点不同、非数据错误</b> → <b>禁跨窗口比较、禁算环比</b>（原 -31%／-28% 等<b>全部作废</b>）；CTR 两窗口 19.9%／18.5% <b>均未站上 20.02%</b>；🆕 <b>报 7 日数必写窗口起止日</b>｜🔴 引用成效<b>禁用 1097/1064/1065</b>（含外部渠道粉）｜🔴 <b>10/19 起出稿必挂专家 ex_addd74ZDOS00，红狐命中一律算命中</b>（≠本地闸门 P0 词表）</div></div><span class="who">L</span></div>
+        <div class="step"><span class="dot g"></span><div class="txt"><div class="t">10/17 事件采集已跑</div><div class="d">四路全跑 4/4 · 平台侧 6 / 政策侧 4 / 企业侧 3 / 权威源 69 家（WB205）· 精确口径见「新发事件」页</div></div><span class="who">W</span></div>
+        <div class="step"><span class="dot gr"></span><div class="txt"><div class="t">10/17 主表维护 + 竞品双周扫</div><div class="d">回写四件套 + 周度复盘 + 固定回执</div></div><span class="who">W</span></div>
+        <div class="step"><span class="dot gr"></span><div class="txt"><div class="t">10/17–10/18 库存盘点（目标攒 12 篇）</div><div class="d">已定稿 <b>3 篇</b>（政策平台篇＝10/17 A 层已启用／网申必填项自查＝10/17 14:00 定稿／投递进度自查＝10/17 20:1x 定稿）· 指标 3 仍 <b>不达标</b>（3 篇 ÷ 3 篇/日 ≈ 1.0 天 ＜ 2 天）· 处罚期收尾前置</div></div><span class="who">W</span></div>
+        <div class="step"><span class="dot y"></span><div class="txt"><div class="t">④–⑨ 违规内容删除备份（L 正逐条核对）</div><div class="d">6/10 未收口 · 这是处罚是否按期解除的关键前置</div></div><span class="who">L</span></div>
+      </div>
+      <div class="panel">
+        <h2><span class="dot"></span>三大内容形式</h2>
+        <div class="step"><span class="dot b"></span><div class="txt"><div class="t">A 层 · 时效入口</div><div class="d">今天/明天截止 · 说数量不说名字 · 结尾必抛问 · 解禁后挂链 19.9</div></div></div>
+        <div class="step"><span class="dot y"></span><div class="txt"><div class="t">B 层 · 互动涨粉</div><div class="d">免笔试/反直觉结论 · 5 铁律 · 解禁后不挂链 · 评论率主力（中位 0.171）</div></div></div>
+        <div class="step"><span class="dot g"></span><div class="txt"><div class="t">C 层 · 往届生收藏</div><div class="d">第一人称写法（评论率最高 0.191） · 解禁后挂链 49.9</div></div></div>
+        <div class="note">写法 > 方向：清单 0.250 ／ 第一人称 0.191 ／ 单家 0.108 ／ 反直觉 0.075（最差）。</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot g"></span>主线里程碑（0 → 月净 ¥10000）</h2>
+      <div class="step"><span class="dot y"></span><div class="txt"><div class="t">M0 处罚期收尾</div><div class="d">零违规 + 攒 12 篇库存 · <span class="cd cy">倒计时见顶栏</span></div></div><span class="who">全员</span></div>
+      <div class="step"><span class="dot gr"></span><div class="txt"><div class="t">M1 店铺升级 + 回暖周</div><div class="d">解禁当天：升级 → 19.9 上架 → 链路自测 → 挂链（A+C）</div></div><span class="who">L/W</span></div>
+      <div class="step"><span class="dot gr"></span><div class="txt"><div class="t">M2 秋招冲刺（49.9 主力）</div><div class="d">49.9 顺延 10/22–24 · 前提：回写四件套跑顺一周</div></div><span class="who">W</span></div>
+      <div class="step"><span class="dot gr"></span><div class="txt"><div class="t">M3 穿越季节断层</div><div class="d">11/15 启用 D 层 · 12 月 A 层断料风险</div></div><span class="who">C/W</span></div>
+      <div class="step"><span class="dot gr"></span><div class="txt"><div class="t">M4 稳定达标</div><div class="d">前提：转化率 0.02% → 0.25%</div></div><span class="who">全员</span></div>
+    </div>
+  </section>
+
+  <!-- ================= 2 今日三层 ================= -->
+  <section class="page" id="p-today">
+    <div class="grid g3">
+      <div class="panel" style="margin-top:0">
+        <h2><span class="dot b"></span>A 层 · 09:00<span class="sub">时效入口</span></h2>
+        <div class="kv"><span class="k">切口</span><span>国家大学生就业服务平台 · 平台侧聚合入口（非单家）</span>
+          <span class="k">口径</span><span>说数量不说名字 · 留其余</span>
+          <span class="k">CTA</span><span>「我整理的企业表」不提家数</span>
+          <span class="k">挂链</span><span>解禁后挂 19.9</span></div>
+        <div class="note">🟢 <b>已发（10/17 08:54 · L 上报）</b> · 标题《应届生秋招，还有个国家平台能用》· 正文 308 汉字 · <b>红狐 0 命中</b> · 闸门 P0=P1=P2=0。🔴 <b>平台侧仍「笔记审核中」（浏览 0）→ 发布 ≠ 过审，10/18 前复查</b>。首评由 L 手动发（发完 30 分钟后）。</div>
+      </div>
+      <div class="panel" style="margin-top:0">
+        <h2><span class="dot y"></span>B 层 · 12:30<span class="sub">互动涨粉</span></h2>
+        <div class="kv"><span class="k">切口</span><span>招满即止 · 截止日 ≠ 关门日（反直觉/争议点）</span>
+          <span class="k">口径</span><span>5 铁律：不说全 · 留缺口 · 结尾抛问 · 有争议 · 触发分享欲</span>
+          <span class="k">挂链</span><span>不挂链</span></div>
+        <div class="note">🟢 <b>已发（12:30 场 · L 14:3x 上报「B层在12点多已发」· W 14:4x 实读取证后落账）</b>。标题《应届生别只盯截止日，有人提前关》· 正文 325 汉字 · <b>红狐 0 命中</b> · 闸门 P0=P1=P2=0。🔴 <b>发布版本＝定稿版本</b>：桌面件（1,606 B／<span class="mono">ac668299</span>／CRLF）↔ 正本（1,585 B／<span class="mono">8179295e</span>／纯 LF）—— 标题 md5 <span class="mono">b727e116</span>／标签 <span class="mono">3c576349</span>／首评 <span class="mono">b412e669</span> 双方相同，正文去空白后逐字同（21 B 差＝包根格式，非内容差）→ <b>无返工</b>。🟡 <b>未取到四项一律留白不推断</b>：精确发布时刻（只给「12 点多」）／平台过审状态／「AI辅助」角标／首日曝光观看。⏳ 24h 回传 <b>10/18 12:30 后</b>。</div>
+      </div>
+      <div class="panel" style="margin-top:0">
+        <h2><span class="dot g"></span>C 层 · 20:30<span class="sub">往届生收藏</span></h2>
+        <div class="kv"><span class="k">切口</span><span>往届可投口径三分类 · ①清单式（评论率最高写法）</span>
+          <span class="k">口径</span><span>3 家带 1 反例</span>
+          <span class="k">挂链</span><span>解禁后挂 49.9</span></div>
+        <div class="note">🟢 <b>已发（L 20:3x 上报「C层已发」· 精确时刻未给）</b> · 标题《往届生能投的，我按公告口径分了三类》（<b>17 字符（去空格）／16 汉字</b>）· 正文 <b>332 汉字</b>（7 段）· 标签 8 个 · <b>红狐 0 命中</b> · 闸门 P0=P1=P2=0 · 桌面件↔正本<b>四项逐字比对全一致</b>（md5 标题 45dbe5e7／正文 b222b561／标签 dabf4172／首评 700e3ca3）→ <b>无返工</b>。首评＝「还没开始翻公告的往届生，你现在盯着哪一类？」（24 汉字·<b>L 发完 30 分钟后 ≈21:0x 手动发</b>，已与正文 CTA 错开不撞）。往届口径一律以<b>公告原文</b>为准（表内标「往届」31 家，含部分招往届）。</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot"></span>发布纪律（处罚期，至 10/19 16:00 解禁）</h2>
+      <div class="grid g2">
+        <ul class="tight">
+          <li>① 一天三篇 A/B/C，时段 09:00 / 12:30 / 20:30</li>
+          <li>② 不挂商品 · 内容不发全＝核心 · 低调不追曝光</li>
+          <li>③ 字数 = 纯汉字 300–600；标题 ≤ 20 字</li>
+          <li>④ 处罚期不提「家数」，写「我整理的企业表」</li>
+        </ul>
+        <ul class="tight">
+          <li>⑤ 首评一律人群点名型，<b>与正文结尾 CTA 错开</b>，发完半小时后发</li>
+          <li>⑥ 每条评论必回；首评/回复出「复制即发」包，W 不代发</li>
+          <li>⑦ 所有层级结尾必须是问题</li>
+          <li>⑧ 隔 3 天原则：A 豁免但每天换 ≥ 2 项；B/C 同向 ≥ 3 天</li>
+        </ul>
+      </div>
+      <div class="note">发布不经 AI 手：发布走 L 手工操作流程，任何自动化浏览器打小红书都高危（处罚起因＝行为风控）。</div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot r"></span>发前必跑（复制即用）<span class="sub">显式传路径，否则默认全量扫描会污染历史批次</span></h2>
+      <pre class="cmd"><span class="cp">复制</span># 1) P0 合规闸门（显式传路径）
+python compliance_gate.py --path "D:\小红书项目\default-workspace\_协作\发布包\20261016\文案.txt"
+
+# 2) 跨店同质化五维度（R1–R8）
+python redline_check.py --pack "_协作\发布包\20261016" --ref "_协作\_参照系_最近3天"
+
+# 3) 时效实跑（A 层定稿前必做 · 当日 deadline 全条目）
+python -c "import json,datetime;d=json.load(open(r'技能包_时间表查询官/data/timetable.json',encoding='utf-8'));t=datetime.date.today();[print(c['no'],c['company'],c['deadline']) for c in d['companies'] if str(c.get('deadline'))==t.isoformat()]"</pre>
+      <div class="note">⚠️ 跨盘 <span class="mono">relpath</span> 会崩 → 先复制到 D 盘临时目录再跑。红色脚本与 <span class="mono">ganhuo_lib.py</span> 一律用 venv：<span class="mono">C:/Users/Administrator/.workbuddy/binaries/python/envs/default/Scripts/python.exe</span>。</div>
+    </div>
+  </section>
+
+  <!-- ================= 3 主表 ================= -->
+  <section class="page" id="p-master">
+    <div class="grid g4">
+      <div class="kpi"><div class="lb">主表规模</div><div class="vl">200<small>行</small></div><div class="ft">v1.0.27 · updated 2026-10-17 07:30</div></div>
+      <div class="kpi"><div class="lb">可比较截止日</div><div class="vl">140<small>行</small></div><div class="ft">硬日期 106 行 · 无固定日 60 行（批外 36 / 滚动 17 / 未列明 5 / 待核 2）</div></div>
+      <div class="kpi hl"><div class="lb">今天 / 明天截止</div><div class="vl">1<small>/ 5</small></div><div class="ft">华为（各 BG 不同）／ 中国华电 · 交行 · 渤海银行 · 百事 ×2</div></div>
+      <div class="kpi"><div class="lb">7 天内截止</div><div class="vl">18<small>家</small></div><div class="ft">0–3 天 12 家 · 0–21 天 63 家</div></div>
+    </div>
+
+    <div class="grid g2">
+      <div class="panel">
+        <h2><span class="dot b"></span>截止日水位（按 10-17 折算）</h2>
+        <div class="bars">
+          <div class="bar"><span class="n">今天 / 明天</span><span class="track"><span class="fill r" style="width:8%"></span></span><span class="v">6 家</span></div>
+          <div class="bar"><span class="n">3 天内</span><span class="track"><span class="fill y" style="width:16%"></span></span><span class="v">12 家</span></div>
+          <div class="bar"><span class="n">7 天内</span><span class="track"><span class="fill y" style="width:24%"></span></span><span class="v">18 家</span></div>
+          <div class="bar"><span class="n">21 天内</span><span class="track"><span class="fill b" style="width:84%"></span></span><span class="v">63 家</span></div>
+          <div class="bar"><span class="n">30 天内</span><span class="track"><span class="fill b" style="width:100%"></span></span><span class="v">75 家</span></div>
+          <div class="bar"><span class="n">已过期（可比较 140 行内）</span><span class="track"><span class="fill" style="width:26%"></span></span><span class="v">36 家</span></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h2><span class="dot g"></span>可信度与来源分布</h2>
+        <div class="bars">
+          <div class="bar"><span class="n">A 级（企业自己写的）</span><span class="track"><span class="fill g" style="width:18%"></span></span><span class="v">36 家</span></div>
+          <div class="bar"><span class="n">B 级（二手/已核）</span><span class="track"><span class="fill g" style="width:44%"></span></span><span class="v">87 家</span></div>
+          <div class="bar"><span class="n">C 级（第三方未核）</span><span class="track"><span class="fill r" style="width:33%"></span></span><span class="v">66 家</span></div>
+          <div class="bar"><span class="n">⚪ 滚动（不参与分级）</span><span class="track"><span class="fill" style="width:6%"></span></span><span class="v">11 家</span></div>
+          <div class="bar"><span class="n">投递入口可点（apply=link）</span><span class="track"><span class="fill b" style="width:62%"></span></span><span class="v">123 家</span></div>
+        </div>
+        <div class="note">
+          <b>🟢 可完全复现的数字</b>：<span class="mono">source_level</span> 实计 <b>A 36 ＋ B 87 ＝ 123</b>，与对外句式「123 家已核验（A/B 级）」的字面一致；<span class="mono">date_form=="hard"</span> ＝ <b>106</b>，与「106 家核到硬截止日」一致；<span class="mono">companies</span> 长度 ＝ <b>200</b>。<br>
+          <b>🟢 已裁定（L 2026-10-16 · C31）</b>：「123」确有两个来源、不是同一批企业——<span class="mono">apply_url_status=="link"</span>（入口可点）同样恰为 <b>123</b>，与 A/B 集<b>仅 70 家重合</b>——A/B 但入口非 link <b>53 家</b>、入口可点但非 A/B <b>53 家</b>；另按 131 核心段（<span class="mono">source_level_cn</span> 非空）统计 A/B 只有 <b>71 家</b>。<b>裁定结果</b>：对外用「200 家汇总 ／ 123 家已核验（A/B 级）」；「71 家核心」仅内部；「可直达投递入口 123」列备用指标、不入对外句式。<br>
+          <b>🟡 批内/批外构成</b>：no.1–131（131 行）＝ A36 / B35 / C49 / ⚪11；no.132–200（69 行，来源 DB57·DB59 采集）＝ B52 / C17，其 <span class="mono">date_form</span> 字段全为空（其中 33 行仍可从截止日文本解析出剩余天数）。<br>
+          <b>🟡 无固定截止日的 60 行分解</b>：批外无 date_form 36＋核心段滚动 17＋未列明 5＋待核 2；可比较截止日 140 行＝200−60。<br>
+          <b>🟡 字段不同步三处</b>：① <span class="mono">source_level_cn</span> 中文分级备注仅覆盖 131 行，批外 69 行为空（英文 <span class="mono">source_level</span> 已覆盖全量 200 行，两者覆盖面不一致）；② 滚动标记三字段互不一致：<span class="mono">status=滚动招</span> 36 行 · <span class="mono">is_rolling=true</span> 65 行 · <span class="mono">date_form=rolling</span> 18 行，三标记任一处不一致的行数＝<b>65</b>（实跑口径已写明）；③ 批外 69 行占用主表编号并已计入 200 家，与「表外素材不得直接进主表」旧口径存疑 → 已列入待判，<b>不自行改口</b>。
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot"></span>200 家明细<span class="sub">内嵌快照 · 按 10-17 折算剩余天数 · 来源 timetable.json v1.0.27</span></h2>
+      <div class="chips" id="mchips">
+        <span class="chip on" data-f="all">全部 200</span>
+        <span class="chip" data-f="soon">3 天内 12</span>
+        <span class="chip" data-f="week">7 天内 18</span>
+        <span class="chip" data-f="expired">已过期 36</span>
+        <span class="chip" data-f="noday">无固定日期 60</span>
+        <span class="chip" data-f="past">招往届 31</span>
+        <span class="chip" data-f="a">A 级 36</span>
+        <span class="chip" data-f="b">B 级 87</span>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;flex-wrap:wrap">
+        <input class="search" id="mq" placeholder="搜索企业 / 行业 / 地点…">
+        <span class="pg" id="mcnt">—</span>
+      </div>
+      <div class="tscroll">
+        <table>
+          <thead><tr>
+            <th style="width:46px">序</th><th style="width:180px">企业名称</th><th style="width:82px">行业</th>
+            <th style="width:70px">性质</th><th style="width:96px">截止日</th><th class="num" style="width:74px">剩余</th>
+            <th style="width:56px">分级</th><th style="width:86px">日期形态</th><th style="width:74px">往届</th><th>备注 / 入口</th>
+          </tr></thead>
+          <tbody id="mbody"></tbody>
+        </table>
+      </div>
+      <div class="note">⚠️ 本表剩余天数按 <b>2026-10-17</b> 折算（快照源 timetable.json v1.0.27）；对外引用前须按守则 78 回权威源实跑复核。<b>60 行无固定日期</b>（批外 36 / 滚动 17 / 未列明 5 / 待核 2）不参与天数统计。</div>
+    </div>
+  </section>
+
+  <!-- ================= 4 今日新发事件 ================= -->
+  <section class="page" id="p-events">
+    <div class="panel" style="margin-top:0">
+      <h2><span class="dot g"></span>今日新发事件采集（WB205 · 10-17 已跑完）<span class="sub">每日 07:00 固化动作</span></h2>
+      <div class="grid g4">
+        <div class="kpi"><div class="lb">① 主表截止池</div><div class="vl">1<small>家</small></div><div class="ft">今日截止（华为）</div></div>
+        <div class="kpi"><div class="lb">② 已截止 7 天内</div><div class="vl">18<small>条</small></div><div class="ft">T-1…T-7 实跑（原「9 条」无出处，已纠正）</div></div>
+        <div class="kpi"><div class="lb">③ 官网来源条目</div><div class="vl">32<small>条</small></div><div class="ft">官网原文 29 ＋ 官网已核验 3（原「官方新发 14 条」无出处，已纠正）</div></div>
+        <div class="kpi hl"><div class="lb">四路覆盖</div><div class="vl">4<small>/4</small></div><div class="ft">四路全跑（WB205）· 平台 6 / 政策 4 / 企业 3 / 权威源 69</div></div>
+      </div>
+      <div class="note"><b>纪律</b>：新发事件 ≠ 可发内容。入池 → 逐家回官网核（M8 四件套：① 官网校招页 URL ② 原文摘录 ③ 截图文件名 ④ A/B/C 判定）→ 判 A/B 才进文案。判 C 不算失职，把 C 写成 A 才是重大失误。</div>
+      <div class="note">🔴 <b>四个数字的实跑口径</b>（W 2026-10-17 实跑 · 全部回 <span class="mono">timetable.json</span> 实跑）：① <span class="mono">days_from_today==0</span> → 1 家 ② <span class="mono">-7 ≤ days_from_today ≤ -1</span> → 18 条 ③ <span class="mono">verify_status</span> ∈ {官网原文 29，官网已核验 3} → 32 条 ④ WB205 四路全跑。⚠️ 原页面「9 条 / 14 条 / 命中 4 条」查无实跑出处，已按实跑口径替换（记入严谨记录台账）。</div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot y"></span>T+0 / T+1 / T+2 排期</h2>
+      <table>
+        <thead><tr><th style="width:70px">时点</th><th style="width:80px">层</th><th style="width:96px">时段</th><th>切口</th><th style="width:120px">状态</th></tr></thead>
+        <tbody>
+          <tr><td>T+0 · 10/16</td><td><span class="tag b">A</span></td><td>09:00</td><td>今天截止（安永 EY）· 说数量不说名字</td><td><span class="tag g">🟢 已发（08:48 L 回传）</span></td></tr>
+          <tr><td>T+0 · 10/16</td><td><span class="tag v">B</span></td><td>12:30</td><td>免笔试 · 反直觉结论 · 结尾抛问</td><td><span class="tag g">🟢 已发（14:1x L 上报）</span></td></tr>
+          <tr><td>T+0 · 10/16</td><td><span class="tag g">C</span></td><td>20:30</td><td>晚截止 / 往届可投 · 第一人称</td><td><span class="tag g">🟢 已发（21:3x L 上报）</span></td></tr>
+          <tr><td>T+0 · 10/17</td><td><span class="tag b">A</span></td><td>09:00</td><td>国家大学生就业服务平台 · 平台侧聚合入口（非单家）</td><td><span class="tag g">🟢 已发（08:54）</span> <span class="tag gr">🔵 平台侧审核中</span></td></tr>
+          <tr><td>T+0 · 10/17</td><td><span class="tag v">B</span></td><td>12:30</td><td>招满即止口径 · 截止日≠关门日</td><td><span class="tag g">🟢 已发（12:30 场）</span></td></tr>
+          <tr><td>T+0 · 10/17</td><td><span class="tag g">C</span></td><td>20:30</td><td>往届可投口径三分类 · ①清单式</td><td><span class="tag g">🟢 已发（20:30 场）</span></td></tr>
+          <tr><td>T+2 · 10/18</td><td><span class="tag b">A</span></td><td>09:00</td><td>三天内截止池轮转</td><td><span class="tag gr">待定稿</span></td></tr>
+        </tbody>
+      </table>
+      <div class="note">A 层防同质化排班：每天换 ≥ 2 项（切口 / 家数 / 写法 / 结构）。<span class="mono">_协作\A层时效稿防同质化排班表-20261014.md</span> · <span class="mono">SOP-A层时效稿N家口径规范-20261016.md</span></div>
+    </div>
+  </section>
+
+  <!-- ================= 5 红线与闸门 ================= -->
+  <section class="page" id="p-gate">
+    <div class="grid g2">
+      <div class="panel" style="margin-top:0">
+        <h2><span class="dot r"></span>P0 零容忍（命中即阻断）</h2>
+        <ul class="tight">
+          <li><span class="no">✕</span> 极限词（最 / 第一 / 100% / 绝对…）</li>
+          <li><span class="no">✕</span> 站外引流（微信 / 私信 / 加 V / 二维码）</li>
+          <li><span class="no">✕</span> 虚假承诺（保过 / 内推 / 必录）</li>
+          <li><span class="no">✕</span> 版权侵权（整段搬运原文）</li>
+          <li><span class="no">✕</span> 焦虑贬损（不转行就完了 / 找不到工作活该）</li>
+          <li><span class="no">✕</span> 诱导互动：<mark id="bait"></mark></li>
+        </ul>
+        <div class="note">诱导互动词族（闸门 <span class="mono">compliance_gate.py</span> v3.8 实跑词数为准）：<b>P0-A 诱饵引流 24 词</b>（自取 / 私信 / 扣1 / 评论区回复 / 加微信 / 扫码 / 二维码 / 加群 / 领取 …）＋ <b>P0-D 诱导互动 10 词</b>（求赞 / 三连 / 求关注 / 666 / 888 …），另有 P0-B 商品引导 16 词、P0-C 焦虑贬损 8 词，命中即算。</div>
+      </div>
+      <div class="panel" style="margin-top:0">
+        <h2><span class="dot r"></span>跨店同质化五维度（v4.37）</h2>
+        <ul class="tight">
+          <li><b>R1</b> 正文 Jaccard（店内）≥ 0.35 🔴</li>
+          <li><b>R2</b> 标题 ≥ 0.30 🔴</li>
+          <li><b>R3</b> 首评前 10 字逐字重复 🔴</li>
+          <li><b>R4</b> 开头 12 字逐字重复 🔴</li>
+          <li><b>R5</b> 结构签名店内 ≥ 3 篇 🔴</li>
+          <li><b>R6</b> 封面四件套 / R7 产品内核 / R8 资产互不引用</li>
+        </ul>
+        <div class="note">返回码 ≠ 0 即阻断。🔴 <b>五查测不出切口撞车</b> → 母版比对必须人工另做（<span class="mono">_协作\_参照系_最近3天\</span>）。</div>
+      </div>
+    </div>
+
+    <div class="grid g2">
+      <div class="panel">
+        <h2><span class="dot r"></span>已命中案例（真实记录）</h2>
+        <div class="cardrow"><span class="id">诱导互动</span><span class="s">「评论区扣 1」出现在正文 → 判 P0，全稿重过</span><span class="tag r">命中</span></div>
+        <div class="cardrow"><span class="id">站外引流</span><span class="s">正文写「私信发你」→ 判 P0（Skill 只能是售后附赠，交付须站内）</span><span class="tag r">命中</span></div>
+        <div class="cardrow"><span class="id">二手标注</span><span class="s">「无笔试 / 免笔试」16 家二手标注无官网依据 → 全部降级，不入文案</span><span class="tag y">降级 C</span></div>
+        <div class="cardrow"><span class="id">阈值标定</span><span class="s">R1 = 0.35 系 W×C 共同标定（依据等级 B）→ 按证据分级仅参考，不可单独改口</span><span class="tag gr">B 级依据</span></div>
+      </div>
+      <div class="panel">
+        <h2><span class="dot"></span>出稿前 8 道（缺一不过）</h2>
+        <ul class="tight">
+          <li>1 红狐选题 → 六维评分（主题15/结构20/利益25/情绪20/稀缺15/合规5）</li>
+          <li>2 二创六步（顺序铁律：二创 → 定稿 → 落档，改动即失效）</li>
+          <li>3 五查（含图内文字）</li>
+          <li>4 标题二创 5 查（T1–T5）</li>
+          <li>5 母版比对（人工 · 防切口撞车）</li>
+          <li>6 <span class="mono">compliance_gate</span>（P0）</li>
+          <li>7 字段/数字与权威源一致性（守则 78 实跑）</li>
+          <li>8 出图 strict + 三层自检 + md5 对照落档</li>
+        </ul>
+        <div class="note">顺序铁律：改标题 / 正文 / 首评 / 标签 / 图内任一处 → <b>重过全套</b>。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 6 出稿全链 ================= -->
+  <section class="page" id="p-chain">
+    <div class="panel" style="margin-top:0">
+      <h2><span class="dot"></span>三方分工（现行唯一 = C01 三方制）</h2>
+      <div class="grid g3">
+        <div class="kpi"><div class="lb">C · 策略线</div><div class="ft" style="margin-top:6px">定标准 + 终判 + 对 L 唯一汇报<br>不发布 / 不碰主表 / 不自动访问小红书</div></div>
+        <div class="kpi hl"><div class="lb">W · 内容线 + 数据线（本台）</div><div class="ft" style="margin-top:6px">出稿全链 + 桌面包 + 主表回写 + 自证四件套 + M8 核验 + 竞品双周扫 + 22:00 落库</div></div>
+        <div class="kpi"><div class="lb">L · 平台与拍板</div><div class="ft" style="margin-top:6px">平台操作 + 唯一数据源 + 拍板<br>只剩 3 件等 L：发不发 / 定价 / 大方向</div></div>
+      </div>
+      <div class="note">链路：<span class="mono">L → C 定标准 → W 执行 → L 发布 → L 回传 → W 落库 → C 复盘</span>。权威序：<b>L 最新指令 &gt; C01+v2.2 &gt; C 派工卡 &gt; W 既有卡 &gt; 归档文件</b>。AI 自定不问 L：标题 / 首评 / 配图 / 措辞 / 发布时间 / 选题微调 / 排版。</div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot y"></span>出稿十步（S1–S6 归口）</h2>
+      <table>
+        <thead><tr><th style="width:52px">步</th><th style="width:150px">动作</th><th>要点</th><th style="width:64px">归口</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>选题</td><td>红狐评分 + 六维；我方实测(A) 优先于红狐评分(B)</td><td><span class="tag v">W</span></td></tr>
+          <tr><td>2</td><td>素材核验</td><td>M8 四件套；二手属性回官网核；判 C 不落表不入文案</td><td><span class="tag v">W</span></td></tr>
+          <tr><td>3</td><td>二创六步</td><td>稿头两行（定题 / 标题二创=T1~T5 过）</td><td><span class="tag v">W</span></td></tr>
+          <tr><td>4</td><td>Humanizer</td><td>去 AI 腔（禁 not-X-but-Y、one-line pileup 等）</td><td><span class="tag v">W</span></td></tr>
+          <tr><td>5</td><td>五查</td><td>含图内文字；极限词 / 引流 / 承诺 / 侵权 / 焦虑</td><td><span class="tag v">W</span></td></tr>
+          <tr><td>6</td><td>标题 5 查</td><td>T1 近 3 天 Jaccard&lt;0.15 ｜ T2 违禁词零命中 ｜ T3 ≤20 字 ｜ T4 人群词前置 ｜ T5 换结构</td><td><span class="tag v">W</span></td></tr>
+          <tr><td>7</td><td>母版比对</td><td>人工做（五查测不出切口撞车）</td><td><span class="tag v">W</span></td></tr>
+          <tr><td>8</td><td>闸门</td><td>compliance_gate（P0；显式传路径）+ 红线五维度</td><td><span class="tag v">W</span></td></tr>
+          <tr><td>9</td><td>出图</td><td>图 1/2/3.png；改图内文字须同步正文+标签（改一处同步三处）</td><td><span class="tag v">W</span></td></tr>
+          <tr><td>10</td><td>落档与交付</td><td>三层自检 → md5 对照 → 桌面包（包根 00-先看这个.txt）</td><td><span class="tag v">W</span></td></tr>
+          <tr><td>复</td><td>审核与终判</td><td>必审不抽样；独立复核</td><td><span class="tag v">C</span></td></tr>
+          <tr><td>发</td><td>发布与回传</td><td>不经 AI 手；满 24h 回传四率</td><td><span class="tag v">L</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot g"></span>交付包标准结构</h2>
+      <pre class="cmd"><span class="cp">复制</span>20261016-ABC层\              ← 桌面「待发包-20261016-ABC层」
+├ 00-先看这个.txt              ← 包根说明：发布时间 / 层级 / 纪律提醒
+├ A-安永截止\
+│  ├ 文案.txt                  ← 标题 / 正文 / 标签 / 首评
+│  ├ 图1.png  图2.png  图3.png
+├ B-免笔试\
+└ C-晚截止\</pre>
+      <div class="note">「已交付 / 已生成」必须回磁盘取证（md5），不采信自述。</div>
+    </div>
+  </section>
+
+  <!-- ================= 7 SKU ================= -->
+  <section class="page" id="p-sku">
+    <div class="grid g3">
+      <div class="kpi hl"><div class="lb">19.9 · 应届基础（主推）</div><div class="vl">19.9<small>元</small></div>
+        <div class="ft">200 家 CSV + ① 排程器（静态）+ 单批更新<br>解禁当天（10/19）上架</div></div>
+      <div class="kpi"><div class="lb">49.9 · 跨人群订阅</div><div class="vl">49.9<small>元</small></div>
+        <div class="ft">全量 CSV + 往届字段 + 月更快照，① ⑤ 双 Skill，至 2027-04<br>顺延 10/22–24</div></div>
+      <div class="kpi"><div class="lb">99.9 · 长期锚点</div><div class="vl">99.9<small>元</small></div>
+        <div class="ft">49.9 全部 + 更新至 2027-07 + 历史归档，①⑤②④ 四 Skill<br>延后（≥10/26）</div></div>
+    </div>
+
+    <div class="grid g2">
+      <div class="panel">
+        <h2><span class="dot b"></span>上架硬前提（49.9）</h2>
+        <div class="step"><span class="dot g"></span><div class="txt"><div class="t">①「招满即止」字段</div><div class="d">已满足（主表 status＝滚动招 36 行 ／ date_form＝rolling 18 行 ／ is_rolling 65 行，三处口径互不一致，见「主表与口径」页体检）</div></div><span class="who">W</span></div>
+        <div class="step"><span class="dot r"></span><div class="txt"><div class="t">② 回写四件套跑顺一周</div><div class="d">未满足 → 49.9 顺延至 10/22–24</div></div><span class="who">W</span></div>
+        <div class="note">99.9 另需补三前提：① 人设补齐 ② 站内交付链路打通 ③ 回写四件套跑顺一周。</div>
+      </div>
+      <div class="panel">
+        <h2><span class="dot r"></span>Skill 定位（🔴 售后附赠，非商品主体）</h2>
+        <ul class="tight">
+          <li>Skill 是本地程序；站内虚拟商品交付 = 文件 / 提取码</li>
+          <li>把 Skill 当商品主体 → 必撞 P0（站外引流 / 私信）</li>
+          <li>只作「让数据更好用」的配套，<b>站内交付</b>（图文 / 录屏 / 售后群）</li>
+        </ul>
+        <div class="note">内容 ↔ SKU 精准匹配：A 层挂主推 19.9 ／ C 层挂往届 49.9 ／ B 层不挂链。禁私信领取、禁留言领取。</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot"></span>定价依据与字段路线</h2>
+      <div class="grid g2">
+        <div>
+          <b style="font-size:13px">定价依据（红狐实证 A-）</b>
+          <ul class="tight">
+            <li>高价档天花板由「人群宽度」定：跨人群中位 10000 vs 执行工具 1428（差 7 倍）</li>
+            <li>工具是窄需求、资料是宽需求；付费对象 = 内容，不是工具</li>
+            <li>29.9 档取消，并入 49.9（10-15 L 拍板）</li>
+          </ul>
+        </div>
+        <div>
+          <b style="font-size:13px">加字段 &gt; 加家数</b>
+          <ul class="tight">
+            <li>家数路线 131 → 200 → 300 已驳回</li>
+            <li>四项待补字段：招聘方向（缺 53）／是否招往届（已完成，30 行＋部分 1）／招满即止（已满足，但标记字段三处不一致）／行业城市筛选</li>
+            <li>对外家数句式：「200 家秋招企业汇总（含分类）｜123 家已核验（A/B 级）｜106 家核到硬截止日」</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot g"></span>对外家数口径 · L 已拍三段式<span class="sub">实跑 timetable.json 2026-10-16 · 依 C31 裁定</span></h2>
+      <table>
+        <thead><tr><th>对外数字</th><th style="width:230px">字段口径（实跑）</th><th style="width:150px">数值</th><th style="width:150px">是否唯一</th></tr></thead>
+        <tbody>
+          <tr><td><b>对外 200 家汇总</b>（含批外段）</td><td>companies 数组长度 ＝ <span class="mono">meta.company_count</span></td><td class="mono">200</td><td><span class="tag g">🟢 L 已拍 · 对外用</span></td></tr>
+          <tr><td><b>内部 123 家已核验（A/B 级）</b></td><td><span class="mono">source_level</span> ∈ {A,B}，全量 200 口径（A36＋B87，其中 52 行来自批外段）</td><td class="mono">123</td><td><span class="tag g">🟢 L 已拍 · 对外用</span></td></tr>
+          <tr><td><b>71 家核心</b>（＝131 核心口径）</td><td>131 核心段（<span class="mono">source_level_cn</span> 非空）内 A/B＝A36＋B35</td><td class="mono">71</td><td><span class="tag b">🟢 L 已定 · 仅内部</span></td></tr>
+          <tr><td>123 家可直达投递入口<br><span class="sub">（另一口径，不入对外句式）</span></td><td><span class="mono">apply_url_status=link</span> 恰为 123，但与 A/B 集<b>仅 70 家重合</b></td><td class="mono">123</td><td><span class="tag b">备用指标</span></td></tr>
+          <tr><td><b>106 家核到硬截止日</b></td><td><span class="mono">date_form='hard'</span></td><td class="mono">106</td><td><span class="tag g">唯一</span></td></tr>
+        </tbody>
+      </table>
+      <div class="note">🟢 <b>结论（L 2026-10-16 拍板 · C31）</b>：对外统一为「<b>200 家汇总 ／ 123 家已核验（A/B 级）</b>」，131 退役；「<b>71 家核心</b>」＝131 核心口径，<b>仅内部用、不对外</b>（是否对外另行拍板）。「123 家可直达投递入口」为另一口径（与 A/B 集仅 70 家重合），列为备用指标、不入对外句式。三组数字已于 2026-10-16 09:5x 回 <span class="mono">timetable.json</span> 实跑复现：A＋B＝123 ／ link＝123 ／ 重合 70 ／ 核心段 131 ／ 段内 A/B＝71 ／ hard＝106。</div>
+    </div>
+  </section>
+
+  <!-- ================= 8 技能中枢 ================= -->
+  <section class="page" id="p-skills">
+    <div class="panel" style="margin-top:0">
+      <h2><span class="dot"></span>本台可调用的能力（12 项）<span class="sub">全部为本地脚本 / 已固化动作 / 自动化</span></h2>
+      <div class="grid g3" id="skillgrid"></div>
+    </div>
+    <div class="panel">
+      <h2><span class="dot g"></span>自动化任务</h2>
+      <table>
+        <thead><tr><th>任务</th><th style="width:150px">时间</th><th>产出</th><th style="width:96px">状态</th></tr></thead>
+        <tbody>
+          <tr><td>四率回传落库</td><td>每日 21:30</td><td>曝光/观看 · 赞藏评 · 涨粉 · 店铺访问 → 台账</td><td><span class="tag g">生效中</span></td></tr>
+          <tr><td>当日复盘</td><td>每日 22:00</td><td>比率口径复盘（看比率不看绝对值）</td><td><span class="tag g">生效中</span></td></tr>
+          <tr><td>新发事件采集</td><td>每日 07:00</td><td>四路采集 → 新发事件池 + T+0/T+1/T+2</td><td><span class="tag g">已固化</span></td></tr>
+          <tr><td>无人值守 · C 侧</td><td>07:30 / 10:00 / 19:00 / 22:30</td><td>A1 早间实跑 · A2+A2b 读卡裁定 · A4 索引核对 · A5 周报（周一）· A6a/A6b 节点提醒；只做清点/校验/草案/写卡，不做判定</td><td><span class="tag g">已建 7 条</span></td></tr>
+          <tr><td>无人值守 · W 侧</td><td>09:00 / 14:00 / 20:00 / 23:00</td><td>B1 首轮读卡执行（含竞品拆解第 0 步）· B2 二轮 · B3 三轮 · 日终收口（错误登记＋索引核对＋看板回写）；提示词自包含，含黑名单八禁与医美隔离<br>🆕 <b>10/16 已落实「无会话记忆」启动包</b>：§二 通用前缀（第 0 步先读盘 5 处）已前置到 B1–B4（原正文逐字保留）；B1 已加一次性哨兵探针，<b>首次生效 10/17 09:00</b></td><td><span class="tag g">已建 4 条 · 已加前缀</span></td></tr>
+        </tbody>
+      </table>
+      <div class="note">无人值守三条前提：① 只做四类动作（清点 / 校验 / 生成草案 / 写卡）② 判定权不下放 ③ 每次运行留痕防重复。黑名单：不发布、不触达、不花钱、不改口径。</div>
+    </div>
+  </section>
+
+  <!-- ================= 9 卡片流 ================= -->
+  <section class="page" id="p-cards">
+    <div class="grid g4">
+      <div class="kpi"><div class="lb">C 卡号</div><div class="vl">C34</div><div class="ft">已启用至 C34（C32／C33／C34 三轮裁定）</div></div>
+      <div class="kpi"><div class="lb">WB 卡号</div><div class="vl">WB195</div><div class="ft">接续递增 · 发卡前查索引＋现场双源</div></div>
+      <div class="kpi"><div class="lb">停用</div><div class="vl">DB<small>/ ZL</small></div><div class="ft">DB 停用 · ZL 作废</div></div>
+      <div class="kpi hl"><div class="lb">读卡通道</div><div class="vl">inbox</div><div class="ft">W 只读 <span class="mono">_协作\inbox\</span></div></div>
+    </div>
+    <div class="panel">
+      <h2><span class="dot"></span>最新卡片流（新 → 旧）<span class="sub">发卡前查双源：卡索引 ＋ inbox 现场，禁凭记忆递增</span></h2>
+      <div id="cardlist"></div>
+    </div>
+    <div class="grid g2">
+      <div class="panel">
+        <h2><span class="dot b"></span>W 固定节奏 <span class="sub">C24 时间校准（2026-10-16 取代 C21–C23 时点）</span></h2>
+        <ul class="tight">
+          <li><b>09:00 首轮</b>：① 竞品拆解（第 0 步，按 SOP 出 <span class="mono">_协作\竞品日报\</span>）② 读 inbox 卡 → 执行 → 回写看板</li>
+          <li><b>14:00</b>：读卡执行（二轮）</li>
+          <li><b>20:00</b>：读卡执行（三轮）</li>
+          <li><b>23:00 日终收口</b>：卡片闭环检查 ＋ 自身错误登记 ＋ 索引登记核对</li>
+          <li>每日 21:30 回传四率 · 22:00 落库 + 复盘（比率口径）</li>
+          <li>每周日 22:00 前周报：本周产出 / 主表状态 / 数据 / 阻塞项</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h2><span class="dot y"></span>三级授权（R 级）<span class="sub">L 职责表 §五 · 让 L 的判定次数再减一档</span></h2>
+        <ul class="tight">
+          <li><span class="tag g">A 级</span> <b>可直接做</b>：技术性、可逆、无对外（未发布稿删唯一性断言 / md5 冲突以落档覆盖桌面）→ <b>不用问，做完报备</b></li>
+          <li><span class="tag y">B 级</span> <b>24h 静默同意</b>（可选开启）：低风险、可逆、不涉对外（素材顺序调整 / 库存稿替换 / 表述降级）→ L 不回即按建议执行并留痕</li>
+          <li><span class="tag r">C 级</span> <b>必须 L 亲口</b>：发布 / 上架下架改价 / 对外触达 / 花钱 / 接客户与报价 / 主表结构性改动 → <b>永不静默</b></li>
+          <li><span class="tag b">出口</span> <b>W 侧待拍一律发请判卡到 C</b>（L 2026-10-16 08:59 指令）：W <b>不再用提问方式直接找 L</b> → 写 <span class="mono">outbox\请判卡-XHS-YYYYMMDD-WB&lt;号&gt;-&lt;摘要&gt;.md</span>（四段：事项／背景与证据／方案与代价／W 倾向<b>标「建议」</b>）→ <b>C 汇总 → L 统一拍板</b>；可自决事项不进请判卡</li>
+          <li class="note" style="list-style:none;margin-left:-6px">现状：A 级已授权两条（零素材切换 · 删唯一性断言）＋ md5 覆盖桌面也可做；C 级永远保留；B 级是否开启由 L 定。请判卡首张 <b>WB190</b>（4 件待拍）。</li>
+        </ul>
+      </div>
+    </div>
+    <div class="panel">
+      <h2><span class="dot g"></span>反空转三件（无活时必推的资产型工作）<span class="sub">C22 · 把「窗口一关就归零」换成「关不关我都有存量」</span></h2>
+      <ul class="tight">
+        <li>① <b>内容库存</b>：每天补 1 篇已定稿（目标滚动 ≥6 篇），不看发布节奏</li>
+        <li>② <b>主表字段维护</b>：自证四件套回写，版本递增，来源等级标注</li>
+        <li>③ <b>医美线去豆包化</b>：诊断包全部改用我方实测数据</li>
+      </ul>
+      <div class="note">任何一轮手头没别的活，就去推这三项，不许空转。</div>
+    </div>
+  </section>
+
+  <!-- ================= 10 风险与待判 ================= -->
+  <section class="page" id="p-risks">
+    <div class="panel" style="margin-top:0">
+      <h2><span class="dot r"></span>风险清单</h2>
+      <div class="grid g3">
+        <div class="kpi"><div class="lb">🔴 高</div><div class="ft" style="margin-top:6px">
+          · 处罚期违规内容删除未收口（6/10）→ 直接影响解禁（<b>10/19 16:00</b>）<br>
+          · 报白<b>下周才出结果</b>（L 20:0x）→ 等通知；10/20–22 提交窗是否顺延<b>由 L 定</b><br>
+          · 主表 34 家已过期 + 60 行无固定日期 → A 层断料（7 天内可写仅 18 行，3 天内 11 行）</div></div>
+        <div class="kpi"><div class="lb">🟡 中</div><div class="ft" style="margin-top:6px">
+          · 转化率 0.02% vs 目标 0.25%（差 12 倍）；首单 10/12 后 6 天无新成交（北极星 1/30）<br>
+          · 评论率 0.56% 是唯一未达标指标<br>
+          · 字段不同步三处未收口：①「123 家」双口径歧义 → <b>🟢 已裁定（C31 · 10-16）</b>：对外 200／123，71 家核心仅内部② 滚动标记三字段互不一致（status 36 行／is_rolling 65 行／date_form 18 行）③ 批外 69 行（132–200）占用主表编号且无中文分级备注</div></div>
+        <div class="kpi"><div class="lb">🟢 低</div><div class="ft" style="margin-top:6px">
+          · 36/131 行有 source_url（核心段实跑 36；全量 40/200）<br>
+          · 分级口径曾于本页误读为「A33/B37 → A+B=70」（实为 36/87 → 123），2026-10-16 自查修正并留痕</div></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot y"></span>待判清单（等 L / C 拍板 · 自动化只列不判）<span class="sub">W 侧出口＝请判卡 → C（L 2026-10-16 08:59）</span></h2>
+      <div id="pendlist"></div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot"></span>九条铁律（逐条对应真实错误）</h2>
+      <div class="grid g2">
+        <ul class="tight">
+          <li><b>R1</b> 禁止用确定性措辞承载不确定依据</li>
+          <li><b>R2</b> 红狐等工具服务不得越权代行判定</li>
+          <li><b>R3</b> 禁止「为把内容写满而编」</li>
+          <li><b>R4</b> 二手标注必回官网核，官网无表述即判 C</li>
+          <li><b>R5</b> source_url 三条款（第三方最高 B / 须指校招页 / 日期须附摘录）</li>
+        </ul>
+        <ul class="tight">
+          <li><b>R6</b> 数字必回权威源实跑，不采信单方报告（守则 78）</li>
+          <li><b>R7</b> 状态类断言先回磁盘取证，取不到就写「无法查证」</li>
+          <li><b>R8</b> 对外口径一条只落一个权威文件</li>
+          <li><b>R9</b> 图内文字改一处同步三处（正文 / 标签 / 图内）</li>
+        </ul>
+      </div>
+      <div class="note">根因只有两个：① 取证不完整就下结论 ② 结论不受数据约束。凡涉数字 / 日期 / 状态，先实跑再落笔。</div>
+    </div>
+  </section>
+
+  <!-- ================= 11 医美线 ================= -->
+  <section class="page" id="p-medical">
+    <div class="panel" style="margin-top:0">
+      <h2><span class="dot b"></span>医美线 · 0 → 第一笔 ¥3000<span class="sub">本页内容由 C 维护 · W 不执行（隔离铁律）· 我方实测优先于二手登记</span></h2>
+      <div class="grid g4">
+        <div class="kpi"><div class="lb">赛道结论</div><div class="vl" style="font-size:16px">抖音</div>
+          <div class="ft">小红书对医美＝负和博弈，已彻底放弃</div></div>
+        <div class="kpi"><div class="lb">入池门槛</div><div class="vl" style="font-size:16px">H1–H4</div>
+          <div class="ft">四门槛逐条核 · 已剔维多利亚 / 艺星</div></div>
+        <div class="kpi"><div class="lb">诊断包</div><div class="vl">3<small>份</small></div>
+          <div class="ft">美熙 · 媚颜 · 悠美丽思（批 2 出稿中）</div></div>
+        <div class="kpi hl"><div class="lb">首单（里程碑）</div><div class="vl">¥3000</div>
+          <div class="ft">首案赚案例不赚钱 · 钱在第 2、3 家</div></div>
+      </div>
+      <div class="note">一句话现状：<b>卡在「诊断包数据补完」</b>。首案的真实价值＝用 ¥3000 打样换一份可复制的案例资产；后续客户全靠项项引荐（止损线：项项签约后 30 天内引荐不出第二家即停）。</div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot y"></span>节点链（0 → 第一笔回款）<span class="sub">谁在做 / 谁在等谁</span></h2>
+      <div class="step"><span class="dot gr"></span><div class="txt"><div class="t">1 · L1 候选池核验（20 家清单）</div><div class="d">🟡 执行中 · L 按 P0–P5 逐条核 · 美团截图 22 家门店中 21 家显「医疗资质」，UY+优颜嘉已补核</div></div><span class="who">L</span></div>
+      <div class="step"><span class="dot y"></span><div class="txt"><div class="t">2 · 诊断包出稿（3 份）</div><div class="d">美熙 v1.2 定稿可发 · 媚颜 v1.0 可发 · 悠美丽思（批 2）10/16 20:00 交稿</div></div><span class="who">C/W</span></div>
+      <div class="step"><span class="dot g"></span><div class="txt"><div class="t">3 · 补诊断包数据（屏 2 同行 3 家）</div><div class="d">🟢 已回填 · 口径裁定：跨平台允许 / 停更降级 / 水位兜底（C14）</div></div><span class="who">C</span></div>
+      <div class="step"><span class="dot g"></span><div class="txt"><div class="t">4 · C 抽检美熙</div><div class="d">🟢 通过 · v1.2 定稿可发（数据全实证、零豆包源）</div></div><span class="who">C</span></div>
+      <div class="step"><span class="dot gr"></span><div class="txt"><div class="t">5 · 长图渲染</div><div class="d">媚颜 v1.0 已就绪 · 等 C 单独派工（避开与批 2 抢产能）</div></div><span class="who">W</span></div>
+      <div class="step"><span class="dot r"></span><div class="txt"><div class="t">6 · L 首触项项</div><div class="d">🔴 待 L · 今晚 20:00–21:30 放一次好奇心钩子；周日不回则冷藏两周</div></div><span class="who">L</span></div>
+      <div class="step"><span class="dot gr"></span><div class="txt"><div class="t">7 · 约谈 + 报价</div><div class="d">C3 话术与异议应答 · 以抖音为主通道</div></div><span class="who">L</span></div>
+      <div class="step"><span class="dot gr"></span><div class="txt"><div class="t">8 · 签约</div><div class="d">C4 条款模板 · 媚焕公司主签 · 签约前须核《医疗机构执业许可证》原件（G1）</div></div><span class="who">L</span></div>
+      <div class="step"><span class="dot gr"></span><div class="txt"><div class="t">9 · 收款 ¥3000（里程碑）</div><div class="d">首案定位＝买案例资产，不作为现金流</div></div><span class="who">—</span></div>
+    </div>
+
+    <div class="grid g2">
+      <div class="panel">
+        <h2><span class="dot b"></span>候选池四门槛（H1–H4）<span class="sub">按此判入池，不凭感觉</span></h2>
+        <table>
+          <thead><tr><th style="width:66px">门槛</th><th style="width:180px">判定</th><th>实测结果</th></tr></thead>
+          <tbody>
+            <tr><td><b>H1</b> 资质</td><td>美团「医疗资质」标签 或《医疗机构执业许可证》</td><td>22 家门店中 21 家显标签，1 家（UY+优颜嘉）补核通过</td></tr>
+            <tr><td><b>H2</b> 单店</td><td>台州同品牌门店 ≤3 家通过；≥4 家剔除</td><td>🔴 维多利亚（4 条记录）、Yestar 艺星（全国 53 城 60+ 院）已剔</td></tr>
+            <tr><td><b>H3</b> 内容</td><td>作品 ≥10 条 且 近 10 条点赞中位 &lt;100</td><td>🟢 过：美熙 693 条／中位约 2；媚颜 26 条／中位约 1；悠美丽思 12 条／中位 18</td></tr>
+            <tr><td><b>H4</b> 更新</td><td>最近一条在 2026-09-15 之后</td><td>🔵 不过：臻颜（2025-11-11）、华荟（2026-07-13）、临海安禾（2025-05-30）</td></tr>
+          </tbody>
+        </table>
+        <div class="note">🔴 已定、不再重复列：<b>恩璨、联合丽格·丽雅丽格、海辰（2 店）、星美会、温岭臻美、维德、裕雅、花漾、天台熹颜</b> 属「无线上运营」，不再花时间。</div>
+      </div>
+      <div class="panel">
+        <h2><span class="dot r"></span>当前卡点与下一个动作<span class="sub">按优先级</span></h2>
+        <ul class="tight">
+          <li><b>卡点</b>：批 2 悠美丽思诊断包未交稿 → C 无稿可抽检；媚颜长图在排队等派工。</li>
+          <li><b>① W</b>：批 2 悠美丽思诊断包 → 10/16 20:00 交稿 → C 抽检。</li>
+          <li><b>② C</b>：单独给媚颜长图派工，避免与批 2 抢产能。</li>
+          <li><b>③ L</b>：今晚 20:00–21:30 项项好奇心钩子（不提钱、不报价，先要一个回复）。</li>
+          <li><b>④ W（持续）</b>：其余诊断包数据去豆包化，全部改用我方实测数据。</li>
+        </ul>
+        <div class="note">⚠️ 数据源纪律：豆包（D）已退出，<b>不再采信单方报告</b>。悠美丽思一项实测即发现三处偏差（笔记数 −3、点赞中位低估 44%、更新日期疑似差数天）→ 靠 H4 做出的取舍须全量重核。</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot r"></span>红线与隔离铁律（与分工铁律同级）</h2>
+      <div class="grid g2">
+        <ul class="tight">
+          <li>🔴 小红书对医美＝负和博弈，<b>彻底放弃，只做抖音</b>（项项个人号 4607 粉）。</li>
+          <li>🔴 首案赚案例不赚钱，<b>别拿它当现金流</b>；止损＝签约后 30 天内引荐不出第二家。</li>
+          <li>🔴 定题与文案一律过 <span class="mono">04-医美违禁词库v1与定题评分口径（C5）</span>。</li>
+        </ul>
+        <ul class="tight">
+          <li><span class="mono">_协作\医美线\</span> <b>不是</b> W 的读卡通道；W 的读卡通道只有 <span class="mono">_协作\inbox\</span>。</li>
+          <li>医美文件默认不读、不执行、不引用；只有 inbox 出现指派给 W 的医美「指路卡」才读。</li>
+          <li>绝不把医美内容混进求职号稿件 / 主表 / 发布包 / 桌面待发包。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 12 爆款案例拆解分析 ================= -->
+  <section class="page" id="p-cases">
+    <div class="panel" style="margin-top:0">
+      <h2><span class="dot g"></span>爆款案例拆解分析<span class="sub">W 每日 09:00 拆 1 篇 → C 10:00 审核（C28 §三·4 校准）→ 采纳项进推进看板并派生落地卡</span></h2>
+      <div class="note" style="margin-top:0">本页是<b>拆解结论的沉淀处</b>，不是参考视频的复刻对照。依据 <span class="mono">_协作\竞品拆解SOP-每日-20261016.md</span> 与 <span class="mono">竞品拆解框架v2_20261015.md</span>。<b>写法与结构可学，文案不可搬。</b></div>
+      <table>
+        <thead><tr><th style="width:46px">维</th><th style="width:130px">拆什么</th><th>每维必答的证据要求（无证据写「未取到」，不许编）</th></tr></thead>
+        <tbody>
+          <tr><td><b>A</b></td><td>笔记风格</td><td>封面风格 / 内页结构 / 内容类型占比 / 发布频率 / 单篇数据 / 互动引导方式 —— 至少给 3 篇的赞·藏·评原始值并注明抓取日期</td></tr>
+          <tr><td><b>B</b></td><td>SKU 布局</td><td>档数 / 价格区间 / 分层逻辑 / 原价锚定 / 热销标签位置 / 社会认同标签 / 紧迫感设计 —— 价格与已售数写具体数值，页面没有写「无」</td></tr>
+          <tr><td><b>C</b></td><td>产品包装</td><td>定价设计 / 卖点写法 / 好评截图 / 自动发货 / 视觉包装 / 产品延伸 —— 卖点须逐句摘录且不超过 20 字并注明位置</td></tr>
+          <tr><td><b>D</b></td><td>转化闭环</td><td>流量入口 / 信任建立 / 下单路径 / 交付体验 —— 下单路径须写清步数</td></tr>
+          <tr><td><b>E</b></td><td>赛道优势</td><td>成本 / 受众 / 差异化 / 售后压力 —— 推断必须标【推断】并写成立条件</td></tr>
+          <tr><td><b>F</b></td><td>笔记内容结构</td><td>开头怎样 / 中间怎样 / 结尾怎样（一句话概括）＋ 结构好处 ＋ 可复用点</td></tr>
+        </tbody>
+      </table>
+      <div class="note">📌 选对象配比 <b>求职 4 天 : 医美 3 天</b>；优先<b>有成交证据</b>的竞品；对象与笔记均须近 30 天活跃；与最近 7 天已拆对象不重复。篇幅上限 <b>800 字</b>——写满一页不等于拆得好。</div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot b"></span>案例一 · 红狐高评论钩子实证（样本 203 篇）<span class="sub">内部数据 · 不得对外</span></h2>
+      <div class="grid g3">
+        <div class="kpi"><div class="lb">评论 / 点赞 比值最高</div><div class="vl">154.65</div><div class="ft">《双非逆袭985，上岸湖南大学》3557 评论 vs 23 点赞</div></div>
+        <div class="kpi"><div class="lb">命中率最高的结构</div><div class="vl">44<small>%</small></div><div class="ft">「人群点名」7 / 16 篇（高评论篇 n=16）</div></div>
+        <div class="kpi"><div class="lb">命中率最低</div><div class="vl">0<small>%</small></div><div class="ft">召唤评论 / 两难 / 情绪词 / 反直觉 / 求助式 全为 0</div></div>
+      </div>
+      <table>
+        <thead><tr><th style="width:210px">标题结构标签</th><th style="width:130px">高评论篇命中</th><th>结论</th></tr></thead>
+        <tbody>
+          <tr><td><b>人群点名</b>（XX 生 / XXer / 双非）</td><td><span class="tag g">7 / 16 · 44%</span></td><td>🟢 唯一高命中的结构，优先抄</td></tr>
+          <tr><td>疑问句 / 吗 / ？</td><td><span class="tag y">3 / 16 · 19%</span></td><td>🟡 有效，但只在点名到具体人群时才生效</td></tr>
+          <tr><td>召唤评论（说说 / 聊聊 / 来）</td><td><span class="tag r">0 / 16</span></td><td>🔴 不要再用「评论区聊聊」这类空召唤</td></tr>
+          <tr><td>两难选择（还是 / 或）</td><td><span class="tag r">0 / 16</span></td><td>🔴 不代表有效</td></tr>
+          <tr><td>情绪词（崩 / 哭 / 焦虑）</td><td><span class="tag r">0 / 16</span></td><td>🔴 不代表有效（与案例二「情绪型 1934 赞」不冲突：一个测标题结构，一个测内容类型）</td></tr>
+          <tr><td>反直觉（别 / 其实 / 居然）</td><td><span class="tag r">0 / 16</span></td><td>🔴 与案例三我方实测一致：反直觉写法最差</td></tr>
+          <tr><td>求助式（怎么办 / 怎么跟）</td><td><span class="tag r">0 / 16</span></td><td>🔴 不代表有效</td></tr>
+        </tbody>
+      </table>
+      <div class="note">反例校正（同样是提问，评论却极低）：《双非本科人请进‼️3步轻松捡漏神仙offer～》点赞 4496 / 评论 6；《应届生求职提前做好准备，谁说毕业＝失业？》点赞 1410 / 评论 0。<b>结论：点名人群 &gt; 单纯提问。</b></div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot y"></span>案例二 · 竞品 Top10 高流量笔记（2026-10-15 06:3x 搜索列表采集）</h2>
+      <div class="grid g4">
+        <div class="kpi" style="padding:11px 13px"><div class="lb">名单 / 汇总型</div><div class="vl" style="font-size:18px">4<small>/10</small></div><div class="ft">40% · 我方主战场</div></div>
+        <div class="kpi" style="padding:11px 13px"><div class="lb">方法 / 指南型</div><div class="vl" style="font-size:18px">3<small>/10</small></div><div class="ft">30% · <b>我方缺口</b></div></div>
+        <div class="kpi" style="padding:11px 13px"><div class="lb">节点 / 提醒型</div><div class="vl" style="font-size:18px">2<small>/10</small></div><div class="ft">20% · 我方在做</div></div>
+        <div class="kpi" style="padding:11px 13px"><div class="lb">情绪 / 吐槽型</div><div class="vl" style="font-size:18px">1<small>/10</small></div><div class="ft">10% · 我方完全没有</div></div>
+      </div>
+      <table>
+        <thead><tr><th style="width:110px">结构型</th><th style="width:260px">代表案例</th><th>开头 / 中间 / 结尾</th></tr></thead>
+        <tbody>
+          <tr><td>① 时间线·方法型</td><td>offer 先生《国庆后找工作的时间线》<span class="tag g">2519 赞 · Top1</span></td><td>痛点开头 → 时间线 / 步骤 → 引导。实用价值高、收藏率高、长尾流量好</td></tr>
+          <tr><td>② 情绪开头 + 名单主体</td><td>酒酿小柚《27届毕业生是犯了天条吗？》<span class="tag g">1934 赞 · Top3</span></td><td>吐槽拉共鸣 → 放名单 / 干货 → 引导互动。情绪入口传播力强于纯信息入口</td></tr>
+          <tr><td>③ 紧迫感开头 + 截止名单</td><td>橙职《今天截止的秋招！（10.10）》<span class="tag g">1326 赞 · Top5</span></td><td>「今天截止！」制造紧迫 → 具体名单 → 引导收藏。节点型收藏率高</td></tr>
+          <tr><td>④ 人设背书 + 经验分享</td><td>果果学姐《银行秋招真的要开始爆发了！赶紧准备🥹》<span class="tag b">839 赞</span></td><td>人设开头 → 点出趋势 → 给建议。第一人称拉近距离</td></tr>
+        </tbody>
+      </table>
+      <div class="note">三条可直接用的结论：<b>①</b> 高赞笔记都命中<b>搜索长尾词</b>（时间表 / 截止名单 / 往届生）→ 本赛道主要吃搜索流量，不是推荐流量；<b>②</b> 人设型账号占 5/10，「我整理的 / 我分享一下」优于「你应该」；<b>③</b> 赞数断层明显——Top3 为 1800–2500，腰部 600–850，尾部 470–620。<br>⚠️ 未取到：<b>B SKU 布局 / C 产品包装 / D 下单路径</b>（需登录点进笔记与商品页），按 SOP 记「未取到」，<b>不得当结论使用</b>。</div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot g"></span>案例三 · 我方三层实测（L 回传口径，截至 10-15）<span class="sub">写法 &gt; 方向</span></h2>
+      <div class="grid g4">
+        <div class="kpi"><div class="lb">清单型写法</div><div class="vl" style="font-size:18px">0.250</div><div class="ft">评论率最高 · 继续加码</div></div>
+        <div class="kpi"><div class="lb">第一人称写法</div><div class="vl" style="font-size:18px">0.191</div><div class="ft">C 层主力</div></div>
+        <div class="kpi"><div class="lb">单家写法</div><div class="vl" style="font-size:18px">0.108</div><div class="ft">效果一般</div></div>
+        <div class="kpi"><div class="lb">反直觉写法</div><div class="vl" style="font-size:18px">0.075</div><div class="ft">最差 · 减少使用</div></div>
+      </div>
+      <div class="note">同一选题下，<b>写法带来的评论率差 3.3 倍</b>（0.250 ÷ 0.075）。这与案例一「反直觉 0%」、案例二「方法型更优」交叉验证：<b>定题之后先改写法，而不是急着换方向</b>。分层看：B 层（互动涨粉）评论率中位 0.171；C 层（往届生收藏）最高 0.191。</div>
+    </div>
+
+    <div class="grid g2">
+      <div class="panel">
+        <h2><span class="dot g"></span>✅ 可复用点（每条必须带落点）</h2>
+        <ul class="tight">
+          <li><b>【动作】</b>首评与结尾 CTA 一律写成「人群点名」型（如「往届生 / 双非的宝子」），不写空召唤。<br><b>【落点】</b>每日首评包 ＋ <span class="mono">评论区钩子话术库-XHS</span>。<br><b>【依据】</b>案例一：人群点名 44%、疑问句 19%、其余五类均为 0%。</li>
+          <li><b>【动作】</b>每周排 1 篇「时间线 / 方法型」稿（不只给名单，还给步骤），作 A 或 B 层候选。<br><b>【落点】</b>推进看板在办 #5／#6 内容库存。<br><b>【依据】</b>案例二：方法型 3/10，Top1 即方法型（2519 赞）；我方当前无此结构。</li>
+          <li><b>【动作】</b>把「写法」写进定题评分口径的加权项（清单 &gt; 第一人称 &gt; 单家 &gt; 反直觉）。<br><b>【落点】</b><span class="mono">选题定题SOP-红狐评分法</span> 与 C5 定题评分口径。<br><b>【依据】</b>案例三：0.250 / 0.191 / 0.108 / 0.075。</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h2><span class="dot r"></span>❌ 不可复用 / 风险</h2>
+        <ul class="tight">
+          <li>🔴 <b>可学结构，不可搬文案</b>——竞品原文照搬进我方稿件即违规。</li>
+          <li>🔴 <b>未取到的维度不得当结论</b>：B / C / D 三维当前均为「未取到」。</li>
+          <li>🟡 竞品 Top10 是<b>搜索列表口径</b>（只看得到赞数与发布时间），不能当曝光或转化基准。</li>
+          <li>🟡 红狐样本<b>只给评论数、不给评论原文</b>，故只能证明「标题结构 → 高评论」的相关性，不能证明因果。</li>
+          <li>🔴 红狐数据<b>仅供内部</b>，不得出现在任何对外交付物；样本 n&lt;5 的方向不下结论。</li>
+          <li>🔴 不采集竞品评论区用户信息；医美线拆解不得复制任何医疗宣传素材（效果图 / 术前术后 / 患者形象）。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot g"></span>案例四 · 首拆实证 · 牛马学姐🐮（矩阵号）<span class="sub">2026-10-16 · 红狐实跑 · 待 C 审核</span></h2>
+      <div class="grid g4">
+        <div class="kpi" style="padding:11px 13px"><div class="lb">选中理由</div><div class="vl" style="font-size:16px">成交证据</div><div class="ft">SOP 来源优先级 #1 · 全库唯一已知成交证据</div></div>
+        <div class="kpi" style="padding:11px 13px"><div class="lb">已售（B 级）</div><div class="vl" style="font-size:18px">1507<small> 件</small></div><div class="ft">评价 500+ · 评分 4.6（10-13 快照，本轮未复核）</div></div>
+        <div class="kpi" style="padding:11px 13px"><div class="lb">近 30 天样本</div><div class="vl" style="font-size:18px">5<small> 篇</small></div><div class="ft">09-16～09-27 · 赞/藏/评原始值来自红狐 API</div></div>
+        <div class="kpi" style="padding:11px 13px"><div class="lb">篇幅</div><div class="vl" style="font-size:18px">695<small> 汉字</small></div><div class="ft">≤800 字上限 · 未取到处一律标「未取到」</div></div>
+      </div>
+      <div class="note" style="margin-top:0">产出：<span class="mono">_协作\竞品日报\2026-10-16-拆解-牛马学姐.md</span>。去重声明：该号 10-13 已由 D 拆过<b>商品页/SKU 层</b>，本轮拆<b>笔记层</b>（赞藏评原始值＋正文结构），故属同账号不同层，<b>是否触发 P3 退回交 C 判</b>。</div>
+      <div class="grid g2">
+        <div class="panel">
+          <h2><span class="dot g"></span>✅ 可复用点（3 条，均带落点）</h2>
+          <ul class="tight">
+            <li><b>【动作】</b>清单条目固定加「可投届数区间」列（如 25/26/27届）。<br><b>【落点】</b>往届生线稿（看板在办 #6／#7，10/17–18 出稿）清单格式。<br><b>【依据】</b>09-16／09-24／09-27 三篇 45 条<b>全部</b>带届数区间；09-24 篇藏 1277。</li>
+            <li><b>【动作】</b>正文改「反常识一问 → 编号清单 → 一句核验提示」，不用情绪句收尾。<br><b>【落点】</b>下一批稿件稿头结构模板 ＋ 看板在办 #5 库存补稿。<br><b>【依据】</b>三篇开场均为澄清句，藏/赞 0.75 / 0.80 / 0.94。</li>
+            <li><b>【动作】</b>话题标签固化为 9–10 个固定组，人群词写进标签。<br><b>【落点】</b>发布包标签字段模板。<br><b>【依据】</b>5 篇标签高度一致（#秋招有路子 #往届生求职 #27届秋招）。</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h2><span class="dot r"></span>❌ 不可复用 / 风险</h2>
+          <ul class="tight">
+            <li>🔴 <b>「招满即止」</b>（09-24 篇 15 家中 11 家）不可核验，与守则1＋逐家核官网冲突，<b>禁用</b>。</li>
+            <li>🔴 <b>「免笔试」</b>（09-27 正文）命中红线（结果暗示），<b>不可抄</b>。</li>
+            <li>🔴 09-21 正文夹带第三方 AI 工具并写「第 7 天收到面试邀请」——植入＋效果暗示，<b>不可学</b>。</li>
+            <li>🔴 矩阵号（主号/往届版/校招版）与铁律 12「只做 1 个主号」冲突；结尾「查阅…表格👇👇」属站内引流、笔记不豁免（守则 37），改写成「领取」即 P0，<b>只能删句</b>。</li>
+            <li>🟡 成交数为 10-13 快照、赞藏为 10-16 快照，均 <b>B 级非今日实测</b>；依 SOP §七·4 <b>不得对外披露来源</b>。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2><span class="dot g"></span>案例五 · 2026-10-17 · 刚刚（秋招版）<span class="sub">2026-10-17 · 红狐实跑（非降级）· 待 C 审核</span></h2>
+      <div class="grid g4">
+        <div class="kpi" style="padding:11px 13px"><div class="lb">选中理由</div><div class="vl" style="font-size:16px">命中最多</div><div class="ft">优先级 #1 今日无可用对象 → 落 #2 高互动账号</div></div>
+        <div class="kpi" style="padding:11px 13px"><div class="lb">近 30 天样本</div><div class="vl" style="font-size:18px">4<small> 篇</small></div><div class="ft">09-20～10-10 · 两轮 13 词命中 · 赞/藏/评原始值</div></div>
+        <div class="kpi" style="padding:11px 13px"><div class="lb">单篇峰值</div><div class="vl" style="font-size:18px">1209<small> 赞</small></div><div class="ft">09-24「国庆节前即将截止的秋招汇总」藏 1142 / 评 313</div></div>
+        <div class="kpi" style="padding:11px 13px"><div class="lb">篇幅</div><div class="vl" style="font-size:18px">740<small> 汉字</small></div><div class="ft">≤800 上限 · 未取到处一律标「未取到」</div></div>
+      </div>
+      <div class="note" style="margin-top:0">产出：<span class="mono">_协作\竞品日报\2026-10-17-拆解-刚刚秋招版.md</span>。去重声明：与 10-16 拆的牛马学姐<b>不同账号</b>；本号近 30 天活跃（09-20～10-10）。🔴 B / C 维<b>未取到</b>（红狐仅笔记层，无商品页）。</div>
+      <div class="grid g2">
+        <div class="panel">
+          <h2><span class="dot g"></span>✅ 可复用点（3 条，均带落点）</h2>
+          <ul class="tight">
+            <li><b>【动作】</b>岗位表固定三列＝<b>企业类型／base地／有无笔试</b>。<br><b>【落点】</b>我方时间表字段模板 ＋ A 层笔记表格三列描述。<br><b>【依据】</b>09-20／10-06 正文均写「细分了企业类型、base地、有无笔试」，与我方主表字段重合。</li>
+            <li><b>【动作】</b>标题走「<b>日期＋今天刚开的秋招</b>」系列化容器（只学系列感，不搬文案）。<br><b>【落点】</b>时效层稿件标题模板（守则62 ≤20 字）。<br><b>【依据】</b>09-20／10-10 同名不同日期（赞 604／540）。</li>
+            <li><b>【动作】</b>正文以<b>可核量级开场</b>（开了多少家／热度升降）再落到投递优先级。<br><b>【落点】</b>A 层时效稿开篇（与 10/17 政策平台篇澄清式开场并列备选）。<br><b>【依据】</b>10-06「9月累计开了3100多家」；10-10「每天只有四五十家…」。</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h2><span class="dot r"></span>❌ 不可复用 / 风险</h2>
+          <ul class="tight">
+            <li>🔴 <b>数字不可照搬</b>：「近4000家／3100多家／每天100多家」为对方<b>自述未核验</b>（B 级），与守则1＋守则78 冲突。</li>
+            <li>🔴 标签跨届堆（25fall/26fall/27届）与<b>守则55</b>（不写「2027届」）冲突，不照抄。</li>
+            <li>🟡 09-24 篇（赞1209）<b>正文为空</b> → 可能是纯图/长图，文字层不足以佐证其做法，<b>不作 A／F 维依据</b>。</li>
+            <li>🔴 4 篇正文实查<b>无「领取／私信」字样（0 命中）</b>；其「岗位表」引导属站内暗示，<b>只学字段结构、不学引导话术</b>——配「领取」即 P0。</li>
+            <li>🔴 红狐数据<b>仅供内部</b>，不得出现在任何对外交付物；依 SOP §七·4 不得对外披露来源。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <h2><span class="dot"></span>日常机制与审核线<span class="sub">W 出拆解 · C 审核 · 结果回推进看板</span></h2>
+      <table>
+        <thead><tr><th style="width:130px">环节</th><th style="width:96px">责任</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td>09:00 拆解</td><td><span class="tag b">W</span></td><td>按 A–F 六维拆 1 篇 → 产出 <span class="mono">_协作\竞品日报\YYYY-MM-DD-拆解-竞品名.md</span>（现行位；根目录 <span class="mono">竞品日报\</span> 为历史存档，口径待 C 统一）；篇幅上限 800 字；无证据写「未取到」</td></tr>
+          <tr><td>09:00 审核</td><td><span class="tag g">C</span></td><td>五条通过线逐条给结论：<b>P1</b> 证据可核（随机抽 1 条实跑复核，不得只读文字）／<b>P2</b> 新鲜度／<b>P3</b> 非重复／<b>P4</b> 可执行（至少 1 条写明落点且本周可落地）／<b>P5</b> 无编造</td></tr>
+          <tr><td>结论处理</td><td><span class="tag g">C</span></td><td>🟢 采纳 → 写入推进看板「可复用点」区并派生落地卡；🟡 部分采纳（只留 1–2 条）；🔴 退回 → 次日重拆。<b>连续 3 次退回 → 改框架，而不是要求 W 更努力</b></td></tr>
+          <tr><td>周度评估</td><td><span class="tag g">C</span></td><td><b>采纳率 ≥60%</b>（🟢＋🟡 ÷ 总篇数）· <b>落地率 ≥50%</b>（已采纳且实际进稿 ÷ 已采纳条目）。采纳率低 → 改框架；采纳率高而落地率低 → 改流程</td></tr>
+        </tbody>
+      </table>
+      <div class="note">🔧 本页维护：<b>W</b>（每日 08:00 拆解后同步本页结论；<b>只增不删</b>，状态变更用「→」记录轨迹）。数字来源：红狐爆款库 203 篇（2026-10-14）｜竞品搜索列表（2026-10-15 06:3x）｜L 平台回传（截至 10-15）｜框架 v2.0 A–F 六维。</div>
+    </div>
+  </section>
+
+  <div class="footer">
+    L 的工作台 · 离线单文件版 · 生成于 2026-10-17 by W（内容线 + 数据线）<br>
+    主表权威源 timetable.json v1.0.27（updated 2026-10-17 07:30）｜医美线内容由 C 维护，W 不执行<br>
+    全页数字已按守则 78 逐条实跑复核（2026-10-17 复跑：总览/水位/事件/明细四区数字已按 v1.0.27 重算）<br>
+    🔧 日常更新维护：<b>W 全责</b>——完成即更新、不攒批、只增不删（依据 <span class="mono">_协作\工作台维护规则-W全责-20261014.md</span>）<br>🕐 最近刷新 <b>2026-10-17 20:4x</b>：<b>C 层 20:30 已发落账（WB219）</b>——三项今日发布全部完成（A 08:54／B 12:xx／C 20:3x）→ 四项逐字比对全一致·首评 ≈21:0x 待 L 手动发 ‖ 上轮 20:1x L 四项裁定落账（WB218）
+  </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+</div><!-- /wrap -->
+
+<script>
+/* ---------- 主表数据（内嵌快照 200 行） ---------- */
+const ROWS = [[15,"中国农业发展银行","银行","央企","2026-10-11",-6,"B","硬日期","未明确","网申9/15–10/11 24:00；县支行本科可报","https://adbc.com.cn","官方/就业网(2026-10-08)"],[105,"中国有色矿业集团","国企/央企","央企","2026-10-11",-6,"B","硬日期","未明确","北科大就业网原文「网申地址」；**入口为国聘企业专区（裁定算官方入口）**；区间","https://hrcnmc.iguopin.com/","WB第4批 / 北科大就业网"],[16,"快手","互联网","民企","2026-10-12",-5,"B","硬日期","未明确","网申截止10/12（就业网口径）","https://campus.kuaishou.com","官方/就业网(2026-10-08)"],[17,"联合利华","快消","外企","2026-10-12",-5,"C","硬日期","未明确","网申截止10/12（引用官方微招聘） ｜ 入口回写(第6批, 2026-10-1","https://careers.unilever.com.cn/","公开汇总(2026-09~10)"],[99,"浙江省储备粮管理集团有限公司","国企/央企","国企","2026-10-14",-3,"C","硬日期","未明确","来源为中公汇总表；截止日原文：10月14日","","WB第2批(中公汇总) https://www.offcn.com/"],[18,"中国石油","国企/央企","央企","2026-10-15",-2,"A","硬日期","未明确","报名2026-09-09至10-15","https://zhaopin.cnpc.com.cn","公开汇总(2026-09~10)"],[72,"广发银行","银行","股份制","2026-10-15",-2,"A","硬日期","未明确","总行10/15截止、分支机构11/15截止","www.cgbchina.com.cn","高校就业网转载官方公告 + 豆包复核"],[19,"安永EY","专业服务","外企","2026-10-16",-1,"C","硬日期","未明确","网申7/30-10/16 [D侧2026-10-14核实]官网校招页存在，但官网","https://ey.hotjob.cn","公开汇总(2026-10补充)"],[20,"华为","科技/硬件","民企","2026-10-17",0,"C","滚动·招满即止","未明确","各BG不同：ICT 10/17、华为云10/21、销售10/5、汽车BU 11/","https://career.huawei.com","公开汇总(2026-09~10)"],[21,"中国华电","国企/央企","央企","2026-10-18",1,"A","硬日期","未明确","青年骏才/华电蓝海第一批10/18 24:00截止 ｜ 入口回写(第6批, 20","https://rencaishichang.chd.com.cn/","官方/就业网(2026-10-08)"],[22,"交通银行","银行","央企","2026-10-18",1,"B","硬日期","招往届","简历投递截至10/18｜往届核验(2026-10-15 W亲核)：官网/官方公告","https://job.bankcomm.com","官方/就业网(2026-10-08)"],[79,"渤海银行","银行","股份制","2026-10-18",1,"C","硬日期","未明确","⚠️ 单源（WorkBuddy 一处），豆包未抽到，建议再核 ｜ 入口回写(第7","https://campus.51job.com/bhyh2027","中公汇总(2026-10-01)，单源未复核"],[102,"中国五矿集团","国企/央企","央企","2026-10-19",2,"B","硬日期","未明确","区间 09-21~10-19 取结束日；自有域名","https://zhaopin.minmetals.com.cn","WB第4批 / 牛企直聘"],[23,"国家管网","国企/央企","央企","2026-10-20",3,"B","硬日期","招往届","网申9/15–10/20 24:00 ｜ 入口回写(第6批, 2026-10-1","https://zhaopin.pipechina.com.cn/","官方/就业网(2026-10-08)"],[24,"网易","互联网","民企","2026-10-20",3,"C","硬日期","未明确","互联网板块约10/20；游戏雷火10/16（招满即止）","https://campus.163.com","公开汇总(2026-09~10)"],[25,"中国电信","国企/央企","央企","2026-10-20",3,"B","硬日期","招往届","各省不一：浙/舟山10/20，川10/6、豫10/16 ｜ 入口回写(第6批, ","https://job.chinatelecom.com.cn/","官方/就业网(2026-10-08)"],[126,"国投·国投电力","国企/央企","央企","2026-10-22",5,"C","硬日期","未明确","⚠️ 单源（粉笔）；校招星球另有 2026-12-31 但自注「未注明截止时间」","https://sdic.iguopin.com","WB第5批 · 二级单位下钻"],[85,"江西裕民银行","银行","国企","2026-10-24",7,"C","硬日期","未明确","来源为中公汇总表；截止日原文：报名截止日期：2026年10月24日24:00。","https://ymbank.zhaopin.com","WB第2批(中公汇总) https://www.offcn.com/"],[26,"兴业银行","银行","股份制","2026-10-25",8,"A","硬日期","未明确","报名至10/25（部分分行滚动）","https://cib.com.cn","官方/就业网(2026-10-08)"],[68,"中国民生银行","银行","股份制","2026-10-25",8,"B","硬日期","未明确","总行、分行、附属机构；STEM 或金融科技复合背景优先","https://career.cmbc.com.cn","嘉庚学院就业网汇总(2026-09-28)"],[70,"浙商银行","银行","股份制","2026-10-25",8,"B","硬日期","未明确","专业不限，电子信息/计算机/化工制药等理工类优先","https://zp.czbank.com.cn","嘉庚学院就业网汇总(2026-09-28)"],[71,"华夏银行","银行","股份制","2026-10-25",8,"B","硬日期","未明确","总行、分行、子公司；信息科技/数统/经金/财会等","https://wecruit.hotjob.cn","嘉庚学院就业网汇总(2026-09-28)"],[116,"中国航天科技集团·五院513所","国企/央企","央企","2026-10-26",9,"B","硬日期","未明确","集团二级单位；⚠️ 投递为邮箱非网申入口 ｜ 入口回写(第7批, 2026-10","https://www.spacetalent.com.cn/jituan_xxx.html?id=50&childDeptId=63&positionId=132035262","WB第4批 / 二级单位下钻（本批验证的有效路径）"],[97,"中国铁塔","科技/硬件","央企","2026-10-27",10,"C","硬日期","未明确","来源为中公汇总表；截止日原文：10月27日 ｜ 入口回写(第7批, 2026-1","https://zhaopin.chinatowercom.cn/","WB第2批(中公汇总) https://www.offcn.com/"],[27,"中国石化","国企/央企","央企","2026-10-28",11,"A","硬日期","未明确","报名截止10/28 17:00","https://job.sinopec.com","官方/就业网(2026-10-08)"],[28,"中国建筑","国企/央企","央企","2026-10-28",11,"C","硬日期","未明确","中建集团10/28（第三方口径，待核） ｜ 入口回写(第6批, 2026-10-","https://recruit.cscec.com/recruit#/","公开汇总(2026-09~10)"],[29,"中金公司","券商","国企","2026-10-28",11,"A","硬日期","未明确","官网QA：9/8–10/28申请","https://campus.cicc.com","官方/就业网(2026-10-08)"],[86,"中粮集团","快消","央企","2026-10-28",11,"A","硬日期","未明确","来源为中公汇总表；截止日原文：10月28日截止｜🆕 10-10 WorkBudd","https://campus.51job.com/cofco","WB第2批(中公汇总) https://m.js.offcn.com"],[109,"中国航天科技集团","国企/央企","央企","2026-10-28",11,"C","硬日期","未明确","⚠️ 单源（超级简历）→ 待复核","https://www.spacetalent.com.cn","WB第4批 / 超级简历"],[30,"蚂蚁集团","互联网","民企","2026-10-30",13,"B","硬日期","未明确","网申截止10/30（就业网口径）","https://talent.antgroup.com","官方/就业网(2026-10-08)"],[31,"中国广核","国企/央企","央企","2026-10-30",13,"B","硬日期","未明确","简历投递截止10/30","https://cgn.hotjob.cn","官方/就业网(2026-10-08)"],[32,"中国华能","国企/央企","央企","2026-10-31",14,"A","硬日期","未明确","简历投递9/15–10/31 18:00 ｜ 入口回写(第6批, 2026-10","https://zhaopin.chng.com.cn/","官方/就业网(2026-10-08)"],[33,"美团","互联网","民企","2026-10-31",14,"A","硬日期","未明确","官方10/31，部分岗位招满提前结束","https://zhaopin.meituan.com","官方/就业网(2026-10-08)"],[34,"中国海油","国企/央企","央企","2026-10-31",14,"A","硬日期","招往届","报名9/30–10/31 24:00 ｜ 入口回写(第6批, 2026-10-1","https://cnooc.zhaopin.com/","官方/就业网(2026-10-08)"],[35,"中国邮政","国企/央企","央企","2026-10-31",14,"A","硬日期","招往届","邮储银行10/7、中邮保险10/17｜往届核验(2026-10-15 W亲核)：","https://chinapost2027.zhaopin.com/","官方/就业网(2026-10-08)"],[36,"达能","快消","外企","2026-10-31",14,"B","硬日期","未明确","网申截止10/31 ｜ 入口回写(第6批, 2026-10-11)","https://careers.danone.com.cn/zh_CN/campus","官方/就业网(2026-10-08)"],[37,"米哈游","游戏","民企","2026-10-31",14,"A","硬日期","未明确","原神/星穹铁道团队；网申8/3-10/31，一人限投1岗","https://campus.mihoyo.com","官方/就业网(2026-10-08)"],[38,"德勤Deloitte","专业服务","外企","2026-10-31",14,"A","硬日期","未明确","网申8/3-10/31，网申后即时笔试","https://www2.deloitte.com","官方/就业网(2026-10-08)"],[69,"宁波银行","银行","国企","2026-10-31",14,"B","硬日期","未明确","总行、分支机构、子公司；专业不限","https://zhaopin.nbcb.com.cn","嘉庚学院就业网汇总(2026-09-28)"],[81,"广西北部湾银行","银行","国企","2026-10-31",14,"C","硬日期","未明确","来源为中公汇总表；日期为区间表述，取结束日","https://zhaopin.bankofbbg.com/","WB第2批(中公汇总) https://www.offcn.com/"],[82,"泸州银行","银行","国企","2026-10-31",14,"C","硬日期","未明确","来源为中公汇总表；截止日原文：简历投递截止：北京时间2026年10月31日24：","https://campus.51job.com/lzccb2027","WB第2批(中公汇总) https://www.offcn.com/"],[83,"长城华西银行","银行","国企","2026-10-31",14,"C","硬日期","未明确","来源为中公汇总表；日期为区间表述，取结束日｜⚠️ 已修正：原解析取到开始日，按区","https://cchx.zhaopin.com","WB第2批(中公汇总) https://www.offcn.com/"],[88,"中国大唐集团","国企/央企","央企","2026-10-31",14,"C","硬日期","未明确","来源为中公汇总表；日期为区间表述，取结束日｜⚠️ 已修正：原解析取到开始日，按区","https://zhaopin.china-cdt.com/","WB第2批(中公汇总) https://m.js.offcn.com"],[103,"国机集团","国企/央企","央企","2026-10-31",14,"B","硬日期","未明确","原文「简历投递截止日期：2026年10月31日」；双源互证","https://zhaopin.sinomach.com.cn/","WB第4批 / 牛企直聘"],[125,"国投·国投证券","国企/央企","央企","2026-10-31",14,"B","硬日期","未明确","厦大24365 + 湖南农大云就业 同源公告「网申时间 即日起-2026年10月","https://sc.hotjob.cn/wt/Essence/web/index","WB第5批 · 二级单位下钻"],[39,"华泰证券","券商","国企","2026-11-01",15,"A","硬日期","未明确","总部/子公司11/1；分公司11/15","https://campus.htsc.com","官方/就业网(2026-10-08)"],[40,"南方电网","国企/央企","央企","2026-11-02",16,"C","硬日期","未明确","各二级单位截止不同，正式批约11月，以官网为准","https://zhaopin.csg.cn","公开汇总(2026-09~10)"],[110,"上汽集团","国企/央企","央企","2026-11-04",18,"B","硬日期","未明确","区间 09-04~11-04 取结束日；企业公众号源","https://saic-recruit.saicmotor.com","WB第4批 / 牛企直聘"],[41,"平安银行","银行","股份制","2026-11-06",20,"B","硬日期","未明确","网申8/10–11/6","https://campus.pingan.com","官方/就业网(2026-10-08)"],[115,"中国船舶集团·武汉船用机械有限责任公司","国企/央企","央企","2026-11-06",20,"B","硬日期","未明确","集团二级单位（集团级无统一截止）","https://cssc.zhiye.com","WB第4批 / 二级单位下钻（本批验证的有效路径）"],[42,"小红书","互联网","民企","2026-11-08",22,"C","硬日期","未明确","网申9/8–11/8（第三方）","https://job.xiaohongshu.com","公开汇总(2026-09~10)"],[75,"中国光大银行","银行","股份制","2026-11-08",22,"A","硬日期","招往届","官网公告「网上报名 即日起-2026年11月8日」(eoap.cebbank.c","","官网原文 + 双源确认(WorkBuddy/豆包独立核到同一官网)"],[107,"中国煤炭科工集团","国企/央企","央企","2026-11-09",23,"C","硬日期","未明确","⚠️ 单源（超级简历）+ 未核到官方入口 → 双重弱 ｜ 入口回写(第7批修正,","https://ccteg.iguopin.com/job","WB第4批 / 超级简历"],[113,"中国核工业集团·中国核动力研究设计院","国企/央企","央企","2026-11-09",23,"B","硬日期","未明确","集团二级单位","http://hr.cnnc.com.cn/","WB第4批 / 二级单位下钻（本批验证的有效路径）"],[114,"中国核工业集团·中国聚变能源有限公司","国企/央企","央企","2026-11-10",24,"B","硬日期","未明确","集团直属二级单位","http://hr.cnnc.com.cn/","WB第4批 / 二级单位下钻（本批验证的有效路径）"],[84,"柳州银行","银行","国企","2026-11-12",26,"C","硬日期","未明确","来源为中公汇总表；日期为区间表述，取结束日","https://bolz.hotjob.cn/","WB第2批(中公汇总) https://www.offcn.com/"],[112,"中国核工业集团·中核华辰","国企/央企","央企","2026-11-14",28,"B","硬日期","未明确","集团二级单位","http://hr.cnnc.com.cn/","WB第4批 / 二级单位下钻（本批验证的有效路径）"],[89,"中国出版集团","专业服务","央企","2026-11-15",29,"C","硬日期","未明确","来源为中公汇总表；日期为区间表述，取结束日 ｜ 入口回写(第7批, 2026-1","https://cnpubg.iguopin.com/job","WB第2批(中公汇总) https://m.js.offcn.com"],[96,"中国人寿集团","专业服务","央企","2026-11-15",29,"C","硬日期","未明确","来源为中公汇总表；截止日原文：截止11.15 ｜ 入口回写(第7批, 2026-","https://chinalife.zhiye.com/","WB第2批(中公汇总) https://www.offcn.com/"],[128,"中国电建·贵阳勘测设计研究院","国企/央企","央企","2026-11-16",30,"C","硬日期","未明确","⚠️ 单一媒体汇总源（今日头条汇总表），未见院方公告原文 ｜ 入口回写(第7批,","https://gyyhr.powerchina.cn/","WB第5批 · 二级单位下钻"],[104,"中国一重集团","国企/央企","央企","2026-11-17",31,"C","硬日期","未明确","⚠️ 单源（超级简历），中南/天大就业网未写截止日 → 待复核","https://cfhi.zhaopin.com/","WB第4批 / 超级简历"],[129,"中国电建·西北勘测设计研究院","国企/央企","央企","2026-11-25",39,"C","硬日期","未明确","⚠️ 单一媒体汇总源（今日头条汇总表），未见院方公告原文 ｜ 入口回写(第7批,","https://zhaopin.powerchina.cn/","WB第5批 · 二级单位下钻"],[43,"国家电投","国企/央企","央企","2026-11-30",44,"C","硬日期","未明确","部分岗位报名截至11/30，偏远地区招满即止 ｜ 入口回写(第6批, 2026-","https://zhaopin.spic.com.cn/","公开汇总(2026-09~10)"],[44,"雀巢","快消","外企","2026-11-30",44,"B","硬日期","未明确","网申截止11/30 ｜ 入口回写(第6批, 2026-10-11)","https://nestlecareers.cn/zh-hans/life-at-nestle","官方/就业网(2026-10-08)"],[45,"京东","互联网","民企","2026-11-30",44,"A","硬日期","未明确","网申8/3–11/30","https://campus.jd.com","官方/就业网(2026-10-08)"],[119,"中国电子·中国长城科技集团","国企/央企","央企","2026-11-30",44,"A","硬日期","未明确","公告原文「网申截止日期在2026年11月30日」","https://career.cec.com.cn/","WB第5批 · 二级单位下钻"],[130,"中国电建·华东勘测设计研究院","国企/央企","央企","2026-11-30",44,"C","硬日期","未明确","⚠️ 单一媒体汇总源（今日头条汇总表），未见院方公告原文 ｜ 入口回写(第7批,","https://hdec.zhiye.com/","WB第5批 · 二级单位下钻"],[121,"中国远洋海运·舟山中远海运重工","国企/央企","央企","2026-12-20",64,"A","硬日期","未明确","国聘职位页「产业技术岗-2027校招 报名截止 2026-12-20」——**企","https://coscoshipping.iguopin.com/job","WB第5批 · 二级单位下钻"],[122,"中国远洋海运·广东中远海运重工","国企/央企","央企","2026-12-27",71,"C","硬日期","未明确","「网申时间 2026-09-02 ~ 2026-12-27」，页面标注信息来源为","https://coscoshipping.iguopin.com/job","WB第5批 · 二级单位下钻"],[46,"宁德时代","新能源/汽车","民企","2026-12-30",74,"B","硬日期","未明确","网申8/25-12/30，6000+ offer","https://campus.catl.com","官方/就业网(2026-10-08)"],[47,"小米","科技/硬件","民企","2026-12-31",75,"A","硬日期","未明确","官方投递至12/31，招满即止","https://hr.xiaomi.com","官方/就业网(2026-10-08)"],[48,"哔哩哔哩","互联网","民企","2026-12-31",75,"A","硬日期","未明确","官网职位页网申截止12/31","https://jobs.bilibili.com","官方/就业网(2026-10-08)"],[49,"携程","互联网","民企","2026-12-31",75,"C","硬日期","未明确","官网8/26起招满即止；平台口径12/31","https://careers.ctrip.com","公开汇总(2026-10补充)"],[73,"青岛银行","银行","国企","2026-12-31",75,"C","硬日期","未明确","⚠️ 豆包复核核不到官网佐证（命中的是潍坊银行/青银社招），来源仅中公汇总","","中公汇总(2026-09-04)，**官网佐证未找到**"],[98,"浙商期货有限公司","券商","国企","2026-12-31",75,"C","硬日期","未明确","来源为中公汇总表；截止日原文：12月31日 ｜ 入口回写(第7批修正, 2026","https://www.cnzsqh.com/hr/jobs/?type=school","WB第2批(中公汇总) https://www.offcn.com/"],[106,"中国中化控股","国企/央企","央企","2026-12-31",75,"B","硬日期","未明确","农大+清华双高校就业网互证；区间 09-15~12-31 取结束日","http://sinochem.hotjob.cn/","WB第4批 / 双高校就业网"],[111,"中国核工业集团","国企/央企","央企","2026-12-31",75,"B","硬日期","未明确","来源为就业网「**职位有效期**」，非公告明文截止日（已按裁定标注）","http://hr.cnnc.com.cn/","WB第4批 / 成都理工就业网"],[50,"拼多多","互联网","民企","2027-01-31",106,"A","硬日期","未明确","官网：网申9/2–次年1/31","https://campus.pinduoduo.com","官方/就业网(2026-10-08)"],[127,"中国电建·北京勘测设计研究院","国企/央企","央企","2027-01-31",106,"C","硬日期","未明确","⚠️ 单一媒体汇总源（今日头条汇总表），未见院方公告原文 ｜ 入口回写(第7批,","https://bhidi.zhiye.com/","WB第5批 · 二级单位下钻"],[87,"中国铝业集团","国企/央企","央企","2027-03-07",141,"C","硬日期","未明确","来源为中公汇总表；日期为区间表述，取结束日｜⚠️ 已修正：原解析取到开始日，按区","https://chinalco2027.iguopin.com/","WB第2批(中公汇总) https://m.js.offcn.com"],[94,"中信期货","券商","央企","2027-03-21",155,"B","硬日期","未明确","WorkBuddy 自纠：原文为「总部及子公司 2027-03-21 截止；分支","https://citicsfz.zhiye.com/","WB第2批(中公汇总) https://m.js.offcn.com"],[90,"中国人民保险","专业服务","央企","2027-04-25",190,"C","硬日期","未明确","来源为中公汇总表；日期为区间表述，取结束日｜⚠️ 已修正：原解析取到开始日，按区","https://picc.zhiye.com/","WB第2批(中公汇总) https://m.js.offcn.com"],[51,"字节跳动","互联网","民企","2027-05-31",226,"A","硬日期","未明确","全年滚动8/3–次年5/31，4次投递机会","https://jobs.bytedance.com/campus","官方/就业网(2026-10-08)"],[131,"中国电建·昆明勘测设计研究院","国企/央企","央企","2027-06-29",255,"B","硬日期","未明确","四川大学就业网「职位有效期 2027-06-29」+ 网申地址 —— 注明为平台","https://xyzp.51job.com/kmy2027","WB第5批 · 二级单位下钻"],[118,"中国船舶集团·江南造船","国企/央企","央企","2027-06-30",256,"B","硬日期","未明确","中国海洋大学就业网「职位截止时间 2027-06-30」+ 应届生求职网转载同源","http://jnzhaopin.zhiye.com","WB第5批 · 二级单位下钻"],[123,"中国航发·沈阳黎明航空发动机","国企/央企","央企","2027-06-30",256,"A","硬日期","未明确","国聘职位页「报名截止 2027-06-30」+ 公告网申通道 —— 企业系统字段","https://aecc.iguopin.com/job","WB第5批 · 二级单位下钻"],[124,"中国航发·贵州黎阳航空动力","国企/央企","央企","2027-06-30",256,"B","硬日期","未明确","山东大学 + 哈工大（威海）就业网双源互证；⚠️南大就业网另有 2026-12-","http://campus.51job.com/liyang/","WB第5批 · 二级单位下钻"],[117,"中国船舶集团·沪东中华造船","国企/央企","央企","2027-09-01",319,"B","硬日期","未明确","山大就业网「招聘截止日期 2027-09-01」+ 企业自有站各校招岗均标该日 ","https://hudong.zhiye.com/jobs","WB第5批 · 二级单位下钻"],[52,"腾讯","互联网","民企","招满即止",null,"⚪","滚动·无固定截止","未明确","官网FAQ：网申无硬性截止，建议8月投递","https://join.qq.com","公开汇总(2026-09~10)"],[53,"阿里巴巴","互联网","民企","招满即止",null,"⚪","滚动·无固定截止","未明确","各业务线无统一截止，招满即止（部分约10月底）","https://talent.alibaba.com","公开汇总(2026-09~10)"],[54,"百度","互联网","民企","招满即止",null,"⚪","滚动·无固定截止","未明确","投递通道全年开放(7/9–次年6月)","https://talent.baidu.com","公开汇总(2026-09~10)"],[55,"大疆","科技/硬件","民企","招满即止",null,"⚪","滚动·无固定截止","未明确","官网明示不设投递截止，招满即止","https://we.dji.com","公开汇总(2026-09~10)"],[56,"搜狐","互联网","民企","招满即止",null,"⚪","滚动·无固定截止","未明确","官网FAQ：8/6开放，招满即止","","公开汇总(2026-09~10)"],[57,"中国联通","国企/央企","央企","招满即止",null,"⚪","滚动·无固定截止","招往届","集团招满即止；京/湘联通约11/18｜往届核验(2026-10-15 W亲核)：","","公开汇总(2026-09~10)"],[58,"国家电网","国企/央企","央企","招满即止",null,"C","滚动·无固定截止","未明确","2027届一批公告尚未发布，网申约11月下旬（历年）","https://zhaopin.sgcc.com.cn","公开汇总(2026-09~10)"],[59,"中国国家铁路集团·各铁路局","国企/央企","央企","招满即止",null,"C","滚动·无固定截止","招往届","各铁路局自主，多数约11月上旬；成都局本科批12/4｜往届核验(2026-10-","https://rczp.china-railway.com.cn","公开汇总(2026-09~10)"],[60,"中国烟草总公司·各省公司","国企/央企","央企","招满即止",null,"C","滚动·无固定截止","未明确","各省自主公告，网申窗口约7–15天，多集中10–12月","","公开汇总(2026-09~10)"],[61,"滴滴","互联网","民企","招满即止",null,"⚪","滚动·无固定截止","未明确","官方：8/13起投递，岗位招满即关闭","https://talent.didiglobal.com","公开汇总(2026-10补充)"],[62,"比亚迪","新能源/汽车","民企","招满即止",null,"C","滚动·无固定截止","未明确","2027届博士校招7/28启动，未公布截止","https://job.byd.com","公开汇总(2026-10补充)"],[63,"普华永道PwC","专业服务","外企","招满即止",null,"⚪","滚动·无固定截止","未明确","官网滚动招聘、招满即止（10/31为学校口径，已修正）","https://www.pwccn.com","公开汇总(2026-10补充)"],[64,"毕马威KPMG","专业服务","外企","招满即止",null,"⚪","滚动·无固定截止","未明确","官网：持续开放、分批安排（10/31为学校口径，已修正）","https://kpmg.com","公开汇总(2026-10补充)"],[65,"中信证券","券商","国企","招满即止",null,"C","滚动·无固定截止","未明确","总部约10月中下旬；分支9月–次年4月滚动","https://campus.citics.com","公开汇总(2026-10补充)"],[66,"网易有道","互联网","民企","招满即止",null,"⚪","滚动·无固定截止","未明确","官方简章：8/31起招满即止","https://campus.youdao.com","公开汇总(2026-10补充)"],[67,"OPPO","科技/硬件","民企","招满即止",null,"⚪","滚动·无固定截止","未明确","官网：岗位招满即止，不分提前/正式批","https://careers.oppo.com","公开汇总(2026-10补充)"],[76,"厦门银行","银行","国企","",null,"B","未列明日期","未明确","汇总页未列截止日","https://xmbank.mokahr.vip","嘉庚学院就业网汇总(2026-09-28)"],[77,"重庆银行","银行","国企","",null,"C","未列明日期","未明确","2026-09-28 发布，汇总页未列截止日｜⚠️ 2026-09-28 是【发","","中公网银行公告汇总(2026-09-28)"],[78,"乌鲁木齐银行","银行","国企","",null,"C","未列明日期","未明确","汇总页未列截止日 ｜ 入口回写(第7批, 2026-10-11)","https://hr.boubank.com","中公网银行公告汇总(2026-09-01)"],[80,"徽商银行","银行","国企","",null,"C","未列明日期","未明确","汇总页标注为「2026年社会招聘」，是否含校招待核 ｜ 入口回写(第7批, 20","https://rczp.hsbank.com.cn/pc/#/homepage","中公网银行公告汇总(2026-08-31)"],[92,"中交集团","国企/央企","央企","",null,"C","未列明日期","未明确","来源为中公汇总表；日期为区间表述，取结束日｜⚠️无法解析为具体日期 ｜ 入口回写","https://zhaopin.ccccltd.cn","WB第2批(中公汇总) https://m.js.offcn.com"],[100,"中国兵器工业集团","国企/央企","央企","",null,"C","有日期待核实","未明确","⚠️ 日期待核实｜2026年9月1日~2026年11月1日（待核实：该起止时间来","https://norincogroupzhaopin.zhiye.com","https://sa.offcn.com/html/2026/09/"],[101,"中国中车","国企/央企","央企","",null,"C","有日期待核实","未明确","⚠️ 日期待核实｜2026年11月11日（待核实：来自超级简历汇总字段；公告正文","https://crrc.hotjob.cn","https://www.chaojijianli.com/xiaoz"],[108,"通用技术集团","国企/央企","央企","招满即止",null,"A","滚动·无固定截止","未明确","官方网申通道；截止口径「招满即止」（与现有 17 条同口径）","https://genertec.zhiye.com/","WB第4批 / 北理工就业网"],[14,"招商银行","银行","股份制","2026-10-10",-7,"A","硬日期","未明确","总行及分行统一10/10 23:59","https://career.cmbchina.com","官方/就业网(2026-10-08)"],[12,"中国银行","银行","央企","2026-10-09",-8,"A","硬日期","招往届","已截止 1 天（2026-10-09）｜投递截止10/9 24:00（中行官网公","https://career.boc.cn","官方/就业网(2026-10-08)"],[13,"中信银行","银行","股份制","2026-10-09",-8,"A","硬日期","未明确","已截止 1 天（2026-10-09）｜简历接收截止暂定10/9（中信官网原文口","https://job.citicbank.com","官方/就业网(2026-10-08)"],[6,"中国移动","国企/央企","央企","2026-10-08",-9,"A","硬日期","招往届","已截止 2 天（2026-10-08）｜集团无统一截止，各分公司10月上旬–中旬","https://job.10086.cn/","官方/就业网(2026-10-08)"],[7,"中国工商银行","银行","央企","2026-10-08",-9,"A","硬日期","招往届","已截止 2 天（2026-10-08）｜网申9/4–10/8 24:00｜往届核","https://job.icbc.com.cn","官方/就业网(2026-10-08)"],[8,"中国农业银行","银行","央企","2026-10-08",-9,"A","硬日期","招往届","已截止 2 天（2026-10-08）｜即日起–10/8 24:00｜往届核验(","https://career.abchina.com","官方/就业网(2026-10-08)"],[9,"中国建设银行","银行","央企","2026-10-08",-9,"A","硬日期","招往届","已截止 2 天（2026-10-08）｜报名截止10/8 24:00｜往届核验(","https://job.ccb.com","官方/就业网(2026-10-08)"],[10,"浦发银行","银行","股份制","2026-10-08",-9,"B","硬日期","未明确","已截止 2 天（2026-10-08）｜报名截止10/8 18:00","https://job.spdb.com.cn","官方/就业网(2026-10-08)"],[11,"微软中国","科技/硬件","外企","2026-10-08",-9,"A","硬日期","未明确","已截止 2 天（2026-10-08）｜亚太研发岗10/8 23:59；MSRA","https://careers.microsoft.com","官方/就业网(2026-10-08)"],[120,"中国电子·南京熊猫电子","国企/央企","央企","2026-10-08",-9,"C","硬日期","未明确","已截止 2 天（2026-10-08）｜⚠️ 单源，未见公告原文复核","https://www.cec.com.cn/recruit/apply","WB第5批 · 二级单位下钻"],[3,"国家能源集团","国企/央企","央企","2026-10-07",-10,"A","硬日期","未明确","统招9/2–10/7；直招批9/19已截止","https://zhaopin.chnenergy.com.cn","官方/就业网(2026-10-08)"],[4,"邮储银行","银行","央企","2026-10-07",-10,"A","硬日期","未明确","已截止 3 天（2026-10-07）｜总行/一级分行统一10/7 24:00","https://career.psbc.com","官方/就业网(2026-10-08)"],[5,"国家开发银行","银行","央企","2026-10-07",-10,"A","硬日期","未明确","已截止 3 天（2026-10-07）｜总行及分行统一10/7 24:00","https://cdb.com.cn","官方/就业网(2026-10-08)"],[74,"曲靖市商业银行","银行","国企","2026-09-30",-17,"C","硬日期","未明确","9月30日止，按 10-10 计算已截止","","中公网银行公告汇总(2026-09-04)"],[2,"宝洁","快消","外企","2026-09-28",-19,"B","硬日期","招往届","网申截止9/28（已截止） ｜ 入口回写(第6批, 2026-10-11)｜往届","https://careers.pg.com.cn/","官方/就业网(2026-10-08)"],[93,"中国东方资产管理股份有限公司","专业服务","央企","2026-09-18",-29,"C","硬日期","未明确","已截止 22 天（2026-09-18）｜来源为中公汇总表；截止日原文：9月18","https://coamc.zhiye.com/","WB第2批(中公汇总) https://m.js.offcn.com"],[1,"vivo","科技/硬件","民企","2026-09-15",-32,"A","硬日期","未明确","网申截至9/15 12:00（已截止）","https://hr.vivo.com.cn","官方/就业网(2026-10-08)"],[95,"淮安国发投资集团","国企/央企","国企","2026-09-14",-33,"C","硬日期","未明确","已截止 26 天（2026-09-14）｜来源为中公汇总表；截止日原文：9月14","http://rsj.huaian.gov.cn/col/4729_463783/index.html","WB第2批(中公汇总) https://m.js.offcn.com"],[91,"光大证券","券商","央企","2026-09-06",-41,"C","硬日期","未明确","已截止 34 天（2026-09-06）｜来源为中公汇总表；截止日原文：9月6日","https://ebscn.zhiye.com/","WB第2批(中公汇总) https://m.js.offcn.com"],[132,"安利(中国)","快消","外企","2026-10-31",14,"B","","招往届","外企｜往届能投，24/25/26/27届都可报｜往届核验(2026-10-15 ","","小红书爆款笔记采集（DB59）"],[133,"四川银行","银行","城商行","2026-10-31",14,"B","","部分招往届","城商行｜分岗位放宽：数据科技类+艰苦边远地区岗至24届，总行/成都岗26/27届","","第三方汇总多源互证（超级简历/上岸鸭/高顿/HI简历 4 源逐字一致"],[134,"湖北水发","国企/央企","国企","2026-10-26",9,"B","","招往届","国企｜往届友好，24/25/26/27届｜往届核验(2026-10-15 W亲核","","小红书爆款笔记采集（DB59）"],[135,"牧士集团","快消","民企","招满即止",null,"B","","招往届","民企｜往届友好，24/25/26/27届｜往届核验(2026-10-15 W亲核","","小红书爆款笔记采集（DB59）"],[136,"中海油（社招岗）","国企/央企","央企","2026-10-31",14,"B","","招往届","央企｜往届在范围内，25/26/27届｜往届核验(2026-10-15 W亲核)","","小红书爆款笔记采集（DB59）"],[137,"麦当劳","快消","外企","招满即止",null,"B","","未明确","外企餐饮｜毕业年份卡得不严","","小红书爆款笔记采集（DB57）"],[138,"山东健康","国企/央企","国企","2026-11-30",44,"B","","招往届","国企医疗｜往届友好，25/26/27届｜往届核验(2026-10-15 W亲核)","","小红书爆款笔记采集（DB59）"],[139,"永辉超市","零售","民企","招满即止",null,"B","","招往届","零售｜往届友好，25/26/27届｜往届核验(2026-10-15 W亲核)：官","","小红书爆款笔记采集（DB59）"],[140,"不凡帝范梅勒","快消","外企","招满即止",null,"B","","招往届","外企食品｜往届友好，25/26/27届｜往届核验(2026-10-15 W亲核)","","小红书爆款笔记采集（DB59）"],[141,"百分教育","教育","民企","招满即止",null,"B","","招往届","教育｜往届友好，25/26/27届｜往届核验(2026-10-15 W亲核)：官","","小红书爆款笔记采集（DB59）"],[142,"电投钍能","国企/央企","国企","招满即止",null,"B","","招往届","国企能源｜往届友好，25/26/27届｜往届核验(2026-10-15 W亲核)","","小红书爆款笔记采集（DB59）"],[143,"鲁南制药","医药","民企","招满即止",null,"B","","招往届","药企｜往届友好，26/27届｜往届核验(2026-10-15 W亲核)：官网/官","","小红书爆款笔记采集（DB59）"],[144,"UR（FMG）","零售","民企","招满即止",null,"B","","未明确","服装零售｜往届友好，26/27届｜往届核验(2026-10-15 W亲核)：原D","","小红书爆款笔记采集（DB59）"],[145,"华润电力","国企/央企","央企","招满即止",null,"B","","招往届","央企能源｜往届友好，26/27届｜往届核验(2026-10-15 W亲核)：官网","","小红书爆款笔记采集（DB59）"],[146,"卡夫亨氏","快消","外企","2026-10-31",14,"B","","招往届","外企食品｜往届友好，26/27届｜往届核验(2026-10-15 W亲核)：官网","","小红书爆款笔记采集（DB59）"],[147,"绿萌科技","科技/硬件","民企","招满即止",null,"B","","招往届","科技｜往届友好，26/27届｜往届核验(2026-10-15 W亲核)：官网/官","","小红书爆款笔记采集（DB59）"],[148,"谷雨","美妆","民企","招满即止",null,"B","","招往届","美妆｜往届友好，26/27届｜往届核验(2026-10-15 W亲核)：官网/官","","小红书爆款笔记采集（DB59）"],[149,"嘉银科技","金融科技","民企","招满即止",null,"B","","未明确","金融科技｜往届友好，26/27届｜待核(2026-10-15)：届别口径矛盾，暂","","小红书爆款笔记采集（DB59）"],[150,"隆平高科","农业科技","国企","招满即止",null,"B","","招往届","农业科技｜往届友好，26/27届｜往届核验(2026-10-15 W亲核)：官网","","小红书爆款笔记采集（DB59）"],[151,"光大银行（往届友好岗）","银行","股份制","2026-11-08",22,"B","","招往届","股份制银行｜往届在范围内｜往届核验(2026-10-15 W亲核)：官网/官方公","","小红书爆款笔记采集（DB59）"],[152,"招商局集团","国企/央企","央企","2026-10-10",-7,"C","","未明确","央企｜无笔试，直接面试","","小红书爆款笔记采集（DB57）"],[153,"中国航发","国企/央企","央企","2026-10-15",-2,"C","","未明确","央企｜无笔试","","小红书爆款笔记采集（DB57）"],[154,"中国电子科技集团","国企/央企","央企","2026-10-13",-4,"C","","未明确","央企｜无笔试","","小红书爆款笔记采集（DB57）"],[155,"中国光大集团","国企/央企","央企","2026-11-08",22,"C","","未明确","央企｜无笔试","","小红书爆款笔记采集（DB57）"],[156,"中国建材集团","国企/央企","央企","2026-10-24",7,"C","","未明确","央企｜无笔试","","小红书爆款笔记采集（DB57）"],[157,"中国国新控股","国企/央企","央企","2026-10-19",2,"C","","未明确","央企｜无笔试","","小红书爆款笔记采集（DB57）"],[158,"中国东方电气","国企/央企","央企","2026-10-19",2,"C","","未明确","央企｜无笔试","","小红书爆款笔记采集（DB57）"],[159,"中国物流集团","国企/央企","央企","2026-10-26",9,"C","","未明确","央企｜无笔试","","小红书爆款笔记采集（DB57）"],[160,"中国华能集团","国企/央企","央企","2026-10-31",14,"B","","未明确","简历投递9/15–10/31 18:00 ｜ 入口回写(第6批, 2026-10","","小红书爆款笔记采集（DB57）"],[161,"中国船舶集团","国企/央企","央企","2026-10-23",6,"B","","未明确","央企｜仅测评，不用笔试","","小红书爆款笔记采集（DB57）"],[162,"中国电子信息产业集团","国企/央企","央企","2026-10-12",-5,"B","","未明确","央企｜仅测评","","小红书爆款笔记采集（DB57）"],[163,"中国中信集团","国企/央企","央企","2026-10-12",-5,"B","","未明确","央企｜仅测评","","小红书爆款笔记采集（DB57）"],[164,"中国保利集团","国企/央企","央企","2026-10-13",-4,"B","","未明确","央企｜仅测评","","小红书爆款笔记采集（DB57）"],[165,"中国医药集团","国企/央企","央企","2026-10-13",-4,"B","","未明确","央企｜仅测评","","小红书爆款笔记采集（DB57）"],[166,"中国中车集团","国企/央企","央企","2026-10-12",-5,"B","","未明确","央企｜仅测评","","小红书爆款笔记采集（DB57）"],[167,"中国煤炭","国企/央企","央企","2026-10-25",8,"B","","未明确","央企｜仅测评","","小红书爆款笔记采集（DB57）"],[168,"金发科技","化工","民企","2026-10-31",14,"B","","未明确","民企｜仅测评","","小红书爆款笔记采集（DB57）"],[169,"百事公司","快消","外企","2026-10-18",1,"C","","未明确","外企｜无笔试","","小红书爆款笔记采集（DB57）"],[170,"金佰利","快消","外企","2026-10-23",6,"C","","未明确","外企｜无笔试","","小红书爆款笔记采集（DB57）"],[171,"福特中国","汽车","外企","2026-10-31",14,"C","","未明确","外企｜无笔试","","小红书爆款笔记采集（DB57）"],[172,"微软（中国）","互联网","外企","2026-10-31",14,"C","","未明确","外企｜无笔试","","小红书爆款笔记采集（DB57）"],[173,"喜士（便利店）","零售","外企","2026-10-31",14,"C","","未明确","外企｜无笔试","","小红书爆款笔记采集（DB57）"],[174,"托中杯（饮品）","快消","民企","2026-10-23",6,"C","","未明确","民企｜无笔试","","小红书爆款笔记采集（DB57）"],[175,"XM（消费电子）","科技/硬件","民企","2026-10-16",-1,"C","","未明确","民企｜无笔试","","小红书爆款笔记采集（DB57）"],[176,"百事（销售岗）","快消","外企","2026-10-18",1,"C","","未明确","外企｜无笔试","","小红书爆款笔记采集（DB57）"],[177,"联合利华（销售）","快消","外企","2026-10-31",14,"C","","未明确","外企｜无笔试","","小红书爆款笔记采集（DB57）"],[178,"白象食品","快消","民企","招满即止",null,"B","","未明确","民企｜双非友好，门槛低","","小红书爆款笔记采集（DB57）"],[179,"迪卡侬","零售","外企","招满即止",null,"B","","未明确","外企｜双非友好","","小红书爆款笔记采集（DB57）"],[180,"TCL","科技/硬件","民企","招满即止",null,"B","","未明确","民企｜双非友好","","小红书爆款笔记采集（DB57）"],[181,"雅迪","汽车","民企","招满即止",null,"B","","未明确","民企｜双非友好","","小红书爆款笔记采集（DB57）"],[182,"森马","零售","民企","招满即止",null,"B","","未明确","民企｜双非友好","","小红书爆款笔记采集（DB57）"],[183,"东方甄选","互联网","民企","招满即止",null,"B","","未明确","民企｜双非友好","","小红书爆款笔记采集（DB57）"],[184,"巨人网络","游戏","民企","招满即止",null,"B","","未明确","民企｜双非友好","","小红书爆款笔记采集（DB57）"],[185,"Wind万得","金融科技","民企","招满即止",null,"B","","未明确","民企｜双非友好","","小红书爆款笔记采集（DB57）"],[186,"西门子（销售）","工业","外企","招满即止",null,"B","","未明确","外企｜双非友好","","小红书爆款笔记采集（DB57）"],[187,"法雷奥","汽车","外企","招满即止",null,"B","","未明确","外企｜双非友好","","小红书爆款笔记采集（DB57）"],[188,"飞利浦","医疗","外企","招满即止",null,"B","","未明确","外企｜双非友好","","小红书爆款笔记采集（DB57）"],[189,"施耐德电气","工业","外企","招满即止",null,"B","","未明确","外企｜双非友好","","小红书爆款笔记采集（DB57）"],[190,"中建三局","建筑","国企","招满即止",null,"B","","未明确","国企｜双非友好","","小红书爆款笔记采集（DB57）"],[191,"达梦数据","软件","国企","招满即止",null,"B","","未明确","国企｜双非友好","","小红书爆款笔记采集（DB57）"],[192,"烽火通信","通信","国企","招满即止",null,"B","","未明确","国企｜双非友好","","小红书爆款笔记采集（DB57）"],[193,"腾娱互动（腾讯系）","游戏","腾讯系","招满即止",null,"B","","未明确","腾讯系子公司｜门槛比腾讯低","","小红书爆款笔记采集（DB57）"],[194,"字节跳动（武汉）","互联网","民企","招满即止",null,"B","","未明确","大厂分公司｜门槛比总部低","","小红书爆款笔记采集（DB57）"],[195,"宁德时代（厦门）","新能源","民企","招满即止",null,"B","","未明确","大厂基地｜门槛比总部低","","小红书爆款笔记采集（DB57）"],[196,"斗鱼","直播","民企","招满即止",null,"B","","未明确","直播平台｜双非友好","","小红书爆款笔记采集（DB57）"],[197,"美团（销售岗）","互联网","民企","招满即止",null,"B","","未明确","互联网大厂｜销售岗门槛低，往届友好｜往届核验(2026-10-15 W亲核)：原","","小红书爆款笔记采集（DB59）"],[198,"京东（物流管培）","物流","民企","招满即止",null,"B","","未明确","电商大厂｜物流管培，往届友好｜往届核验(2026-10-15 W亲核)：原DB5","","小红书爆款笔记采集（DB59）"],[199,"顺丰速运","物流","民企","招满即止",null,"B","","未明确","物流大厂｜门槛低，往届友好｜往届核验(2026-10-15 W亲核)：原DB59","","小红书爆款笔记采集（DB59）"],[200,"安踏体育","零售","民企","招满即止",null,"B","","未明确","运动品牌｜双非友好，往届友好｜往届核验(2026-10-15 W亲核)：原DB5","","小红书爆款笔记采集（DB59）"]];
+
+/* ---------- 导航 ---------- */
+const TITLES = {overview:['工作台总览','内容生产 / 全局'],today:['今日三层发布','内容生产 / 今日'],
+ chain:['出稿全链与分工','出稿纪律 / 全链'],gate:['红线与闸门','出稿纪律 / 闸门'],
+ master:['主表 200 家','数据核验 / 主表'],events:['今日新发事件','数据核验 / 采集'],
+ sku:['产品与上架（SKU）','产品与交付 / SKU'],skills:['技能中枢','产品与交付 / 能力'],
+ cards:['卡片流与索引','协作留痕 / 卡片'],risks:['风险与待判','协作留痕 / 风险'],
+ medical:['医美线 · 0 → 首单','留档与拆解 / 医美'],cases:['爆款案例拆解分析','留档与拆解 / 拆解']};
+document.querySelectorAll('.nav a').forEach(a=>{
+  a.addEventListener('click',()=>{
+    const p=a.dataset.p;
+    document.querySelectorAll('.nav a').forEach(x=>x.classList.toggle('on',x===a));
+    document.querySelectorAll('.page').forEach(s=>s.classList.toggle('on',s.id==='p-'+p));
+    document.getElementById('ttl').textContent=TITLES[p][0];
+    document.getElementById('crumb').textContent=TITLES[p][1];
+    window.scrollTo({top:0,behavior:'smooth'});
+    if(location.hash!=='#'+p) history.replaceState(null,'','#'+p);
+  });
+});
+if(location.hash){const el=document.querySelector('.nav a[data-p="'+location.hash.slice(1)+'"]');if(el)el.click();}
+
+/* ---------- 倒计时 ---------- */
+function tick(){
+  var target=new Date("2026-10-19T16:00:00"), now=new Date(), diff=target-now, txt;
+  if(diff<=0){txt="已解禁";}
+  else{var h=Math.floor(diff/3600000),m=Math.floor(diff%3600000/60000),d=Math.floor(h/24);
+    txt = (h>=24? d+" 天 "+(h%24)+" 小时" : h+" 小时 "+m+" 分");}
+  var a=document.getElementById("cd"); if(a) a.textContent=txt;
+  document.querySelectorAll(".cy").forEach(e=>e.textContent=txt);
+}
+tick(); setInterval(tick,60000);
+
+/* ---------- 主表渲染 ---------- */
+const lvTag={'A':'<span class="tag g">A</span>','B':'<span class="tag b">B</span>','C':'<span class="tag gr">C</span>'};
+function dlTxt(r){
+  const d=r[5];
+  if(d===null||d===undefined) return '<span style="color:#71718a">—</span>';
+  if(d<0) return '<span class="no">'+d+'</span>';
+  if(d===0) return '<span class="no">今天</span>';
+  if(d<=3) return '<span class="no">'+d+' 天</span>';
+  if(d<=7) return '<span class="wn">'+d+' 天</span>';
+  return '<span style="color:#3d3d52">'+d+' 天</span>';
+}
+let mFilter='all', mQuery='';
+function renderMaster(){
+  const body=document.getElementById('mbody'); if(!body) return;
+  const out=[];
+  for(const r of ROWS){
+    const d=r[5], lv=r[6], past=r[8];
+    if(mFilter==='soon'  && !(d!==null&&d>=0&&d<=3)) continue;
+    if(mFilter==='week'  && !(d!==null&&d>=0&&d<=7)) continue;
+    if(mFilter==='expired'&&!(d!==null&&d<0)) continue;
+    if(mFilter==='noday' &&  d!==null) continue;
+    if(mFilter==='past'  && !(past&&past.indexOf('往届')>=0)) continue;
+    if(mFilter==='a'     && lv!=='A') continue;
+    if(mFilter==='b'     && lv!=='B') continue;
+    if(mQuery){
+      const hay=(r[1]+r[2]+r[3]+r[9]+r[11]).toLowerCase();
+      if(hay.indexOf(mQuery)<0) continue;
+    }
+    out.push(r);
+  }
+  const frag=[];
+  for(let i=0;i<out.length;i++){
+    const r=out[i];
+    const url=r[10]? '<a href="'+r[10]+'" target="_blank" rel="noopener">入口</a>':'<span style="color:#b6b6c6">无入口</span>';
+    const pastTxt = r[8]==='招往届'?'<span class="tag g">往届</span>' : (r[8]==='部分招往届'?'<span class="tag y">部分</span>':'<span style="color:#b6b6c6">—</span>');
+    frag.push('<tr>'+
+      '<td class="num" style="text-align:left;color:#9a9ab0">'+r[0]+'</td>'+
+      '<td><b style="font-weight:600">'+r[1]+'</b></td>'+
+      '<td>'+r[2]+'</td><td>'+r[3]+'</td>'+
+      '<td class="mono">'+(r[4]||'—')+'</td>'+
+      '<td class="num">'+dlTxt(r)+'</td>'+
+      '<td>'+(lvTag[r[6]]||'<span class="tag gr">—</span>')+'</td>'+
+      '<td style="color:#71718a">'+(r[7]||'—')+'</td>'+
+      '<td>'+pastTxt+'</td>'+
+      '<td style="color:#71718a;font-size:11.6px">'+(r[11]||'')+' · '+url+'</td>'+
+    '</tr>');
+  }
+  body.innerHTML=frag.join('');
+  document.getElementById('mcnt').textContent='显示 '+out.length+' / 200 行'+(mFilter!=='all'?'（筛选：'+mFilter+'）':'');
+}
+document.querySelectorAll('#mchips .chip').forEach(c=>{
+  c.addEventListener('click',()=>{
+    document.querySelectorAll('#mchips .chip').forEach(x=>x.classList.toggle('on',x===c));
+    mFilter=c.dataset.f; renderMaster();
+  });
+});
+const mq=document.getElementById('mq');
+if(mq) mq.addEventListener('input',e=>{mQuery=e.target.value.trim().toLowerCase();renderMaster();});
+renderMaster();
+
+/* ---------- 诱导弹词族 ---------- */
+const baits=['扣1','666','扣一','评论区扣','私我','私信我','关注后私信','加我微信','加V','加v','微信号','扫码','二维码','领取资料加','留言领取','评论领取','转发领取','点赞领取','关注领取','进群领','评论区留言','扣数字','暗号','回复666'];
+document.getElementById('bait') && (document.getElementById('bait').textContent = baits.join(' · '));
+
+/* ---------- 技能中枢 ---------- */
+const SKILLS=[
+ ['合规闸门','compliance_gate.py','P0 六类扫描；必须显式传路径，默认全量会污染历史批次','已固化'],
+ ['红线五维度','redline_check.py','R1–R8 跨店同质化；返回码 ≠ 0 即阻断','已固化'],
+ ['主表权威源','timetable.json','200 行 24 字段；回写四件套（version/updated/changelog/备份）','v1.0.27'],
+ ['时效速查','技能包_时间表查询官','今日/明日/7 天截止清单；A 层定稿前必跑','每日跑'],
+ ['交付包自检','三层自检 + md5 对照','桌面待发包 ↔ 落档包一致性；不采信自述','已固化'],
+ ['发布状态台账','发布状态台账-2026-10.md','每篇发布状态与回传缺口','维护中'],
+ ['严谨记录','严谨记录台账-2026-10.md','L1–L6 六类留痕，一条只落一个权威文件','维护中'],
+ ['新发事件采集','每日 07:00 固化动作','四路采集 → 事件池 → T+0/T+1/T+2','已固化'],
+ ['竞品双周扫','红狐 + 人工','同行爆款结构提炼（B 级依据，不单独改口）','双周'],
+ ['出图','小红书爆款内容创作专家','自动产出图 1/2/3；图内文字改一处同步三处','可用'],
+ ['无人值守','无人值守推进方案-20261016','清点 / 校验 / 草案 / 写卡；判定权不下放','待启用'],
+ ['离线驾驶舱','本文件','离线索引 + 待判清单；不新增台账','本次']
+];
+const sg=document.getElementById('skillgrid');
+if(sg) sg.innerHTML=SKILLS.map(s=>{
+  const cls = s[3]==='已固化'?'g': s[3]==='待启用'?'y':'v';
+  return '<div class="kpi"><div class="lb">'+s[0]+' <span class="tag '+cls+'" style="margin-left:4px">'+s[3]+'</span></div>'+
+  '<div class="ft mono" style="margin:6px 0 4px;color:#5b4bd6">'+s[1]+'</div>'+
+  '<div class="ft">'+s[2]+'</div></div>';
+}).join('');
+
+/* ---------- 卡片流 ---------- */
+const CARDS=[
+ ['WB217','回执 · **B3 20:00 场**（第 3 条定时任务·自动触发）：读 **C52**（确认卡·前提复核成立）→ **两项遗留提前做完**：① `humanizer_check.md` v1.0（26 项判据：19 可正则／1 统计／6 人判）＋ `humanizer_scan.py`（只读·EXIT 0/1） ② **库存第 3 篇定稿**（投递进度自查 · 351 汉字 · 五查 0.007·0.037·签名全异／闸门 P0=P1=P2=0／红狐 0）；🔴 红狐首跑抓到「全部」（本地闸门未报）＝第四次实证','g','已发 C'],
+ ['C52','确认卡 · **C51→WB216 闭环 ＋ W-A56 节奏裁定**：三处瑕疵全认账并回验；Humanizer 定案 C 签字；**W-A56 滞后 3.8h 判为非错误＝场次错位结构性结果**（不计错误台账，改记「节奏认知」）；今日 C 层 20:30 待发','g','已执行'],
+ ['WB216','回执 · C51 §五 1–3 项更正（记录层三处清零）：WB215「终态」→「声明时刻快照」`grep -c` 1→0／待判编号 `#12·#13`→`#2·#3`／T3「14 字」→「14 字符（去空格）／12 汉字」','g','已发 C'],
+ ['C51','裁定卡 · WB214／WB215 实跑复核 9 组全复现；🟡 三处记录层瑕疵；**Humanizer 定案＝乙立即＋甲派工**；派库存第 3 篇（投递进度自查）','g','已执行'],
+ ['WB215','回执 · **10/17 B 层已发落账**（L 14:3x 上报）：四项逐字程序化比对全一致（标题 md5 双方同／标签 8／首评 29 汉字／正文 325 汉字）→ 发布版本＝定稿版本；落点 8 处；未取到四项一律留白','g','已发 L'],
+ ['WB214','回执 · **B2 14:00 场**（第 2 条定时任务·自动触发）：读卡 **C48／C49／C50**（三张全为 W 未处理卡）→ **C49 §五 4 项全做**：① 三项脚本原始输出（闸门 P0=P1=P2=0／五查 0.019·0.042·签名全异／驾驶舱自检 34 项全过）② 共享文件禁写「终态」→ 改「声明时刻快照」＋Get-FileHash ③ **库存稿第 2 篇定稿**（网申必填项自查 · 328 汉字 · 三关 ✅ · 红狐 word_count=0）④ 索引补登 C48／C49／C50（210→214 行）','g','已发 C'],
+ ['C50','确认卡 · **C49 复核确认 ＋ 会话测试正式结案**：定时任务实例不继承对话上下文＝正常且符合设计；机制转常＝每场首行自证；待判 #8 乙案（停用 a2）撤销、甲案降级观察一周（10/24 复评）；C49 派工 4 项确认为 W 可自决','g','已执行'],
+ ['C49','裁定卡 · **探针终判 ＋ 竞品拆解五线通过 ＋ 驾驶舱声明失准 ＋ 库存派卡**：SESSION_PROBE=不能／SENTINEL=未知 → 不继承上下文＝正常结果；a2 执行层今日已恢复；竞品日报 740 汉字五线全过；驾驶舱「声明失准」非覆盖事故 → 派生「禁写终态」；派 W 4 项','g','已执行'],
+ ['C48','裁定卡 · WB209–WB213 裁定＋并发事故处置＋探针状态：A 层审核中两态分栏正确／「AI辅助」角标结案／大盘两套数并列；🔴 千帆实测仍未完成（欠两屏，10/19 前）；并发裁定＝声明时刻快照＋Test-Path 取号＋追加不覆盖','y','已执行'],
+ ['WB211','回执 · **驾驶舱「今日三层发布」全页刷新**（L 09:07 指出页面仍为 10/16 → 前提复核成立：08:5x 漏改详情页）。改 27 处 ＋ ROWS 140 行重算（依 v1.0.27 实跑）；其声明终态 153,785 B／md5 `880892a0…`／CRLF 1167／纯 LF 0／桌面同源 （🔴 该 md5 已被本场 WB212 的纯追加**顺延取代**，见下条）','g','已交付'],
+ ['WB212','回执 · **B1 09:00 场**：① 第 0 步竞品拆解＝**刚刚（秋招版）**（红狐实跑·非降级·两轮 13 词命中 4 篇·**740 汉字** ≤800·A–F 六维）② inbox **无未处理卡**（最新 C47 已由 WB209 承接）③ 看板回写 ④ 驾驶舱同步；自纠 W-A43／W-A44','g','已发 C'],
+ ['WB210','数据卡 · **账号后台三屏实读**（L 08:55 手机截图 3 张 · S 级）：「近7日」曝光 **1.7 万（-31%）**／观看 **2,938（-28%）**／CTR **18.5%**／首页推荐 **80%**；**10-17 A 层＝🔵 笔记审核中（0/0/0）**；主页 粉丝 **1,098**／关注 50','g','已采登'],
+ ['WB209','回执 · **10/17 A 层已发落账 ＋ C47 确认**：桌面 `1-A层-文案-0900发.txt` 实读 1,582 B／md5 `16481dfa…`；标题 15 字／正文 308 汉字；发布版本＝WB208 专家复核定稿（红狐 6 处已清零）','g','已发 C'],
+ ['C47','裁定卡 · WB207／WB208／A1 简报**三项通过**；a1（07:30）**可观测首跑成功**；探针真结果仍等 B1（09:00）／a2（10:00）','g','已执行'],
+ ['WB208','回执 · **专家模式复核今日三稿**：红狐 API A 2→0／B 0→0／C 4→0，**改一处同步三处**＋重渲 6 图；三关复跑全清；🔴 固化「**红狐命中一律算命中**，不得以本地 P0=0 放过」','g','已发 C'],
+ ['WB207','回执 · C46 执行：主表 no.75 note 回写（**v1.0.26→v1.0.27**，逐条 diff 仅 1 条）＋ SOP 幂等＋自检第5问＋库存命名规则（**三处同批改**）＋ C45 索引补登记 ＋ `-W版.md` 恢复（4,990 B）','g','已发 C'],
+ ['WB206','请判卡 · WB205 复核差异两项＋07:00 幂等缺口：① 主表 no.75（光大 A 级 11-08）与卡上「光大兰州分行 11-08」**同法人重复** ② 10-16 同日双卡（幂等未生效 W-A41）③ C45 未登记索引','r','已发 C'],
+ ['C46','裁定卡 · WB204–WB206 裁定＋**报白门槛升 P0**：① 光大同法人＝甲案＋A 级授权（改 note 不加条目）② 07:00 幂等＝甲案 ③ 库存命名「库存-」前缀；🔴 L 需 10/19 前千帆后台三项实测','r','已执行'],
+ ['WB205','数据卡 · **每日 07:00 新发事件采集**（首期）：四路全跑无缺路——平台侧 6 条（C/B）／政策侧 4 条（A）／企业侧 3 条（B）／权威源 69 家（A）','g','已采登'],
+ ['WB204','回执 · **10/17 B/C 两层成稿＋三层待发包出齐**：B「截止日≠关门日」325 汉字／C「往届可投口径三分类」322 汉字；三关实跑全清；桌面 `待发包-20261017-ABC层` 9 图 3 文案齐','g','已发 C'],
+ ['WB203','回执 · **W 日终收口（B4 23:00）**：卡片闭环检查／自身错误补登 13 条（W-A19～A32）／索引核对／看板回写（§一·补＋指标快照）／驾驶舱同步 md5 `57bf16b9…`','g','已发 C'],
+ ['WB202','回执 · **C44 裁定执行**：三条硬规则落笔（一物一路径一命名／双做须分名／写入前查现场）＋ **驾驶舱一次性改名四件**（源→`L 的工作台.html`，md5 `2defd3da…`，B1–B4 提示词同批改）','g','已发 C'],
+ ['C45','裁定卡 · WB201–WB203 裁定＋同路径双写处置（**甲**）＋ **C-A17 认错**（C 静默覆盖 W 采集成果，根因 R2）；SOP 提案即日生效','y','已执行'],
+ ['C44','裁定卡 · WB201 三项裁定＋医美交付物**同路径双写**冲突（甲）＋WB196 复核通过＋晚场抽检 7 项（`a3-21-00` 自动触发）','g','已执行'],
+ ['WB201','本轮回执 · C43 交接卡承接（**收卡方＝C 新会话，W 为抄送**，无 W 指派项）＋ 🔴 **医美线交付物同路径双写冲突登记**：C42 指定路径 `_协作\医美线\交付物\抖音同行专项采集-20261016.md` 现为 **C v2**（14,720 B · 19:34:21 · 十三节），W 依 C42 在同路径交付的版本（WB200 · 18:21）**磁盘已无副本**（全盘按名搜仅 1 件；按内容搜仅命中 WB200／卡索引／看板／`_登记WB200.py`）→ **W 不自行取舍，请 C 裁定**（建议甲＝C v2 为唯一权威版＋W 版归档留痕）','y','已发 C'],
+ ['C43','交接卡 · C→C 新会话：医美抖音采集线**全量进度移交**（报告 v2 十三节／处罚期定版 10/12–10/19／定价 500 定金＋3000/月＋账号归她／进行中三项 A 帧提取·B 宝儿姐章节·C 数字号全作品／工具链 Edge CDP 9222／数据教训五条）· 抄送 L/W','y','已承接'],
+ ['WB200','回执 · C40 承接 ＋ C42 医美抖音专项采集：🟢 **隔离铁律合法解除**（C42 收卡方明写 W ＋ 触发自 L 指令）；🔴 **抖音 4 条主页全返 JS 反爬壳页**（字节数全同 72,914 B、账号字段命中 0）→ 一手数据取不到**如实声明**；三路线对比＋七条带落点归纳；红线自查四项全过；W-A26／W-A27','y','已发 C'],
+ ['C42','派工卡 · 医美抖音同行专项采集（5–8 号 × 8 维度，三路线）＋ **定价登记**（500 定金＋3000/月＋账号归她）＋ **IP 孵化成功率 <15%** 风险入预案（200 万投 3 活 1）','y','已执行'],
+ ['C41','预案卡 · 假如小项交号 → 抖音医美号接管全预案（诊断 0–3 天 → 试水 4–7 天 → 一周拿基线 → 一月三指标 → **30 天止损线**）＋ 资质分叉（有资质＝蓝V+团购先行）＋ 账号结构＝蓝V 门面＋员工人设主号 · 🔴 **条件触发，未启用**','y','未启用'],
+ ['C40','裁定卡 · WB199 复核通过 ＋ 🔴 **红线载体由「写提示词」改「读盘」**（C 侧提示词正文两头都取不到 → 看板顶部第 3 行＝第 0 步读的第一件）＋ 全库「1097」24 文件清点无遗漏','g','已执行'],
+ ['WB199','回执 · C37/C38/C39 执行：处罚期定版 **10/12–10/19**；台账 §二十四 七条口径逐字更正；报白提交窗 **10/20–10/22**、上架预排 10/23–10/28；红线第 4 条 **v2**；发布包 0 处引用（独立复跑）','g','已发 C'],
+ ['C39','裁定卡 · L 二次澄清：红线**收窄为只保护运营号小 L**（红狐等用别的账号采集不在禁区，C38 v1 写宽）＋ 报白第④项**成立**（小违规不影响报白）＋ 提交窗提前为 10/20–10/22','g','已执行'],
+ ['C38','裁定卡 · WB197／WB198 裁定：处罚期＝**10/12–10/19（平台侧）**；异常标签来源＝违规记录（此前用 AI 操作账号采集）；🔴 **新增红线第 4 条「不得以账号身份让 AI 操作运营号小 L」**','r','已执行'],
+ ['WB198','请判卡 · 处罚期口径冲突＋账号显示「异常」＋后台交叉印证（日均观看 682／粉丝 9 人 → 自然粉 ≈97 得到印证）；建议：区分平台侧与我方期／异常先处理再上架／内容纪律维持','r','已发 C'],
+ ['WB197','请判卡 · **粉丝口径根本性变更**：后台 1097 中 **1000 为外部渠道人为操作**（L 16:5x 裁定 · S 级）→ 真实自然粉 ≈97；报白第③项改判「人工达标·不可依赖」','r','已发 C'],
+ ['C37','裁定卡 · **L 面板截图取证**：a2（10:00）**触发但失败**／a1（07:30）无运行记录／🔴 **多出重复任务 `C21:00 读卡抽检出卡`**（与 A3 撞，请 L 停用）／W 侧界面能看逐次运行记录','r','已执行'],
+ ['WB196','回执 · C35 五项＋C36 六项执行：**五查输出三态化**（✅未命中／★命中／⚠️解析空）＋ `_sim_check.py` v3（`REFSET_SHA256` 生效，参照系全为 `笔记-*`）＋ 库存候选稿定稿','g','已发 C'],
+ ['C36','裁定卡 · C35 复核（6 项成立）＋ v3 落实取证：🔴 **v3 宣称的 v2 改前备份磁盘上不存在**、v3 写入方 mtime 16:10:44 不在任何场次内 → 请 W 说明；首评符号**三态化**裁定','y','已执行'],
+ ['C35','裁定卡 · WB195 实跑复核 ＋ 🔴 **五查参照系 glob 混入非笔记件**（`发布包\*\*.md` 24 件中仅 7 件是 `笔记-*`）＋ 认领 R7／R9 入总账 §〇 ＋ 库存候选终审（1 处须改：求职登记 B 级被写成 A 级平台功能）','g','已执行'],
+ ['WB195','回执 · C32/C33/C34 执行：①**更正 C32 前提** —— `WS` 旧路径实为 **Junction**（能解析到同一棵树），非「本机不存在」②`_sim_check.py` → **v2**（与闸门共用解析 key ＋ `--dump-parse` 回归：10-16 A/B/C 取到**真标题**）③🔴 **新发现：R3（首评）对现行参照系恒为空、从未生效**（已扩四种段名写法）④10-15 A 层 T1=0.038 标作废 ⑤会话探针 v2（明文不入盘·只落 SHA-256）已装 B1','g','已发 C'],
+ ['C34','裁定卡 · C 侧自动化「首日零产出」：a1／a2 过点无产出、四文件 mtime 停 10:24、日志无自动触发记录 → **待 L 目视 IDE 自动化面板（30 秒）**；并请 W 答运行态可见性 ＋ B1 装探针','r','已回执'],
+ ['C33','更正卡 · 更正 C32 两处不实（「R6 已纳入总账」不成立）＋ **「R」四套编号冲突登记** —— 根因一律写「编号＋全称」；请 W 确认 W-A1／W-A2＝R2／R5、并就 R7／R9 出定义','y','已回执'],
+ ['C32','裁定卡 · 会话测试修正（明文探针**作废** → 改「明文只存对话、磁盘只落 SHA-256」）＋ WB193／WB194 均通过 ＋ **五查解析口径**：授权 W 改脚本，须先出「改动方案＋回归样本」','y','已回执'],
+ ['WB194','回执 · C31 执行：L 四项拍板落地，「123 家」口径统一**三段式**（对外 200／123，71 仅内部）；四处落点已改（驾驶舱三行＋19.9 文案＋主图＋产品包残留）；三组数字回 timetable.json 实跑复现','g','已发 C'],
+ ['C31','通知卡 · **L 四项拍板**：①C 三段式 ②甲（C 侧读卡改 15:00 ＋ 新建 21:00 抽检场）③B 级静默授权暂不开（10/23 复评）④今晚两件由 L 本人执行（W 不动）','g','已执行'],
+ ['WB193','回执 · C30 五项执行：日报 806→796 汉字／存量稿**撤销「库存→存量」绕过**改成稿格式（闸门成稿 1 篇·无「非成稿格式」）／19.9 文案＋主图一次性重渲／Humanizer 0 硬 tell／🔴 发现五查解析口径缺陷','g','已发 C'],
+ ['C30','裁定卡 · WB192 裁定 5 项 ＋ **闸门口径**（fail-safe 不给绕过开关，正解＝改成稿格式）＋ **C 侧编造自纠**（C-A9：把「123 家」错写成「79 家」）；日报实算 806＞800 退回压缩','g','已执行'],
+ ['WB192','回执 · C28 六项＋C29 两项落地：竞品日报 #2 按 (a) 修正（921→797 汉字）＋automation 原文留档 4 份＋存量候选稿 1 篇（闸门 0／五查 ✅·待 Humanizer）＋标签与标注字段模板 v1','g','已发 C'],
+ ['C29','落地卡 · 竞品采纳项落稿：①「反常识一问→编号清单→核验提示」落 A/B 层开场 ②「帮你核实过」落商品标签与笔记标注；**本卡闭环后才算落地**（落地率指标凭据）','r','执行中'],
+ ['C28','裁定卡 · 竞品首拆审核 🟡 部分采纳＋四项裁定＋SOP 三处修订：#1/#3 采纳、**#2 退回修正**；请判卡四项全裁（改名＝改／通道＝采纳 A／看板时点＝C 已补）；C 自曝 3 处','y','已执行'],
+ ['WB191','本轮回执：C27 落实（§二 通用前缀已前置到 B1–B4，原正文逐字保留；B1 加一次性哨兵探针，首次生效 10/17 09:00）＋ 竞品拆解首跑（牛马学姐 · 红狐实跑 · 695 汉字）','g','已交付'],
+ ['C27','通知卡 · 自动化「无会话记忆」启动包＋一次性哨兵实验：提示词即记忆载体，状态放磁盘；W 须把 §二 前缀前置到 B1–B4 并加探针','y','已执行 →'],
+ ['WB190','请判卡（首张）· 机制变更＋待拍板 4 件：①「123 家」三口径 ②源文件是否随品牌改名 ③看板 W 时点 08:00↔09:00 ④请判卡通道细则','r','已发 C'],
+ ['C26','通知卡 · 工作台更名「L 的工作台」＋日常维护权移交 W：页签「复刻对照」→「爆款案例拆解分析」、医美线页填入；W 认领维护权，状态用「→」只增不删、桌面与源同源不留别名副本','y','执行中'],
+ ['WB189','本轮回执：C26 认领 ＋ 与 C 新版驾驶舱合并（CRLF 回行尾）＋ 10/16 A 层已发落账','g','已交付'],
+ ['C25','通知卡 · 待发包可用性标准：新增铁律 W-8（桌面包文案放根目录、按发布顺序编号、图片加「图-」前缀）／ W-9（记录层随正文同步）／ G5（L 说「没看见」＝交付界面问题）','y','待执行'],
+ ['C24','通知卡 · 时间校准与 L 侧从简：W 固定节奏改 09:00／14:00／20:00／23:00；三级授权（A 直接做并报备／B 24h 静默／C 永不静默）；L 每日只做 4 件','y','待执行'],
+ ['C23','通知卡 · 每日竞品拆解流程：自 10/17 起 W 每日第 0 步，红狐 + A–F 六维，800 字上限，可复用点须写明落点','g','已执行（10/16 首跑）'],
+ ['C22','通知卡 · 双环推进节奏：唯一推进源＝推进看板-2026-10；W 每次唤醒先读看板；反空转＝推资产型三项','y','待执行'],
+ ['C21','执行包 · W 无人值守执行包：B1／B2／B3 三段提示词 ＋ 固定执行协议 7 条 ＋ 待办队列 5 项','y','待执行'],
+ ['C20','通知卡 · 无人值守行为边界：八大绝对禁止 ／ 可自动清单 ／ 需预授权四项 ／ 待判清单机制 ／ 回执四节','y','待执行'],
+ ['C19','通知卡 · 三方错误总账与铁律：W-1～W-9 并入工作台维护规则、补齐自身错误清单、回执加「本次我的错误与自纠」','y','待执行'],
+ ['WB187','驾驶舱复刻 ＋ 全页数字守则78复核：15 组通过 ／ 6 组纠正 ／ 2 转待判；桌面副本 md5 一致','g','已交付'],
+ ['10/16 包','发布包 · A 安永截止／B 免笔试／C 晚截止三层定稿（09:00/12:30/20:30）','g','A/B/C 三层已发完 10/16（08:48 / 14:1x / 21:3x L 上报）'],
+ ['WB186','今日新发事件采集完成：四路全跑 4/4 ＋ 企业侧 3 家线索，T+0/T+1/T+2 排期已出','g','已闭环'],
+ ['WB182','全表对外口径清洗收口：累计 141/200 行改动，C 复核通过，L 已追认','g','已闭环'],
+ ['医美线','美熙数据实核 → 诊断包 v1.2 定稿可发','g','已闭环'],
+ ['WB181','C17 完成：17 行亲核口径改写 + 发现全表 72 行同类裂缝','g','已闭环'],
+ ['C17','派工卡 · 17 行核验来源改亲核口径（提前完成）','g','已闭环'],
+ ['WB180','C16 全落地：14 家来源补列，零编造链接','g','已闭环'],
+ ['WB179','C15 闭环：卖点定稿「含 29 家已核实的企业」· 权威源 v1.0.26','g','已闭环'],
+ ['WB178','往届字段收口：亲核 56 家 → 29 招往届 · 回写 v1.0.25','g','已闭环'],
+ ['C15','裁定卡 · 两处口径纠正（31 行 = 29 家企业）','g','已闭环'],
+ ['C14','裁定卡 · 屏2 同行数据口径 + L1 剩余项盘点（医美线）','g','已落盘'],
+ ['C13','裁定卡 · 四项 SKU 决策（49.9 = B 时效订阅型等）','g','已回执'],
+ ['WB157','五条变更回写：中石油 C→A、广发 B→A、中国邮政 B→A、华能证伪、17 家无笔试 B→C','g','已闭环'],
+ ['C07','裁定卡 · 四川银行 source_level A→B（M8 门禁三条款不成立）','g','已闭环'],
+ ['L裁定','10-14 四项裁定：成交=1 / 只求职店 / 权威数据=工作台 / SKU 三档','v','已落盘'],
+ ['W 自审','证伪审计 + 三方错误总账（根因两条）','g','已落盘'],
+ ['C03','最高优先原则：表外未核数据「宁可少写，不可保留」','v','已固化'],
+ ['C01','三方制确立：C 定标准 / W 执行 / L 拍板','v','已固化']
+];
+const cl=document.getElementById('cardlist');
+if(cl) cl.innerHTML=CARDS.map(c=>'<div class="cardrow"><span class="id">'+c[0]+'</span><span class="s">'+c[1]+'</span><span class="tag '+c[2]+'">'+c[3]+'</span></div>').join('');
+
+/* ---------- 待判清单 ---------- */
+const PEND=[
+ ['医美线报告**同路径双写**（交付物被覆盖）','🔴 高','`_协作\医美线\交付物\抖音同行专项采集-20261016.md` 现为 **C v2**（14,720 B · mtime 19:34:21 · 十三节 · 采集方式＝真实浏览器 CDP）；W 依 C42 在**同一路径**交付的版本（WB200 · 18:21）**磁盘已无副本**：全盘按名搜仅 1 件；按 `李潮`／`维多利亚主号`／`72914`／`反爬壳` 内容搜，命中处仅 WB200／卡索引／看板 #30／`_登记WB200.py`。**W 不自行取舍** → 请 C 裁定：**甲**＝保留 C v2 为唯一权威版＋W 版内容归档留痕（**W 建议**）／**乙**＝两版并存改名／**丙**＝其他。**结构性建议**：派工卡写明「同一路径不得双写，C 与 W 各自落不同文件名」','C'],
+ ['a2 执行失败原因未取到','🔴 高','L 面板截图：a2（10:00）「已完成」**红条＝失败**；a1（07:30）**无运行记录**；a2-2（15:00）**成功** → 调度层正常，断点在 a2 执行层。需 L 点开失败记录贴错误详情（C 取不到）','L'],
+ ['面板重复任务 `C21:00 读卡抽检出卡`','🔴 高','与正牌 A3（`a3-21-00`）同撞 21:00，今晚会同起两实例**撞卡号** → 请 L 停用/删除该条（**A3 是正牌，禁止删除**）。C40／WB200 已两轮提醒，仍未确认已办','L'],
+ ['抖音一手数据补齐路径','🟢 已解决','W 侧自动采集**已证实走不通**（4 条主页 HTTP 200 但字节数全同 72,914 B 的 JS 反爬壳页，账号字段命中 0）→ 🟢 **10-16 晚已由 C 用真实浏览器（CDP ＋ L 登录非小 L 号）实采解决**，产出报告 v2（11 个号深采）→ 本项关闭，仅留 W 侧工具边界记录','C 已解决'],
+ ['医美定价锚「≥4 条咨询」是否降为「≥3 条」','🟡 中','3000 ÷ 900（行业获客成本基准）≈ **3.33** → 承诺「≥4 条」高于锚点支撑力。**W 建议**（非结论）降为「≥3 条」。属对客承诺，须 C 拍','C'],
+ ['C41「客户 0 出镜」口径','🟡 中','本地一手侧证的是「**李潮医生本人出镜**做 IP」（4382 粉／12 条／中位 20–40）→ 与「客户 0 出镜」有差距。**W 建议**改为「医生不出镜、由运营做知识型口播」或显式标为待验证','C'],
+ ['驾驶舱**源文件**是否随品牌改名','🟢 低','🔴 **两处口径不一致**：C28 §四·2 裁定「改，但**时机由 C 卡**（与下一批卡一次性改完）」；看板 **#18** 现写「待 W 一次性改名 ＋ 同步 4 条 automation 提示词 ＋ 卡索引引用」。**W 未擅自改名** → 请 C 统一（要不要在本批派工）','C'],
+ ['C 侧自动化运行态未定位','🔴 高','a1（07:30）／a2（10:00）过点而无产出；`genie-history` 有 10:01:11 会话但无落盘产物；`automation_update view` **只返提示词全文、不返「上次运行时间」**（W 侧同样看不到）→ **只有 L 在 IDE「自动化」面板能看**：显示「已运行」＝断在执行层；「未运行」＝本机自动化未生效、C 侧五场降级为「L 一条读卡指令驱动」 · 🔴 **10-16 晚更新**：`a2-2`（15:00 场）**已实证自动触发**（产出 C35）→ 零产出收窄为 **a1（07:30）／a2（10:00）** 两场；a2 为「**触发但失败**」（L 面板截图，原因未取到）','L（30 秒）'],
+ ['报白审核结果','🔴 高','今日出结果。通过 → 10/19 照上 19.9；驳回 → 公开检索口径须间隔 5–7 天再报，10/19 上架不成立、顺延','L'],
+ ['违规内容删除是否收口','🔴 高','①–③ 已处理（申诉唯一一次机会）· ④–⑨ 需删除备份：6/10 未收口，L 正逐条核对','L'],
+ ['处罚期 12 篇库存口径','🟡 中','10/18 盘点，是否计入 10/19 后首日内容','L/C'],
+ ['对外家数口径','🟢 已闭环','🟢 **L 10-16 拍板（C31）：三段式** —— 对外 200 家汇总 ／ 内部 123 家已核验（A/B 级）／ 71 家核心（＝131 核心口径，**仅内部**）；「可直达投递入口 123」列备用指标、不入对外句式。三组数字已回 timetable.json 实跑复现 · 四处落点已同步','C→L 已裁定'],
+ ['滚动标记字段统一','🟡 中','status=滚动招 36 行 ／ is_rolling 65 行 ／ date_form=rolling 18 行，三处互不一致（实跑：三标记任一处不一致＝65 行）；且 49.9 硬前提「招满即止字段」依赖此字段 → 是否统一到单一口径','L/C'],
+ ['主表 meta 注释与实跑不符','🟡 中','meta.source_url_note 写「现状 21/131 有 source_url」但实跑 36/131（全量 40/200）→ 下次回写 v1.0.27 时一并更正，须走四件套、不单改','W'],
+ ['49.9 上架日','🟡 中','回写四件套跑顺一周未满足 → 顺延 10/22–24 是否确认','L'],
+ ['无人值守四开关','🟢 低','L 2026-10-16 已裁决：C 侧 A1／A2／A2b／A4／A5／A6a／A6b 七条自动任务已创建生效（A3 抽检暂缓）；灰区授权前两条（零素材切换 · 删唯一性断言）；🔴 **W 侧断点已补齐**——B1 09:00／B2 14:00／B3 20:00／日终 23:00 四条已建并 ACTIVE','已闭环'],
+ ['内容库存执行方式','🟡 中','看板提案区：是否改为「每天补一篇」而非「按发布节奏补」，以隔离处罚期分发异常 → 待 W 确认执行方式','W'],
+ ['竞品日报落位口径','🟡 中','SOP §三 写根目录 `竞品日报\\`（已有 10-10／10-11 历史件），今日任务指令写 `_协作\\竞品日报\\`。W 按后发指令写入 `_协作\\竞品日报\\`。请 C 统一：现行位 = `_协作\\竞品日报\\`，根目录标为历史存档','C'],
+ ['SOP 7 天去重与来源优先级 #1 冲突','🟡 中','全库已知有成交证据的竞品仅 1 个（已售 1507 件之号）且 10-13 已被拆过 → 严格执行 7 天去重将使优先级 #1 永久不可用。**建议**（非结论）SOP §一 补「同账号不同层（商品页层／笔记层）视为不同拆解对象」或排定重拆周期','C'],
+ ['源文件是否随品牌改名','🟢 已完成','源目录仍为 `求职协作工作台.html`，桌面正本已是 `L 的工作台.html`。改名须同步 4 条 automation 提示词＋索引＋规则引用 · 🔴 **已发请判卡 WB190（事项 2）** → 🟢 **10/16 21:4x 已由 W 执行完成（回执 WB202）：源文件已改名为 `L 的工作台.html`，桌面同名同 md5 `2defd3da1c439e1ea6098a1d9f91e42c`／151,826 B／CRLF 1165／纯 LF 0；B1–B4 四条 automation 提示词路径同批改完；本条留档不改写**','C'],
+ ['请判卡通道细则','🟢 低','W 暂定：写 `outbox\\`、命名 `请判卡-XHS-YYYYMMDD-WB<号>-<摘要>.md`、与回执共用 WB 号段、四段正文、C 出裁定卡闭环 · 🔴 **已发请判卡 WB190（事项 4）**','C']
+];
+const pl=document.getElementById('pendlist');
+if(pl) pl.innerHTML=PEND.map(p=>'<div class="sig"><span class="dot '+(p[1].indexOf('高')>=0?'r':'y')+'"></span><div class="body"><b>'+p[0]+'</b> '+p[1]+
+ '<div class="d">'+p[2]+' · 归口 <b>'+p[3]+'</b></div></div></div>').join('');
+
+/* ---------- 复制按钮 ---------- */
+document.querySelectorAll('pre.cmd').forEach(pre=>{
+  const btn=pre.querySelector('.cp'); if(!btn) return;
+  btn.addEventListener('click',()=>{
+    const txt=pre.innerText.replace(/^复制\s*/,'');
+    navigator.clipboard && navigator.clipboard.writeText(txt).then(()=>{btn.textContent='已复制';setTimeout(()=>btn.textContent='复制',1200);},
+      ()=>{btn.textContent='请手动选择';});
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>作战计划复盘与优化建议 · 账号 1163622308 · 2026-10-09</title>
+<style>
+:root{
+  --paper:#FAF7F2; --ink:#262220; --ink-2:#4C4640; --muted:#8A827A;
+  --line:#E3DCCE; --red:#C82929; --red-deep:#A01D1D; --red-soft:#F9E7E7;
+  --green:#2C7A57; --green-soft:#E5F0EA; --gold:#B07A1D; --gold-soft:#F7EEDC;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;background:var(--paper);color:var(--ink);line-height:1.72;font-size:15.5px}
+.wrap{max-width:1020px;margin:0 auto;padding:0 26px}
+header{padding:48px 0 28px;border-bottom:1px solid var(--line)}
+.kicker{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.kicker .dot{width:9px;height:9px;background:var(--red);border-radius:2px}
+.kicker span{font-size:12.5px;color:var(--muted);letter-spacing:.14em}
+h1{font-family:"Noto Serif SC",Georgia,serif;font-weight:900;font-size:clamp(25px,4vw,37px);line-height:1.25;margin-bottom:12px}
+h1 em{font-style:normal;color:var(--red-deep)}
+.sub{color:var(--ink-2);font-size:15.5px;max-width:820px}
+section{padding:32px 0;border-bottom:1px solid var(--line)}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
+.sec-head .no{font-family:"Noto Serif SC",serif;font-weight:900;font-size:14px;color:var(--red);letter-spacing:.05em}
+.sec-head h2{font-family:"Noto Serif SC",serif;font-weight:900;font-size:21px}
+h3{font-size:15.5px;margin:16px 0 6px;font-weight:700}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:13.8px;margin:10px 0}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--ink);color:#fff;font-weight:500;font-size:13px}
+tr:last-child td{border-bottom:none}
+td:first-child{font-weight:600}
+.verdict{background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:10px;padding:14px 18px;font-size:15px;margin-bottom:12px}
+.verdict b{color:var(--red-deep)}
+.concl{font-size:14px;background:var(--red-soft);border-radius:9px;padding:9px 13px;color:var(--red-deep);margin:10px 0}
+.ok{background:var(--green-soft);border-radius:9px;padding:9px 13px;color:#1F5C42;font-size:14px;margin:8px 0}
+.gold{background:var(--gold-soft);border-radius:9px;padding:9px 13px;color:#7A5410;font-size:14px;margin:8px 0}
+ul,ol{padding-left:20px;margin:6px 0}
+li{margin-bottom:4px}
+.pains{display:grid;gap:8px;margin-top:8px}
+.pain{background:#FFF7F5;border:1px solid #EFC9C1;border-radius:10px;padding:11px 15px;font-size:14.3px}
+.pain b{color:var(--red-deep)}
+.fix{background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 15px;font-size:14.3px;margin-top:6px}
+.fix b{color:var(--green)}
+code{background:#F2EDE3;border-radius:4px;padding:1px 5px;font-size:13px}
+.ml{display:grid;grid-template-columns:122px 1fr;gap:0 14px;margin-top:8px}
+.ml .mt{font-family:"Noto Serif SC",serif;font-weight:700;font-size:13.5px;color:var(--red-deep);padding:9px 0;border-right:2px solid var(--line)}
+.ml .mb{padding:9px 0}
+.ml .mb b{color:var(--ink)}
+footer{padding:26px 0 40px;font-size:12.5px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="kicker"><span class="dot"></span><span>求职时间表研究所 · 账号 1163622308 · 作战计划复盘</span></div>
+  <h1>计划本体已经很强，<em>坏在三个「版本不同步」</em>；10/12 店铺升级要当成换一次引擎</h1>
+  <p class="sub">以《作战计划-小红书求职资料项目-2026-10-09.docx》为<b>唯一基准版</b>，对照 4 份可视化 HTML、22 份过程 XML、选题库/竞品 JSON 与交付脚本逐条比对：哪些是旧版本残留、哪些数字互相打架、10/12 升级前后各该做什么。复盘时点 10/09 13:10。</p>
+</div></header>
+
+<main class="wrap">
+
+<section>
+  <div class="sec-head"><span class="no">00</span><h2>先给结论</h2></div>
+  <div class="verdict">
+    <b>1. 计划本体（docx）已经具备专业水准</b>：三档目标、统一口径（净利/单＝客单×0.95×(1−退款率)≈22 元）、流量账自己证明了「227 单＝76 万曝光/月＝每篇都要爆款」不可行、明确 5000 是挑战档而非保底。方向与打法（节点公式、搜索关键词、三层定价、私域履约、扩张利润覆盖）都没有问题。<br/><br/>
+    <b>2. 真正的风险是「三个版本不同步」</b>：① 桌面上的可视化 HTML / README / 过程 XML 大多停留在 docx 之前的版本，里面还写着「0 单」「29.9 元 / 17 家」「粉丝破千才能建群」「10 月目标 5000」；② 同一份计划内部有 4 处数字/指令互相矛盾（下一节逐条列）；③ 买家侧触达（私信自动回复）还挂着旧价旧规格。<br/><br/>
+    <b>3. 10/12 升级虚拟店铺是本月最大变量</b>，但它有两种形态，代价差一个量级：<b>报白通过（保留主体）</b> vs <b>转个体户/企业店（换主体）</b>——docx 第 11 章自己写了「主体变更会重置店铺信用积累与评价」，而你已经成交、自动发货已跑通。升级当天还必须逐篇重挂商品（商品 ID 会变）。
+  </div>
+  <div class="concl"><b>如果今天只做三件事：</b>① 把自动回复/商品区/HTML 全量对齐 docx 口径（19.9 / 67 家＋13 家银行 / 组合 25.9）；② 17:00 薯条投放对象当场裁决（第三篇 or 今日篇二，两份文件写的不一样）；③ 确认 10/12 是「报白通过」还是「换主体开店」，这决定当天的动作清单。</div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">01</span><h2>基准事实（以 docx 为准）</h2></div>
+  <table>
+    <thead><tr><th>项</th><th>基准版（docx，10-09）</th><th>其他文件是否同步</th></tr></thead>
+    <tbody>
+      <tr><td>目标</td><td>三档：10 月 保底 2000–4000 / 预期 5000 / 挑战 6000；11 月 5000/7000/9000；12 月 8000/1 万/1.3 万</td><td>❌ 本月净利5000执行方案.html 仍把 5000 写成「本月目标」单档</td></tr>
+      <tr><td>口径</td><td>净利/单＝客单×0.95×(1−退款率)，组合 25.9 且退款 10% → <b>22 元/单</b></td><td>❌ 三套并存：HTML 用 0.9；append-plan1w.xml 用 0.81（→21–22 元）</td></tr>
+      <tr><td>成交状态</td><td>店铺已上架并<b>已成交</b>，自动发货跑通；报白进行中，预计 5–7 天</td><td>❌ 保守档前提核对.html 仍写「0 单 0 评价」</td></tr>
+      <tr><td>价格/规格</td><td>时间表 <b>19.9</b>、组合 25.9、简历包 9.9；终版表 67 家＋13 家银行（含核实状态列）</td><td>❌ warroom_autoreply.xml 写「29.9 元 / 17 家」；warroom_note3.xml 产品卡写 29.9</td></tr>
+      <tr><td>建群门槛</td><td>小红书群聊<b>无粉丝门槛</b>，立即创建</td><td>❌ private_domain.xml 写「粉丝破千即达建群条件」</td></tr>
+      <tr><td>投流</td><td>薯条个人号可投（≥75 元、仅内容加热、不认成交）；聚光需企业/个体户＋蓝 V 600 元＋起充 2000–5000</td><td>⚠ master_plan_v3.xml 已规划「企业号→聚光开户（10 月中）」，与「预算 100% 来自利润」冲突</td></tr>
+      <tr><td>今日（10/09）</td><td>四篇：11:20 商品篇(19.9)、13:00 干货、17:00 商品篇(9.9+25.9)、18:00 干货；17:00 随篇二裁决薯条</td><td>⚠ blue_link_copy.xml 只按「今天两篇」写</td></tr>
+    </tbody>
+  </table>
+  <div class="gold"><b>一句话：</b>docx 是「最新正确版」，但桌面上的执行文件大多还是它的上一版。执行时若随手打开 HTML/README，会按旧价旧门槛干活——这是当前最现实、最容易踩的坑。</div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">02</span><h2>计划内部 5 处硬矛盾（必须裁定唯一口径）</h2></div>
+  <table>
+    <thead><tr><th>#</th><th>矛盾</th><th>证据</th><th>建议裁定</th></tr></thead>
+    <tbody>
+      <tr><td>A</td><td><b>10/15 里程碑 vs 第 1 周目标，差 3–6 倍</b></td><td>docx 11.2：10/15 净利 <b>≥2000 元</b>（≈91 单）；docx 表 7 第 1 周（10/09–10/15）目标却是「累计 <b>15–30 单</b>」＝净利 330–660 元</td><td>以 15–30 单为准，把 10/15 里程碑改为「累计 20–40 单 + 首单链路零事故 + 评论从 0 变正」</td></tr>
+      <tr><td>B</td><td><b>5000 目标没有任何可用杠杆</b></td><td>docx 7.2：227 单＝76 万曝光/月，「纯自然流在数学上不成立，薯条是<b>必要条件</b>」；docx 11.1：薯条<b>只买曝光涨粉、不认成交</b>，聚光个人号不可用</td><td>7.2 结论改写为：5000 在个人号阶段不可控达成 → 归入挑战档，10 月考核换成三验证＋店铺升级（与 docx 3.1 一致即可）</td></tr>
+      <tr><td>C</td><td><b>同日多篇到底行不行</b></td><td>docx 6.2：「同日多篇不互相抢量」；appendix_chapter.xml：「Week2 起<b>不双发</b>，避免污染归因」，且「同时改三处＝永远归因不出来」</td><td>10/09 四篇按 docx 执行（节点硬约束）；<b>10/10 起回到一天一篇</b>，变量单点化</td></tr>
+      <tr><td>D</td><td><b>薯条投哪一篇，两份文件相反</b></td><td>薯条加热决策.html：投 10/08 <b>第三篇</b>（799 观看/5.9% 互动）；master_plan_v3.xml＋docx 6.3：<b>今日 17:00 随篇二</b>裁决、优先今日新篇</td><td>今天 17:00 前用同一把尺子裁决：<b>发布后 4–6 小时自然观看 ≥200 且互动率 ≥5%</b> 才投；两条都不达标就不投，钱留到店铺升级后</td></tr>
+      <tr><td>E</td><td><b>投流预算原则被绕过</b></td><td>expansion_principle.xml：不额外扩充预算、扩张资金 100% 来自利润；实际：0–少量成交，却已排「薯条 100 元 → 本周 300–500 → 聚光起充 2000–5000」</td><td>把薯条定性为「一次性数据采购」，总额上限 200 元；聚光在单月流水过万前不碰</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">03</span><h2>10/12 虚拟店铺升级：先分清「报白」还是「换主体」</h2></div>
+  <div class="verdict">docx 第 11 章已写明：个人店门槛＝<b>注册满 180 天 + 笔记 ≥30 篇 + 粉丝 ≥1000 + 近 12 个月单月流水 ≥6000（需凭证）+ 90 天无重大违规</b>，且「<b>主体变更会重置店铺信用积累与评价</b>」。所以 10/12 的升级形态决定当天的全部动作——这两条路的代价完全不同。</div>
+  <table>
+    <thead><tr><th>形态</th><th>含义</th><th>代价 / 动作</th></tr></thead>
+    <tbody>
+      <tr><td>A · 报白通过<br/>（保留主体）</td><td>商品正式进入「电子资源」类目，店铺主体不变</td><td>最优路径：销量/评价保留，只需确认类目、保证金、费率、投流权限；商品 ID 通常不变，改动小</td></tr>
+      <tr><td>B · 转个体户/企业店<br/>（换主体）</td><td>用企业执照另开店铺、走企业类目</td><td>销量与评价<b>归零</b>（docx 11 章原话），商品 ID 变化 → <b>10/08–10/11 已发的每一篇笔记＋置顶评论蓝链都要重新挂</b>；客服自动回复要从专业号私信搬到千帆后台；蓝 V 600 元一次性 +（若要聚光）起充 2000–5000</td></tr>
+    </tbody>
+  </table>
+  <h3>10/12 当天 6 项核对（逐项截图存档）</h3>
+  <ol>
+    <li><b>主体与类目</b>：个人 / 个体户 / 企业？商品在正式「电子资源」还是替代类目？（docx 11.1 明确要求「今日确认」，至今仍是待办）</li>
+    <li><b>保证金与实际扣点</b>：这直接决定 22 元/单的口径是否成立。</li>
+    <li><b>投流权限</b>：能否开聚光。<b>不能开 ⇒ 12 月 455 单 / 1 万净利 需重算</b>。</li>
+    <li><b>逐篇重挂商品</b>：已发笔记 + 置顶评论蓝链一个都不能漏，否则流量在、转化断。</li>
+    <li><b>客服体系搬移</b>：warroom_autoreply.xml 的欢迎语/问答按店铺版本重写（入口在千帆后台，与专业号私信是两套）。</li>
+    <li><b>合规自查</b>：站外导流、绝对化用语、素材授权——任何一条中招都会击穿「90 天无重大违规」这条升级资格线。</li>
+  </ol>
+  <h3>窗口动作排布</h3>
+  <div class="ml">
+    <div class="mt">10/09–10/11<br/>升级前</div>
+    <div class="mb">今天四篇按 docx 6.2 执行，17:00 前裁决薯条；给 10/08 三篇补置顶首评＋组合 25.9 蓝链（blue_link_copy.xml 文案已备好）；把 30 篇门槛清点完成（docx 5.2 的「30 篇升级门槛」）；预生成 3–5 篇存货，避免升级当天断更。</div>
+    <div class="mt">10/12<br/>升级日</div>
+    <div class="mb">完成上面 6 项核对；上第一批 SKU（9.9 / 19.9 / 25.9 / 29.9）；详情页按「三层闸门·事实卡」写全交付清单、格式、更新机制、售后口径；发一条「店铺升级＋上新」笔记吃冷启动流量。</div>
+    <div class="mt">10/13–10/18<br/>升级后首周</div>
+    <div class="mb">用 <b>9.9 简历包冲销量与评价</b>（目标 30 天 30–50 单评价）——这是店铺权重与「流水凭证」的原始数据，比短期利润重要；主推固定 3 个（组合 25.9 / 升级包 29.9 / 99 诊断）；每天盯「店铺访客 → 商品点击 → 支付」三段漏斗。</div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">04</span><h2>买家侧触达的 4 个漏点（直接漏钱）</h2></div>
+  <div class="pains">
+    <div class="pain"><b>① 自动回复还是旧价旧规格。</b>warroom_autoreply.xml：「2027 届秋招网申截止时间表 <b>29.9</b> 元，<b>17 家</b>企业」；终版是 <b>19.9 / 67 家＋13 家银行</b>。三层闸门章节专门记了「29.9→19.9 主动纠正并<u>全程替换</u>」——这里漏了。私信自动回复是成交前第一触点，写错＝当场流失或收货后纠纷（正中文档里「虚拟商品 90% 纠纷来自说发的和实际不一致」）。</div>
+    <div class="pain"><b>② 19.9 与 29.9 权益重叠，升级包讲不清。</b>19.9 的自动回复承诺「每周更新，买过的朋友更新版免费拿」，组合蓝链也写「持续更新到网申结束」；而 29.9 升级包卖的核心正是「更新服务」。买家会问「我已经有更新了，为什么再买 29.9」。</div>
+    <div class="pain"><b>③ 组合露出还没落到 10/08 三篇。</b>appendix_chapter.xml：「所有挂 19.9 的笔记，商品区必须同时露出组合 25.9」——今天 17:00 那篇已挂 9.9+25.9 ✓，但 10/08 三篇仍待补。客单从 15 抬到 25 是唯一乘法因子。</div>
+    <div class="pain"><b>④ 交付件在买家侧可能显示 0 / 空白。</b>README 写「Excel 打开须 Ctrl+Alt+F9 刷新」——这是生成脚本写入公式但<b>无缓存值</b>的典型症状：买家（WPS / 手机端）打开看到 0 或空白，而卖点偏偏是「剩余天数自动倒计时」。同时交付包 xlsx / rar / zip 三份同内容，<b>iOS 无法直接解压 rar</b>。</div>
+  </div>
+  <div class="fix"><b>修正动作：</b>
+    <ul>
+      <li>重写自动回复三组问答：价格统一 19.9、规格统一「67 家＋13 家银行」，并<b>随交付件一起附核实状态列</b>（11 家已截止、15 家弱来源），否则「67 家已核实」就是虚假宣传。</li>
+      <li>权益分层写死：<code>19.9＝当前版本一次性交付；25.9＝时间表＋12 套模板；29.9＝更新到网申结束＋银行专项＋群内答疑</code>，写进详情页首屏。</li>
+      <li>交付件重算公式并另存（或直接改静态值），只保留 zip＋PDF 预览，删 rar，包内附「使用说明.txt」。</li>
+      <li>10/08 三篇补组合蓝链＋置顶首评。</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">05</span><h2>流量与内容：实测已经在否定「上午发」</h2></div>
+  <table>
+    <thead><tr><th>计划怎么写</th><th>实测</th><th>改法</th></tr></thead>
+    <tbody>
+      <tr><td>「上午发吃搜索长尾」（docx 6.2/3.2）</td><td>07:05 → 34 观看；11:47 → 66；<b>15:42 → 799</b>。7 日点击率 9%，低于 10% 基准</td><td>主窗口 <b>15:00–16:30</b>，补 <b>19:00–21:00</b>；节点笔记按截止时刻倒推 2–4 小时发</td></tr>
+      <tr><td>置顶首评＋秒回</td><td>历史 21+ 篇与 10/08 三篇<b>评论全 0</b>（评论权重 3、分享 4）</td><td>每条笔记固定三钩子：置顶首评<b>提问式</b>（「你投哪家？」）＋正文末尾提问＋发布 5 分钟内自评 2 条答疑</td></tr>
+      <tr><td>干货 70 : 带链 30</td><td>10/08–10/09 五篇里 4 篇带链</td><td>门槛达成后回到 7:3，先靠纯干货吃搜索打标签</td></tr>
+      <tr><td>选题库 38 条 / 缺认知反差与对比</td><td>docx 5.3 已识别缺口</td><td>先补「改前 vs 改后」「别等金九银十」两类，这是简历类最容易被收藏的结构</td></tr>
+    </tbody>
+  </table>
+  <div class="ok"><b>已验证公式（继续复制）：</b>时效节点（今天截止）＋官网核验证据＋下午发布＋封面大字报＋产品卡。10/10 招行、10/11 农发行、10/12 快手/联合利华、10/15 中石油都已在选题库里，套结构即可，别自由发挥。</div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">06</span><h2>合规与资产风险（会让前面白干）</h2></div>
+  <div class="pains">
+    <div class="pain"><b>① 素材授权（最高风险）。</b>12 套简历模板包、干货配图、赠品简版的来源在全部文件里没有任何授权记录；你自己的同行报告写着「5 家里 4 家集中在广东（模板搬运产业带）」。一旦被投诉，直接击穿升级资格的「90 天无重大违规」。</div>
+    <div class="pain"><b>② 更新承诺的可交付性。</b>「每周更新、更新版免费拿」的兑现动作是「周日晚 40–60 分钟官网核验 SOP」。这条最容易被挤掉，而它是退款与差评第一来源（也是你写的「核验日期停在 10-08 却宣称每天核＝自毁人设」）。</div>
+    <div class="pain"><b>③ 首次曝光的门槛风险。</b>docx 3.2 的漏斗「商品卡点击 3%、支付转化 10%」属乐观假设，文档自己注了「若实测 5%，单量需求翻倍」。店铺升级后应立刻用真实数据校准，避免继续用乐观口径排产。</div>
+  </div>
+  <div class="fix"><b>建议：</b>建《素材台账》（文件名 / 来源 / 作者 / 授权方式 / 可商用），12 套模板优先替换为自研或 AI 生成版本；更新承诺统一改成有边界的表述（「更新到 2027 届网申结束」）；升级后第一周用实测转化率重算漏斗与单量目标。</div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">07</span><h2>文件治理：过程文件其实是唯一事实源</h2></div>
+  <table>
+    <thead><tr><th>问题</th><th>证据</th><th>建议</th></tr></thead>
+    <tbody>
+      <tr><td>「过程文件-可删」里装着定稿规则</td><td>三层闸门、私信自动回复存档、产品矩阵、私域方案、总纲 v2/v3、两大前提核验全在这 22 份 XML 里</td><td>把 6 份定稿迁入「方案与可视化」并存成正式文档；删之前确认没有唯一副本</td></tr>
+      <tr><td>同一指标字段写错</td><td>records_选题库.json 把观看数写进「曝光」列（34/66/799），而 P3 真实曝光按点击率反推约 6,100–8,000</td><td>拆成「曝光 / 观看 / 点击率 / 收藏 / 评论 / 分享 / 单量」七列；混用会让漏斗算错一个数量级</td></tr>
+      <tr><td>README 未收录最新 docx</td><td>README「方案与可视化」只列 4 个 html，未列同名 docx（docx 是最新复制进来的）</td><td>README 更新：标注 docx 为<b>唯一基准版</b>，其余 HTML 标注「历史版本，口径以 docx 为准」</td></tr>
+      <tr><td>版本命名混乱</td><td>秋招网申截止时间表_v1 / 时间表-终版 / backup_改前 / 2027届秋招信息汇总表-终版</td><td>统一 <code>品名_v主.次_YYYYMMDD</code> + CHANGELOG（改了什么、影响哪些已购用户）</td></tr>
+      <tr><td>双轨数据</td><td>飞书运营库（选题库/竞品对标）＋本地 records_选题库.json</td><td>指定唯一事实源（建议飞书主库、本地为导出）</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <div class="sec-head"><span class="no">08</span><h2>修正版 10/09–10/31 节奏</h2></div>
+  <div class="ml">
+    <div class="mt">10/09 今天</div>
+    <div class="mb">四篇按 docx 6.2 执行；<b>17:00 前</b>用「自然观看 ≥200 且互动率 ≥5%」裁决薯条（两篇都不达标就不投）；重写自动回复（19.9 / 67 家＋13 家银行）；给 10/08 三篇补组合蓝链；晚间 22:00 复盘顺带确认<b>账户注册时长</b>（决定 180 天门槛）。</div>
+    <div class="mt">10/10–10/11</div>
+    <div class="mb">回到<b>一天一篇</b>（归因单点化）；补 3–5 篇存货；清点 30 篇门槛；确认 10/12 升级形态（报白 / 换主体）。</div>
+    <div class="mt">10/12–10/18<br/>店铺基建周</div>
+    <div class="mb">升级日 6 项核对 + <b>逐篇重挂商品</b>；上 4 个 SKU 与合规详情页；9.9 冲销量评价；发布窗口改 15:00–16:30；评论三钩子固定执行；<b>10/15 首个决策节点</b>：单篇曝光 ≥500、商品点击率 ≥3%、评论 0→正——三缺一先修内容，不缺则改商品详情首屏。</div>
+    <div class="mt">10/19–10/25<br/>放大与升单</div>
+    <div class="mb">把 10/15 验证过的结构批量套到每个截止节点；29.9 升级包上架（权益与 19.9 划清）；主推固定 3 个；私域群开放（更新履约＋答疑）；试分层简历包（19.9 分岗位版）。</div>
+    <div class="mt">10/26–10/31<br/>切换叙事</div>
+    <div class="mb">秋招末班车系列冲最后转化；<b>10/20 起</b>就上「笔面日历 / 补录捡漏 / 春招预售」的预告，避免 11 月时间表贬值后无品可推；10/31 只复盘三件事：哪个公式可复制、哪个 SKU 有复购、11 月主推是谁。</div>
+  </div>
+  <div class="concl" style="margin-top:14px"><b>目标建议（与 docx 3.1 对齐）：</b>10 月保底 2000–4000 元维持不变，<b>但把「预期 5000」下移到 11 月</b>；10 月的考核换成四个可验证结果——①首单链路零事故 ②评论从 0 变正（单篇 5–15）③组合客单 ≥25 的成交占比 ④10/12 店铺升级完成＋30 篇笔记。这四条达成，11 月冲 5000–7000 才站得住。</div>
+</section>
+
+<section style="border-bottom:none">
+  <div class="sec-head"><span class="no">09</span><h2>需要你确认的 3 件事（会改变结论）</h2></div>
+  <ol>
+    <li><b>账户注册时长</b>（docx 11 章明确要求「今日确认」）：是否满 180 天？不满就必须走个体户/企业店。<b>10/12 的升级是报白通过，还是换主体开店？</b></li>
+    <li><b>12 套简历模板与全部配图的来源与授权</b>：能不能规模化卖、会不会影响升级资格。</li>
+    <li><b>当前真实粉丝数与累计成交单数</b>：净涨 25/周意味着 1000 粉还需很久，这决定「报白/正式类目」和粉丝群运营的时间线要不要整体后移。</li>
+  </ol>
+</section>
+
+</main>
+<footer><div class="wrap">
+  证据边界：本页结论来自《作战计划-…2026-10-09.docx》的<b>文本镜像与构建脚本</b>（本机 shell/Python 进程全部以 0xC0000142 启动失败，无法解析 docx 二进制），以及作战文件夹内 4 份 HTML、22 份 XML、2 份 JSON、README 与生成脚本。xlsx / zip / png 等二进制未解包，涉及交付件的判断依据为 README 与生成脚本的描述。财务口径与 ROI 推演已标注假设，不构成收益承诺。（账号 1163622308 · 2026-10-09 13:10）
+</div></footer>
+</body>
+</html>

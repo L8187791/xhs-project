@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10/15–10/19 冲刺 + 10/19 升级当天执行清单 · 账号 1163622308</title>
+<style>
+:root{
+  --paper:#FAF7F2; --card:#fff; --ink:#262220; --ink-2:#4C4640; --muted:#8A827A;
+  --line:#E3DCCE; --red:#C82929; --red-deep:#A01D1D; --red-soft:#F9E7E7;
+  --green:#2C7A57; --green-soft:#E5F0EA; --gold:#B07A1D; --gold-soft:#F7EEDC;
+  --blue:#1F5C8A; --blue-soft:#E6EFF6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;background:var(--paper);color:var(--ink);line-height:1.68;font-size:15.5px;-webkit-print-color-adjust:exact}
+.wrap{max-width:1020px;margin:0 auto;padding:0 24px}
+header{padding:42px 0 22px;border-bottom:1px solid var(--line)}
+.kicker{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.kicker .dot{width:9px;height:9px;background:var(--red);border-radius:2px}
+.kicker span{font-size:12.5px;color:var(--muted);letter-spacing:.14em}
+h1{font-family:"Noto Serif SC",Georgia,serif;font-weight:900;font-size:clamp(23px,3.5vw,33px);line-height:1.25;margin-bottom:10px}
+h1 em{font-style:normal;color:var(--red-deep)}
+.sub{color:var(--ink-2);font-size:15px;max-width:860px}
+.sub b{color:var(--red-deep)}
+.bar{position:sticky;top:0;z-index:9;background:rgba(250,247,242,.96);border-bottom:1px solid var(--line);padding:10px 0;margin:16px 0 0}
+.bar .wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.pgw{flex:1;min-width:200px;height:10px;background:#EDE7DC;border-radius:6px;overflow:hidden}
+.pgb{height:100%;width:0;background:var(--green);transition:width .2s}
+.pgt{font-size:13px;color:var(--ink-2);font-weight:700;white-space:nowrap}
+button{font:inherit;font-size:13px;padding:6px 13px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--ink-2);cursor:pointer}
+button:hover{border-color:var(--red);color:var(--red-deep)}
+section{padding:26px 0;border-bottom:1px solid var(--line)}
+.sec-head{display:flex;align-items:baseline;gap:11px;margin-bottom:6px;flex-wrap:wrap}
+.sec-head .no{font-family:"Noto Serif SC",serif;font-weight:900;font-size:13.5px;color:var(--red);letter-spacing:.05em}
+.sec-head h2{font-family:"Noto Serif SC",serif;font-weight:900;font-size:20px}
+.when{font-size:12.5px;color:var(--muted);font-weight:600;margin-left:auto}
+.hint{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+.gate{background:var(--gold-soft);border:1px solid #E6D2A8;border-radius:11px;padding:14px 18px;margin-bottom:12px;font-size:14.3px}
+.gate b{color:#8A5A0B}
+.item{display:grid;grid-template-columns:26px 1fr;gap:9px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:9px 13px;margin-bottom:6px;font-size:14.3px}
+.item:hover{border-color:#D6CCB8}
+.item input{margin-top:5px;width:16px;height:16px;accent-color:#2C7A57;cursor:pointer}
+.item.done .txt{color:var(--muted);text-decoration:line-through}
+.item .why{display:block;font-size:12.8px;color:var(--muted);margin-top:3px;text-decoration:none}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;border-radius:5px;padding:1px 6px;margin-right:6px;vertical-align:1px;white-space:nowrap}
+.t-all{background:#EFEAE0;color:#645C52}
+.t-w{background:var(--green-soft);color:#1F5C42}
+.t-l{background:var(--red-soft);color:var(--red-deep)}
+.t-hard{background:#FCE8C9;color:#8A5A0B}
+.t-key{background:var(--blue-soft);color:var(--blue)}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:13.6px;margin:10px 0}
+th,td{padding:8px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--ink);color:#fff;font-weight:500;font-size:12.8px}
+tr:last-child td{border-bottom:none}
+td:first-child{font-weight:600}
+.fill{display:inline-block;min-width:120px;border-bottom:1.5px dashed var(--red);height:1.1em;vertical-align:-2px}
+.melt{background:#FFF7F5;border:1px solid #EFC9C1;border-radius:11px;padding:12px 16px;font-size:14.2px;margin-bottom:8px}
+.melt b{color:var(--red-deep)}
+.redline{background:var(--red-soft);border:1px solid #EFC9C1;border-radius:11px;padding:14px 18px;font-size:14.3px}
+.redline b{color:var(--red-deep)}
+.redline ul{margin:8px 0 0 20px}
+.redline li{margin-bottom:5px}
+footer{padding:24px 0 40px;font-size:12.5px;color:var(--muted)}
+code{background:#F1ECE3;padding:1px 5px;border-radius:4px;font-size:12.8px}
+@media(max-width:720px){.when{margin-left:0;width:100%}}
+@media print{
+  .bar{display:none}
+  body{background:#fff;font-size:12pt}
+  section{break-inside:avoid}
+  .item{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <div class="kicker"><span class="dot"></span><span>求职时间表研究所 · 账号 1163622308 · 2026-10-15</span></div>
+  <h1>10/15–10/19 冲刺 ＋ <em>10/19 升级当天执行清单</em></h1>
+  <p class="sub">
+    配套《运营方案 v2.2 · 三个月月入一万》。<b>外部约束已全部清空</b>：店铺升级条件已满足（走 A 分支）、站内群聊可承接、扣点 2%／保证金 1000 已锁定、当前无退款。
+    本清单把方案拆成<b>可勾选的动作</b>——标 <span class="tag t-w">W</span> 由 WorkBuddy 执行，<span class="tag t-l">L</span> 只有你能做，<span class="tag t-key">★</span> 为不可跳过项，<span class="tag t-hard">硬门槛</span> 为不满足就不能继续。
+  </p>
+</div></header>
+
+<div class="bar"><div class="wrap">
+  <span class="pgt" id="pgt">进度 0 / 0</span>
+  <span class="pgw"><span class="pgb" id="pgb"></span></span>
+  <button onclick="allDone()">全部勾选</button>
+  <button onclick="allClear()">全部清空</button>
+  <button onclick="window.print()">打印 / 存 PDF</button>
+</div></div>
+
+<main class="wrap">
+
+<!-- ============ STEP A ============ -->
+<section>
+  <div class="sec-head"><span class="no">STEP A</span><h2>10/15–10/18 · 处罚期冲刺</h2><span class="when">处罚期至 10/19 15:58</span></div>
+  <p class="hint">这四天的唯一目标：<b>零违规、攒库存、把 7 天验证表的第一格数据拿到</b>。处罚期内一律不挂链。</p>
+  <div class="gate">
+    <b>处罚期五不（每天都适用）</b>：不挂商品链 · 不投流 · 不站外导流 · 不登录/自动化访问小红书 · 不删笔记。
+    评论区话术扩展口径：<b>首评与回复同样零商品提及</b>。
+  </div>
+  <div id="gA"></div>
+</section>
+
+<!-- ============ STEP B ============ -->
+<section>
+  <div class="sec-head"><span class="no">STEP B</span><h2>10/19 上午 · 升级前只核对、不改动</h2><span class="when">动手之前</span></div>
+  <p class="hint">这一组做完，升级当天才不会卡在「找不回来 / 接不上」。<b>所有核对项都要截图存档</b>（命名 <code>1019-项名-截图.png</code>）。</p>
+  <div id="gB"></div>
+</section>
+
+<!-- ============ STEP C ============ -->
+<section>
+  <div class="sec-head"><span class="no">STEP C</span><h2>10/19 15:58 后 · 升级执行</h2><span class="when">解禁即刻</span></div>
+  <p class="hint">已确认走 <b>A 分支</b>（类目报白通过、主体不变）→ 销量与评价保留、商品 ID 大概率不变、保证金不重交。<b>但 ID 仍要实测确认，不能假定。</b></p>
+  <div id="gC"></div>
+</section>
+
+<!-- ============ STEP D ============ -->
+<section>
+  <div class="sec-head"><span class="no">STEP D</span><h2>10/19 下午 · 数据基线 ＋ 链路自测</h2><span class="when">★ 本清单最关键的一节</span></div>
+  <p class="hint">升级的真正价值不是"能多卖货"，是<b>第一次能看见漏斗中段</b>。这一节漏做，后面所有优化都是盲调。</p>
+  <div id="gD"></div>
+  <h3 style="font-size:15px;margin:16px 0 6px">四段数据首日基线（升级当天必填）</h3>
+  <table>
+    <thead><tr><th style="width:26%">漏斗段</th><th style="width:22%">首日基线值</th><th style="width:52%">说明</th></tr></thead>
+    <tbody>
+      <tr><td>店铺访客</td><td><span class="fill"></span></td><td>进店人数</td></tr>
+      <tr><td>商品曝光</td><td><span class="fill"></span></td><td>商品卡被看到次数</td></tr>
+      <tr><td>商品点击</td><td><span class="fill"></span></td><td>点击率 = 点击 ÷ 曝光</td></tr>
+      <tr><td>支付转化</td><td><span class="fill"></span></td><td>转化率 = 支付 ÷ 点击（若仅 5%，单量需求翻倍）</td></tr>
+    </tbody>
+  </table>
+  <div class="gate">
+    <b>重算规则</b>：拿到上表后，用实测转化率重算全部目标。规划口径按净额系数 <b>0.931</b>（预留 5% 退款）；事实口径 0.98；压力口径 0.882。
+  </div>
+</section>
+
+<!-- ============ STEP E ============ -->
+<section>
+  <div class="sec-head"><span class="no">STEP E</span><h2>10/19 晚间 · 上架、首发、复盘</h2><span class="when">当天收口</span></div>
+  <div id="gE"></div>
+</section>
+
+<!-- ============ 熔断 ============ -->
+<section>
+  <div class="sec-head"><span class="no">熔断</span><h2>当天出这四种情况，立即切规则</h2></div>
+  <div class="melt"><b>① 挂链失效且 24 小时内修不完</b> → 暂停发新笔记，先把「已发笔记 → 商品」链路全量修通。流量在、转化断＝白烧曝光，修链路优先级高于更新。</div>
+  <div class="melt"><b>② 升级后聚光仍不可用</b> → 投流杠杆只剩薯条（只买曝光涨粉、不认成交）→ 全部单量与流量目标按新口径重算，别用旧数字排产。</div>
+  <div class="melt"><b>③ 四段数据仍不可见</b> → 说明可能没落到正式「电子资源」类目（仍是替代类目）→ 当天回查类目路径，不要等到月底才发现。</div>
+  <div class="melt"><b>④ 群链路断（下单后进不去群）</b> → <b>暂停发售</b>，先修「商品详情 → 自动回复 → 群入口」这条链，再开卖。</div>
+</section>
+
+<!-- ============ 红线 ============ -->
+<section style="border-bottom:none">
+  <div class="sec-head"><span class="no">红线</span><h2>升级前后都适用</h2></div>
+  <div class="redline">
+    <b>任一条中招，都会击穿「90 天内无重大违规」这条升级／经营资格线。</b>
+    <ul>
+      <li>站内（笔记/首评/评论/私信/群）<b>不留微信、QQ、公众号、二维码、邮箱、电话</b>；不写「加群」二字</li>
+      <li>不写绝对化用语（最 / 第一 / 永久 / 包过 / 保证 / 100% / 全网）</li>
+      <li>不引导站外交易、不做导购式私信催单</li>
+      <li>素材只用自有或已授权（<b>简历模板线已放弃</b>，原因＝来源授权不明）</li>
+      <li>商品页避开「电子资料 / 网盘发货 / 自动发货 / 虚拟商品 / 订阅」字样</li>
+      <li>更新承诺留缓冲：写「每月 1 日<b>前后 3 天内</b>更新」，不写死「每月 1 日」</li>
+      <li>发布永远不经 AI 手（L 是唯一平台操作者）</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+<footer><div class="wrap">
+  依据：《运营方案 v2.2 · 三个月月入一万》（<code>_协作/运营方案-v2-三个月月入一万-20261015.md</code>）、<code>10-12虚拟店铺升级-执行清单.html</code>、项目交接文件 20261015。<br/>
+  勾选状态保存在本机浏览器（localStorage），换设备或清理浏览器数据会重置。生成时间 2026-10-15 ｜ 账号 1163622308
+</div></footer>
+
+<script>
+const DATA = {
+ gA:[
+  ["all","每日出稿 3 篇：A 层截止（09:00）/ B 层机会（12:30）/ C 层人群（20:30）","走完不可颠倒的全链：定题（红狐评分）→ 二创六步（含 Humanizer）→ 同质化五查 → 闸门 P0=0 → 字段一致性体检 → 定稿 → 落档。"],
+  ["all","每日产出桌面包并做「三层齐不齐」自检","格式：00-先看这个.txt ＋ 文案.txt ＋ 图1/2/3.png。缺层必须在包内写明原因，不许默认交齐。"],
+  ["l","每日按时发布三篇","只有你能操作账号。发布后请回传「已发」。"],
+  ["all","每篇满 24h 回传四率：曝光/观看、赞/藏/评、涨粉、店铺访问人数","店铺访问人数是商品卡点击的最佳代理指标（个人售卖期唯一可得的中段线索）。未回传写「待确认」，不推定。"],
+  ["all","22:00 复盘：落库 + 当日一条结论 + 填《7 天验证追踪表》","唯一填表纪律：状态一律以 L 回传为准，不填默认值。"],
+  ["key","10/15：确认 10/16 三篇桌面包齐（A 层安永 / B 层免笔试 / C 层冷门央国企）","WB157 已完成 3 篇改稿 + 3 篇通过；确认桌面目录与图序 big→list→big 全过 strict。"],
+  ["l","10/15：改账号简介（删「逐家核过官网」、去「2027 届」）","现简介与 C 级占比 33% 不符＝虚假陈述敞口；同一句商品页已删、简介仍留。只有你能改。"],
+  ["all","10/16–10/18：每天出次日 3 篇，10/18 出 10/19 三篇（解禁日首发）","10/19 第一篇 A 层发布即挂链。"],
+  ["all","10/17（周日）：主表每周维护（脚本批处理）+ 竞品双周扫 + 周度复盘","D 退出后主表维护归 W；改为脚本化一次跑完，不再人工逐家。周度复盘做《7 天验证表》首次判定。"],
+  ["hard","10/19 前攒够 12 篇成稿库存","M0 硬 KPI。库存是应对「升级当天忙到断更」的唯一缓冲。"],
+  ["hard","处罚期违规数 = 0","一次新违规 = 升级资格线受损，且「连续两次大违规＝永久限流」。"],
+  ["all","简历模板 / 9.9 包相关素材全部下架或归档不再使用","来源授权不明，是本项目最高风险项之一。"],
+  ["all","对外家数一律用动态句式：200 家汇总｜123 家已核验｜106 家硬截止日","禁写死数字，禁写「200 家截止日期」；旧「131」出现在任何未发布物料即改。"]
+ ],
+ gB:[
+  ["all","备份旧店数据：商品列表、销量、评价数、店铺分截图存档","A 分支虽保留信用积累，但先留证据再动手是纪律。"],
+  ["all","填「挂链地图」：逐条点开已发笔记，记录商品组件与置顶评论蓝链状态","升级后靠这张表逐条核对，避免「以为挂上了其实没挂」。"],
+  ["all","确认商品类目路径 ＝ 正式「电子资源」类目（截图留档）","若实为临时/替代类目 → 四段数据可能看不到，直接击穿升级目的。"],
+  ["key","实测商品 ID 是否变化：新旧商品链接各点一次对比","A 分支预期不变，但必须实测；变则所有挂链失效，要走全量重挂。"],
+  ["all","确认千帆后台店铺客服欢迎语与自动回复位置","店铺客服与专业号私信是两套，漏配会让升级后的新流量无人应答。"],
+  ["all","平台通知中心自查 90 天内有无警告/扣分记录（截图）","资格线组成项；有问题当天就要申诉或整改。"],
+  ["all","备 3–5 篇存货（含 1 篇节点型），确保 10/19 不断更","升级日最忙，断更会同时损失搜索长尾与升级流量。"]
+ ],
+ gC:[
+  ["l","执行店铺升级，截图升级成功页","升级条件已满足，只等处罚期结束。"],
+  ["all","核对类目 / 费率 2% / 保证金 1000 与预期一致，回填财务口径","与预期不符 → §6 全部单量与流量目标重算。"],
+  ["key","确认投流权限：能否开通聚光？蓝 V 是否已认证？起充多少？","不能开 ⇒ 杠杆只剩薯条，目标需下调。这一条决定后面能不能放大。"],
+  ["all","按挂链地图逐条验证：已发笔记商品组件仍可点、指向正确商品","A 分支可抽查 2 篇 + 抽查置顶蓝链是否失效；B 分支须全量重挂。"],
+  ["all","配置店铺客服欢迎语 ＋ 3 组自动问答（时间表 / 怎么买 / 更新机制）","口径＝动态家数句式；价格与规格必须与实物一致（虚拟商品 90% 纠纷来源）。"],
+  ["l","建立站内群聊 ＋ 群公告（更新说明 / 更新节奏 / 售后口径）","群已确认可承接。群是「更新与答疑」载体，不做导购、不催单。"],
+  ["all","确认群入口只能出现在平台组件内（商品详情页 / 自动回复）","🔴 群入口绝不进笔记正文；「加群」二字是 P0 禁词。"]
+ ],
+ gD:[
+  ["key","记录升级首日四段基线：店铺访客 / 商品曝光 / 商品点击 / 支付转化","填下方表格。这是新漏斗的起点，也是本项目第一次「能看见」。"],
+  ["key","链路自测（自己账号下单，自测单不计业绩）","商品详情页 → 下单支付 → 自动回复 → 群入口 → 进群成功 → 群里收到「更新说明」。任一环断 → 暂停发售先修链。"],
+  ["all","用实测转化率重算全部单量与流量目标","若支付转化仅 5%，单量需求翻倍。规划口径净额系数 0.931。"],
+  ["all","建「笔记 → 商品卡 → 成交」归因表","找出哪类选题真正带来成交，然后加倍。这是从「发得多」转向「发得对」的唯一依据。"],
+  ["all","建立每日记账：流水 / 退款 / 扣点 / 净额","退款率是唯一未锁定的参数，靠连续 30 天实测锁定。"],
+  ["all","复核对私口径与商品页：来源分级列是否真的随 CSV 交付","CSV = 200 行 ＋ 「来源可信度」分级列，C 级透明标注；周报只收 A/B 级。"]
+ ],
+ gE:[
+  ["l","恢复 19.9 挂链（第一篇 A 层发布即挂）","挂链篇正文零商品引导（带链率 67% 与商业占比 ≤20% 的折中方式）。"],
+  ["all","49.9 上架齐备度检查（5 项写全）","包含内容 / 数量 / 格式 / 更新机制 / 售后口径。命名避开避雷词。"],
+  ["key","49.9 上架硬前提复核：①「招满即止」类字段是否已补 ②主表维护流程是否已跑顺一周","宁可不卖空壳，也不上架一个交付不全的 49.9。不满足就顺延。"],
+  ["l","发布「店铺升级 ＋ 上新」笔记","合规写法：讲新增的品类与内容，不写资质促销。吃店铺冷启动流量与商品搜索流量。"],
+  ["l","发布 10/19 三篇（解禁日首发）","A 09:00 / B 12:30 / C 20:30。"],
+  ["all","22:00 复盘三问：①挂链是否全通 ②订单是否受影响 ③聚光权限结论","然后写 10/20 的三件事进日历。"],
+  ["all","重导对外交付 CSV（200 行 ＋ 来源可信度分级列）","10/19 前必办。替换旧 131 行 xlsx。"],
+  ["all","19.9 商品详情页话术稿 ＋ 简介改法话术稿（交 L 手动改）","W 出稿，L 执行——只有你能改商品页与简介。"],
+  ["all","「回暖周」10/19–10/26 逐日节奏表","流量不会自动恢复，需持续发原创养回。逐日写清发布/挂链/群维护/观测点。"]
+ ]
+};
+const KEYS = {all:'t-all',w:'t-w',l:'t-l',hard:'t-hard',key:'t-key'};
+const LABEL = {all:'通用',w:'W',l:'L',hard:'硬门槛',key:'★ 不可跳过'};
+document.querySelectorAll('section > div[id^="g"]').forEach(function(host){
+  const list = DATA[host.id] || [];
+  host.innerHTML = list.map(function(it, i){
+    const k = host.id + '-' + i;
+    return '<label class="item" id="it-'+k+'">'+
+      '<input type="checkbox" data-k="'+k+'">'+
+      '<span class="txt"><span class="tag '+KEYS[it[0]]+'">'+LABEL[it[0]]+'</span>'+it[1]+
+      '<span class="why">'+it[2]+'</span></span></label>';
+  }).join('');
+});
+const boxes = Array.from(document.querySelectorAll('.item input'));
+const KEY = 'xhs-1019-checklist-v1';
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(boxes.map(b=>b.checked))); }catch(e){} }
+function load(){ try{ const d = JSON.parse(localStorage.getItem(KEY)||'[]'); boxes.forEach((b,i)=>{ if(d[i]) b.checked = true; }); }catch(e){} }
+function paint(){
+  boxes.forEach(function(b){ b.closest('.item').classList.toggle('done', b.checked); });
+  const n = boxes.filter(b=>b.checked).length;
+  document.getElementById('pgt').textContent = '进度 ' + n + ' / ' + boxes.length;
+  document.getElementById('pgb').style.width = (boxes.length? (n/boxes.length*100):0) + '%';
+  save();
+}
+boxes.forEach(b=>b.addEventListener('change', paint));
+function allDone(){ boxes.forEach(b=>b.checked=true); paint(); }
+function allClear(){ boxes.forEach(b=>b.checked=false); paint(); }
+load(); paint();
+</script>
+</body>
+</html>

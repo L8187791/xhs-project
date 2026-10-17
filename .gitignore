@@ -1,0 +1,31 @@
+# ===== 登录态 / 浏览器数据（严禁入库）=====
+_login_profile/
+default-workspace/_采集/
+default-workspace/.tools/
+
+# ===== 大体量备份与只读归档 =====
+_backup/
+_备份/
+_旧归档快照-*/
+归档/
+
+# ===== 敏感协作数据（医美线另行管理，不进本仓库）=====
+default-workspace/_协作/医美线/
+
+# ===== 浏览器取证快照（内嵌第三方会话令牌，触发 GitHub 密钥扫描）=====
+default-workspace/_协作/_浏览器取证/
+
+# ===== Python 运行产物 =====
+__pycache__/
+*.pyc
+*.pyo
+
+# ===== 构建产物 =====
+default-workspace/_extract/
+dist/
+_site/
+
+# ===== 系统杂项 =====
+Thumbs.db
+desktop.ini
+~$*
