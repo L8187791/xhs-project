@@ -1,0 +1,25 @@
+﻿企业名,猜测入口URL,URL来源(搜索命中页),置信度,备注
+乌鲁木齐银行,https://hr.boubank.com,既有记录：_扩充\WB-第6批_投递入口补全_v2.csv（本卡未重新搜索验证）,中,本卡未重新搜索；沿用既有记录，建议主运营按此抓一次验证
+徽商银行,https://rczp.hsbank.com.cn/pc/#/homepage,既有记录：_扩充\WB-第6批_投递入口补全_v2.csv（本卡未重新搜索验证）,中,同上
+泸州银行,https://campus.51job.com/lzccb2027,搜索命中：重庆高校毕业生智慧就业平台 https://24365.cq.smartedu.cn/teachin/view/id/134572/mark 公告原文「网申地址:https://campus.51job.com/lzccb2027」,高,🔴 修正既有记录：原值 https://campus.51job.com/ 已实测 404（见交付卡 WB1），应作废。同页载「简历投递截止时间:北京时间2026年10月31日24:00」
+中粮集团,https://campus.51job.com/cofco,既有记录：_扩充\WB-入口重判结果.csv（公告原文「电脑端: https://campus.51job.com/cofco」）,高,带路径，未被 404 证据推翻，维持
+中国铝业集团,https://chinalco2027.iguopin.com/,既有记录：_扩充\WB-入口重判结果.csv（西安交大就业网转载公告「入口 chinalco2027.iguopin.com」）,高,国聘企业专区，非自有域名，按卡56重判已采信
+中国大唐集团,https://zhaopin.china-cdt.com/,既有记录：_扩充\WB-第6批_投递入口补全_v2.csv（本卡未重新搜索验证）,中,本卡未重新搜索
+中国出版集团,https://cnpubg.iguopin.com/job,既有记录：_扩充\WB-入口重判结果.csv（「网申简历投递方式 在线投递:https://cnpubg.iguopin.com/job」）,高,国聘企业专区
+中国人民保险,https://picc.zhiye.com/,既有记录：_扩充\WB-第6批_投递入口补全_v2.csv（本卡未重新搜索验证）,中,本卡未重新搜索
+光大证券,https://ebscn.zhiye.com/,既有记录：_扩充\WB-第6批_投递入口补全_v2.csv（本卡未重新搜索验证）,中,本卡未重新搜索
+中交集团,https://zhaopin.ccccltd.cn,既有记录：_扩充\WB-第6批_投递入口补全_v2.csv（本卡未重新搜索验证）,中,本卡未重新搜索
+中国东方资产管理股份有限公司,https://coamc.zhiye.com/,既有记录：_扩充\WB-第6批_投递入口补全_v2.csv（本卡未重新搜索验证）,中,本卡未重新搜索
+中信期货,https://citicsfz.zhiye.com/,既有记录：_扩充\WB-第6批_投递入口补全_v2.csv（本卡未重新搜索验证）,中,本卡未重新搜索
+淮安国发投资集团,http://rsj.huaian.gov.cn/col/4729_463783/index.html；https://gftzjt.com,搜索命中：吉林大学就业网 https://jdjyw.jlu.edu.cn/portal/recruit/details?id=23a6c2b4c75a46d39925bf3a104e1221 与 淮安市人社局 https://rsj.huaian.gov.cn/col/4846_751778/art/17749728/17769275444582ExUm1OD.html 均载「应聘者登录淮安市人力资源和社会保障局门户网站『人事考试』专栏(http://rsj.huaian.gov.cn/col/4729_463783/index.html)」,高（人社局入口）／中（官网）,⚠️ 该集团无独立招聘站 —— 招聘由「淮安市市属国有企业」统一组织、走市人社局人事考试专栏。官网 gftzjt.com 为集团站，未见招聘频道
+中国人寿集团,https://chinalife.zhiye.com/,既有记录：_扩充\WB-第6批_投递入口补全_v2.csv（本卡未重新搜索验证）,中,本卡未重新搜索
+中国铁塔,https://zhaopin.chinatowercom.cn/,既有记录：_扩充\WB-第6批_投递入口补全_v2.csv（本卡未重新搜索验证）,中,本卡未重新搜索
+浙商期货有限公司,https://www.cnzsqh.com/hr/jobs/?type=school；https://www.cncico.com/recruit.html?nid=1&category=7212&id=5969185；邮箱 zsqh_hr@163.com,搜索命中：浙商期货官网校招页 https://www.cnzsqh.com/hr/jobs/?type=school（页面含职位名称/职位类别/所属部门/工作地点/发布时间，确为列表页）；中公转载公告 https://eoffcn.com/kszx/detail/2007406.html 载「访问 https://www.cncico.com/recruit.html?nid=1&category=7212&id=5969185」,高（官网校招页）／中（浙交投平台）／低（邮箱）,🔴 官网校招页是本次最有价值的发现：自有域名 + /hr/jobs/ 路径 + 已在页面上看到真实职位（化工商品研究员/油品研究员/黑色商品研究员/农产品研究员/财富管理…），可直接进 T7 式列表页解析
+浙江省储备粮管理集团有限公司,未找到（招聘入口 URL）；官网首页 http://www.zjcbl.com/；报名邮箱 zjscbl@126.com,搜索命中：网易转载《浙江一批企事业单位公开招聘》https://www.163.com/dy/article/L8T8LKE0514FDFN.html 载「应聘者将…打包成一个压缩文件发送至邮箱zjscbl@126.com，即完成报名」；官网 http://www.zjcbl.com/,低,🔴 未找到招聘入口 URL —— 该集团公开招聘走邮箱投递，官网未见招聘频道。按守则「宁缺毋假」不编 URL，标「未找到」
+中国煤炭科工集团,https://ccteg.iguopin.com/job；https://www.ccteg.cn/,搜索命中：中国煤科官网招聘公告 https://www.ccteg.cn/article/infoDetails/18526 原文「报名人员登录招聘网站，https://ccteg.iguopin.com/job 进行岗位申报，本次招聘工作不接受现场、电话、信函等其他方式报名」，另两篇公告（16539／19128）重复同一网址,高,官方公告三处互证同一入口，置信度高
+中国航天科技集团·五院513所,https://www.spacetalent.com.cn/jituan_xxx.html?id=50&childDeptId=63&positionId=132035262,既有记录：_扩充\WB-第6批_投递入口补全_v2.csv（本卡未重新搜索验证）,中,⚠️ 这是具体职位页不是列表页，入口形态与其他家不一致，建议主运营裁定是否换入口
+中国电建·北京勘测设计研究院,https://bhidi.zhiye.com/,既有记录：_扩充\WB-第6批_投递入口补全_v2.csv（本卡未重新搜索验证）,中,本卡未重新搜索
+中国电建·贵阳勘测设计研究院,https://gyyhr.powerchina.cn/,既有记录：_扩充\WB-第6批_投递入口补全_v2.csv（本卡未重新搜索验证）,中,本卡未重新搜索
+中国电建·西北勘测设计研究院,https://zhaopin.powerchina.cn/,既有记录：_扩充\WB-第6批_投递入口补全_v2.csv（本卡未重新搜索验证）,中,本卡未重新搜索
+中国电建·华东勘测设计研究院,https://hdec.zhiye.com/,既有记录：_扩充\WB-第6批_投递入口补全_v2.csv（本卡未重新搜索验证）,中,本卡未重新搜索
+【附注·不在23家内但同类错误】渤海银行,https://campus.51job.com/bhyh2027,搜索命中：江苏智慧就业平台 https://www.91job.org.cn/recruitment/jobDetails?zpgwid=1000000000750107、湖北大学就业网 https://hubu.91wllm.cn/job/view/id/2390555、华中农业大学就业网 https://hzau.91wllm.cn/job/view/id/2390555、应届生求职网 https://www.yingjiesheng.com/job-008-079-146.html —— 四处公告原文一致「网申地址:https://campus.51job.com/bhyh2027」,高,🔴 与泸州银行同一类错误：既有记录 https://campus.51job.com/ 实测 404。四处独立来源互证新 URL，同页载「简历投递截止 2026年10月18日24点」

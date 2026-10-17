@@ -1,0 +1,77 @@
+# -*- coding: utf-8 -*-
+"""生成卡54/卡50要求的44家官方投递入口补全CSV。"""
+import csv
+import json
+from pathlib import Path
+
+WS = Path(r"D:\Documents\deepseek-harness\default-workspace")
+DATA = WS / "技能包_时间表查询官" / "data" / "timetable.json"
+OUT = WS / "_扩充" / "WB-第6批_投递入口补全.csv"
+
+HEADERS = ["企业名", "新URL", "来源依据", "是否直链"]
+ROWS = [
+    ("宝洁", "https://careers.pg.com.cn/", "P&G大中华区招聘站；站内可搜索职位并进入申请流程。", "是"),
+    ("中国移动", "https://job.10086.cn/", "中国移动自有域名招聘站；含职位列表、登录和投递入口。", "是"),
+    ("联合利华", "https://careers.unilever.com.cn/", "联合利华企业域名招聘站；可搜索职位并进入申请。", "是"),
+    ("中国华电", "https://rencaishichang.chd.com.cn/", "中国华电官网招聘公告指定平台；可注册、查职位并报名。", "是"),
+    ("国家管网", "https://zhaopin.pipechina.com.cn/", "国家管网企业自有域名招聘站；官方公告称为统一报名平台。", "是"),
+    ("中国电信", "https://job.chinatelecom.com.cn/", "中国电信集团自建招聘网站；官网招聘公告指定。", "是"),
+    ("中国建筑", "https://recruit.cscec.com/recruit#/", "中国建筑企业自有域名招聘平台；可查询职位并网申。", "是"),
+    ("中国华能", "https://zhaopin.chng.com.cn/", "中国华能企业自有域名校园招聘站；可注册并申请职位。", "是"),
+    ("中国海油", "", "未见官方入口；cnooc.com.cn仅有招聘信息页，对外校招投递跳转cnooc.zhaopin.com第三方。", "未见官方入口"),
+    ("中国邮政", "", "未见官方入口；chinapost.com.cn仅发公告，网申使用chinapost2027.zhaopin.com第三方。", "未见官方入口"),
+    ("达能", "https://careers.danone.com.cn/zh_CN/campus", "达能中国企业域名校园招聘站；可搜索职位、登录并创建简历。", "是"),
+    ("国家电投", "https://zhaopin.spic.com.cn/", "国家电投官网指定招聘网站；可注册、填简历并申请职位。", "是"),
+    ("雀巢", "https://nestlecareers.cn/zh-hans/life-at-nestle", "雀巢中国校招指定PC入口；页面路径含校园招聘与立即投递。", "是"),
+    ("搜狐", "https://hr.sohu.com", "搜狐企业自有域名招聘官网；校招公告要求在该站选职位投递。", "是"),
+    ("中国联通", "", "未见官方入口；chinaunicom.com.cn仅有招贤纳士信息页，实际投递跳转第三方平台。", "未见官方入口"),
+    ("中国烟草总公司·各省公司", "", "未见官方入口；tobacco.gov.cn人才招聘平台只发布各省公告，报名入口分散且无统一企业自有投递URL。", "未见官方入口"),
+    ("青岛银行", "", "未见官方入口；官网跳转hr.qdboffice.com，但该域名归属无法从官方材料确认，按不硬填处理。", "未见官方入口"),
+    ("曲靖市商业银行", "", "未见官方入口；qjccb.com人才招聘页仅发布公告，现有岗位采用下载表格后邮箱报名。", "未见官方入口"),
+    ("中国光大银行", "https://eoap.cebbank.com/uiap/wt/CEB/zpzh/campus", "中国光大银行自有域名招聘系统；可查看校园职位并报名。", "是"),
+    ("重庆银行", "", "未见官方入口；cqcbank.com仅发布招聘公告，网申跳转智联或国企优聘第三方。", "未见官方入口"),
+    ("乌鲁木齐银行", "https://hr.boubank.com", "乌鲁木齐银行招聘门户；页面标题为乌鲁木齐银行招聘门户并提供秋招入口。", "是"),
+    ("渤海银行", "", "未见官方入口；cbhb.com.cn仅有招聘信息页，在线网申使用campus.51job.com第三方。", "未见官方入口"),
+    ("徽商银行", "https://rczp.hsbank.com.cn/pc/#/homepage", "徽商银行自有域名招聘系统；官方公告称统一采取官网在线报名。", "是"),
+    ("泸州银行", "", "未见官方入口；官网未见可投递招聘栏目，校招网申为campus.51job.com第三方。", "未见官方入口"),
+    ("中粮集团", "", "未见官方入口；cofco.com旧招聘页已失效，现有校招入口均为51job/智联等第三方。", "未见官方入口"),
+    ("中国铝业集团", "", "未见官方入口；chinalco.com.cn招聘栏目只发公告，实际网申跳转国聘第三方。", "未见官方入口"),
+    ("中国大唐集团", "https://zhaopin.china-cdt.com/", "中国大唐企业自有域名人力资源市场平台；可注册、填简历和申请。", "是"),
+    ("中国出版集团", "", "未见官方入口；cnpubg.com官网仅作招聘信息入口，实际网申跳转国聘第三方。", "未见官方入口"),
+    ("中国人民保险", "", "未见官方入口；picc.com.cn官网为信息入口，实际网申使用picc.zhiye.com第三方。", "未见官方入口"),
+    ("光大证券", "", "未见官方入口；ebscn.com仅发布公告，实际网申为ebscn.zhiye.com第三方。", "未见官方入口"),
+    ("中交集团", "https://zhaopin.ccccltd.cn", "中国交建企业自有域名招聘平台；含登录、职位查询和校园招聘投递。", "是"),
+    ("中国东方资产管理股份有限公司", "", "未见官方入口；coamc.com.cn仅有招聘信息页，实际网申为coamc.zhiye.com第三方。", "未见官方入口"),
+    ("中信期货", "", "未见官方入口；citicsf.com官网招聘菜单跳转citicsfzp.zhiye.com第三方。", "未见官方入口"),
+    ("淮安国发投资集团", "", "未见官方入口；gftzjt.com人才招聘栏目采用公告加邮箱报名，无在线投递URL。", "未见官方入口"),
+    ("中国人寿集团", "", "未见官方入口；chinalife.com.cn招聘路径会跳转chinalife.zhiye.com第三方，按严格域名口径不填。", "未见官方入口"),
+    ("中国铁塔", "https://zhaopin.chinatowercom.cn/", "中国铁塔自有域名唯一招聘网站；可查职位、登录并投递。", "是"),
+    ("浙商期货有限公司", "", "未见官方入口；cnzsqh.com招聘页可查看岗位但现有公告采用邮箱投递，未见在线申请URL。", "未见官方入口"),
+    ("浙江省储备粮管理集团有限公司", "", "未见官方入口；zjcbl.com曾有加入我们在线报名，但当前入口不可用，后续公告改为邮箱报名。", "未见官方入口"),
+    ("中国煤炭科工集团", "", "未见官方入口；ccteg.cn官网在线招聘入口跳转iguopin.com第三方。", "未见官方入口"),
+    ("中国航天科技集团·五院513所", "https://www.spacetalent.com.cn/jituan_xxx.html?id=50&childDeptId=63&positionId=132035262", "中国航天科技集团招聘平台上的五院513所职位页；可进入职位申请。", "是"),
+    ("中国电建·北京勘测设计研究院", "", "未见官方入口；bhidi.com官网招聘栏目跳转bhidi.zhiye.com第三方。", "未见官方入口"),
+    ("中国电建·贵阳勘测设计研究院", "https://gyyhr.powerchina.cn/", "中国电建自有域名贵阳院人才招聘系统；校招公告要求在此网申。", "是"),
+    ("中国电建·西北勘测设计研究院", "https://zhaopin.powerchina.cn/", "中国电建集团自有域名招聘平台；可查询西北院岗位并进入投递。", "是"),
+    ("中国电建·华东勘测设计研究院", "", "未见官方入口；hdec.com官网加入我们入口跳转hdec.zhiye.com第三方。", "未见官方入口"),
+]
+
+with DATA.open("r", encoding="utf-8") as f:
+    data = json.load(f)
+expected = [c["company"] for c in data["companies"] if c.get("apply_url_status") == "textual"]
+actual = [r[0] for r in ROWS]
+assert len(ROWS) == 44, len(ROWS)
+assert actual == expected, (len(actual), len(expected), set(actual) ^ set(expected))
+assert sum(r[3] == "是" for r in ROWS) == 21
+assert sum(r[3] == "未见官方入口" for r in ROWS) == 23
+assert all((r[1].startswith("http") and r[3] == "是") or (r[1] == "" and r[3] == "未见官方入口") for r in ROWS)
+
+with OUT.open("w", encoding="utf-8", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(HEADERS)
+    writer.writerows(ROWS)
+raw = OUT.read_bytes()
+assert raw[:3] != b"\xef\xbb\xbf"
+print(f"已生成: {OUT}")
+print(f"总计={len(ROWS)} 直链={sum(r[3] == '是' for r in ROWS)} 未见官方入口={sum(r[3] != '是' for r in ROWS)}")
+print("UTF-8无BOM校验通过")

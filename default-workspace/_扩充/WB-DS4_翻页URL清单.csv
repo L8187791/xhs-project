@@ -1,0 +1,14 @@
+﻿企业,层级,页码,完整URL,URL规律(如何推出的),是否已验证
+中船集团,集团级全量列表·热招(o=1),1,https://cssc.zhiye.com/alljob/?o=1&PageIndex=1,"A01.html L792 原文「当前第1/5页」确认共5页；L793 href=「/alljob/?o=1&PageIndex=2」(下一页)、「/alljob/?o=1&PageIndex=5」(末页) → 参数名 PageIndex，1-based，范围1-5",否(抓取归主运营)
+中船集团,集团级全量列表·热招(o=1),2,https://cssc.zhiye.com/alljob/?o=1&PageIndex=2,同上（此条即HTML里现成的「下一页」href原文）,否
+中船集团,集团级全量列表·热招(o=1),3,https://cssc.zhiye.com/alljob/?o=1&PageIndex=3,同上（按PageIndex递增推出，未实测）,否
+中船集团,集团级全量列表·热招(o=1),4,https://cssc.zhiye.com/alljob/?o=1&PageIndex=4,同上（按PageIndex递增推出，未实测）,否
+中船集团,集团级全量列表·热招(o=1),5,https://cssc.zhiye.com/alljob/?o=1&PageIndex=5,同上（此条即HTML里现成的「末页」href原文）,否
+中船集团,集团级全量列表·长招(o=2),1,https://cssc.zhiye.com/alljob/?o=2&PageIndex=1,"A02.html L792「当前第1/5页」；L793 href=「/alljob/?o=2&PageIndex=2」「PageIndex=5」→ 与o=1同构",否
+中船集团,集团级全量列表·长招(o=2),2,https://cssc.zhiye.com/alljob/?o=2&PageIndex=2,同上（HTML现成href）,否
+中船集团,集团级全量列表·长招(o=2),3,https://cssc.zhiye.com/alljob/?o=2&PageIndex=3,同上（推出，未实测）,否
+中船集团,集团级全量列表·长招(o=2),4,https://cssc.zhiye.com/alljob/?o=2&PageIndex=4,同上（推出，未实测）,否
+中船集团,集团级全量列表·长招(o=2),5,https://cssc.zhiye.com/alljob/?o=2&PageIndex=5,同上（HTML现成href）,否
+中船集团,二级单位筛选·中船智海创新研究院(单位ID=83),(全部),https://cssc.zhiye.com/alljob?r=&p=1^83&c=&d=&k=#jlt,"A01.html L351 原文 href=「/alljob?r=&p=1^83&c=&d=&k=#jlt」title=中船智海创新研究院有限公司；L258 同单位 constval=83 → 参数 p=1^<单位ID>",否
+江南造船,校招列表页 campus/jobs,(提不出),"（无）","A05.html 全文件扫描：href分页链接 0 命中；pageNum/pageIndex/pageSize/total 均为 0 命中；无 /api/ 端点；无 __INITIAL_STATE__/__NEXT_DATA__ SSR数据块。仅见 L377 id=LIST_LAST_DOM 服务端即输出「没有更多了~」 → HTML内无任何翻页或滚动加载机制证据，提不出URL",不适用
+中国中化,校招列表页 school.html,1-51(页码范围有据),"（无URL可提）","A07.html L29 ant-pagination 控件：分页项 title 为 1,2,3,4,5,…(省略号),51，最大页 title=51 → 51页确认。但每个分页项为 <li title=N><a>N</a>（无 href，React onClick 绑定），且全文无 API/total/pageSize 字段 → 提不出URL规律",不适用
